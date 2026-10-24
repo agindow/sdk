@@ -1,0 +1,36 @@
+AGINDOW
+Copyright 2026 AGINDOW
+
+This product includes software developed at AGINDOW.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not
+use these files except in compliance with the License. A copy of the License
+is distributed with this work, and is also available at:
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+--------------------------------------------------------------------------------
+Trademark notice
+--------------------------------------------------------------------------------
+
+"AGINDOW" is a trademark of AGINDOW. The Apache License, Version 2.0 does
+**not** grant permission to use this name, the AGINDOW word mark, or any other
+trademark or logo of the Licensor. See Section 6 of the License.
+
+The License permits use of the name only as reasonably necessary to describe
+the origin of the work and to reproduce the content of this NOTICE file.
+
+Vendors and redistributors who wish to refer to the project by name in their
+own documentation or user interfaces should write something like "built with
+AGINDOW" rather than implying endorsement or affiliation. Please contact the
+Licensor for permission to use the mark in any other way.
+
+--------------------------------------------------------------------------------
+Scope
+--------------------------------------------------------------------------------
+
+This NOTICE applies to the Work distributed under the Apache License, Version
+2.0. Portions of this repository designated as proprietary in
+`tasks/TECH_STACK.md` §6 — the control plane, registry, and dashboard — are not
+covered by the Apache License and are licensed separately. Those portions do
+not exist in this repository yet.
