@@ -1,11 +1,11 @@
-# Explicit call-level array sampling (TI-51)
+# Explicit call-level array sampling
 
 `agw_stats::windows::sampled` is an opt-in local library, governed by runtime
-contract [§10.28](../../agindow-runtime-contract.md). Object-only TI-45 stores
+contract the runtime contract. Object-only stores
 keep their original JSON Pointer behavior. There is no default guard, profile
 export/refresh or array repair integration.
 
-A `Selection` contains the normal TI-45 `Scope`, an `array` pointer from the
+A `Selection` contains the normal the `Scope`, an `array` pointer from the
 response root, an `item` pointer relative to an item object, a `Policy`, and an
 explicit numeric `Projection`. For example, `array: "/orders"` and
 `item: "/total"` selects one order's total. Both pointers traverse object
@@ -19,9 +19,9 @@ use agw_stats::windows::{Projection, sampled::{Draw, Policy, Selection, Store}};
 
 let selection = Selection {
     scope, // Exact tenant/connection/vendor/operation/side/field/segment/window/generation.
-    array: "/orders".into(),
-    item: "/total".into(),
-    policy: Policy { version: "orders-v1".into(), max_items: 1000 },
+    array: "/orders".into,
+    item: "/total".into,
+    policy: Policy { version: "orders-v1".into, max_items: 1000 },
     projection: Projection::Disabled,
 };
 let mut store = Store::new(limits)?;
@@ -44,26 +44,26 @@ constant words are useful only for controlled tests/replay. Equal weighting of
 calls does not give equal weighting to all items across calls of different sizes.
 The sampler cannot establish traffic independence or representative populations.
 
-Each policy version, maximum length, selector pair and TI-45 scope has separate
+Each policy version, maximum length, selector pair and scope has separate
 windows/readiness/baselines. Projection is immutable within that identity. The
-private canonical tuple key must fit TI-45's 4096-byte scope-component limit.
+private canonical tuple key must fit 's 4096-byte scope-component limit.
 `inspection_nodes` bounds complete validation plus pointer-search steps and array
 item eligibility visits across the batch. Inspection text/depth limits and the
 normal scope/sample/batch/retained-byte quotas apply. Failed admissions preserve
-active references; explicit publication/advance/removal retain TI-45 semantics.
+active references; explicit publication/advance/removal retain semantics.
 Externally held snapshots and allocator slack are outside retained-byte accounting.
 
-Snapshot `selection()` and `unit()` retain policy and `EligibleCall` metadata.
-`baseline()`/`live()` provide immutable descriptive windows, exact strings/numeric
+Snapshot `selection` and `unit` retain policy and `EligibleCall` metadata.
+`baseline`/`live` provide immutable descriptive windows, exact strings/numeric
 tokens and caller timestamps. Only explicit safe numeric authorization enables
 unit projection. No selection permits repairs.
 
-Before using `snapshot.evidence(Assumptions { ... })`, the host must attest to
+Before using `snapshot.evidence(Assumptions {... })`, the host must attest to
 `independent_exchangeable_calls` and `comparable_populations`. Either false returns
 `UnsupportedAssumptions` with no statistical report. The returned adapter offers
 `completeness`, `coercion`, `charset`, `enumeration`, and `unit`, each requiring the
-predeclared global hypothesis-family size. These wrap TI-50 unchanged and expose
-TI-19 materiality decisions. Insufficient detector denominators produce no tests.
+predeclared global hypothesis-family size. These wrap unchanged and expose
+ materiality decisions. Insufficient detector denominators produce no tests.
 Completeness counts admitted calls; enum counts string-bearing calls; units count
 safe numeric calls. Descriptive windows alone do not establish significance.
 Seasonal selection and comparisons remain host responsibilities; this store does
@@ -74,7 +74,6 @@ Run `cargo bench -p agw-stats --bench array_sampling` for native local costs on
 extraction and one-field cold admission. Parsing, fixture setup and store creation
 are excluded. Results are saved in `target/ti51-array-sampling.json`; this is a
 local measurement, not a runtime latency guarantee or production qualification.
-
 
 Local native release measurement (2,200 timings after 200 warmups per fixture):
 

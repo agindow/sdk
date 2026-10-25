@@ -64,9 +64,9 @@ Build the checkout, then inspect the generator's demonstration input:
 
 ```bash
 node cells/cell-relay/node/scripts/build.mjs
-node cells/cell-relay/node/dist/cli.cjs report ./my-nango-project
+node cells/cell-relay/node/dist/cli.cjs report./my-nango-project
 node cells/cell-relay/node/dist/cli.cjs codegen cells/cell-relay/node/examples/nango-contracts.json
-node cells/cell-relay/node/dist/cli.cjs scan ./my-nango-project --snapshot ./my-local-contracts.json
+node cells/cell-relay/node/dist/cli.cjs scan./my-nango-project --snapshot./my-local-contracts.json
 ```
 
 After packing/installing the local tarball, `agindow` is the same CLI. The
@@ -87,7 +87,7 @@ lookup, environment-variable fetch or escalation request. Internal unavailable
 input passes through and warns. Root objects and scalar fields are supported;
 arrays, deep paths, opaque values and incomplete captures are unavailable.
 
-`AGINDOW_DISABLED=true agindow scan ...` is an explicit generation-time
+`AGINDOW_DISABLED=true agindow scan...` is an explicit generation-time
 opt-out. Re-generate without it to restore the snapshot's configured setting.
 This does not poll a live sandbox environment variable. Runtime opt-out delivery
 and hosted escalation remain unimplemented.
@@ -107,7 +107,7 @@ the real-Nango-project report run on October 20, 2026. A deployed Nango dryrun
 has not been performed. The builder skill ships under
 [skills/guarding-nango-functions/SKILL.md](./skills/guarding-nango-functions/SKILL.md).
 Partner publication, template review, a joint launch and OEM agreement remain
-pending; see the [delivery record](../../../tasks/integrations/nango-delivery.md).
+pending; see the delivery record.
 
 The sandbox restrictions and error convention were checked against Nango's
 [function-building skill](https://github.com/NangoHQ/skills/blob/main/skills/building-nango-functions/SKILL.md).

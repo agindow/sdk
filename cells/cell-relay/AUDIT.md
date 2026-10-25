@@ -1,4 +1,4 @@
-# Audit publication, delivery and retrieval (TI-29 / TI-57)
+# Audit publication, delivery and retrieval
 
 Every call publishes exactly one artifact conforming to the closed
 [`audit_artifact` v1](../../contracts/audit_artifact.v1.json) schema — clean,
@@ -6,9 +6,9 @@ observed, degraded, repaired, bypassed or blocked. A bypass is evidence too, so
 nothing filters by decision. Publication is a local, best-effort pipeline in
 `agw-audit`: validate honesty, stamp recurrence, append to an append-only
 bounded store, enqueue once for a host-driven sink outbox and project the
-`TECH_STACK.md` §3.8 metrics. No call awaits delivery, and the only outcome that
+the tech stack metrics. No call awaits delivery, and the only outcome that
 stops a publication is local store refusal — callers may ignore it. The
-in-path guard never depends on this crate (contract §10.40); TI-47 owns
+in-path guard never depends on this crate (the runtime contract); owns
 composing statistical evidence before publication.
 
 ## Honesty rules the schema cannot express
@@ -16,7 +16,7 @@ composing statistical evidence before publication.
 `artifact::validate` rejects, before storage or publication:
 
 - `patch.applied` and `patch.byte_identical` not complementary (a repair always
-  breaks byte identity — contract §3.1);
+  breaks byte identity — the runtime contract);
 - an applied patch that names no changed field;
 - a `repaired` decision without an applied patch;
 - `occurrences` or `first_seen` present without the other;
@@ -75,10 +75,10 @@ A direct drain to a sink declaring another tenant delivers zero without sink
 I/O, retaining the queue and delivery counters. This fence also covers artifacts
 without tenant metadata; unscoped sinks such as `NdjsonSink` remain supported.
 
-## Composed statistical evidence (TI-47)
+## Composed statistical evidence
 
 `agw_guard::statistical::Outcome::compose(draft)` produces the one artifact this
-publisher consumes. It keeps TI-24's decision and frozen mode, refuses stale
+publisher consumes. It keeps 's decision and frozen mode, refuses stale
 draft repair/hypothesis/integrity claims, and replaces the reserved metadata
 keys. A semantic response halt remains `blocked` with `drift_halted` detail
 even when an earlier malformed write request passed through; actual availability
@@ -92,11 +92,11 @@ upstream outcome, the decision or policy, and composition never awaits delivery.
 The shared fixture
 [`audit_artifact.statistical.valid.json`](../../contracts/examples/audit_artifact.statistical.valid.json)
 round-trips through the frozen schema. See [STATISTICAL.md](./STATISTICAL.md)
-and runtime contract §10.41.
+and the runtime contract.
 
-## Durable archive and retrieval (`cell-registry`)
+## Durable archive and retrieval (the registry)
 
-Migration [`004_audit_artifacts.sql`](../cell-registry/migrations/004_audit_artifacts.sql)
+Migration `004_audit_artifacts.sql`
 adds a Postgres table whose trigger rejects every `UPDATE`, `DELETE` and
 `TRUNCATE` outside `purge_expired_audit_artifacts(at)`. Appends go through
 `append_audit_artifact` under one advisory lock per `(tenant, id)`: an identical
@@ -113,7 +113,7 @@ IDs with 404, serves `no-store`, treats contradictory tenant metadata and
 storage faults as 503 and never returns another tenant's record. Retrieval never
 rewrites a record.
 
-## Native delivery and caller-owned scheduling (TI-57)
+## Native delivery and caller-owned scheduling
 
 `agw_audit::delivery::Outbox` is a native durable spool bound to one tenant and
 one destination. Allocate a separate private path for the registry and each
@@ -127,14 +127,14 @@ background worker, outside guarded calls:
 
 ```rust,ignore
 // Setup once: private parent directory must already exist.
-let mut spool = Outbox::open(path, "acme", Limits::default())?;
+let mut spool = Outbox::open(path, "acme", Limits::default)?;
 let mut sender = HttpsSender::new(
     "https://registry.example/v1/audit", "acme", producer_token, 5_000,
 )?;
 // One host tick; recover errors here, never propagate them into a guarded call.
 publisher.stage(&mut spool, 32)?;
 spool.drain(unix_time_ms, 32, &mut sender)?;
-let delivery_metrics = spool.metrics().export_json(Utc::now());
+let delivery_metrics = spool.metrics.export_json(Utc::now);
 ```
 
 Each staging/drain tick is capped at 1,024 items. `stage` removes a publisher
@@ -142,7 +142,7 @@ front only after fsync/atomic-rename admission succeeds. Release publisher owner
 off-path; if a host shares a publisher with guarded calls, use nonblocking
 admission and a caller-owned contention/loss counter so staging never makes a
 call wait for a publisher mutex. A full spool retains the publisher front; the bounded
-publisher outbox counts rejected new deliveries in `dropped()` and
+publisher outbox counts rejected new deliveries in `dropped` and
 `audit_publication_drops_total`. The spool defaults to 1,024 entries/64 MiB,
 with hard ceilings of 65,536 entries/512 MiB, including JSON escaping, retry
 metadata and reserved counter growth. One artifact is capped at 1 MiB.
@@ -175,7 +175,7 @@ URLs, artifact metadata or command-line arguments. Producer and reader maps are
 independent. Absent producer configuration keeps ingestion disabled (503).
 
 `POST /v1/audit` accepts the unchanged frozen v1 artifact JSON body, a bearer
-token and `X-Agindow-Tenant`. The native HTTPS sender follows TI-48's curl-stdin
+token and `X-Agindow-Tenant`. The native HTTPS sender follows 's curl-stdin
 credential convention, disables curl config loading and redirects, enforces
 HTTPS and a 1..30,000 ms timeout, and buffers only curl's status code. Endpoint,
 tenant and token are configured together; the spool checks the sender tenant
@@ -223,7 +223,7 @@ against real PGlite append, duplicate, conflict, retrieval and retention purge.
 Regenerate its shared publication fixture with:
 
 ```bash
-cargo run -p agw-audit --example publish_audit > cells/cell-registry/tests/support/relay-audit.json
+cargo run -p agw-audit --example publish_audit > crates/audit/tests/support/relay-audit.json
 ```
 
 A Rust test locks the fixture to the real publisher's stamped output.
@@ -231,15 +231,15 @@ A Rust test locks the fixture to the real publisher's stamped output.
 ## Limits
 
 Local implementation only. Statistical composition is supplied by
-[TI-47](../../tasks/tickets/tier-1/EPIC-06/TI-47.md) (see
+ (see
 [STATISTICAL.md](./STATISTICAL.md)); default-engine wiring remains future work.
 Native delivery and registry ingestion are implemented by
-[TI-57](../../tasks/tickets/tier-1/EPIC-06/TI-57.md); the embedded WASM/SDK drain
-boundary is [TI-58](../../tasks/tickets/tier-1/EPIC-07/TI-58.md); hosted
-qualification is [OPS-09](../../tasks/tickets/ops/OPS-09/README.md). The registry
+; the embedded WASM/SDK drain
+boundary is; hosted
+qualification is. The registry
 route is off by default; enabling it and applying migration 004 to staging are
 deployment steps, not claims made here.
 
-Contract: [§10.40](../../agindow-runtime-contract.md#1040-ti-29--audit-artifacts-recurrence-and-durable-retrieval).
+Contract: the runtime contract.
 Tests: `cargo test -p agw-audit`,
-`pnpm --filter cell-registry test tests/audit-archive.test.ts tests/audit-retrieval.test.ts tests/audit-runtime.test.ts`.
+`cargo test -p agw-audit`.

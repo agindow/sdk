@@ -1,6 +1,6 @@
 # cell-relay — the in-path engine
 
-**Rust** · Apache-2.0 (`TECH_STACK.md` §6) · **Byte-passthrough forwarding (TI-05) + bounded inspection tee (TI-06) + mode configuration (TI-09) + schema learning (TI-10) + lossless inspection (TI-39) + generated contract types (TI-02) — explicit native guard paths; `NullEngine` remains the default**
+**Rust** · Apache-2.0 (the tech stack) · **Byte-passthrough forwarding + bounded inspection tee + mode configuration + schema learning + lossless inspection + generated contract types — explicit native guard paths; `NullEngine` remains the default**
 
 > Sits in the request path of every tool call: intercepts, inspects on a side
 > channel, classifies drift, repairs selectively, records the artifact. Deploys
@@ -10,51 +10,51 @@
 
 | Rule | Where |
 |---|---|
-| No synchronous dependency on another cell, a database, or an LLM | `TECH_STACK.md` §2 |
-| Never reserialize the client's payload — byte-identity is structural | contract §3, `AGENTS.md` §4.1 |
-| Reads never block; shape drift fails open, semantic drift fails closed | contract §4.2 |
-| Any internal fault becomes `bypassed`, never a thrown error | contract §4.1 |
-| Availability-gate path < 10 µs, faster than the working path | `TECH_STACK.md` §4 |
+| No synchronous dependency on another cell, a database, or an LLM | the tech stack |
+| Never reserialize the client's payload — byte-identity is structural | the runtime contract, the agent guide |
+| Reads never block; shape drift fails open, semantic drift fails closed | the runtime contract |
+| Any internal fault becomes `bypassed`, never a thrown error | the runtime contract |
+| Availability-gate path < 10 µs, faster than the working path | the tech stack |
 
 These are why the cell owns its own pipeline: a broken neighbour must not be able
 to stop it, and it must not be able to stop a neighbour.
 
 ## Crates
 
-Directories follow `TECH_STACK.md` §2; package names carry the `agw-` prefix.
+Directories follow the tech stack; package names carry the `agw-` prefix.
 
 | Crate | Responsibility | Lands with |
 |---|---|---|
-| `agw-node-guest` | embedded Node WASM binding and local statistical selection | TI-30 |
-| `agw-guard` | interception, byte-passthrough forwarding (TI-05), mode dispatch | EPIC-02 |
-| `agw-inspector` | streaming tee (TI-06), schema inference (TI-10) | EPIC-02, EPIC-03 |
+| `agw-node-guest` | embedded Node WASM binding and local statistical selection | |
+| `agw-guard` | interception, byte-passthrough forwarding, mode dispatch | EPIC-02 |
+| `agw-inspector` | streaming tee, schema inference | EPIC-02, EPIC-03 |
 | `agw-diff` | shape diff, classification | EPIC-03 |
 | `agw-stats` | Tier 1 statistical detectors | EPIC-04 |
 | `agw-invariants` | cross-field invariant checks | EPIC-05 |
 | `agw-repair` | selective patch synthesis | EPIC-03 |
 | `agw-policy` | fail-open/close gates, availability gate | EPIC-02, EPIC-06 |
-| `agw-audit` | audit artifact construction; generated cross-cell contract types (TI-02) | EPIC-06 |
-| `agw-notify` | channel-neutral notification envelopes and bounded off-path emission (TII-28) | EPIC-11 |
+| `agw-audit` | audit artifact construction; generated cross-cell contract types | EPIC-06 |
+| `agw-notify` | channel-neutral notification envelopes and bounded off-path emission | EPIC-11 |
 
 `agw-guard` and `agw-inspector` carry the engine behaviour that exists:
-`proxy::forward` streams an upstream body to the client byte-for-byte (TI-05),
+`proxy::forward` streams an upstream body to the client byte-for-byte,
 proven by a property test and a 50MB stream, and `Tee` captures at most 8MiB of
-that stream for side-channel inspection (TI-06), recording parse failures as
+that stream for side-channel inspection, recording parse failures as
 classification input rather than raising them. `agw-diff` now provides the
-standalone TI-11 differ described below. `agw-invariants` now provides the TI-21 DSL/local store and explicit TI-22 native execution
-([usage and limits](./INVARIANTS.md)); `agw-policy` supplies the shared TI-24/TI-46 policy matrix; `agw-stats` supplies standalone TI-15 unit and TI-16 enum evidence; `agw-repair` has the TI-07 numeric coercion fence and
-TI-12 selective repair library, and
+standalone differ described below. `agw-invariants` now provides the DSL/local store and explicit native execution
+([usage and limits](./INVARIANTS.md)); `agw-policy` supplies the shared / policy matrix; `agw-stats` supplies standalone unit and enum evidence; `agw-repair` has the numeric coercion fence and
+ selective repair library, and
 `agw-audit` carries generated contract types with the tests that
 hold them to `contracts/examples/` — types, not engine behaviour. `agw-notify`
-builds the frozen `notification` v1 envelope from an eligible TI-19 alert and
+builds the frozen `notification` v1 envelope from an eligible alert and
 holds a volatile 1–4,096-entry handoff that a host drains only after its sink
 accepts; it performs no I/O and claims no durable admission. Where there
-is no failing test, there is no implementation (`AGENTS.md` §3.3).
+is no failing test, there is no implementation (the agent guide).
 
-## Replay safety (TI-27)
+## Replay safety
 
 `agw_guard::idempotency` supplies a bounded tenant-local replay store and explicit
-TI-24 `gated::Call::execute_once` integration. Write/unknown keys are required
+the `gated::Call::execute_once` integration. Write/unknown keys are required
 before inspection; replay shares original outcomes, blocks and audit identity.
 Same-key calls serialize, running reservations never expire, and caller panics
 retain an indeterminate result rather than causing a second execution. Key and
@@ -62,22 +62,22 @@ supported durability headers are applied verbatim. See [usage, retention risks
 and host responsibilities](./IDEMPOTENCY.md). No automatic retry, durable cache,
 streaming replay or default-engine change is supplied.
 
-## Malformed-body handling (TI-36)
+## Malformed-body handling
 
-`CallContext::malformed` accepts borrowed captured bytes and TI-11 baseline
+`CallContext::malformed` accepts borrowed captured bytes and baseline
 inputs, returning original bytes, a disposition, headers/warning and a generated
 audit artifact. Complete malformed JSON (or an authoritative top-level container
 mismatch) has shape drift, confidence zero and repair skipped. Observe/repair
 reads degrade; writes bypass. Strict returns `Halt` for human escalation.
 Incomplete captures have no drift finding; parser faults bypass in every mode.
 Caller-owned `History` accumulates scoped occurrences and first-seen timestamps
-with one active entry. See contract §10.17 for scope and draft semantics.
+with one active entry. See the runtime contract for scope and draft semantics.
 
 This is a library seam. Callers must publish returned artifacts/warnings and
 honor `Halt` before dispatch. Forwarding remains streaming, `NullEngine` remains
 the default, and persistence/general policy wiring remain future work.
 
-## Runtime configuration (TI-09)
+## Runtime configuration
 
 `agw_guard::config` provides startup validation, local mode hot-reload and
 immutable call snapshots. Startup precedence is explicit config > `AGINDOW_MODE`
@@ -88,15 +88,15 @@ sources must be valid even if one is shadowed. Values are exact lowercase
 ```rust,no_run
 use agw_guard::config::{Config, RuntimeConfig};
 
-let runtime = RuntimeConfig::from_env(Config::default())?;
+let runtime = RuntimeConfig::from_env(Config::default)?;
 let call = runtime.begin_call(None)?;
 // A local control-plane owner can update all clones without restart.
 runtime.reload_mode("strict")?;
 // `call` retains its original mode; the next begin_call sees strict.
-# Ok::<(), Box<dyn std::error::Error>>(())
+# Ok::<, Box<dyn std::error::Error>>()
 ```
 
-Use the same `CallContext` throughout the call: `mode()` feeds future policy
+Use the same `CallContext` throughout the call: `mode` feeds future policy
 logic, `forward(upstream, overhead)` claims `X-Agindow-Mode` and wraps the body
 in the bounded tee, and `audit(draft)` finalizes the mode on an owned generated
 `AuditArtifact` for every outcome. It leaves the draft's other fields untouched;
@@ -113,7 +113,7 @@ server, drift detection or mode-dependent repair/block decision yet. The
 low-level `proxy::forward` retains its latency-only header contract; configured
 calls use `CallContext::forward`.
 
-## Fault containment (TI-40)
+## Fault containment
 
 `CallContext::guard` evaluates a synchronous, unwind-safe engine closure with
 borrowed input, a local `RegistrySnapshot`, and a per-call `Budget`. It runs the
@@ -126,7 +126,7 @@ Registry loading occurs outside this seam. Charge the cooperative budget before
 allocating or inspecting; it cannot preempt arbitrary work or recover from actual
 host OOM. It does not change the tee capture cap. The native dev/release profiles
 use unwind recovery; aborts and double panics during unwinding cannot be caught.
-The low-level containment boundary does not own circuit state; TI-42 adds the
+The low-level containment boundary does not own circuit state; adds the
 readiness/cooldown wrapper below. Registry loading and policy remain future work.
 
 `wasm/guard.ts` supplies a synchronous host boundary: inspection exceptions/traps
@@ -140,7 +140,7 @@ Install the test target once: `rustup target add wasm32-unknown-unknown`.
 The cell's test and lint scripts include the WASM host tests and strict TypeScript
 checking; its CI installs the target. No generated WASM binary is checked in.
 
-## Availability latency gate (TI-42)
+## Availability latency gate
 
 Attach one `agw_guard::readiness::AvailabilityGate` to an engine and share its
 clones with callers of `CallContext::guard_with`. `set_ready(false)` skips
@@ -151,7 +151,7 @@ evaluations reset failures, while original-operation errors never count as engin
 failures. This adds no synchronous dependencies or lock waits.
 
 Skipped inspection closures are cleaned up under recovery before the original
-operation runs (TI-43). Cleanup panics yield `Bypassed(Panic)` without changing
+operation runs. Cleanup panics yield `Bypassed(Panic)` without changing
 readiness or circuit state; successful cleanup retains the admission reason.
 
 Run the same absolute performance check as CI from the repo root:
@@ -198,9 +198,9 @@ node cells/cell-relay/perf/check-availability.mjs target/criterion/availability 
 ## Run
 
 ```bash
-cargo build --workspace            # from the repo root, clean clone
+cargo build --workspace # from the repo root, clean clone
 cargo clippy --workspace --all-targets -- -D warnings
-cargo test --workspace             # agw-guard forwarding (TI-05) + agw-inspector tee (TI-06) + agw-audit contract tests
+cargo test --workspace # agw-guard forwarding + agw-inspector tee + agw-audit contract tests
 ```
 
 Cell-scoped, the way CI runs it:
@@ -217,7 +217,7 @@ package and its own scoped commands (`Cargo.toml` says so too).
 ## Not here yet
 
 - **WASM bindings** (`wasm/`) — EPIC-07. Criterion benches exist in `agw-audit`
-  and `agw-guard`; TI-04 is what turns `TECH_STACK.md` §4's budgets into
+  and `agw-guard`; is what turns the tech stack's budgets into
   CI-enforced measurements instead of local runs.
 - **Drift detection, repair, and policy** — the rest of EPIC-02 and EPIC-03+. The
   working reference for this cell's *shape* is still the TypeScript prototype in
@@ -226,9 +226,9 @@ package and its own scoped commands (`Cargo.toml` says so too).
 
 ---
 
-*Cell boundaries: [`../README.md`](../README.md) · Stack: [`../../tasks/TECH_STACK.md`](../../tasks/TECH_STACK.md) · Epic: [`../../tasks/tickets/tier-1/EPIC-02/README.md`](../../tasks/tickets/tier-1/EPIC-02/README.md)*
+*Cell boundaries: [`../README.md`](../README.md) · Stack: the tech stack*
 
-## Schema learning (TI-10)
+## Schema learning
 
 `agw_inspector::inference::BaselineStore` learns nested JSON Schema shapes from
 complete response captures, with optional `SpecPrior` shapes extracted from a
@@ -241,21 +241,21 @@ retaining older versions. Reads return borrowed immutable baselines.
 use std::num::NonZeroUsize;
 use agw_inspector::inference::{BaselineStore, Key, Limits, Progress};
 
-let mut store = BaselineStore::new(NonZeroUsize::MIN, Limits::default());
+let mut store = BaselineStore::new(NonZeroUsize::MIN, Limits::default);
 let key = Key::new("vendor", "GET /users");
-store.begin(key.clone(), None)?;
+store.begin(key.clone, None)?;
 let result = store.observe(&key, br#"{"data":{"email":"a@example.com"}}"#, false)?;
 assert_eq!(result, Progress::Established { version: 1 });
-# Ok::<(), agw_inspector::inference::LearnError>(())
+# Ok::<, agw_inspector::inference::LearnError>()
 ```
 
-After driving a `Tee` to completion, pass `tee.captured()` and `tee.truncated()`.
+After driving a `Tee` to completion, pass `tee.captured` and `tee.truncated`.
 The learner reads raw JSON tokens, preserving integer/number shape without float
-conversion. TI-39 also supplies a lossless `Inspection` tree; the learner
+conversion. also supplies a lossless `Inspection` tree; the learner
 retains its standalone byte entry point. The original response bytes remain
 owned by forwarding and are never rewritten by learning.
 
-`Schema::json_schema()` exports types/properties/items; `Schema::paths()` exposes
+`Schema::json_schema` exports types/properties/items; `Schema::paths` exposes
 escaped dot paths and pooled array paths (`data[].email`). Every node includes
 presence count and confidence: presence once per response divided by samples.
 A spec prior adds one pseudo-sample, so unsupported prior nodes decay in
@@ -267,44 +267,44 @@ nodes, 128 keys and 32 versions per key. Failed learning attempts leave existing
 state intact; errors are learning outcomes, never drift verdicts. Callers must
 handle them through availability containment when integrating this library.
 This seam adds no alerts, persistence, OpenAPI loader or guard integration.
-See runtime contract §10.11 for the exact rules.
+See the runtime contract for the exact rules.
 
-## Lossless structured inspection (TI-39)
+## Lossless structured inspection
 
 `inspect(captured, truncated, None)` now returns `Parse::Parsed(Value)` with
 `numeric::Number` leaves. No number passes through a float. Serialization uses
-`Number::lexeme()`, retaining huge integers, long decimals, `-0` and `1e400`.
+`Number::lexeme`, retaining huge integers, long decimals, `-0` and `1e400`.
 `None` selects `Precision::Observed`: oversized integers are retained as
 `Unrepresentable`. `Some(Precision::HighPrecision)` explicitly models those
 integers as `Verbatim`. Both serialize their original spelling.
 
-`Tee::into_inspection()` uses the default; use
+`Tee::into_inspection` uses the default; use
 `into_inspection_with_precision(Precision)` to supply a whole-document decision.
-TI-38 adds `inspect_fields(captured, truncated, &FieldPrecisions)` for exact
+ adds `inspect_fields(captured, truncated, &FieldPrecisions)` for exact
 field-local decisions. `Value::Object` contains
 entry vectors, preserving duplicate keys so numeric evidence is never discarded.
 The tree has a 128-node path-depth limit (root zero). Parse failures remain
 recorded values, with capture-relative coordinates; truncation remains independent
 of whether the retained prefix parses. No classifier or repair is added.
 
-The legacy TI-06 inspection tests only change call arguments and three expected
+The legacy inspection tests only change call arguments and three expected
 JSON-value constructions. Their byte-forwarding and failure assertions remain.
 The new property suite compares raw numeric tokens against the tree and its
 serialized output, using independent token scanning and generated nested JSON.
 
-## Shape diff and classification (TI-11)
+## Shape diff and classification
 
 `agw_diff::compare(side, before, after)` compares typed `Snapshot`s;
 `compare_inspection(side, baseline, inspection)` compares a selected baseline
-with the lossless TI-39 tree. Both have `*_with_limits` entry points. `Snapshot::from`
-adapts a TI-10 learned schema with `Evidence::Learned`, retaining no repair
+with the lossless tree. Both have `*_with_limits` entry points. `Snapshot::from`
+adapts a learned schema with `Evidence::Learned`, retaining no repair
 confidence. `Node` describes types, properties, pooled items, and explicit
 requiredness, units, enum values, null meaning and confirmed identity metadata.
 Callers extract authoritative facts from specs/detectors; this is not a general
 JSON Schema validator or an OpenAPI loader.
 
 Each change retains its side, escaped dot path, kind, class and stable reason;
-confirmed renames also carry the destination path. `Report::class()` aggregates
+confirmed renames also carry the destination path. `Report::class` aggregates
 semantic > unknown > shape, returning `None` for no findings. Inspect `skipped`
 separately: incomplete captures, duplicate keys, parser/internal failures and
 resource limits are not vendor drift. Complete malformed bodies are shape with
@@ -324,14 +324,14 @@ Capture, parsing and setup are excluded. It writes environment and quantiles to
 `target/ti11-shape-diff.json`; a failed budget exits nonzero. These are local
 native measurements, not CI, WASM or end-to-end latency claims.
 
-## Selective repair library (TI-12)
+## Selective repair library
 
 `agw_repair::repair(side, source, inspection, report, candidates, mode)` accepts
-original capture bytes and their TI-39 parsed inspection, a TI-11 report and
+original capture bytes and their parsed inspection, a report and
 explicit repair proposals. Use the frozen mode from the call context. The
 `repair_with_limits` variant bounds input/output, nodes/depth, proposals, paths
 and replacement metadata. Default limits: 8 MiB, 4096 nodes, depth 64, 64 proposals.
-The TI-24 bounded guard explicitly composes this seam; the default forwarder and
+The bounded guard explicitly composes this seam; the default forwarder and
 SDK paths do not automatically enable it.
 
 A `Candidate` identifies a finding and proposes `Rename { to }` or `Replace`
@@ -339,9 +339,9 @@ A `Candidate` identifies a finding and proposes `Rename { to }` or `Replace`
 the caller; the engine computes their minimum as per-repair confidence. Shape
 requires ≥0.97, semantic ≥0.99, and strict requires ≥0.99. Unknown drift is never
 repaired. Rename findings must have confirmed identity and the exact sibling
-destination. Statistical identity evidence is available through `agw_diff::rename` (TI-13). Explicit scalar
+destination. Statistical identity evidence is available through `agw_diff::rename`. Explicit scalar
 replacement is not value synthesis or numeric arithmetic; numeric type changes
-are refused as semantic even when the input finding is mislabeled. TI-66 permits
+are refused as semantic even when the input finding is mislabeled. permits
 only an actually empty string to literal null under an explicit semantic
 `NullMeaningChanged`/`MeaningChanged` proposal at ≥0.99 confidence. All other
 type changes remain unsupported or numerically fenced; independent guard
@@ -359,14 +359,14 @@ Handle `Outcome::failure` before interpreting the result. It records
 incomplete/malformed/mismatched captures, duplicate keys, invalid reports and
 resource failures separately from drift. Internal failures are availability
 bypass inputs; a complete unparseable capture remains non-repairable and its
-existing `malformed_body` finding still follows contract §4.4 policy. Resource preflight can reject before
+existing `malformed_body` finding still follows the runtime contract policy. Resource preflight can reject before
 copying an oversized report; the caller still owns that report. For ordinary
 rejections, assessments retain reasons/confidence and `unresolved` retains
 findings for the policy caller. Applied proposals remove only their findings;
-unproposed drift remains unresolved. `Outcome::class()` summarizes unresolved
+unproposed drift remains unresolved. `Outcome::class` summarizes unresolved
 drift; a missing class is not a write-integrity proof.
 
-An applied result owns patched bytes. `Outcome::patch()` exposes the generated
+An applied result owns patched bytes. `Outcome::patch` exposes the generated
 cross-cell `Patch` with `applied: true`, `selective: true`, concrete
 `fields_changed` and `byte_identical: false`. `Outcome::audit(draft)` stamps this
 patch, aggregate applied confidence and the execution mode into an owned draft.
@@ -377,7 +377,7 @@ verification and audit publication remain separate future work.
 cargo test -p agw-repair
 ```
 
-## Statistical rename evidence (TI-13)
+## Statistical rename evidence
 
 `agw_diff::rename::match_fields(removed, added)` borrows typed histograms for
 caller-selected sibling fields. Callers own vendor/operation/side scope, windows,
@@ -394,10 +394,10 @@ and resource limits yield an explicit error before any result is returned.
 Limits: 64 fields/side, 256 bins/field, 1 MiB total metadata.
 
 Confidence decreases with divergence, low volume and sparse coverage using
-[contract §10.15](../../agindow-runtime-contract.md). It is deterministic evidence,
+the runtime contract. It is deterministic evidence,
 not a calibrated probability. A confirmed low-volume match can remain below the
-repair gate. Callers assign a scope-unique shared identity to matched TI-11 nodes
-and supply the detector score to TI-12 alongside independent applicability.
+repair gate. Callers assign a scope-unique shared identity to matched nodes
+and supply the detector score to alongside independent applicability.
 Semantic child checks and repair thresholds still apply. The integration test
 `rename_evidence` exercises this handoff, exact-byte repair and observe mode.
 No traffic collection, persistence, guard wiring or latency claim is included.
@@ -407,7 +407,7 @@ cargo test -p agw-diff --test rename
 cargo test -p agw-repair --test rename_evidence
 ```
 
-## Per-field precision snapshots (TI-38)
+## Per-field precision snapshots
 
 `contract_snapshot` v2 carries optional `high_precision` booleans. Compile one
 selected tool with `agw_guard::snapshot::precision_for`, then pass its map to
@@ -424,10 +424,9 @@ including `\e` for empty keys; the legacy `paths` API is unchanged.
 
 Map compilation is bounded to 4096 entries / 1 MiB of path text. Compile outside
 forwarding and handle errors at snapshot loading/availability containment. No
-registry delivery or default-engine wiring is added. See contract §10.18.
+registry delivery or default-engine wiring is added. See the runtime contract.
 
-
-## Unit-conversion evidence (TI-15)
+## Unit-conversion evidence
 
 `agw_stats::unit::detect(path, baseline, observed)` borrows caller-selected finite
 f64 windows. Scope them to one field/vendor/operation/side and tenant/volume
@@ -441,20 +440,19 @@ and PSI must reach 0.2 to return `Drift(finding)`. Signed median ratios within
 2% of 100, 0.01, 1000 or 0.001 receive typed `UnitConversion` evidence; other
 significant shifts remain semantic without a diagnosis. Zero baseline medians
 cannot suggest a ratio. Sign-only flips are invisible to magnitude metrics.
-See [contract §10.19](../../agindow-runtime-contract.md) for exact formulas.
+See the runtime contract for exact formulas.
 
 `finding.audit(draft, side)` stamps generated v1 semantic drift and optional
 `unit_conversion`/detail, clears stale patch and proof claims, and retains the
 caller-owned policy decision. This API has no payload rewriting or repair
-proposal. It neither executes the §4 write block nor wires the guard, collects
+proposal. It neither executes the write block nor wires the guard, collects
 traffic, publishes artifacts or establishes production calibration/latency.
 
 ```bash
 cargo test -p agw-stats
 ```
 
-
-## Cardinality and enum growth (TI-16)
+## Cardinality and enum growth
 
 `agw_stats::enumeration::compare(path, baseline, observations)` borrows a known
 string vocabulary and timestamped observations for a caller-selected enum field.
@@ -474,18 +472,17 @@ additions in changes and all novelty under `metadata.agindow_enum_growth`, and
 clears stale repair/proof claims while retaining caller-owned policy. No wire
 schema changes are needed. Limits: 256 baseline entries, 256 observed distinct
 values, 4096 observations, 4096 bytes per string/path and 1 MiB total input text.
-See [contract §10.20](../../agindow-runtime-contract.md) for exact boundaries.
+See the runtime contract for exact boundaries.
 
 This is standalone evidence without persistence, first-ever histories, numeric
-enums, guard wiring or policy execution. TI-19/TI-20 still own configurable
+enums, guard wiring or policy execution. / still own configurable
 floors, cross-detector weighting, alert routing and production validation.
 
 ```bash
 cargo test -p agw-stats --test enumeration
 ```
 
-
-## Completeness, type consistency and string fingerprints (TI-17)
+## Completeness, type consistency and string fingerprints
 
 `agw_stats::field::{completeness, coercion, charset}` compare two borrowed
 `Option<&agw_inspector::Value>` windows for a selected field. Callers own complete
@@ -511,7 +508,7 @@ Limits are 4096 observations/window, 4096 UTF-8 bytes per path/string/numeric to
 and 1 MiB combined text. Containers count only as a top-level type. Invalid numeric
 tokens and resource limits return errors even for sparse windows. Profiles and
 reports own counts only; no payload mutation, guard, policy, registry or audit
-publication is added. See [contract §10.21](../../agindow-runtime-contract.md).
+publication is added. See the runtime contract.
 
 ```bash
 cargo test -p agw-stats --test field_detectors
@@ -525,8 +522,7 @@ both profiles, comparison and returned report drop; setup/parsing are excluded.
 Environment, scope and quantiles are saved to `target/ti17-field-detectors.json`.
 This is a local fixture gate, not a production, all-input or WASM latency guarantee.
 
-
-## False-positive controls (TI-19)
+## False-positive controls
 
 `agw_stats::control` supplies exact-scope seasonal window selection, configurable
 customer/field/signal floors, supplied-significance gates, weighted alert ranking,
@@ -535,18 +531,16 @@ requires 30 growing-traffic days; synthetic runs cannot qualify production.
 See [controls and caller obligations](./CONTROLS.md). No guard wiring or production
 calibration exists; the real production replay remains pending.
 
-
-## Detector significance (TI-50)
+## Detector significance
 
 `agw_stats::significance::{unit, enumeration, completeness, coercion, charset}`
 wrap existing detectors with raw-window statistical tests and normalized effects.
 Typed reports retain descriptive results and all tested features; `decision`
-applies TI-19 only to original local findings. Original detector APIs remain
+applies only to original local findings. Original detector APIs remain
 unchanged. See [methods, sampling assumptions and usage](./SIGNIFICANCE.md).
 No guard/default-engine integration or production calibration is implied.
 
-
-## Detection router and inference accounting (TI-20)
+## Detection router and inference accounting
 
 `agw_stats::router` borrows diff/invariant findings, retains mixed handlers,
 queues optional unknown-case investigation in a bounded local FIFO, and provides
@@ -555,7 +549,7 @@ confusion counters. See [routing and caller obligations](./ROUTING.md).
 No guard wiring, worker execution, durable delivery or provider billing enforcement
 is included; `NullEngine` remains the default.
 
-## Local statistical windows (TI-45)
+## Local statistical windows
 
 `agw_stats::windows::Store` extracts one scalar/missing opportunity per selected
 field from complete lossless inspections. Scope includes tenant, connection,
@@ -590,54 +584,53 @@ record overhead and retained text, excluding allocator slack and externally held
 snapshots. The caller owns retention/removal and external snapshot lifetimes.
 `set_available(false)` exposes an outer provider/refresh fault locally while
 retaining the baseline; snapshot acquisition invokes no provider, network, clock
-or storage API. Guard execution, export and remote refresh remain TI-46, TI-48
-and TI-49. See contract §10.26 and the three `windows_*` integration suites.
+or storage API. Guard execution, export and remote refresh remain,
+and. See the runtime contract and the three `windows_*` integration suites.
 
-## Explicit statistical execution (TI-46)
+## Explicit statistical execution
 
 [`agw_guard::statistical`](./STATISTICAL.md) now connects local windows, raw-window
 significance, materiality, routing and the shared policy matrix on actual native
 request/response calls. Activation is explicit; `NullEngine` stays the default.
 The library preserves completed upstream outcomes on response halts and admits
-no more than one optional local investigation job per call. TI-47 composes the
+no more than one optional local investigation job per call. composes the
 statistical evidence into one audit artifact; HTTP/SDK/streaming drivers,
 default-engine wiring and WASM statistical budgets remain separate.
 
-TI-48 adds bounded local window staging, lossless v1 projection, a durable native
+ adds bounded local window staging, lossless v1 projection, a durable native
 background outbox and tenant-bound HTTPS transport. See [profile export](./EXPORT.md).
-OPS-05 qualified isolated staging export with synthetic observations;
+ qualified isolated staging export with synthetic observations;
 the default guard does not collect or send.
 
-TI-49 adds explicitly selected aggregate snapshot refresh, a bounded local cache,
+ adds explicitly selected aggregate snapshot refresh, a bounded local cache,
 revision/generation fences and separate native/WASM host transports. Historical
 rollups never become exact detector windows. See [profile refresh](./REFRESH.md).
-OPS-05 qualified native/WASM refresh and recovery against staging;
-no scheduler starts by default. See the [hosted evidence](../cell-registry/ops/HOSTED-EVIDENCE.md#ops-05-hosted-qualification--2026-10-22-americanew_york).
+ qualified native/WASM refresh and recovery against staging;
+no scheduler starts by default. See the the hosted qualification evidence.
 
-TI-51 adds standalone [bounded call-level array sampling](./SAMPLING.md) with
-explicit policy identity and conditional TI-50 significance adapters.
+ adds standalone [bounded call-level array sampling](./SAMPLING.md) with
+explicit policy identity and conditional significance adapters.
 
-TI-52 adds [precision-budgeted unit inputs](./PROJECTION.md), with explicit
+ adds [precision-budgeted unit inputs](./PROJECTION.md), with explicit
 exact/bounded policies and local error provenance.
 
-
-TI-23 adds [cross-endpoint consistency](./CROSS_ENDPOINT.md): bounded paired-profile
+ adds [cross-endpoint consistency](./CROSS_ENDPOINT.md): bounded paired-profile
 candidates and workflow-scoped local observations, consumed through immutable
 snapshots in the existing native guard. No peer fetch or automatic activation.
 
-TI-54 adds an explicit background [qualification/activation controller](./ACTIVATION.md)
+ adds an explicit background [qualification/activation controller](./ACTIVATION.md)
 with staged native publications; default construction remains disabled and no
 production calibration dataset is supplied.
 
-TI-28 supplies [strict human review handoffs](./REVIEW.md): bounded off-path evidence, local outbox and replay retention; hosted delivery remains separate.
+ supplies [strict human review handoffs](./REVIEW.md): bounded off-path evidence, local outbox and replay retention; hosted delivery remains separate.
 
-TI-29 adds the local [audit publication and retrieval](./AUDIT.md) seam:
+ adds the local [audit publication and retrieval](./AUDIT.md) seam:
 honesty-validated artifacts for every decision (bypasses included), bounded
 recurrence and append-only storage, a host-drained NDJSON sink outbox and
-`TECH_STACK.md` §3.8 OTLP/JSON metrics; the durable registry archive and its
-opt-in authenticated read route are documented there (contract §10.40).
+the tech stack OTLP/JSON metrics; the durable registry archive and its
+opt-in authenticated read route are documented there (the runtime contract).
 
-TI-57 adds native durable audit delivery: `Publisher::stage` transfers queued
+ adds native durable audit delivery: `Publisher::stage` transfers queued
 artifacts off-path into `agw_audit::delivery::Outbox`, and caller-owned bounded
 drains deliver through tenant-bound HTTPS or the existing NDJSON sink. Retry
 reservations and counters survive restart; registry ingestion acknowledges stored,
@@ -645,22 +638,22 @@ duplicate and conflicting evidence explicitly. See [AUDIT.md](./AUDIT.md) for
 limits, scheduling and producer configuration. No library scheduler or hosted
 activation is supplied.
 
-## Node SDK (TI-30)
+## Node SDK
 
 The [local Node package](./node/README.md) builds ESM/CJS and the release WASM
 guest. Default detection remains NullEngine; explicit scoped statistical windows
-run TI-46. Package tests cover offline install, size, tool/outcome identity,
+run. Package tests cover offline install, size, tool/outcome identity,
 policy halts and faults. A CI-gated local agent-loop benchmark covers the default
-engine only; TI-53 retains integrated statistical latency qualification.
+engine only; retains integrated statistical latency qualification.
 
-TI-31 extends this package with config-file resolution, immutable events,
+ extends this package with config-file resolution, immutable events,
 optional OTel spans, explicit tool/client/fetch/Express adapters, offline
 simulation/report and a limited Nango code generator. The
 [Nango guide](./node/NANGO.md) states the exact surfaces and limitations.
 Python parity, partner publication/adoption and hosted sandbox delivery remain
 separate; the default engine still detects nothing.
 
-## Local Python SDK (TI-32)
+## Local Python SDK
 
 [python/README.md](./python/README.md) documents the typed uv-managed Python
 decorators/context managers and identical shared-WASM binding. Build stages the
@@ -669,7 +662,7 @@ behavior/package fixtures and actual cross-language parity. CI gates default
 NullEngine added p50 <100 µs separately from statistical paths. No PyPI release
 or Python framework/HTTP adapters are claimed.
 
-## Explicit HTTP and agent surfaces (TI-33/TI-34/TI-41)
+## Explicit HTTP and agent surfaces
 
 The shared `agw-http-host` crate supplies a [local sidecar](./sidecar/README.md)
 and [workers-rs host](./hosted/README.md). Connection bindings hold credentials;
@@ -680,20 +673,19 @@ workflow additionally runs them. Deployment and public listings remain pending.
 Node `guardRemote` and Python `guard_remote` implement explicit transport fallback
 with one bypass event and the same upstream-enforced idempotency key.
 
-## Embedded audit drain and measurements (TI-58/TI-53)
+## Embedded audit drain and measurements
 
 Node publication is opt-in through `audit: { tenant }`. Completed guest calls
 compose one frozen v1 artifact into a bounded FIFO; `drainAudit(sink)` is explicit,
 ordered and off-path. Failed sinks retain the same ID. Capacity drops are counted;
 retirement/restart loses guest memory. No guest network, timers or threads exist.
-The host owns durable persistence and delivery. Wrapper §12.10 and contract §10.40
+The host owns durable persistence and delivery. Wrapper and the runtime contract
 state the ABI and bounds.
 
 [The embedded performance methodology](./node/PERFORMANCE.md) records the real
 351-case statistical matrix, separate bypass/trap lifecycle measurements, strict
 absolute/regression checkers and retained raw samples. Native timing cannot qualify
 this Node boundary. Unmet budgets remain visible; no production SLA is implied.
-
 
 ## Credential evidence and cutover
 
@@ -705,7 +697,7 @@ custody, scheduler, default SDK integration or hosted qualification is claimed.
 
 ## Public benchmark protocol
 
-[TII-21a methodology and standalone harness](./public-benchmark/README.md)
+[ methodology and standalone harness](./public-benchmark/README.md)
 provide a synthetic conditional repair/policy safety development set and two
 local baseline reproduction artifacts. Publication remains gated on private
 held-out custody and external validator signatures; no Agindow entry is included.

@@ -1,4 +1,4 @@
-# Strict-mode human review (TI-28)
+# Strict-mode human review
 
 The explicit bounded-capture guard halts unresolved drift on reads, writes and
 unknown operations in strict mode. Only independently verified repairs at
@@ -16,13 +16,13 @@ metadata can contain customer data; the host owns access and retention.
 
 `review::Outbox::new(tenant, capacity, byte_limit)` provides a caller-owned FIFO.
 `submit` returns false for an exact pending duplicate or an outcome without a
-strict halt; conflicting IDs fail. `front()` remains until `ack(id)` confirms
+strict halt; conflicting IDs fail. `front` remains until `ack(id)` confirms
 host delivery. Tenant/scope errors, saturation and oversized evidence return
 explicit errors while the policy halt and original upstream outcome remain
 intact. Publication belongs outside the inspection path; it sends no network
 request and never depends synchronously on another cell.
 
-TI-27 `Completion.review` retains admitted evidence or its capture error.
+the `Completion.review` retains admitted evidence or its capture error.
 `case_from_completion` and `Outbox::submit_completion` can export it after replay
 without reevaluation or redispatch. A human resolution cannot release a terminal
 idempotency key. Any later execution requires separately authorized input and a
@@ -35,11 +35,11 @@ most 128 cases and 8 MiB serialized bytes. Evidence exceeding limits is rejected
 whole rather than silently abbreviated. `contracts` applies equivalent semantic
 checks on the TS consumer boundary.
 
-[`cell-console`](../cell-console/README.md) supplies the local queue, human
-receipts and SLA alerts; [`cell-registry`](../cell-registry/README.md) consumes
+ supplies the local queue, human
+receipts and SLA alerts; consumes
 those receipts as descriptive confidence priors. Hosts provide authentication,
 durable storage, delivery, polling and notifications. This implementation has no
 hosted queue, scheduler, automatic retry/execution or calibrated safety claim.
 
-Contract: [§10.38](../../agindow-runtime-contract.md#1038-ti-28--human-review-and-bounded-confidence-feedback).
+Contract: the runtime contract.
 Tests: `cargo test -p agw-guard --test review`.

@@ -1,24 +1,23 @@
-# Selected profile refresh — TI-49
-
-Background synchronization implements [contract §10.22](../../agindow-runtime-contract.md)
+# Selected profile refresh
+Background synchronization implements the runtime contract
 using frozen [`profile_snapshot` v1](../../contracts/profile_snapshot.v1.json).
 This is an explicit library/host boundary; no background thread starts by default.
 `NullEngine` remains the default. Aggregate snapshots cannot make the statistical
-guard ready: `exact_detector_inputs()` always returns unavailable. TI-45 exact
-windows and the TI-46 detector provider retain their existing lifecycle.
+guard ready: `exact_detector_inputs` always returns unavailable. exact
+windows and the detector provider retain their existing lifecycle.
 
 ## Selection and evidence
 
-Pass an exact TI-19-selected scope, generation, grain, UTC bucket and profile
+Pass an exact -selected scope, generation, grain, UTC bucket and profile
 start/end to `agw_stats::refresh::Cache::select`. Each admission is one selected
 field/window, not a claim that an entire seasonal family is ready. The selection
-must use TI-48's canonical segment tuple: `["ti48", connection, generation,
+must use 's canonical segment tuple: `["ti48", connection, generation,
 segment, window]`. `volume_cohort` remains a trusted explicit scope dimension.
 Unknown legacy segments are refused. The refresh service never chooses latest,
 alters selection or automatically relearns. A selected rollup that has changed
 its bounds becomes unavailable until the selector explicitly chooses it again.
 
-`Snapshot::aggregate()` retains the HLL/value/numeric/character histograms,
+`Snapshot::aggregate` retains the HLL/value/numeric/character histograms,
 excluded-number count, contributing window count and revision. HLL is approximate;
 numeric bins are intervals and excluded numbers remain excluded. These summaries
 lack exact vocabularies, lossless numbers, sample timestamps, detector confidence
@@ -76,7 +75,7 @@ and generation through the canonical tuple. The route queries one exact hourly o
 daily rollup, validates its counters/bounds and returns 404 for missing history,
 400 for malformed selection, 401/403 for denied credentials/scope and 503 for
 unavailable/invalid data. Responses are private `no-store`. It uses registry SQL
-history because the TI-18 latest-hour DO cache cannot serve selected seasonal
+history because the latest-hour DO cache cannot serve selected seasonal
 slots. No second latest-snapshot/seasonality policy is introduced.
 
 - Native: `refresh::native::HttpsReader` invokes installed curl over HTTPS, with
@@ -84,7 +83,7 @@ slots. No second latest-snapshot/seasonality policy is introduced.
   Request cap is 8 KiB, response cap 128 KiB, with bounded connect/total time.
 - WASM: [`wasm/refresh.ts`](./wasm/refresh.ts) exports `createSnapshotTransport`.
   A host with standard fetch/Request/AbortController supplies the endpoint,
-  tenant and reader token. Send `Job::body()` JSON with the job timeout; return
+  tenant and reader token. Send `Job::body` JSON with the job timeout; return
   the bytes to the same Rust cache owner's `complete`. It bounds streams and
   cancels timeouts, refuses redirects, and requires no Worker binding. The host
   owns guest invocation/ABI and must honor fetch cancellation. No automatic WASM
@@ -98,7 +97,7 @@ provided by a malicious host; the host is the credential/trust boundary.
 
 ## Telemetry and verification
 
-`metrics()` exposes attempts, successful installs, failures, rejected completions,
+`metrics` exposes attempts, successful installs, failures, rejected completions,
 conflicts and missing/stale reads. `telemetry(id, now)` exposes refresh age, next due
 time, in-flight state and failed attempts. Export these from background monitoring;
 no diagnostic callback executes on a local read. Age measures time since successful
@@ -106,23 +105,23 @@ validation, not the age of a historical seasonal baseline. No latency claim
 includes a remote request.
 
 Local suites cover authenticated Worker/Neon boundaries in workerd, real PGlite
-rollups, TI-48 ingestion, WASM host transport, native curl controls, monotonic
+rollups, ingestion, WASM host transport, native curl controls, monotonic
 scheduling, conflicts/expiry/reselection and original guarded error identity.
 
 ```bash
 cargo test -p agw-stats --test refresh
 cargo test -p agw-guard --test profile_refresh
 cargo check -p agw-stats --target wasm32-unknown-unknown
-pnpm --filter cell-registry exec vitest run tests/profile-refresh*.test.ts
+cargo test -p agw-audit
 pnpm --filter cell-relay exec vitest run --config wasm/vitest.config.ts
 ```
 
-[OPS-05 hosted qualification](../cell-registry/ops/HOSTED-EVIDENCE.md#ops-05-hosted-qualification--2026-10-22-americanew_york)
+hosted qualification
 completed with actual relay exports from synthetic observations, native/WASM
 cache validation and recovery. Temporary credentials/bridge access were revoked.
 For a separately authorized repeat exercise, on the isolated staging
 Worker, install a separate reader secret and use an authorized private HTTPS bridge
-or service binding. Ingest TI-48 traffic first, wait for Queue commit, then select
+or service binding. Ingest traffic first, wait for Queue commit, then select
 its exact scope/bucket/bounds. With endpoint, tenant and token set in the protected
 `AGINDOW_PROFILE_ENDPOINT`, `AGINDOW_PROFILE_TENANT`, `AGINDOW_PROFILE_READER_TOKEN`
 environment variables, run:
@@ -132,6 +131,6 @@ cargo run -p agw-stats --example refresh_snapshot < /private/tmp/selected-profil
 ```
 
 Record sanitized revision, refresh lag, wrong-tenant denial, outage/expiry recovery
-and selected-history retention in the [OPS-04 evidence log](../cell-registry/ops/HOSTED-EVIDENCE.md).
+and selected-history retention in the the hosted qualification evidence.
 Do not claim hosted delivery from local tests. No public route, credentials or
 production rollout is enabled by this change.

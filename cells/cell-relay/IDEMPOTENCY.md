@@ -1,7 +1,7 @@
-# TI-27 — native idempotency and replay safety
+# — native idempotency and replay safety
 
 The explicit `agw_guard::idempotency` boundary implements
-[runtime contract §5 and §10.37](../../agindow-runtime-contract.md). Keep one
+the runtime contract. Keep one
 `Store` per authenticated tenant and reuse it across that tenant's calls. Its
 key is exactly `(connection, idempotency_key)`, case-sensitive. Separate stores,
 processes or hosts do not share reservations.
@@ -10,7 +10,7 @@ processes or hosts do not share reservations.
 use agw_guard::idempotency::{Access, Bindings, Limits, Request, Store};
 
 // Set bindings from the endpoint's known capabilities; no provider is guessed.
-let store = Store::new(tenant, Limits::default(),
+let store = Store::new(tenant, Limits::default,
     Bindings::new("Idempotency-Key", supported_durability_header)?)?;
 let result = store.execute(Request {
     connection, operation, key: Some(idempotency_key), durability: requested_hint,
@@ -21,8 +21,8 @@ let result = store.execute(Request {
 })?;
 match result {
     Access::Completed(replay) => deliver_original(replay.value),
-    Access::InProgress => attach_to_current_call(),
-    Access::Indeterminate => reconcile_the_existing_write(),
+    Access::InProgress => attach_to_current_call,
+    Access::Indeterminate => reconcile_the_existing_write,
 }
 ```
 
@@ -38,7 +38,7 @@ header names. `Forwarding::apply_headers` replaces all case-insensitive copies
 of the claimed header, appending one exact supplied value. Other headers and
 customer body bytes are untouched. Reuse the immutable forwarding view on every
 explicit transport attempt. No retry, repair proposal or backoff is generated
-by the store; retry ceilings remain deferred in contract §10.5.
+by the store; retry ceilings remain deferred in the runtime contract.
 
 ## Original outcomes and concurrency
 
@@ -51,7 +51,7 @@ count, not arbitrary caller-owned heaps.
 A key reserves execution before invoking any callback. Concurrent identical keys
 wait on that entry and return its original outcome. The global map lock is never
 held over caller work, upstream I/O, waiting or disposal of expired outcomes.
-Different keys proceed independently; `Store::waiting()` exposes a diagnostic
+Different keys proceed independently; `Store::waiting` exposes a diagnostic
 waiter count, never an authorization check. Same-thread recursive access to the
 running key returns `InProgress` instead of deadlocking. Waiting has no forced
 execution timeout: abandoning a slow reservation must not issue another write.
@@ -98,7 +98,7 @@ The host must apply that view to its real transport (or pass its fields to the
 upstream SDK); it does not attest transport delivery or verified persistence.
 No provider-specific semantics or support are inferred.
 
-## TI-24 integration
+## integration
 
 `gated::Call::execute_once(&store, metadata, body, pipeline, audit, operation)`
 wraps the existing bounded-capture guard. The operation callback receives effective
@@ -118,7 +118,7 @@ Audit proof records the verbatim key and leaves `write_integrity: false`.
 and process-local retention. Payload verification, replay protection and forwarding
 a durability hint do not prove write correctness. The same audit ID and structured
 feedback survive replay; feedback explains that the key is terminal. Audit
-publication/retrieval remains TI-29.
+publication/retrieval remains.
 
 No hosted/SDK transport, automatic retries, default-engine switch, durable cache,
 statistical final-audit composition, streaming response cache, production

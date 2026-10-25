@@ -1,10 +1,10 @@
-# Explicit native two-layer calls (TI-24)
+# Explicit native two-layer calls
 
 `agw_guard::gated::Call` connects the existing availability gate, policy matrix
 and selective repair library for bounded JSON captures. It is an opt-in library
 seam; the default statistical engine remains `NullEngine` and streaming/SDK
 integration is separate. See runtime contract
-[§10.34](../../agindow-runtime-contract.md#1034-ti-24--explicit-two-layer-native-call-execution).
+the runtime contract.
 
 The host prepares a local `Pipeline`, one shared `AvailabilityGate`, and a valid
 generated `AuditArtifact` draft carrying identity, operation and selected contract
@@ -12,8 +12,8 @@ provenance. It snapshots `RuntimeConfig::begin_call` once, then constructs
 `Call::new(context, &gate, work_limit)` and calls `execute` with the request
 capture, pipeline, draft and upstream closure. Unknown operations follow writes.
 
-`Pipeline::detect` supplies a complete side-matched TI-11 report and bounded
-TI-12 proposals. `Pipeline::verify` independently checks the patched payload and
+`Pipeline::detect` supplies a complete side-matched report and bounded
+ proposals. `Pipeline::verify` independently checks the patched payload and
 the supplied applied finding indices against authoritative evidence. A callback
 returning false leaves the original bytes subject to policy; an error or unwind
 bypasses. No default verifier, remote callback, registry fetch or LLM call exists.
@@ -34,7 +34,7 @@ Observe records drift but never verifies, applies or blocks. Other modes use
 patch is the only path to owned effective bytes. A request blocked by another
 unresolved finding sends nothing and claims no applied patch. Incomplete,
 duplicate-key, skipped, invalid-side and over-budget evidence bypasses instead
-of becoming vendor drift. Complete malformed bodies retain TI-36's special
+of becoming vendor drift. Complete malformed bodies retain 's special
 shape policy and byte-identity audit evidence.
 
 One readiness admission, circuit permit, mode snapshot and work allowance span
@@ -52,8 +52,8 @@ hypothesis/note claims are replaced. Applied patch paths carry `request:` or
 `response:` prefixes, while `X-Agindow-Patch` gives a compact selective field
 count. Payload verification does not establish write integrity or idempotency:
 those stale proof claims are cleared. Contract version and verification source
-remain host-supplied provenance. TI-47 owns statistical evidence composition;
-TI-25/TI-29 own structured errors and storage/publication.
+remain host-supplied provenance. owns statistical evidence composition;
+/ own structured errors and storage/publication.
 
 Validation:
 
@@ -62,17 +62,16 @@ cargo test -p agw-guard --test gated --test gated_edges --test gated_detector
 cargo test -p agw-policy
 ```
 
-The detector fixture runs actual TI-11 identity-backed comparison and independent
-target-schema verification over TI-12's token patcher, retaining `1e400` verbatim.
+The detector fixture runs actual identity-backed comparison and independent
+target-schema verification over 's token patcher, retaining `1e400` verbatim.
 Other fixtures cover modes/operations/classes/repair outcomes, faults in each
 phase, cold/open gates, verifier faults, malformed/incomplete captures, reloads,
 byte identity and completed upstream errors. These are local correctness tests,
 not production repair calibration or new native/WASM latency claims.
 
-
 ## Explicit replay safety
 
-TI-27 adds `Call::execute_once` as an opt-in boundary around this call path.
+ adds `Call::execute_once` as an opt-in boundary around this call path.
 It validates write keys before inspection, serializes identical keys and retains
 the original terminal result, including blocks, bypasses and completed response
 halts. It caches final audit/feedback and moves repaired response bytes without

@@ -1,11 +1,11 @@
-# Local invariant activation (TI-54)
+# Local invariant activation
 
-`agw_invariants::activation` implements runtime contract §10.33. It is an explicit
+`agw_invariants::activation` implements the runtime contract. It is an explicit
 background library; constructing a guard still selects `NullEngine`. It does not
 schedule jobs, fetch profiles, run an LLM, authorize repair or change call modes.
 
 A `Controller` owns one exact tenant/connection/vendor/operation/contract scope.
-`Candidate` carries immutable local DSL definitions/bindings and optional TI-23
+`Candidate` carries immutable local DSL definitions/bindings and optional
 paired-endpoint definitions. At most 128 local and 16 paired rules are admitted. Authorization and pending
 customer overrides obey the same DSL bounds before they are retained.
 Configured capacity (1–1024) separately bounds receipts, candidate versions and
@@ -53,9 +53,9 @@ or safe blocking-write activation.
 2. Run replay in a background worker and append all receipts, including negative,
    incomplete and expired windows. Use a monotonically advancing host clock.
 3. `prepare(candidate, stage, now)` records a decision and compiles a complete
-   immutable replacement. Inspect `Prepared::decision()` for promote/reject/defer
+   immutable replacement. Inspect `Prepared::decision` for promote/reject/defer
    reasons, complete authorization, controls, counts and retained evidence.
-4. Publish through `publish_with(pending, now, |generation| ...)`, calling
+4. Publish through `publish_with(pending, now, |generation|...)`, calling
    `Engine::publish_activation(side, generation)` in the callback and mapping its
    error. The engine must already be explicitly configured as statistical. Publication rechecks expiry at commit, and next-stage replay starts after the
    actual publication time. Its publisher validates the whole replacement before one Arc swap, retaining all
@@ -91,7 +91,7 @@ findings and explicitly selected rules keep their policy, including external fin
 with a coincidentally identical name. Actual call mode remains unchanged.
 
 Each published generation retains its decision, receipts, authorization and controls.
-`Controller::decisions()` exposes rejected decisions and publication/conflict outcomes.
+`Controller::decisions` exposes rejected decisions and publication/conflict outcomes.
 Native per-phase audit metadata includes generation, stage, policy/candidate versions
 and complete receipt counts, including negative counts. Existing invariant and
 paired-endpoint metadata retains scope, actual/expected values, controls and units.

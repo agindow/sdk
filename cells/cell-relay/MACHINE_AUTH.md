@@ -1,7 +1,7 @@
 # Local machine identity — EPIC-14
 
-Contract [§10.56](../../agindow-runtime-contract.md) and
-[wrapper API §12.13](../../tasks/integrations/design/wrapper-api.md) define the
+Contract the runtime contract and
+the wrapper API define the
 per-surface decision. This is opt-in local code. Nothing is deployed, no live
 identity provider is qualified, and the SDK's embedded behavior is unchanged.
 
@@ -16,7 +16,7 @@ accepts ES256; SPIFFE JWT-SVID uses ES256 with standard sub/aud/exp claims.
 RS256 provider adapters, X.509 SVID
 exchange and HTTP Message Signatures are not implemented. This does not imply
 live compatibility with GitHub, AWS, GCP or Azure. Public-key client assertions
-provide the self-hosted path selected by TI-67. Their issuer and subject must
+provide the self-hosted path selected by. Their issuer and subject must
 both equal the registered client ID; only the current registered kid can mint.
 
 ## SDK setup
@@ -37,7 +37,7 @@ const auth = await createRemoteAuth({
 });
 try {
   await guardRemote(original, envelope, { endpoint: 'https://guard.example/v1/guard', auth });
-} finally { auth.close(); }
+} finally { auth.close; }
 ```
 
 Python uses `RemoteAuth(workload_identity(...), ProofSigner(public_x, sign))`
@@ -62,7 +62,7 @@ Legacy auth is explicit: a direct `apiKey`/`api_key` is accepted only in the
 callback receives `legacy_unbound`. In a keyless session, fallback requires both
 `allowLegacyFallback`/`allow_legacy_fallback` and a valid legacy key. Combining
 an auth session and direct API key is a setup error. The session never silently
-substitutes the key after refresh failure. TII-38 still owns issuance/revocation.
+substitutes the key after refresh failure. still owns issuance/revocation.
 
 ## Hosted configuration
 
@@ -139,7 +139,7 @@ a new proof; full state rejects with counters. Restart/isolate eviction loses
 those fences. Production routing must keep a token's proof traffic at one replay
 authority or provide distributed enforcement before claiming global replay
 resistance. No live deployment or production latency qualification is implied.
-Distributed replay enforcement is tracked in [TI-74](../../tasks/tickets/tier-1/EPIC-14/TI-74.md).
+Distributed replay enforcement is tracked in.
 
 Standards: [DPoP RFC 9449](https://www.rfc-editor.org/rfc/rfc9449.html),
 [token exchange RFC 8693](https://www.rfc-editor.org/rfc/rfc8693.html),

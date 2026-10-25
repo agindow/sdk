@@ -51,7 +51,7 @@ read and the other allow-listed methods as unknown unless explicitly configured.
 unsubscribe function. Events are immutable bounded metadata and include tool,
 mode, side/phase, latency, available class/confidence/audit ID and computed repair
 byte identity. Listener faults cannot release policy or replace upstream results.
-`recent()` returns the retained events, oldest first. The default ring holds
+`recent` returns the retained events, oldest first. The default ring holds
 100 events, `buffer: 0` disables retention, and the maximum is 100,000.
 Internal errors emit an error event and at most one bypass per call.
 
@@ -100,10 +100,10 @@ fabricates repair confidence.
 After `npm install agindow`, the CLI binary is **`agindow`**:
 
 ```bash
-npx agindow report ./src
-npx agindow report ./src --snapshot ./local-drift.json
-npx agindow codegen ./local-contracts.json
-npx agindow scan ./nango-project --snapshot ./local-contracts.json
+npx agindow report./src
+npx agindow report./src --snapshot./local-drift.json
+npx agindow codegen./local-contracts.json
+npx agindow scan./nango-project --snapshot./local-contracts.json
 ```
 
 Report never executes scanned source or writes a project file. Missing evidence
@@ -145,7 +145,7 @@ remote dependency.
 ```js
 const sdk = createAgindow({ audit: { tenant: 'example', capacity: 64 } });
 await sdk.ready;
-const result = sdk.guard(() => ({ value: 1 }), { tool: 'vendor.read' })();
+const result = sdk.guard( => ({ value: 1 }), { tool: 'vendor.read' });
 const receipt = await sdk.drainAudit(async artifact => {
   // Persist artifact.id durably before acknowledging.
   console.log(JSON.stringify(artifact));

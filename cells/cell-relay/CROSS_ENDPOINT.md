@@ -1,7 +1,7 @@
-# Cross-endpoint consistency (TI-23)
+# Cross-endpoint consistency
 
-Runtime contract §10.32 adds explicitly selected cross-endpoint checks to the
-TI-22 native guard. Defaults stay `NullEngine`. No network request, store lock,
+Runtime the runtime contract adds explicitly selected cross-endpoint checks to the
+ native guard. Defaults stay `NullEngine`. No network request, store lock,
 remote registry or LLM runs during a guarded call.
 
 ## Correlation and scope
@@ -65,22 +65,22 @@ use agw_guard::{cross_endpoint::Selection, statistical::{Engine, Plan}};
 
 // `identity` comes from the trusted host; accepted rules are customer-selected.
 let plan = Plan::new(identity, vec![])?
-    .with_cross_endpoint(Selection::new(rule_version, contract_version, accepted_rules)?)?;
+   .with_cross_endpoint(Selection::new(rule_version, contract_version, accepted_rules)?)?;
 let engine = Engine::statistical(plan);
 
 // Acquire local evidence before entering the guard; this never fetches a peer.
 let snapshot = observations.snapshot(&workflow_scope);
 let result = engine
-    .begin_call(context, operation, audit_ref, work_budget, 0)
-    .with_workflow(snapshot, current_sequence)
-    .dispatch(request_body, None, original_operation_once, response_capture);
+   .begin_call(context, operation, audit_ref, work_budget, 0)
+   .with_workflow(snapshot, current_sequence)
+   .dispatch(request_body, None, original_operation_once, response_capture);
 ```
 
 Selections validate versions, rule bounds and decoded pointers administratively.
 At most 16 rules apply to an operation; every selected rule must name the plan's
 operation on one side. Each field uses standard pointer escapes, at most 256 bytes
 and 32 components. Request and response sources remain distinct. Combine local
-TI-22 and cross-endpoint rules in the same plan; contract versions must agree and
+ and cross-endpoint rules in the same plan; contract versions must agree and
 rule IDs cannot collide. Invalid attachments reject before runtime. Customers can
 pin an immutable selection version, override a rule in an explicit replacement
 selection, or disable it by omitting it. Nothing automatically upgrades a plan.
@@ -102,8 +102,8 @@ partial evidence. Supplied busy/poison/corrupt snapshots become availability
 bypasses through existing containment, with one bypass per call and original
 outcome identity preserved.
 
-Divergence becomes a named semantic invariant finding, sharing TI-20 routing and
-TI-24 policy with local/shape/statistical findings. Observe passes with evidence;
+Divergence becomes a named semantic invariant finding, sharing routing and
+ policy with local/shape/statistical findings. Observe passes with evidence;
 repair reads degrade loudly and writes/unknown operations halt; strict retains
 its explicit opt-in escalation. A request halt dispatches zero times. A response
 halt preserves the completed original attempt; it cannot undo a write.
@@ -126,7 +126,7 @@ actual/expected values and no repair/write-integrity claim. Open metadata under
 workflow scope/revision, both configured endpoint operations/sides/fields (even
 for a missing peer), observed values/timestamps/sequences, concept/unit, numeric
 and time bounds, and unavailable reasons. Headers/warnings and final policy remain
-TI-22's. Hosts own publication and final call-wide audit composition; no frozen
+'s. Hosts own publication and final call-wide audit composition; no frozen
 wire schema changes or fourth drift class are needed.
 
 The implementation acquires evidence from earlier explicitly published workflow
@@ -145,7 +145,6 @@ Store acquisition, setup, network, streaming and WASM are excluded. The report
 `target/ti22-invariants.json` retains per-fixture measurements and environment;
 it is a local fixture gate, not a production or maximum-workload guarantee.
 
-
-Planned follow-ups: [TII-27 background peer acquisition](../../tasks/tickets/tier-2/EPIC-09/TII-27.md)
-and [TI-54 opt-in qualification/activation](../../tasks/tickets/tier-1/EPIC-05/TI-54.md).
+Planned follow-ups: background peer acquisition
+and opt-in qualification/activation.
 Both start at Todo; existing explicit observation publication and selection remain supported.

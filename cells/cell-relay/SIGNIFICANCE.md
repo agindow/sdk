@@ -1,9 +1,9 @@
-# Detector significance adapters (TI-50)
+# Detector significance adapters
 
 `agw_stats::significance` computes significance from raw windows and connects it
-to TI-19's materiality interface. Original detector APIs remain descriptive and
-unchanged. Contract §10.24 defines the methods and caller obligations. This is a
-standalone library; TI-46 owns guard execution. No runtime is enabled by default.
+to 's materiality interface. Original detector APIs remain descriptive and
+unchanged. the runtime contract defines the methods and caller obligations. This is a
+standalone library; owns guard execution. No runtime is enabled by default.
 
 ## API and local gates
 
@@ -17,21 +17,21 @@ standalone library; TI-46 owns guard execution. No runtime is enabled by default
 
 Each entry point takes `(path, baseline, observed, total_tests)`. The enum baseline
 is **occurrences**, including repetitions, rather than a deduplicated vocabulary.
-The adapter derives the vocabulary for TI-16 and retains both window counts for
+The adapter derives the vocabulary for and retains both window counts for
 significance. It tests known categories too, including cases where only their
 frequency changes; the original enum detector still decides whether a novel
 category is a material finding.
 
-`Report<D>` owns the original detector result in `detection()`, a `sufficient()`
-flag and every tested feature in `tests()`. Tests expose typed hypothesis, method,
-side sample counts, normalized effect, unadjusted p-value and `is_finding()`.
+`Report<D>` owns the original detector result in `detection`, a `sufficient`
+flag and every tested feature in `tests`. Tests expose typed hypothesis, method,
+side sample counts, normalized effect, unadjusted p-value and `is_finding`.
 `report.decision(index, &floors, tenant)` returns:
 
-- `Some(Decision)` for a local finding, after TI-19 significance/materiality gates.
+- `Some(Decision)` for a local finding, after significance/materiality gates.
 - `None` for an original detector non-finding, even if its p-value is tiny.
-- An error for an invalid index or invalid TI-19 input.
+- An error for an invalid index or invalid input.
 
-Unavailable reports have `sufficient() == false` and no tests/p-values. Check this
+Unavailable reports have `sufficient == false` and no tests/p-values. Check this
 before indexing. At least 20 eligible observations on **both** sides are required;
 for type/charset comparisons this means 20 non-null/string values respectively.
 The unchanged descriptive result is retained even if the significance adapter
@@ -56,7 +56,7 @@ single-sample Massart DKW bounds. It is conservative; no sharp small-sample
 asymptotic KS probability is claimed. The
 [Wei/Dudley paper](https://arxiv.org/abs/1107.5356) states the single-sample bound
 and explains limits of sharper two-sample formulas. Numeric effect differs from
-TI-15's normalized Wasserstein metric; both the original local gate and TI-19's
+'s normalized Wasserstein metric; both the original local gate and 's
 new effect floor must pass. This is evidence of magnitude change, not proof of a
 unit conversion or a numeric repair proposal.
 
@@ -70,7 +70,7 @@ distribution within each scope/seasonal comparison. Callers own valid sampling a
 immutable input selection. Correlated calls, adaptive baselines, repeated peeking
 and mixing seasonal populations require a separately justified design; these APIs
 do not infer effective sample size or verify independence. Production false-positive
-calibration and TI-19's real replay remain pending.
+calibration and 's real replay remain pending.
 
 ## Hypothesis families and bounds
 
@@ -81,12 +81,12 @@ The adapter rejects a total below its local minimum or outside 1–4096. Hosts m
 sum all local families; independent calls cannot discover one another's tests.
 For enum families with unknown future vocabulary, predeclare a conservative upper
 bound (up to 512/category comparison), rather than counting only new categories.
-TI-19 applies Bonferroni **once** to the returned unadjusted p-value. Changing
+ applies Bonferroni **once** to the returned unadjusted p-value. Changing
 `total_tests` cannot change a feature's computed p-value.
 
 Every side is capped at 4096 samples; enum sides are capped at 256 unique values.
 Text values/number lexemes are capped at 4096 bytes with a 1 MiB aggregate input
-budget. Paths are capped at 1024 bytes for TI-19 compatibility. Validate inputs
+budget. Paths are capped at 1024 bytes for compatibility. Validate inputs
 before allocating statistical-test work. Invalid/oversized input returns a local
 error for future guard containment; no I/O, audit mutation, payload rewriting,
 policy execution or notification delivery occurs.

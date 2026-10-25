@@ -1,9 +1,9 @@
 # Credential evidence and cutover (EPIC-13)
 
 Local, unpublished library surfaces implementing
-[TI-61–TI-65](../../tasks/tickets/tier-1/EPIC-13/README.md) and
-[contract §10.53](../../agindow-runtime-contract.md). Local qualification results and remaining review limits are recorded in
-[verification evidence](../../tasks/tickets/tier-1/EPIC-13/VERIFICATION.md). No provider is
+– and
+the runtime contract. Local qualification results and remaining review limits are recorded in
+the hosted qualification evidence. No provider is
 contacted by these libraries and no credential is minted, revoked or read.
 
 ## Response evidence
@@ -59,7 +59,7 @@ writes/unknown operations require per-probe consent and an idempotency key
 carried by the host. The library retains only key presence.
 
 All planned operations must pass before `promote`. Production calls capture
-`dispatch()` once and execute it once. A handle already in flight survives
+`dispatch` once and execute it once. A handle already in flight survives
 revert without replay. Quota consumes the same bounded probe budget and may be
 retried. Faults and deadlines abort without touching production selection.
 Unknown or atomic invalidation capability refuses start.
@@ -68,7 +68,7 @@ Promotion starts a bounded overlap. The host feeds candidate failures and
 successes into `failure`; terminal expiry/revocation or the configured failure
 threshold reverts selection and quarantines that cutover ID. The host drives
 `tick`; the first clean expiry returns a release signal, subsequent ticks do
-not. Persist `snapshot()` before releasing the old binding. External release
+not. Persist `snapshot` before releasing the old binding. External release
 idempotency is the host's responsibility. Restore requires matching binding
 references and valid state; missing/corrupt state freezes to active/unknown.
 Restore recomputes completed probes rather than trusting saved completion flags,
@@ -92,7 +92,7 @@ has `tenant`, `connection`, `observed_at` (UTC Z), `source`, `dual_key`
 (`yes|no|unknown`), `mint` (`manual|api|none|unknown`), and `replacement`
 (boolean). Optional `issued_at` is host-attested; optional `scopes` is an array
 of declared scope labels. Facts are an explicit offline interchange, not a
-claim that TII-71 research has been performed. Operations are shown separately
+claim that research has been performed. Operations are shown separately
 from declared scopes; no operation-to-scope mapping is inferred.
 
 JSON schema identifier: `agindow.rotation-readiness/1`. Output has `as_of` and
@@ -113,7 +113,6 @@ event file is never loaded. Exceeding a bound or malformed input exits nonzero
 with a bounded error and no partial table. `--require=verifiable` exits nonzero
 if any row fails that verdict. No network, bindings, secrets or file mutation
 are involved.
-
 
 ## Reproducible checks
 

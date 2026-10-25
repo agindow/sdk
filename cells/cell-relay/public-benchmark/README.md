@@ -7,8 +7,8 @@ included. This directory has no dependency on the Agindow engine, a service,
 account, database or hosted runner. Node >=22 and TypeScript are enough to build;
 the compiled runner uses only Node built-ins.
 
-This implements [TII-21a](../../../tasks/tickets/tier-2/EPIC-10/TII-21a.md) and
-[runtime contract §11](../../../agindow-runtime-contract.md#11-the-benchmark--sequencing-and-timeline--settled).
+This implements and
+the runtime contract.
 It extends the internal eval's scoring concepts, without importing its cases,
 results, engine or thresholds. The internal eval has 42 synthetic cases and
 fixture-supplied findings. This public development set has 280 synthetic cases:
@@ -137,7 +137,7 @@ cannot recover a lost set. Publish the commitment before receiving official
 entries; never rotate a set to improve a result. Validators privately verify the
 same sealed bytes without releasing them. Reusing templates limits hidden-set
 diversity; secret values alone do not establish resistance to benchmark gaming.
-No official held-out score is produced by this development runner (TII-21b).
+No official held-out score is produced by this development runner.
 
 ## Validator sign-off and publication gate
 

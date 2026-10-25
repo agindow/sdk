@@ -1,27 +1,26 @@
-# Relay profile export — TI-48
-
-The explicit local pipeline implements [contract §10.22](../../agindow-runtime-contract.md).
+# Relay profile export
+The explicit local pipeline implements the runtime contract.
 It does not enable collection or networking on the default guard. The native
 background sender supports Unix hosts with `curl` installed. Local staging and
 projection also compile for WASM; a WASM background transport is not supplied.
-OPS-05 subsequently qualified the authenticated boundary in isolated staging
+ subsequently qualified the authenticated boundary in isolated staging
 with actual relay exports from synthetic observations. Temporary access was
 revoked; no continuous collector is enabled.
 
 ## Ownership and lifecycle
 
-Configure TI-45 `Store` sample/scope/byte limits and TI-48 `Staging` window/byte
+Configure the `Store` sample/scope/byte limits and the `Staging` window/byte
 limits. After complete observations have been admitted, call
 `Staging::close(store, scope, close_id, start, end)` at an explicit boundary.
 Intervals are UTC milliseconds, half open, and must enclose every observation.
 Each logical close ID is caller-owned and unique. Closing detaches an immutable
 window and resets only that scope's live observations; it never publishes a
 baseline. Frozen snapshots and other scopes remain valid. Baseline windows
-must be explicitly published through TI-45 separately.
+must be explicitly published through separately.
 
 Closing does no hashing, profiler work, filesystem access, Queue send or network
-I/O. Staging rejects new closes on capacity pressure, increments `rejected()`
-and leaves the source window untouched. If the source fills too, TI-45 admission
+I/O. Staging rejects new closes on capacity pressure, increments `rejected`
+and leaves the source window untouched. If the source fills too, admission
 rejects new samples atomically. Monitor both error paths. Do not wait for an
 exporter lock or channel from a guarded call: use exclusive local collection
 and a bounded nonblocking handoff to the background owner.
@@ -53,14 +52,14 @@ outbox.pump(utc_epoch_ms, |body| match sender.send(body) {
 
 Each pump sends at most one profile. Attempt reservations and exponential
 backoff deadlines persist before sending. Backoff caps at one hour, configuration
-permits at most 100 attempts, and exhausted entries become durable `losses()`.
-Capacity refusals increment durable `rejected()` rather than claiming actual
+permits at most 100 attempts, and exhausted entries become durable `losses`.
+Capacity refusals increment durable `rejected` rather than claiming actual
 loss. Admission reserves worst-case retry metadata and counter growth before accepting
 a profile. Limits cover serialized spool bytes (at most 16 MiB), pending windows
 (at most 4096), attempts and deadlines; one window is at most 4096 samples and
 64 KiB string input. Include counters/errors in the host's existing telemetry;
 there is no metrics server or implicit background thread. Redelivery after a
-lost acknowledgement is intentional: TI-18's immutable insert is idempotent.
+lost acknowledgement is intentional: 's immutable insert is idempotent.
 
 ## Scope and numeric projection
 
@@ -72,7 +71,7 @@ Keep the same cohort for a logical window. Window IDs hash scope, close ID,
 observation timestamps and summary. No raw values are sent.
 
 Missing, null, boolean, string and numeric type slots remain separate. Only
-TI-45 `ExactInteger(Observed)` values within ±(2^53−1) enter numeric bins.
+the `ExactInteger(Observed)` values within ±(2^53−1) enter numeric bins.
 Decimals, exponents, disabled/high-precision projection and unsafe integers
 increase `excluded_numbers`; no floating parse or rounding occurs. Integer
 lexemes occupy the integer slot; decimal/exponent lexemes occupy the number slot.
@@ -102,14 +101,14 @@ token only on that tenant's native host. Never accept a tenant identifier from a
 request as authorization. The receiver authenticates the token, validates at
 most 64 KiB of streamed body, compares its tenant with the trusted map and awaits
 Queue acceptance before returning 202. Missing credentials/configuration, tenant
-mismatches and Queue failures cannot acknowledge delivery. TI-49 snapshot reads
+mismatches and Queue failures cannot acknowledge delivery. snapshot reads
 use a separate tenant-bound reader credential and `/profile-snapshots` route.
 
 Deployment requires the operator to supply this secret and an intended HTTPS
 route while retaining existing Queue/DO/database bindings. Default configuration
-keeps public routes disabled. Follow the [OPS-04 runbook](../cell-registry/ops/README.md)
-for isolated staging qualification; [TI-49](../../tasks/tickets/tier-1/EPIC-04/TI-49.md)
-owns remote snapshot loading. [OPS-05 evidence](../cell-registry/ops/HOSTED-EVIDENCE.md#ops-05-hosted-qualification--2026-10-22-americanew_york)
+keeps public routes disabled. Follow the the staging runbook
+for isolated staging qualification;
+owns remote snapshot loading. the hosted qualification evidence
 records completed isolated staging qualification and access revocation.
 
 ## Verification
@@ -119,7 +118,7 @@ projection, scope mapping, byte/count pressure, disk faults and retry restart.
 The transport's unit test checks credential handling and acknowledgement codes.
 The guard integration test checks original byte/outcome identity during staging
 pressure and cold-engine bypass. Registry tests validate Rust-produced envelopes
-through authenticated ingress and real TI-18 SQL, duplicate/reordered delivery,
+through authenticated ingress and real SQL, duplicate/reordered delivery,
 consumer recreation, and the production Worker/Queue binding in workerd.
 
 Regenerate the shared test fixture after intentional projection changes:

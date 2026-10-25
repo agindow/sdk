@@ -1,14 +1,14 @@
-# Structured agent feedback (TI-25)
+# Structured agent feedback
 
-`agw_guard::feedback::Feedback::from_outcome(&outcome)` borrows a TI-24 bounded
+`agw_guard::feedback::Feedback::from_outcome(&outcome)` borrows a bounded
 call outcome and returns optional agent feedback. It does not execute, retry,
 throw, publish an audit artifact, or replace the original upstream outcome.
-See [runtime contract §7 and §10.35](../../agindow-runtime-contract.md) and
-[TI-25](../../tasks/tickets/tier-1/EPIC-06/TI-25.md).
+See the runtime contract and
+.
 
 For a halt, send `feedback.http_status` (409) and serialize `feedback.payload`.
 Strict mode uses `drift_halted`; repair-mode semantic/unknown write halts use
-`drift_blocked`. The separately exposed `ErrorCode` pins the eight §7 HTTP error
+`drift_blocked`. The separately exposed `ErrorCode` pins the eight HTTP error
 codes, including `internal` (500 as representative of 5xx, which clients bypass).
 
 Example payload for a strict request halt with confirmed rename evidence:
@@ -40,9 +40,9 @@ hosts retain that outcome and verify it and idempotency before any replay.
 `Display` uses the same hint as the JSON payload.
 
 The audit URL encodes the audit ID as one path segment. It identifies the returned
-audit draft; this library does not make the retrieval service available (TI-29).
-TI-47 composes statistical diagnosis evidence into the audit artifact; this
-adapter consumes TI-24 outcomes and does not wire the statistical guard or SDKs.
+audit draft; this library does not make the retrieval service available.
+ composes statistical diagnosis evidence into the audit artifact; this
+adapter consumes outcomes and does not wire the statistical guard or SDKs.
 
 ## Measuring recovery
 
@@ -52,8 +52,8 @@ explicit retry outcomes against that original identity. Only
 `RetryOutcome::VerifiedTaskSuccess` counts as recovery: the host must verify the
 task result, not infer success from HTTP 200, a repair, or a bypass.
 
-`snapshot()` returns serializable counts of distinct blocked, retried and
-recovered calls. `recovery_rate()` returns recovered/retried or `None` if no retry
+`snapshot` returns serializable counts of distinct blocked, retried and
+recovered calls. `recovery_rate` returns recovered/retried or `None` if no retry
 has occurred. Multiple failed/bypassed retries count once in the denominator;
 a later verified success counts once in the numerator. Duplicate/late callbacks
 cannot inflate counts or erase success. Separate tracker instances can compare
@@ -81,16 +81,15 @@ round-trip, human-readable hints, request dispatch, response outcome retention,
 malformed feedback, mixed semantic safety, URL escaping and bounded deduplication.
 
 Delivery and qualification follow-ups are tracked explicitly: SDK/HTTP feedback
-wiring belongs to [TI-31a](../../tasks/tickets/tier-1/EPIC-07/TI-31a.md),
-[TI-31e](../../tasks/tickets/tier-1/EPIC-07/TI-31e.md),
-[TI-32](../../tasks/tickets/tier-1/EPIC-07/TI-32.md),
-[TI-33](../../tasks/tickets/tier-1/EPIC-07/TI-33.md) and
-[TI-34](../../tasks/tickets/tier-1/EPIC-07/TI-34.md).
-[TI-56](../../tasks/tickets/tier-1/EPIC-06/TI-56.md) owns production recovery
+wiring belongs to,
+,
+,
+ and
+.
+ owns production recovery
 measurement and qualification.
 
-
-TI-27's [explicit replay adapter](./IDEMPOTENCY.md) retains this feedback with the
+'s [explicit replay adapter](./IDEMPOTENCY.md) retains this feedback with the
 original audit identity and adds a terminal-key note for writes. Reusing a blocked
 key returns the same block, even after correcting arguments. An authorized new
 logical write can be correlated to the original known-undispatched block for

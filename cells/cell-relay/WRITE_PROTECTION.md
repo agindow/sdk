@@ -1,6 +1,6 @@
-# TI-26 — explicit write-protection opt-out
+# — explicit write-protection opt-out
 
-Native controls implement [contract §4.1 and §10.36](../../agindow-runtime-contract.md).
+Native controls implement the runtime contract.
 `RuntimeConfig` defaults to protected writes. Use one runtime per tenant/connection
 protection scope. Administrative callers can request an opt-out:
 
@@ -28,12 +28,12 @@ receipt. There is no implicit environment-variable opt-out.
 Observe, verified repair, malformed-body and availability rules are unchanged.
 Unknown operations receive conservative write policy. Mode and protection occupy
 one atomic configuration word, loaded once per call. Changes cannot alter a
-request/response pair already in progress. TI-24 call audits record the effective
+request/response pair already in progress. call audits record the effective
 `fail_closed` value in `metadata.agindow_policy`; administrative actor/time lives
 in the separate control receipt. Original bytes and completed upstream outcomes
 remain available through the existing guard APIs.
 
-The [console component](../cell-console/README.md) consumes host-adapted accepted
+The console component consumes host-adapted accepted
 receipts and cumulative detected-write counts. Deliver those off-path. Count
 admitted drift on both phases once per call, including observed, repaired and
 blocked calls; exclude clean calls, read calls and faults without drift evidence.

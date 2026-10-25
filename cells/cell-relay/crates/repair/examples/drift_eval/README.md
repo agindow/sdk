@@ -1,10 +1,10 @@
-# TII-20 internal repair judgment — revision 2
+# internal repair judgment — revision 2
 
-Internal engineering instrument under [contract §10.2 and §11](../../../../../../agindow-runtime-contract.md).
+Internal engineering instrument under the runtime contract.
 No publication, leaderboard, production calibration or detector-accuracy claim.
 
-[TII-74 guarded profile v3](./guarded/README.md) separately qualifies these same
-cases through TI-24 independent verification and actual dispatch capture; this
+[ guarded profile v3](./guarded/README.md) separately qualifies these same
+cases through independent verification and actual dispatch capture; this
 v2 seam report and its baseline remain separate diagnostics.
 
 ```bash
@@ -30,7 +30,7 @@ The report version, baseline filename and trusted CI cache namespace all changed
 
 ## Independent case labels
 
-42 deterministic synthetic cases cover all seven §4a classes, six per class:
+42 deterministic synthetic cases cover all seven a classes, six per class:
 
 | Label | Per class | Total | Meaning |
 |---|---|---|---|
@@ -100,7 +100,7 @@ are reported both per all cases and per dispatched cases. No dispatches means
 exact; derived floating rates permit only JSON round-trip rounding differences
 (1e-15) during validation. Regression decisions use exact per-case outcomes.
 
-## Observed revision 2 results after TI-66
+## Observed revision 2 results after
 
 Each arm evaluates the same 42 cases; the repairable subset contains 14.
 
@@ -108,7 +108,7 @@ Each arm evaluates the same 42 cases; the repairable subset contains 14.
 |---|---|---|---|---|---|---|
 | No repair | 0/42 | 0/14 | 0 | 0 | 12 | 30 |
 | Naive full-payload reconstruction | 21/42 | 14/14 | 21 | 0 | 5 | 16 |
-| Native selective repair + policy (after TI-66) | 11/42 | 11/14 | 11 | 21 | 6 | 4 |
+| Native selective repair + policy (after ) | 11/42 | 11/14 | 11 | 21 | 6 | 4 |
 
 Unsafe writes per dispatch are 30/42, 16/42 and **4/21**, respectively. The native
 arm's lower dispatch volume is visible rather than hidden inside zero violations.
@@ -116,7 +116,7 @@ Its three repairable misses are required numeric type-transition refusals. Its f
 writes are the deliberately overconfident wrong unit, timestamp, enum and date
 proposals. Both repair arms have zero violations on the repairable slice.
 
-TI-66 adds only the explicit, source-validated empty-string-to-null repair. The
+ adds only the explicit, source-validated empty-string-to-null repair. The
 committed original v2 baseline retains 10/14 recovery; the new run passes against
 it with 11/14. Inputs, independent labels, facts, thresholds and scoring remain
 unchanged. The three numeric misses remain in the denominator. No baseline was
@@ -128,7 +128,7 @@ The naive arm's 21 safe writes include seven coincidentally correct ambiguous
 proposals; that does not make those proposals justified by available evidence.
 
 ToolMisuseBench reference points recorded by
-[TII-20](../../../../../../tasks/tickets/tier-2/EPIC-10/TII-20.md) remain separate:
+ remain separate:
 heuristic recovery **0.000**, schema repair **~0.497 with elevated violations**.
 They are specification-supplied external references, not reproduced here,
 comparable pass criteria, or a measured external violation baseline.

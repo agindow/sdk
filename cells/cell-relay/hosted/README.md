@@ -1,4 +1,4 @@
-# Local Worker execution host (TI-34)
+# Local Worker execution host
 
 The real `workers-rs` handler implements explicit `POST /v1/guard` using the
 same Rust two-phase statistical engine as the sidecar and Node guest. NullEngine
@@ -53,7 +53,7 @@ Response halts retain original status/body at a same-origin `X-Agindow-Outcome`
 handle and warn against replay; retrieval requires the same credential. Artifacts
 and outcomes are bounded FIFO process-local state (64 records/16 MiB), lost on
 isolate eviction. Unknown/oversized/compressed capture streams retain original
-bytes and bypass unavailable inspection. SDK 5xx/transport fallback is TI-41.
+bytes and bypass unavailable inspection. SDK 5xx/transport fallback is.
 
 The optional `/internal/registry-probe` administrative route exercises the
 `REGISTRY_MTLS` Fetcher binding against a fixed `REGISTRY_HEALTH_URL`, protected

@@ -1,4 +1,4 @@
-# Local sidecar (TI-33)
+# Local sidecar
 
 The sidecar exposes the runtime contract's `POST /v1/guard` over loopback HTTP
 and an optional Unix HTTP socket. The default NullEngine detects nothing.
@@ -36,7 +36,7 @@ actually enforce deduplication; no distributed replay store is supplied.
 It does not claim remote control-plane registration. Socket paths are mode 0600;
 startup refuses existing paths. Remove a stale path only after verifying its
 owner is no longer running. SIGINT and SIGTERM remove the owned socket. After SIGKILL,
-operators must clean the stale path; clients use TI-41 fallback and the same key.
+operators must clean the stale path; clients use fallback and the same key.
 
 Policy halts use six-field HTTP 409 feedback. A response halt retains the
 completed original bytes at the `X-Agindow-Outcome` handle, and warns against
@@ -50,7 +50,7 @@ claim.
 Build the static Linux image from the repository root:
 
 ```sh
-docker build -f cells/cell-relay/sidecar/Dockerfile -t agindow-sidecar:local .
+docker build -f cells/cell-relay/sidecar/Dockerfile -t agindow-sidecar:local.
 ```
 
 The scratch image includes a Rust/musl binary and embedded TLS roots. It has no

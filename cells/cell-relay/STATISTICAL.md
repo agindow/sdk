@@ -1,7 +1,6 @@
-# Explicit native statistical guard — TI-46
-
-`agw_guard::statistical::Engine::default()` is `NullEngine`. Explicitly opt into
-`Engine::statistical(Plan::new(identity, fields)?)` using local TI-45 snapshots.
+# Explicit native statistical guard
+`agw_guard::statistical::Engine::default` is `NullEngine`. Explicitly opt into
+`Engine::statistical(Plan::new(identity, fields)?)` using local snapshots.
 Nothing fetches profiles, calls a provider, or activates detection by default.
 Select the exact tenant, connection, vendor, endpoint, side, field, segment,
 window and generation outside the request path. `Field::enumeration` declares
@@ -12,7 +11,7 @@ family reserves 535 slots per comparison: 1 magnitude + 512 enum categories +
 5 completeness + 6 type + 11 charset/format features. All slots, including unused
 and non-finding slots, remain in the Bonferroni denominator. There is no
 production independence, repeated-peeking or calibration guarantee. Seasonal
-selection is explicit host input under runtime contract §10.23; no fallback or
+selection is explicit host input under the runtime contract; no fallback or
 pooling occurs in this guard.
 
 ## Executing a call
@@ -21,7 +20,7 @@ Call `engine.begin_call(context, operation, audit_ref, work_units, inference_cap
 once. The returned call owns its immutable plan selection and mode, shared
 non-cloneable work/investigation allowances, and one breaker admission. Updating
 `Engine::replace` or the runtime mode affects later calls only. `audit_ref` is
-qualified with the plan's tenant before entering TI-20's optional local outbox.
+qualified with the plan's tenant before entering 's optional local outbox.
 
 Use `call.dispatch(request, outbox, upstream, capture)` for owned upstream results.
 `upstream` runs exactly once outside native recovery unless request policy halts.
@@ -39,13 +38,13 @@ is omitted. Neither the live store nor its frozen baseline is updated. Body
 timestamps come from the host. High-precision/unsafe projection disables unit
 analysis only; unit diagnoses never create repair candidates or conversions.
 
-The `Body::findings` input can borrow a complete TI-11 local shape report. Optional
-plan shape snapshots also run TI-11's inspection comparator. They preserve its
+The `Body::findings` input can borrow a complete local shape report. Optional
+plan shape snapshots also run 's inspection comparator. They preserve its
 uncertainty: learned/observed structure does not become authoritative shape proof.
 The engine retains all mixed findings and typed statistical reports, methods,
 sample counts, raw p-values, hypotheses, generations and suppression decisions.
-TI-20 routes the combined findings; the shared `agw_policy` matrix owns policy.
-Complete malformed bodies reuse TI-36's disposition. Truncated, duplicate-key,
+ routes the combined findings; the shared `agw_policy` matrix owns policy.
+Complete malformed bodies reuse 's disposition. Truncated, duplicate-key,
 resource-limited and parser-faulted bodies cannot supply statistical drift.
 
 `Outcome::dispatched` is false only for a pre-send halt. A response-side halt has
@@ -54,25 +53,25 @@ original vendor error. It does not claim prevention, rollback or integrity proof
 `Outcome::bypasses` counts availability failure once per call; unavailable evidence
 is not a clean verdict. A failed request evaluation skips response evaluation.
 Successful request work does not reset consecutive response failures in the
-shared TI-42 breaker. Three failed calls open its one-second monotonic cooldown.
+shared breaker. Three failed calls open its one-second monotonic cooldown.
 
-The policy prerequisite is TI-24's pure matrix in `agw-policy`. This ticket adds
-that boundary and its exhaustive matrix test; TI-24's selective repair integration,
-HTTP/SDK and streaming drivers remain separate. TI-47 composes this call's
+The policy prerequisite is 's pure matrix in `agw-policy`. This ticket adds
+that boundary and its exhaustive matrix test; 's selective repair integration,
+HTTP/SDK and streaming drivers remain separate. composes this call's
 statistical evidence into one audit artifact (below). Strict reads halt on
-unverified drift as specified by contract §2; repair reads fail open. Observe
+unverified drift as specified by the runtime contract; repair reads fail open. Observe
 preserves original bytes and outcomes in every case.
 
-Investigation uses only TI-20's bounded outbox. One shared call reservation admits
+Investigation uses only 's bounded outbox. One shared call reservation admits
 at most one job across both phases. Missing/disabled/full queues, zero ceilings
 and exhausted inference caps cannot alter policy. Jobs contain tenant-qualified
 audit references, not payloads. No worker, network, persistence or inference runs.
 
-## Composing one audit artifact (TI-47)
+## Composing one audit artifact
 
 `outcome.compose(draft)` returns the one final `audit_artifact` v1 value; use
 `compose_with(draft, &applied)` to report caller-verified patches. Composition
-preserves the TI-24 decision and frozen mode, replaces the reserved metadata keys
+preserves the decision and frozen mode, replaces the reserved metadata keys
 (`agindow_statistical`, `agindow_policy`, `agindow_invariants`,
 `agindow_cross_endpoint`, `agindow_activation`, `agindow_enum_growth`), and clears
 stale `patch`, `hypothesis`, `confidence`, `note`, the idempotency key and any
@@ -83,8 +82,8 @@ Evidence lives under `metadata.agindow_statistical` (`agindow_statistical/1`):
 identity, per-field generation/window/segment/readiness/sample provenance,
 per-phase evaluation and suppression counters, the final policy projection, one
 typed entry per admitted test, and the fixed limits/truncation record. Unit
-`unit_conversion` hypotheses remain diagnoses for TI-25 and never authorize
-conversion. Enum `window_first_seen` is window-only; recurrence belongs to TI-29.
+`unit_conversion` hypotheses remain diagnoses for and never authorize
+conversion. Enum `window_first_seen` is window-only; recurrence belongs to.
 A finding carries `side`, `path`, `detector`, `class`, `signal`, sample/p-value
 counts, `reason` and a multi-entry `hypotheses` array; the artifact-level
 `hypothesis` is set only when exactly one hypothesis kind exists.
@@ -94,12 +93,11 @@ Composition is deterministic under input permutation and bounded at 256 findings
 reported in `truncated`; provenance, evaluation counters, decision and mode are
 never truncated, and the aggregate class is a maximum (shape < unknown <
 semantic). `outcome.publish(draft, &mut publisher, now)` forwards the composed
-artifact through TI-29's local publisher and returns `None` on local store or
+artifact through 's local publisher and returns `None` on local store or
 honesty refusal. A full outbox still returns a publication with `queued: false`;
 it never awaits a sink, replaces the upstream outcome or changes policy.
 The shared fixture `contracts/examples/audit_artifact.statistical.valid.json`
-round-trips through the frozen schema in Rust and TypeScript. See runtime contract
-§10.41 and [AUDIT.md](./AUDIT.md).
+round-trips through the frozen schema in Rust and TypeScript. See the runtime contract and [AUDIT.md](./AUDIT.md).
 
 Run:
 
@@ -126,12 +124,12 @@ node cells/cell-relay/perf/run-availability.mjs
 ```
 
 The integrated native Criterion fixture includes call entry, lossless parsing,
-transient extraction, applicable TI-50 adapters, TI-19 materiality, TI-20 routing,
-TI-24 policy, containment, and evidence destruction on both sides. Baseline setup,
+transient extraction, applicable adapters, materiality, routing,
+ policy, containment, and evidence destruction on both sides. Baseline setup,
 network/streaming, capture acquisition, SDK/WASM and final audit composition are
 excluded. Fixtures use 128 samples per window, observe mode, 100 measurements,
 1 s warmup and 3 s sampling. Results are local measurements, not an integrated
-latency gate or a production SLA. TI-42 separately gates native bypass means.
+latency gate or a production SLA. separately gates native bypass means.
 
 Local run on October 17, 2026: Apple M2, Darwin arm64, Rust 1.99.1, release
 profile. Arithmetic iteration means from Criterion's `new/estimates.json`:
@@ -146,12 +144,11 @@ profile. Arithmetic iteration means from Criterion's `new/estimates.json`:
 These are fixture means, not p50/p99 validation or a portable latency guarantee.
 Criterion reports remain under `target/criterion/statistical/` (not committed).
 
-See [TI-46](../../tasks/tickets/tier-1/EPIC-04/TI-46.md) for acceptance criteria,
-[TI-24](../../tasks/tickets/tier-1/EPIC-06/TI-24.md) for policy ownership and the
-[runtime contract](../../agindow-runtime-contract.md) §10.27 for the decisions.
+See for acceptance criteria,
+ for policy ownership and the
+the runtime contract for the decisions.
 
-
-TI-22 optionally attaches frozen request/response invariant selections to this
+ optionally attaches frozen request/response invariant selections to this
 same plan and call-level containment. See [invariant execution](./INVARIANTS.md)
 for exact projection, enum additions, shared policy, per-phase audit drafts and
 the local integrated native p99 gate. Empty statistical fields are supported.

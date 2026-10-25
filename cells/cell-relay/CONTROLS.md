@@ -1,8 +1,8 @@
-# TI-19 false-positive controls
+# false-positive controls
 
 `agw_stats::control` is a standalone, synchronous local library. It performs no
-I/O and makes no guard, policy, repair or delivery decisions. Contract §10.23
-specifies its rules. TI-45 supplies snapshots, TI-20 owns routing, and TI-46
+I/O and makes no guard, policy, repair or delivery decisions. the runtime contract
+specifies its rules. supplies snapshots, owns routing, and
 will connect controls to guarded evaluations. No production qualification or
 latency guarantee is claimed.
 
@@ -42,13 +42,13 @@ of notification rank or budget.
 
 Evidence must carry a valid statistical p-value and the **total** tested hypothesis
 count, including tests that produced no candidate. Significance uses Bonferroni
-`p <= alpha / tests`; this is not a new p-value estimator. The original TI-15–TI-17
-APIs remain descriptive. TI-50's [significance adapters](./SIGNIFICANCE.md) now
+`p <= alpha / tests`; this is not a new p-value estimator. The original
+APIs remain descriptive. 's [significance adapters](./SIGNIFICANCE.md) now
 compute p-values and normalized effects from the same raw windows, retaining
 existing detector-local minimum-evidence gates. Their `Report::decision` method
-passes only local findings into TI-19. Confidence scores must never be substituted
+passes only local findings into. Confidence scores must never be substituted
 for p-values; missing significance is unavailable, not `p = 0`. Runtime guard
-invocation remains TI-46 integration work. These controls do not turn
+invocation remains integration work. These controls do not turn
 synthetic evidence into calibrated detection.
 
 ## Daily notification budget
@@ -99,8 +99,8 @@ history-slot visits before detector-control work begins.
 proof. Review the corpus provenance and output before treating the flag as release
 evidence. Positive counts expose missed detections; the false-positive gate alone
 makes no recall guarantee. Synthetic regression fixtures exercise the machinery
-but cannot close TI-19's production criterion. No production dataset or agreed
-production threshold exists yet; TI-19 stays Blocked until that replay passes.
+but cannot close 's production criterion. No production dataset or agreed
+production threshold exists yet; stays Blocked until that replay passes.
 
 ```sh
 cargo test -p agw-stats --test control_selection --test control_materiality --test control_budget --test control_replay

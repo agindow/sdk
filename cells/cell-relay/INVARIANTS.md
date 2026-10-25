@@ -1,7 +1,7 @@
-# Standalone invariants (TI-21)
+# Standalone invariants
 
-`agw-invariants` implements runtime contract §10.30. TI-22 adds explicit native
-guard execution (§10.31), described below. Standalone compilation/evaluation
+`agw-invariants` implements the runtime contract. adds explicit native
+guard execution , described below. Standalone compilation/evaluation
 remains independent of the guard.
 
 The DSL is typed Rust, with six forms:
@@ -24,10 +24,10 @@ comparisons, and allocates nothing. There is no text parser.
 use agw_invariants::{compile, Form, Rule, Scalar, Verdict};
 
 let rules = [Rule {
-    id: "gross-total".into(),
+    id: "gross-total".into,
     form: Form::Sum {
-        total: "total".into(),
-        terms: vec!["amount".into(), "tax".into()],
+        total: "total".into,
+        terms: vec!["amount".into, "tax".into],
         tolerance: 0,
     },
 }];
@@ -35,8 +35,8 @@ let program = compile(&rules, &["total", "amount", "tax"])?;
 const VALUES: [Scalar<'static>; 3] = [
     Scalar::Integer(120), Scalar::Integer(100), Scalar::Integer(20),
 ];
-assert_eq!(program.rules()[0].evaluate(&VALUES), Verdict::Pass);
-# Ok::<(), agw_invariants::Error>(())
+assert_eq!(program.rules[0].evaluate(&VALUES), Verdict::Pass);
+# Ok::<, agw_invariants::Error>()
 ```
 
 Caller projections must use exact i64 quantities in consistent units. Sums and
@@ -78,7 +78,7 @@ Validation: `cargo test -p agw-invariants`; the workspace gates also compile
 rustdoc and lint every target. Compilation/store/learning errors are administrative
 `Result`s; no default engine or availability behavior changes.
 
-## Explicit native execution (TI-22)
+## Explicit native execution
 
 Attach frozen snapshots to the existing `agw_guard::statistical::Plan`. Statistical
 fields may be empty when only invariants are configured. No default engine changes.
@@ -87,13 +87,13 @@ fields may be empty when only invariants are configured. No default engine chang
 use agw_diff::Side;
 use agw_guard::{invariant::Selection, statistical::{Engine, Plan}};
 // `identity` is the trusted tenant/connection/vendor/operation/segment scope.
-// `request_snapshot` and `response_snapshot` come from TI-21 Store::select.
+// `request_snapshot` and `response_snapshot` come from Store::select.
 let plan = Plan::new(identity, vec![])?
-    .with_invariants(Side::Request, Selection::new(request_snapshot)?)?
-    .with_invariants(Side::Response, Selection::new(response_snapshot)?)?;
+   .with_invariants(Side::Request, Selection::new(request_snapshot)?)?
+   .with_invariants(Side::Response, Selection::new(response_snapshot)?)?;
 let engine = Engine::statistical(plan);
 // engine.begin_call(context, operation, audit_ref, work_budget, inference_budget)
-//     .dispatch(request_body, outbox, operation_once, response_capture)
+//.dispatch(request_body, outbox, operation_once, response_capture)
 ```
 
 Snapshots retain compilation binding order. For guard integration, every binding
@@ -113,13 +113,13 @@ timestamp parsing or sampling grants permission to project decimals. Incomplete
 captures produce no invariant findings; missing/wrong-type/array/numeric evidence
 is unavailable per rule and cannot suppress another rule's confirmed violation.
 Cross-endpoint operands are caller-correlated fields in the supplied document;
-TI-23 still owns acquiring and validating cross-endpoint evidence.
+ still owns acquiring and validating cross-endpoint evidence.
 
 | Mode | Read finding | Write/unknown finding |
 |---|---|---|
 | observe | Pass with warning/evidence | Pass with warning/evidence |
 | repair | Degraded, original outcome | Halt |
-| strict | Halt (explicit opt-in, contract §4.2) | Halt |
+| strict | Halt (explicit opt-in, the runtime contract) | Halt |
 
 An enum addition is a separate informational `enum_expanded` semantic finding.
 It never becomes `invariant_violated` and still halts unproven writes in repair
@@ -127,7 +127,7 @@ and strict modes. Vocabulary alone cannot detect a same-label meaning change;
 explicit arithmetic/relational constraints can independently detect its effect.
 No candidate learning or automatic repair is enabled.
 
-TI-20 routes invariant violations internally to verification, then the shared
+ routes invariant violations internally to verification, then the shared
 policy matrix sees their confirmed semantic class with repair unavailable. Enum
 additions route as semantic diffs. Mixed shape/statistical/invariant findings
 survive and the strongest policy decision wins. A request halt dispatches zero
@@ -149,7 +149,7 @@ pinned selections and `cache` otherwise; this is local selection provenance.
 `write_integrity` stays false, and patch evidence records unapplied, byte-identical
 payloads. Passing a suite does not prove a write correct. These are invariant-only
 per-phase drafts; the full mixed reports remain in `Phase.report`/`records`.
-TI-47 can compose this evidence into the per-call statistical artifact when a
+ can compose this evidence into the per-call statistical artifact when a
 call runs the statistical engine; hosts own other composition, persistence,
 metrics and delivery of headers and warnings. No frozen contract changes or
 fourth wire drift class are needed.
@@ -159,7 +159,7 @@ has a bypassed draft/status and warning rather than a clean claim; this is not a
 engine fault or a global bypass count. Clean completed suites have an `ok` draft.
 When another finding blocks or degrades the phase, its aggregate decision also
 determines the status header; unavailable invariants do not overwrite that status.
-Malformed-body policy remains TI-36; incomplete captures and internal faults have
+Malformed-body policy remains; incomplete captures and internal faults have
 no invariant draft. Faulted phases never retain partially constructed evidence.
 
 `cargo test -p agw-guard --test invariant --test invariant_faults --test invariant_selection`
@@ -171,12 +171,11 @@ containment and result drop; setup, I/O, streaming and WASM are excluded. Report
 include environment and nearest-rank percentiles at `target/ti22-invariants.json`.
 This local fixture gate is not a production latency guarantee for maximal suites.
 
-
-TI-23 adds [workflow-scoped cross-endpoint observations and consistency](./CROSS_ENDPOINT.md),
+ adds [workflow-scoped cross-endpoint observations and consistency](./CROSS_ENDPOINT.md),
 with paired-profile candidates, explicit correlation/revision, immutable local
 snapshots, age/skew fences and native guard/audit integration. The earlier
 cross-endpoint DSL form still supports caller-supplied slots independently.
 
-TI-54 now provides optional background [qualification and activation](./ACTIVATION.md).
+ now provides optional background [qualification and activation](./ACTIVATION.md).
 Explicit selection remains supported; profiles and candidates never authorize
 activation without customer policy and independent qualification evidence.

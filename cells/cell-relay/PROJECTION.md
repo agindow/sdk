@@ -1,11 +1,11 @@
-# Precision-budgeted unit inputs (TI-52)
+# Precision-budgeted unit inputs
 
 `agw_stats::windows::projection` supplies explicit decimal/exponent-to-f64
-materialization under runtime contract [§10.29](../../agindow-runtime-contract.md).
+materialization under runtime contract the runtime contract.
 This produces local analytical inputs and proof of conversion error. It does
-not modify payloads, authorize repairs, or change TI-15 detector thresholds.
+not modify payloads, authorize repairs, or change detector thresholds.
 
-Configure `Projection::Decimal(policy)` on the TI-45 selection. Create `policy`
+Configure `Projection::Decimal(policy)` on the selection. Create `policy`
 with `Policy::new(mode, precision_source, allow_unsafe_integers, limits)`:
 
 - `Mode::ExactOnly` requires exact equality with the actual binary f64 rational.
@@ -28,23 +28,23 @@ let policy = Policy::new(
     Mode::Approximate(Budget::new(1e-12, 1e-15)?),
     PrecisionSource { revision: 42, hint: Hint::Absent },
     false,
-    Limits::default(),
+    Limits::default,
 )?;
 selection.projection = Projection::Decimal(policy);
 // Record complete inspections and explicitly publish the selected baseline.
-let report = projection::compare("/amount", snapshot.baseline(), snapshot.live())?;
-let diagnosis = report.detection();
-let inputs_and_proofs = report.observed();
+let report = projection::compare("/amount", snapshot.baseline, snapshot.live)?;
+let diagnosis = report.detection;
+let inputs_and_proofs = report.observed;
 ```
 
-`Window::unit()` preserves its original safe-integer authorization. New policies
-use `Window::projected_unit()`, returning values plus numeric sample indexes,
+`Window::unit` preserves its original safe-integer authorization. New policies
+use `Window::projected_unit`, returning values plus numeric sample indexes,
 caller timestamps and per-sample authorization, original token, projected value,
 exact absolute/relative error fractions and an exactness flag. Fractions are exact
 nonnegative numerator/denominator decimal strings, not necessarily reduced.
 The relative error for original zero is absent. `projection::compare` requires
 identical baseline/observed policies and retains both projected windows with the
-TI-15 diagnosis and conversion hypothesis. No repair candidate is returned.
+ diagnosis and conversion hypothesis. No repair candidate is returned.
 Existing guard, sampled-significance and profile export paths continue to use
 their existing authorization; they do not discard the new provenance implicitly.
 
@@ -81,14 +81,13 @@ formatting charge checked work before execution. Numeric sample arrays and
 provenance strings precharge output space before allocation. Work credits are
 conservative local operation charges, not wall-clock preemption. Bounded scratch
 integers and allocator slack are separate from returned-output accounting.
-The original TI-45 batch/sample/scope/retained-byte quotas remain in effect.
+The original batch/sample/scope/retained-byte quotas remain in effect.
 
 Run `cargo bench -p agw-stats --bench unit_projection` for native single-number
 validation, f64 parsing, exact error proof, provenance allocation and drop.
 Lossless-tree/fixture setup is excluded. Results/compiler details are written to
 `target/ti52-unit-projection.json`. No guard, WASM, production calibration or
 integrated latency claim is made.
-
 
 Local native release measurement (2,200 timings after 200 warmups per fixture):
 

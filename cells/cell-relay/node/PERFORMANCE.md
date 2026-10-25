@@ -1,9 +1,9 @@
-# Embedded release-WASM measurements (TI-53, TI-59)
+# Embedded release-WASM measurements (, )
 
-This harness invokes the production TI-30 `loadWasm`/`bindGuest` boundary and
-TI-46's actual detector, significance, routing, policy and containment code.
+This harness invokes the production the `loadWasm`/`bindGuest` boundary and
+'s actual detector, significance, routing, policy and containment code.
 No production SLA or Python/Worker latency claim follows from these fixtures.
-Contract §10.44 freezes the budget matrix before measurement; §10.46 records the
+the runtime contract freezes the budget matrix before measurement; records the
 host/guest UTF-8 byte boundary used by the optimized run.
 
 ```sh
@@ -37,7 +37,7 @@ successful reset call between independent samples so an open breaker cannot
 masquerade as budget exhaustion. First trap/retirement and setup are recorded
 separately; a real Rust panic fixture traps once and the host never re-enters it.
 Twenty release-guest setup/first-call runs report lifecycle variation. The full
-Node boundary's warmed bypass mean target is <10 µs; native TI-42 remains its
+Node boundary's warmed bypass mean target is <10 µs; native remains its
 own gate and cannot qualify this boundary.
 
 The checker rejects incomplete/non-finite/mismatched samples and decisions.
@@ -51,17 +51,17 @@ environment must independently pass its absolute bootstrap. A changed fixture
 matrix requires a cache-version review; incompatible restored reports fail. Mutation
 tests exercise both absolute and relative threshold failures.
 
-## TI-59 optimization
+## optimization
 
-TI-59 profiled the failing matrix before changing code. On the 64-KiB anchor
+ profiled the failing matrix before changing code. On the 64-KiB anchor
 case, host capture (`captureBytes`, including its escape scan and UTF-8 encode)
 was 28.3 µs p50 / 86.4 µs p99; each guest phase (one JS-to-WASM byte copy,
 UTF-8 parse, projection and detector/significance work) was ~76 µs; request
-routing and `close()` were 0.04 µs; disposal added nothing measurable. The
+routing and `close` were 0.04 µs; disposal added nothing measurable. The
 dominant detector cost was numeric lexeme formatting: every numeric sample
 allocated a temporary `String` in each of the five detectors and both phases.
 All 5,000 samples per case are retained, and the worst case occurs mid-matrix,
-so no cross-case lifecycle trend was observed. `Number::lexeme_len()` computes the
+so no cross-case lifecycle trend was observed. `Number::lexeme_len` computes the
 lexeme length without allocating and is used by the profile/significance hot
 paths; retained `Verbatim`/`Unrepresentable` lexemes still run the original
 validation. On the same case, guarded p50/p99 fell from 791.87/2,069.50 µs to
@@ -70,11 +70,11 @@ validation. On the same case, guarded p50/p99 fell from 791.87/2,069.50 µs to
 no measurable gain and was removed rather than kept unproven.
 
 The host boundary now projects captured JSON to UTF-8 bytes once and passes a
-`Uint8Array` to the generated guest (`capture()` still returns the string).
+`Uint8Array` to the generated guest (`capture` still returns the string).
 Escape-bearing strings still use `JSON.stringify`; surrogate-containing or
 otherwise unrepresentable values are rejected exactly as before. The wasm
 pointer/length ABI is unchanged, so Python and Node share the identical guest.
-Contract §10.46 and wrapper §12.11 record the decision.
+the runtime contract and wrapper record the decision.
 
 ## Retained local run — 2026-10-21 UTC
 

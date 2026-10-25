@@ -30,14 +30,14 @@ def create_customer(email: str) -> dict[str, str]:
 sdk = Agindow(mode="observe")
 
 @sdk.guard(tool="customers.read", operation="read")
-async def read_customer() -> dict[str, str]:
+async def read_customer -> dict[str, str]:
     return {"id": "fixture"}
 
 with sdk.context(mode="strict"):
     # Only calls through this SDK's guards use the scoped configuration.
     pass
 # `async with sdk.context(...)` is supported as well.
-sdk.close()
+sdk.close
 ```
 
 Context managers scope guarded calls; they cannot intercept arbitrary Python
@@ -46,7 +46,7 @@ tasks. Each call freezes configuration until completion. `configure(mode="repair
 changes future calls. `sdk.ready` is a synchronous boolean after local loading
 (unlike Node’s startup Promise); `sdk.load_error` retains a loading failure.
 Loading failures and retired guests preserve upstream results and emit one
-bypass per call. `close()` is safe for shutdown; subsequent calls bypass.
+bypass per call. `close` is safe for shutdown; subsequent calls bypass.
 
 The wrapper preserves `__name__`, documentation, annotations, signatures,
 bound receivers and arguments. ParamSpec retains Pydantic model types without
@@ -76,7 +76,7 @@ Request halts dispatch zero times. Response halts retain `error.outcome` and
 warn against blind replay. Upstream exceptions survive as `error.__cause__`.
 Missing audit IDs/URLs remain empty rather than fabricated.
 
-`on(type, handler)` returns an unsubscribe callback; `recent()` returns an
+`on(type, handler)` returns an unsubscribe callback; `recent` returns an
 immutable tuple of retained events. `buffer=0` disables retention. This is local
 telemetry, not hosted audit delivery.
 
