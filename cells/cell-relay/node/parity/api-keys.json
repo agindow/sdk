@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "description": "Public, non-production golden fixtures for TII-38 presented keys and unchanged TI-70 SDK fallback parsers.",
+  "keys": [
+    {
+      "environment": "test",
+      "public_id": "11111111111111111111111111111111",
+      "key": "agw_test_11111111111111111111111111111111_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "last4": "aaaa"
+    },
+    {
+      "environment": "live",
+      "public_id": "22222222222222222222222222222222",
+      "key": "agw_live_22222222222222222222222222222222_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "last4": "bbbb"
+    }
+  ]
+}

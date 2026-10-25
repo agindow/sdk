@@ -1,0 +1,72 @@
+# One cargo workspace, rooted at the repo root, so `cargo build --workspace`
+# works from a clean clone (TI-01 AC 1).
+#
+# cell-relay is the only Rust cell (TECH_STACK.md §2), so today this workspace
+# *is* that cell. Every member must live under cells/cell-relay/ — asserted by
+# tests/unit/workspace.test.ts, so a second Rust cell cannot land here by
+# accident. When one does, it gets its own turbo package and CI pipeline; the
+# cell-scoped commands in cells/cell-relay/package.json narrow with it.
+[workspace]
+resolver = "3"
+members = [
+  "cells/cell-relay/crates/guard",
+  "cells/cell-relay/crates/node-guest",
+  "cells/cell-relay/crates/http-host",
+  "cells/cell-relay/crates/inspector",
+  "cells/cell-relay/crates/diff",
+  "cells/cell-relay/crates/stats",
+  "cells/cell-relay/crates/invariants",
+  "cells/cell-relay/crates/repair",
+  "cells/cell-relay/crates/policy",
+  "cells/cell-relay/crates/audit",
+  "cells/cell-relay/crates/notify",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+# TECH_STACK.md §6: the in-path shim and the detectors are Apache-2.0. The
+# registry, cloud and console are proprietary — they are TypeScript, so they are
+# not in this workspace.
+license = "Apache-2.0"
+# Nothing here is published yet. Shipping the shim as a crate is a distribution
+# decision, not a scaffolding one.
+publish = false
+
+[workspace.dependencies]
+# First real dependencies (TI-02): the cross-cell contract types are generated
+# with serde derives, free-form fields use serde_json, and typify maps
+# `format: date-time` to chrono. One version here keeps eight crates aligned.
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+chrono = { version = "0.4", features = ["serde"] }
+# Test and bench tooling, hoisted for the same reason: one version per tool
+# across the workspace (TI-05 added proptest and a second criterion consumer).
+criterion = { version = "0.5", features = ["html_reports"] }
+proptest = "1.12.0"
+
+# Non-negotiables enforced by the compiler instead of by review (AGENTS.md §3.1).
+[workspace.lints.rust]
+# An in-path component that touches bytes it did not allocate is a bug we cannot
+# see in a test. Forbid, not deny: a crate cannot opt out locally.
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+# Library code propagates with `?` or an explicit error type; only tests and
+# `main` may unwrap.
+unwrap_used = "deny"
+expect_used = "deny"
+todo = "deny"
+unimplemented = "deny"
+
+# TI-40: native engine panics must unwind into the guard, never abort the host.
+# wasm32-unknown-unknown guests use a host trap boundary (contract §10.9).
+[profile.dev]
+panic = "unwind"
+# OPS-15: macOS code-signing checks enumerate an executable's parent directory.
+# Pack symbols instead of retaining one loose object per compilation unit.
+split-debuginfo = "packed"
+
+[profile.release]
+panic = "unwind"

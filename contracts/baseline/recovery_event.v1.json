@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RecoveryEvent",
+  "description": "One durable blocked-call recovery measurement event: a policy block, an explicit retry correlation, or a host-observed retry outcome. Produced by a deployed feedback surface and consumed by cell-registry (agindow-runtime-contract.md §10.35). Tenant identity comes from authenticated producer credentials, never from this body.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "version",
+    "id",
+    "ts",
+    "kind",
+    "block_id",
+    "tool",
+    "surface",
+    "window",
+    "feedback"
+  ],
+  "properties": {
+    "contract": { "enum": ["recovery_event"] },
+    "version": { "type": "integer", "const": 1 },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Event identity. One tenant-scoped event ID is admitted at most once; a byte-different replay is a conflict."
+    },
+    "ts": { "type": "string", "format": "date-time" },
+    "kind": { "enum": ["blocked", "retry", "outcome"] },
+    "block_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The original policy block's audit ID. The block is counted at most once."
+    },
+    "tool": { "type": "string", "minLength": 1 },
+    "surface": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Deployed feedback surface identity (for example sdk-node or nango-lambda). Never a credential."
+    },
+    "window": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Caller-owned measurement window identity. Retry and outcome events must match the block's window."
+    },
+    "cohort": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Required on blocked events: the predeclared qualification cohort."
+    },
+    "feedback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "arm"],
+      "properties": {
+        "version": { "type": "string", "minLength": 1 },
+        "arm": { "enum": ["structured", "unstructured", "control"] }
+      }
+    },
+    "retry_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Required on retry and outcome events: explicit host correlation. Never inferred from payload values."
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["verified_success", "failed", "bypassed", "unverified"] },
+        "verifier": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Required for verified_success: the host verifier identity."
+        },
+        "verifier_provenance": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Required for verified_success: how the verifier established task success."
+        },
+        "policy_violation": {
+          "type": "boolean",
+          "description": "Optional independent safety assessment. Never used to count recovery."
+        }
+      }
+    }
+  }
+}

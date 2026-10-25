@@ -1,0 +1,25 @@
+import type { DocPage } from './model.js';
+import { surfaceExample } from './examples.js';
+export const preview: DocPage = {
+  family: 'api-reference',
+  version: 'v1',
+  slug: 'agent-surface',
+  title: 'AGINDOW agent surface',
+  navTitle: 'MCP quickstart',
+  published: true,
+  sections: [
+    {
+      heading: 'Local interface preview',
+      text: 'AGINDOW is a pre-alpha API drift firewall. The default engine passes calls through without detecting drift until a detector is explicitly selected and configured. Coverage describes observed evidence and cannot prove every API change is safe. The local MCP interface exposes lookup_contract, query_drift, fetch_audit, simulate_repair and coverage_report. Requests require authorization; simulations never execute writes. A hosted endpoint is not available yet.',
+    },
+    {
+      heading: 'Runnable example',
+      text: 'For a configured local endpoint, set AGINDOW_SURFACE to its origin and AGINDOW_KEY to your authorized credential, then run the example below. No hosted endpoint or API key issuance is available yet.',
+    },
+    {
+      heading: 'Verify the API description',
+      text: 'Get /openapi.json and verify its x-agindow-signature with an independently trusted Ed25519 public key and key_id. Remove the signature field, encode using agindow.canonical-json/1 (recursively sorted keys, JSON primitives), then verify the exact UTF-8 bytes. The signed tools contain the input and output schemas served by MCP. Never trust a public key merely because the response includes it.',
+    },
+  ],
+  snippets: [surfaceExample],
+};

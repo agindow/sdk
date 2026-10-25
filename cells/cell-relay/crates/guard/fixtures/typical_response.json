@@ -1,0 +1,36 @@
+{
+  "id": "pi_3MxK9Lq2eZvKYlo2C0nQ4rTe",
+  "object": "payment_intent",
+  "amount": 1999,
+  "amount_received": 1999,
+  "currency": "usd",
+  "customer": {
+    "id": "cus_MxK9Lq2eZvKYlo",
+    "email": "ada@example.com",
+    "name": "Ada Lovelace"
+  },
+  "metadata": {
+    "order_id": "ord_8842-charge",
+    "agent": "checkout-v3",
+    "attempt": "1"
+  },
+  "payment_method": "pm_1MxK9Lq2eZvKYlo2C0nQ4rTe",
+  "status": "succeeded",
+  "created": 1750000000,
+  "line_items": [
+    { "sku": "AGW-001", "quantity": 2, "unit_amount": 999 },
+    { "sku": "AGW-002", "quantity": 1, "unit_amount": 1 }
+  ],
+  "shipping": {
+    "carrier": "royal-mail",
+    "tracking": "RM123456789GB",
+    "address": {
+      "line1": "12 Analytical Engine Way",
+      "city": "London",
+      "postal_code": "EC1A 1BB",
+      "country": "GB"
+    }
+  },
+  "refunds": [],
+  "livemode": false
+}

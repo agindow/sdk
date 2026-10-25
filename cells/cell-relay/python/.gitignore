@@ -1,0 +1,5 @@
+.venv/
+dist/
+.mypy_cache/
+__pycache__/
+src/agindow/_guest.wasm

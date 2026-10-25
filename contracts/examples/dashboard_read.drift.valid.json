@@ -1,0 +1,129 @@
+{
+  "data": [
+    {
+      "id": "inc_1",
+      "environment": "test",
+      "created_at": "2026-10-23T11:00:00Z",
+      "status": "blocked",
+      "fields": {},
+      "truncated": false,
+      "drift": {
+        "connection": "c",
+        "mode": "strict",
+        "outcome": "blocked",
+        "severity": "high",
+        "capture": {
+          "kind": "available",
+          "value": "incomplete"
+        },
+        "findings": [
+          {
+            "id": "f_shape",
+            "detector": "shape",
+            "wireClass": "shape",
+            "side": "request",
+            "paths": [
+              "customer_id"
+            ],
+            "hypotheses": [
+              "field renamed"
+            ],
+            "statistics": {
+              "kind": "unavailable",
+              "reason": "Incomplete capture; no statistical sample admitted"
+            },
+            "readiness": {
+              "kind": "available",
+              "value": "ready"
+            },
+            "suppression": {
+              "kind": "available",
+              "value": "not suppressed"
+            },
+            "materiality": {
+              "kind": "unavailable",
+              "reason": "Incomplete capture; no statistical sample admitted"
+            }
+          },
+          {
+            "id": "f_stat",
+            "detector": "statistical",
+            "wireClass": "semantic",
+            "side": "response",
+            "paths": [
+              "customer_id"
+            ],
+            "hypotheses": [
+              "unit shift hypothesis; no conversion permission"
+            ],
+            "statistics": {
+              "kind": "available",
+              "value": {
+                "baselineSamples": 100,
+                "liveSamples": 50,
+                "pValue": 0.001,
+                "testedHypotheses": 535
+              }
+            },
+            "readiness": {
+              "kind": "available",
+              "value": "ready"
+            },
+            "suppression": {
+              "kind": "available",
+              "value": "suppressed: materiality floor not met"
+            },
+            "materiality": {
+              "kind": "available",
+              "value": {
+                "effect": 0.01,
+                "floor": 0.1,
+                "eligible": false
+              }
+            }
+          },
+          {
+            "id": "f_inv",
+            "detector": "invariant",
+            "wireClass": "semantic",
+            "side": "request",
+            "paths": [
+              "total",
+              "line_items"
+            ],
+            "hypotheses": [],
+            "statistics": {
+              "kind": "unavailable",
+              "reason": "Incomplete capture; no statistical sample admitted"
+            },
+            "readiness": {
+              "kind": "available",
+              "value": "ready"
+            },
+            "suppression": {
+              "kind": "available",
+              "value": "not suppressed"
+            },
+            "materiality": {
+              "kind": "unavailable",
+              "reason": "Incomplete capture; no statistical sample admitted"
+            }
+          }
+        ],
+        "auditIds": [
+          "aud_1"
+        ]
+      }
+    }
+  ],
+  "next_cursor": null,
+  "source_freshness": {
+    "source": "drift",
+    "generated_at": "2026-10-23T12:00:00Z",
+    "stale": false
+  },
+  "capability": {
+    "status": "available"
+  },
+  "request_id": "synthetic-drift-contract-fixture"
+}

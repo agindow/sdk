@@ -1,0 +1,13 @@
+{
+  "contract": "investigation_job",
+  "version": 1,
+  "tenant": "tenant-a",
+  "id": "inv_8294b408765f9737d487381f77a5e0c8e258820295448bfe42d32d581fcfb936",
+  "audit_id": "audit-test",
+  "call_id": "call-test",
+  "created_at": "2026-10-21T12:00:00Z",
+  "expires_at": "2026-10-21T12:10:00Z",
+  "ceiling": "10000",
+  "currency": "USD",
+  "price_context": "price-test"
+}

@@ -1,0 +1,201 @@
+{
+  "id": "aud_example_statistical",
+  "ts": "2026-10-19T12:00:00Z",
+  "tool": "stripe.post /v1/charges",
+  "operation": "write",
+  "mode": "repair",
+  "drift": {
+    "class": "semantic",
+    "side": "both",
+    "vendor": "stripe",
+    "changes": [
+      {
+        "path": "/amount",
+        "kind": "unit_changed"
+      },
+      {
+        "path": "/status",
+        "kind": "enum_expanded",
+        "to": "pending_review"
+      }
+    ]
+  },
+  "decision": "blocked",
+  "patch": null,
+  "proof": {
+    "contract_version": "v1",
+    "verified_against": "cache",
+    "write_integrity": false
+  },
+  "detail": "drift_halted",
+  "metadata": {
+    "tenant": "tenant_example",
+    "agindow_statistical": {
+      "schema": "agindow_statistical/1",
+      "note": "statistical evidence only; no conversion, repair or write-integrity permission",
+      "identity": {
+        "tenant": "tenant_example",
+        "connection": "conn_1",
+        "vendor": "stripe",
+        "operation": "post /v1/charges",
+        "segment": "production"
+      },
+      "fields": [
+        {
+          "side": "request",
+          "path": "/amount",
+          "window": "2026-10-18T00:00:00Z",
+          "generation": "v3",
+          "segment": "production",
+          "readiness": "ready",
+          "baseline_samples": 128,
+          "live_samples": 96
+        },
+        {
+          "side": "response",
+          "path": "/status",
+          "window": "2026-10-18T00:00:00Z",
+          "generation": "v2",
+          "segment": "production",
+          "readiness": "ready",
+          "baseline_samples": 64,
+          "live_samples": 64
+        }
+      ],
+      "phases": {
+        "request": {
+          "evaluated": true,
+          "skipped": null,
+          "fault": null,
+          "malformed": null,
+          "investigation": "Disabled",
+          "warning": null,
+          "invariants": {
+            "pass": 0,
+            "violation": 0,
+            "enum_addition": 0,
+            "unavailable": 0
+          },
+          "cross_endpoint": { "comparisons": 0, "divergences": 0 },
+          "summary": {
+            "tests": 1070,
+            "admitted": 2,
+            "non_finding": 1068,
+            "not_significant": 0,
+            "below_materiality": 0,
+            "insufficient_records": 0
+          }
+        },
+        "response": null
+      },
+      "policy": {
+        "request": { "fault": null, "decision": "Halt" },
+        "response": null,
+        "dispatched": false,
+        "bypasses": 0,
+        "fail_closed": true,
+        "investigation_reserved": 0
+      },
+      "findings": [
+        {
+          "side": "request",
+          "path": "/amount",
+          "detector": "unit",
+          "class": "semantic",
+          "generation": "v3",
+          "signal": "unit_hypothesis",
+          "samples": { "baseline": 128, "observed": 96 },
+          "effect": 0.98,
+          "p_value": 0.0000001,
+          "tests": 1070,
+          "materiality": { "decision": "eligible", "score": 0.98 },
+          "reason": {
+            "kind": "magnitude_shift",
+            "wasserstein": 99.0,
+            "normalized_wasserstein": 0.99,
+            "psi": 0.87
+          },
+          "hypotheses": [
+            {
+              "kind": "unit_conversion",
+              "baseline_median": 1.0,
+              "observed_median": 100.0,
+              "ratio": 100.0,
+              "factor": 100.0,
+              "tolerance": 0.02,
+              "automatic_conversion": false
+            }
+          ]
+        },
+        {
+          "side": "request",
+          "path": "/flag",
+          "detector": "completeness",
+          "class": "semantic",
+          "generation": "v3",
+          "signal": "completeness",
+          "samples": { "baseline": 128, "observed": 96 },
+          "effect": 1.0,
+          "p_value": 0.0000001,
+          "tests": 1070,
+          "materiality": { "decision": "eligible", "score": 1.0 },
+          "reason": {
+            "kind": "sentinel_shift",
+            "sentinel": "null",
+            "rates": { "baseline": 0.0, "observed": 1.0 }
+          },
+          "hypotheses": []
+        },
+        {
+          "side": "response",
+          "path": "/status",
+          "detector": "enumeration",
+          "class": "semantic",
+          "generation": "v2",
+          "signal": "enum_novelty",
+          "samples": { "baseline": 64, "observed": 64 },
+          "effect": 1.0,
+          "p_value": 0.0000001,
+          "tests": 1070,
+          "materiality": { "decision": "eligible", "score": 1.0 },
+          "reason": {
+            "kind": "new_value",
+            "value": "pending_review",
+            "count": 64,
+            "frequency": 1.0,
+            "window_first_seen": "2026-10-18T09:14:00Z",
+            "material": true
+          },
+          "hypotheses": []
+        }
+      ],
+      "limits": {
+        "findings": 256,
+        "changes": 1024,
+        "finding_bytes": 262144
+      },
+      "truncated": {
+        "findings": 0,
+        "changes": 0,
+        "finding_bytes": false
+      },
+      "provenance": {
+        "baseline": "frozen selected generation; window-only",
+        "history": "window_first_seen is not persistent first-ever history; recurrence belongs to TI-29",
+        "conversion": "unit hypotheses never authorize conversion or repair",
+        "write_integrity": "not established by statistical composition"
+      }
+    },
+    "agindow_policy": {
+      "request": {
+        "fault": null,
+        "decision": "Halt"
+      },
+      "response": null,
+      "dispatched": false,
+      "bypasses": 0,
+      "fail_closed": true,
+      "investigation_reserved": 0
+    }
+  }
+}

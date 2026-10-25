@@ -1,0 +1,16 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "agindow-guard",
+  "main": "../crates/http-host/build/index.js",
+  "compatibility_date": "2026-08-06",
+  "workers_dev": false,
+  "observability": { "enabled": true, "head_sampling_rate": 1 },
+  "rules": [{ "type": "CompiledWasm", "globs": ["**/*.wasm"], "fallthrough": true }],
+  "vars": { "AGINDOW_LATENCY_CLOCK": "unavailable" },
+  "env": { "local": { "vars": { "AGINDOW_LATENCY_CLOCK": "workerd-local" } } }
+  // Supply GUARD_KEYS and GUARD_CONNECTIONS with wrangler secret put.
+  // Administrative registry probe is disabled without REGISTRY_PROBE_KEY,
+  // REGISTRY_HEALTH_URL and an REGISTRY_MTLS mTLS certificate binding.
+  // Add mtls_certificates: [{ binding: "REGISTRY_MTLS", certificate_id: "<issued-id>" }]
+  // only after provisioning the actual certificate; never commit private keys.
+}

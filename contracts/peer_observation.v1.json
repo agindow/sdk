@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PeerObservation",
+  "description": "TII-27 exact background peer publication or explicit unavailability. Never activates a rule. Contract section 10.52.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "job_id",
+    "recipe_id",
+    "tenant",
+    "connection",
+    "vendor",
+    "workflow",
+    "entity",
+    "entity_revision",
+    "operation",
+    "field",
+    "concept",
+    "unit",
+    "contract_version",
+    "sequence",
+    "contract",
+    "version",
+    "recipe_revision",
+    "attempt",
+    "source_url",
+    "observed_at",
+    "expires_at",
+    "value",
+    "status",
+    "reason"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "job_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "recipe_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "tenant": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "connection": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "vendor": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "workflow": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "entity": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "entity_revision": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "operation": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "field": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "concept": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "unit": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "contract_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "sequence": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "contract": {
+      "enum": [
+        "peer_observation"
+      ]
+    },
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "recipe_revision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 2147483647
+    },
+    "attempt": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 3
+    },
+    "source_url": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "value": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 20
+    },
+    "status": {
+      "enum": [
+        "available",
+        "unavailable"
+      ]
+    },
+    "reason": {
+      "enum": [
+        "",
+        "missing-credentials",
+        "timeout",
+        "rate-limited",
+        "incomplete",
+        "correlation-mismatch",
+        "unsupported-value",
+        "cancelled",
+        "transport",
+        "quota",
+        "recipe-changed"
+      ]
+    }
+  }
+}

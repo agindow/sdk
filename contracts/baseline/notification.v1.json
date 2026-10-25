@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Notification",
+  "description": "TI-19 eligible consolidated alert as one channel-neutral notification; runtime contract section 10.39. References only: never customer payload bytes, replacement tokens or credentials. Bounded semantic validation applies at every boundary.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "version",
+    "id",
+    "ts",
+    "tenant",
+    "scope",
+    "finding",
+    "severity",
+    "occurrences",
+    "consolidation",
+    "audit_refs"
+  ],
+  "properties": {
+    "contract": {
+      "enum": [
+        "notification"
+      ]
+    },
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable logical-notification identity; consolidated-summary updates mutate it, never mint a second one."
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC emission time. The registered envelope requires an explicit Z suffix."
+    },
+    "tenant": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "$ref": "#/$defs/scope"
+    },
+    "finding": {
+      "$ref": "#/$defs/finding"
+    },
+    "severity": {
+      "enum": [
+        "info",
+        "warning",
+        "critical"
+      ]
+    },
+    "occurrences": {
+      "$ref": "#/$defs/occurrences"
+    },
+    "consolidation": {
+      "$ref": "#/$defs/consolidation"
+    },
+    "audit_refs": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Bounded audit IDs; retrieval is the fetch-back surface (contract section 3.3). Never payload copies."
+    }
+  },
+  "$defs": {
+    "scope": {
+      "title": "NotificationScope",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "connection",
+        "vendor",
+        "operation"
+      ],
+      "properties": {
+        "connection": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operation": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Endpoint identity; operation must identify the endpoint (contract section 10.23)."
+        }
+      }
+    },
+    "finding": {
+      "title": "NotificationFinding",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "class",
+        "side"
+      ],
+      "properties": {
+        "class": {
+          "enum": [
+            "shape",
+            "semantic",
+            "unknown"
+          ]
+        },
+        "side": {
+          "enum": [
+            "request",
+            "response",
+            "both"
+          ]
+        }
+      }
+    },
+    "occurrences": {
+      "title": "NotificationOccurrences",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "count",
+        "first_seen",
+        "last_seen"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "first_seen": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "last_seen": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "consolidation": {
+      "title": "NotificationConsolidation",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "day",
+        "mode",
+        "ordinal",
+        "count"
+      ],
+      "properties": {
+        "day": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100000,
+          "description": "UTC epoch day; one TI-19 budget belongs to one (tenant, connection, day)."
+        },
+        "mode": {
+          "enum": [
+            "individual",
+            "summary"
+          ]
+        },
+        "ordinal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000,
+          "description": "TI-19 notification position for the day; the summary keeps the reserved cap position."
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000,
+          "description": "Findings represented by this notification: 1 for an individual alert, at least 1 for a consolidated summary."
+        }
+      }
+    }
+  }
+}

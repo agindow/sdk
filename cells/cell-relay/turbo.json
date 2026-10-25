@@ -1,0 +1,32 @@
+{
+  "extends": [
+    "//"
+  ],
+  "tasks": {
+    "test": {
+      "dependsOn": [
+        "build"
+      ],
+      "outputs": []
+    },
+    "lint": {
+      "dependsOn": [
+        "build"
+      ],
+      "outputs": []
+    },
+    "build": {
+      "env": [
+        "AGINDOW_WASM_BINDGEN"
+      ],
+      "outputs": [
+        "node/dist/**",
+        "node/LICENSE",
+        "node/NOTICE",
+        "python/src/agindow/_guest.wasm",
+        "python/LICENSE",
+        "python/NOTICE"
+      ]
+    }
+  }
+}

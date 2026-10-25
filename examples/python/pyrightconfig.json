@@ -1,8 +1,5 @@
 {
   "venvPath": ".",
   "venv": ".venv",
-  "extraPaths": [
-    "../../../cells/cell-relay/python/src"
-  ],
   "reportMissingImports": "error"
 }

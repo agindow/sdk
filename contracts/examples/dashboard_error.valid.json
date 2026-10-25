@@ -1,0 +1,7 @@
+{
+  "error": {
+    "code": "forbidden",
+    "message": "Request refused",
+    "request_id": "request-1"
+  }
+}

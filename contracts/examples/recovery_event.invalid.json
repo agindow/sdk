@@ -1,0 +1,13 @@
+{
+  "contract": "recovery_event",
+  "version": 1,
+  "id": "rcv_01HQ8Z3K4M5N6P7Q8R9S0T1V2W",
+  "ts": "2026-10-17T14:00:11.204Z",
+  "kind": "blocked",
+  "block_id": "aud_01HQ8Z3K4M5N6P7Q8R9S0T1V2W",
+  "tool": "stripe.create_customer",
+  "surface": "sdk-node",
+  "window": "win_2026_10",
+  "cohort": "coh_2026_10_structured",
+  "feedback": { "version": "ti25-v1", "arm": "none" }
+}

@@ -1,17 +1,14 @@
 # Python examples
 
+These examples install the published package from PyPI — no local Rust build is
+needed.
+
 ```bash
-pip install -r requirements.txt   # after PyPI publish
+python -m venv .venv && source .venv/bin/activate   # optional
+pip install -r requirements.txt
 python observe.py
 ```
 
-**In this monorepo (before PyPI):** create a local env so the IDE resolves `agindow`:
-
-```bash
-uv venv .venv
-uv pip install --python .venv/bin/python -e ../../../cells/cell-relay/python
-source .venv/bin/activate   # or select .venv in the editor
-python observe.py
-```
-
-`pyrightconfig.json` points at `.venv` and the monorepo `src` path.
+`pyrightconfig.json` points the type checker at that virtual environment. The
+default engine observes only; `observe.py` prints the guard outcome so you can
+see that the original object is returned unchanged.

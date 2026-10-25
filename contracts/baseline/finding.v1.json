@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Finding",
+  "description": "The result of an asynchronous investigation by cell-cortex: vendor-published context for a drift, or the recorded absence of it. Consumed by cell-registry (agindow-runtime-contract.md §4.1, §5).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "version", "id", "ts", "tool", "classification", "conclusion", "citations"],
+  "properties": {
+    "contract": { "enum": ["finding"] },
+    "version": { "type": "integer", "const": 1 },
+    "id": { "type": "string", "minLength": 1 },
+    "ts": { "type": "string", "format": "date-time" },
+    "tool": { "type": "string", "minLength": 1 },
+    "vendor": { "type": "string", "minLength": 1 },
+    "classification": {
+      "enum": ["shape", "semantic", "unknown"],
+      "description": "What the investigation concluded the drift is. May differ from the engine's first reading."
+    },
+    "conclusion": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable verdict in one paragraph. 'No changelog found' is recorded here, with an empty citations array."
+    },
+    "citations": { "type": "array", "items": { "$ref": "#/$defs/citation" } },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "drift_id": { "type": "string", "minLength": 1 }
+  },
+  "$defs": {
+    "citation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "quote"],
+      "properties": {
+        "url": { "type": "string", "minLength": 1 },
+        "quote": { "type": "string", "minLength": 1 },
+        "retrieved_at": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

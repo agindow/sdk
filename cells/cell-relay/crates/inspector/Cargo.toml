@@ -1,0 +1,38 @@
+[package]
+name = "agw-inspector"
+description = "Streaming tee and schema inference — inspects bytes without altering them."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# Structured inspection parses the captured head as JSON (contract §4.4):
+# unparseable bodies are shape drift with no repair, so the parse outcome is a
+# classification input rather than a client-visible error.
+#
+# `raw_value` is declared here rather than in the workspace table because only
+# this crate needs it — `numeric::Number`'s `Serialize`. Cargo unifies features
+# per build, so a workspace build still compiles one serde_json with it on.
+serde_json = { workspace = true, features = ["raw_value"] }
+# Only for the `Serialize` impl on `numeric::Number`, which writes a number back
+# as its source lexeme. Without it the lossless round trip would be a convention
+# each call site had to remember instead of a property of the type.
+serde = { workspace = true }
+
+[dev-dependencies]
+# Property tests: the client's bytes are identical for any data, cap and
+# chunking (contract §3.1).
+proptest = { workspace = true }
+# What the tee costs a typical response, and what it costs once the stream is
+# past the cap. Same treatment as TI-05's forwarder bench — a number in the
+# ticket beats a claim in one.
+criterion = { workspace = true }
+
+[[bench]]
+name = "tee"
+harness = false

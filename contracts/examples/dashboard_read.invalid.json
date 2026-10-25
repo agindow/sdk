@@ -1,0 +1,15 @@
+{
+  "data": [],
+  "next_cursor": null,
+  "source_freshness": {
+    "source": "drift",
+    "generated_at": null,
+    "stale": false
+  },
+  "capability": {
+    "status": "not_configured",
+    "reason": "Owner source not configured"
+  },
+  "request_id": "request-1",
+  "secret": "refused"
+}

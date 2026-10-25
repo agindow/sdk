@@ -1,0 +1,8 @@
+{
+  "resource": "drift",
+  "limit": 25,
+  "from": "2026-10-01T00:00:00Z",
+  "to": "2026-10-22T00:00:00Z",
+  "filters": {},
+  "extra": "refused"
+}

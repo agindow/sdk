@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DriftEvent",
+  "description": "One observation of drift on one tool call. Produced by cell-relay, consumed by cell-registry and cell-cortex (agindow-runtime-contract.md §3, §3.2, §4.1).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "version",
+    "id",
+    "ts",
+    "tool",
+    "connection",
+    "operation",
+    "mode",
+    "drift",
+    "decision"
+  ],
+  "properties": {
+    "contract": { "enum": ["drift_event"] },
+    "version": { "type": "integer", "const": 1 },
+    "id": { "type": "string", "minLength": 1 },
+    "ts": { "type": "string", "format": "date-time" },
+    "tool": { "type": "string", "minLength": 1 },
+    "connection": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Connection handle, never a credential (TECH_STACK.md §7). Required: drift is segmented per tenant/connection."
+    },
+    "operation": { "enum": ["read", "write", "unknown"] },
+    "mode": { "enum": ["observe", "repair", "strict"] },
+    "drift": { "$ref": "#/$defs/drift" },
+    "decision": {
+      "enum": ["ok", "repaired", "degraded", "bypassed", "blocked"],
+      "description": "The engine's verdict for this call — the same vocabulary as the X-Agindow-Status header. `mode` says whether it was enforced."
+    },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "audit_id": { "type": "string", "minLength": 1 },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Free-form context (workflow, tenant, request id). Never credentials."
+    }
+  },
+  "$defs": {
+    "change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "kind"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "kind": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Change taxonomy (field_renamed, type_changed, unit_changed, ...). Deliberately open: the vocabulary grows with the detectors, and a new kind must not require a contract version."
+        },
+        "from": { "type": "string" },
+        "to": { "type": "string" }
+      }
+    },
+    "drift": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["class", "side"],
+      "properties": {
+        "class": { "enum": ["shape", "semantic", "unknown"] },
+        "side": { "enum": ["request", "response", "both"] },
+        "vendor": { "type": "string", "minLength": 1 },
+        "changes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/change" },
+          "description": "Present when the diff enumerates changes; a semantic hypothesis may carry none."
+        },
+        "first_seen": { "type": "string", "format": "date-time" },
+        "occurrences": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

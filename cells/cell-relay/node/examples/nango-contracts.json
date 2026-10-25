@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "contracts": [{
+    "version": 1,
+    "id": "local-demo-contract-1",
+    "file": "stripe/actions/create-customer.ts",
+    "tool": "stripe.create_customer",
+    "method": "post",
+    "endpoint": "/v1/customers",
+    "mode": "repair",
+    "operation": "write",
+    "request": {
+      "fields": { "payment_method": { "type": "string", "required": true } },
+      "renames": [{ "from": "source", "to": "payment_method", "identity": "fixture-payment-token", "confidence": 0.99 }]
+    },
+    "response": { "fields": { "status": { "type": "string", "enum": ["active"] } } }
+  }]
+}

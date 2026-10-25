@@ -1,0 +1,25 @@
+[package]
+name = "agw-repair"
+description = "Selective patch synthesis — changes only what drifted."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# One direction only: a refused repair must classify as `semantic` (contract
+# §3.1), and DriftClass belongs to agw-diff — the crate that decides drift. Two
+# drift vocabularies is one too many, and the callers already depend on both.
+agw-diff = { path = "../diff" }
+agw-inspector = { path = "../inspector" }
+agw-audit = { path = "../audit" }
+serde = { workspace = true }
+serde_json = { workspace = true, features = ["raw_value"] }
+
+[dev-dependencies]
+agw-guard = { path = "../guard" }
+agw-policy = { path = "../policy" }

@@ -1,0 +1,22 @@
+{
+  "name": "cell-relay",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The in-path engine: interception, inspection, drift classification, repair. Rust; ships as a native binary and a WASM embed.",
+  "scripts": {
+    "build": "cargo build --workspace --manifest-path ../../Cargo.toml && node node/scripts/build.mjs && python3 python/scripts/build.py --stage-only",
+    "lint": "cargo fmt --all --check --manifest-path ../../Cargo.toml && cargo clippy --workspace --all-targets --manifest-path ../../Cargo.toml -- -D warnings && RUSTDOCFLAGS=\"-D warnings\" cargo doc --workspace --no-deps --manifest-path ../../Cargo.toml && tsc --project wasm/tsconfig.json && tsc --project perf/tsconfig.json && tsc --project node/tsconfig.tests.json && tsc --project node/tsconfig.tooling.json && uv run --directory python --frozen mypy && tsc --project public-benchmark/tsconfig.json --noEmit",
+    "test": "cargo test --workspace --manifest-path ../../Cargo.toml && vitest run --config wasm/vitest.config.ts && node --test perf/tests/*.test.mjs && vitest run --config node/vitest.config.ts && node --test node/tests/*.test.mjs && uv run --directory python --frozen python -m unittest discover -s tests && node node/parity/run.mjs",
+    "build:hosted": "node hosted/build.mjs",
+    "test:hosted": "node --test hosted/tests/*.test.mjs",
+    "test:sidecar": "node --test sidecar/tests/*.test.mjs"
+  },
+  "dependencies": {
+    "contracts": "workspace:*"
+  },
+  "devDependencies": {
+    "miniflare": "4.20260730.0",
+    "wrangler": "4.151.1"
+  }
+}

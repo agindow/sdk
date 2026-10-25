@@ -1,4 +1,4 @@
-"""Minimal observe-mode example — installs from PyPI, not the monorepo."""
+"""Minimal observe-mode example — installs from PyPI."""
 
 from agindow import Agindow, guard
 

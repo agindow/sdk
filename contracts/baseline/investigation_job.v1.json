@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InvestigationJob",
+  "description": "TII-25 payload-free background admission. Runtime additionally checks micro-unit and lifetime bounds.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "version",
+    "tenant",
+    "id",
+    "audit_id",
+    "call_id",
+    "created_at",
+    "expires_at",
+    "ceiling",
+    "currency",
+    "price_context"
+  ],
+  "properties": {
+    "contract": {
+      "enum": [
+        "investigation_job"
+      ]
+    },
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "tenant": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "audit_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "call_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ceiling": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 20
+    },
+    "currency": {
+      "enum": [
+        "USD"
+      ]
+    },
+    "price_context": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "contract": "drift_event",
+  "version": 1,
+  "id": "drift_01HQ8Z3K4M5N6P7Q8R9S0T1V2W",
+  "ts": "2026-10-17T14:00:03.412Z",
+  "tool": "stripe.create_customer",
+  "connection": "conn_abc123",
+  "operation": "write",
+  "mode": "repair",
+  "drift": {
+    "class": "shape",
+    "side": "request",
+    "vendor": "stripe",
+    "changes": [{ "path": "source", "kind": "field_renamed", "to": "payment_method" }],
+    "first_seen": "2026-10-17T13:41:02Z",
+    "occurrences": 143
+  },
+  "decision": "repaired",
+  "confidence": 0.97,
+  "audit_id": "aud_01HQ8Z3K4M5N6P7Q8R9S0T1V2W",
+  "metadata": { "workflow": "nightly-recon", "tenant": "acme" }
+}

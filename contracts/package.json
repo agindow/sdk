@@ -1,0 +1,26 @@
+{
+  "name": "contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Cross-cell contract schemas (JSON Schema 2020-12, versioned vN) and the validators every cell crosses its message boundary through. See README.md.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./compat": "./src/compat.ts",
+    "./packaging": "./src/packaging.ts",
+    "./docs": "./src/docs.ts",
+    "./docs/detection": "./src/docs/detection.ts"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1"
+  }
+}

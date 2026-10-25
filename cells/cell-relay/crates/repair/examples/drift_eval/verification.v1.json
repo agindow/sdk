@@ -1,0 +1,223 @@
+{
+  "version": 1,
+  "cases": {
+    "unit_flip-1": {
+      "authority": {
+        "rule": "scale",
+        "factor": 0.01
+      },
+      "preserve_other_fields": true
+    },
+    "unit_flip-2": {
+      "authority": {
+        "rule": "scale",
+        "factor": 0.01
+      },
+      "preserve_other_fields": true
+    },
+    "unit_flip-3": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "unit_flip-4": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "unit_flip-5": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "unit_flip-6": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "timestamp_epoch-1": {
+      "authority": {
+        "rule": "scale",
+        "factor": 1000.0
+      },
+      "preserve_other_fields": true
+    },
+    "timestamp_epoch-2": {
+      "authority": {
+        "rule": "scale",
+        "factor": 1000.0
+      },
+      "preserve_other_fields": true
+    },
+    "timestamp_epoch-3": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "timestamp_epoch-4": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "timestamp_epoch-5": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "timestamp_epoch-6": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "enum_expansion-1": {
+      "authority": {
+        "rule": "mapping",
+        "source": "queued",
+        "destination": "pending"
+      },
+      "preserve_other_fields": true
+    },
+    "enum_expansion-2": {
+      "authority": {
+        "rule": "mapping",
+        "source": "archived",
+        "destination": "closed"
+      },
+      "preserve_other_fields": true
+    },
+    "enum_expansion-3": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "enum_expansion-4": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "enum_expansion-5": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "enum_expansion-6": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "null_semantics-1": {
+      "authority": {
+        "rule": "mapping",
+        "source": 0,
+        "destination": null
+      },
+      "preserve_other_fields": true
+    },
+    "null_semantics-2": {
+      "authority": {
+        "rule": "mapping",
+        "source": "",
+        "destination": null
+      },
+      "preserve_other_fields": true
+    },
+    "null_semantics-3": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "null_semantics-4": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "null_semantics-5": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "null_semantics-6": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "type_coercion-1": {
+      "authority": {
+        "rule": "mapping",
+        "source": "123",
+        "destination": 123
+      },
+      "preserve_other_fields": true
+    },
+    "type_coercion-2": {
+      "authority": {
+        "rule": "mapping",
+        "source": 456,
+        "destination": "456"
+      },
+      "preserve_other_fields": true
+    },
+    "type_coercion-3": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "type_coercion-4": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "type_coercion-5": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "type_coercion-6": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "date_format-1": {
+      "authority": {
+        "rule": "mapping",
+        "source": "Jan 5 2026",
+        "destination": "2026-01-05"
+      },
+      "preserve_other_fields": true
+    },
+    "date_format-2": {
+      "authority": {
+        "rule": "mapping",
+        "source": "2026/02/28",
+        "destination": "2026-02-28"
+      },
+      "preserve_other_fields": true
+    },
+    "date_format-3": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "date_format-4": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "date_format-5": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "date_format-6": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "field_rename-1": {
+      "authority": {
+        "rule": "rename",
+        "destination": "payment_method"
+      },
+      "preserve_other_fields": true
+    },
+    "field_rename-2": {
+      "authority": {
+        "rule": "rename",
+        "destination": "payment_method"
+      },
+      "preserve_other_fields": true
+    },
+    "field_rename-3": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "field_rename-4": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "field_rename-5": {
+      "authority": null,
+      "preserve_other_fields": true
+    },
+    "field_rename-6": {
+      "authority": null,
+      "preserve_other_fields": true
+    }
+  }
+}

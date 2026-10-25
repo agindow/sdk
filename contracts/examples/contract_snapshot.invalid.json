@@ -1,0 +1,40 @@
+{
+  "contract": "contract_snapshot",
+  "version": 2,
+  "generated_at": "2026-10-17T14:00:00Z",
+  "tools": [
+    {
+      "tool": "stripe.create_customer",
+      "vendor": "stripe",
+      "contract_version": "cv_stripe_2026_10_17a",
+      "operation": "write",
+      "fields": [
+        {
+          "path": "id",
+          "type": "integer",
+          "high_precision": "yes"
+        },
+        {
+          "path": "email",
+          "type": "string"
+        },
+        {
+          "path": "name",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "path": "payment_method",
+          "type": "string"
+        },
+        {
+          "path": "created_at",
+          "type": "string"
+        }
+      ],
+      "policy": {
+        "fail_closed": true
+      }
+    }
+  ]
+}

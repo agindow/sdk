@@ -1,0 +1,3351 @@
+{
+  "version": 2,
+  "corpus": "[\n  {\n    \"id\": \"unit_flip-1\",\n    \"class\": \"unit_flip\",\n    \"task\": {\n      \"input\": {\n        \"value\": 1200,\n        \"account\": \"tenant-0\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 0\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": 12,\n        \"confidence\": 1.0,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"repairable\",\n      \"rationale\": \"Authoritative migration fixture uniquely specifies unit_flip mapping; original caller fields must survive. This label does not depend on native support.\",\n      \"expected\": {\n        \"value\": 12,\n        \"account\": \"tenant-0\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 0\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"unit_flip-2\",\n    \"class\": \"unit_flip\",\n    \"task\": {\n      \"input\": {\n        \"value\": 3499,\n        \"account\": \"tenant-1\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 1\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": 34.99,\n        \"confidence\": 0.99,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"repairable\",\n      \"rationale\": \"Authoritative migration fixture uniquely specifies unit_flip mapping; original caller fields must survive. This label does not depend on native support.\",\n      \"expected\": {\n        \"value\": 34.99,\n        \"account\": \"tenant-1\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 1\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"unit_flip-3\",\n    \"class\": \"unit_flip\",\n    \"task\": {\n      \"input\": {\n        \"value\": 5600,\n        \"account\": \"tenant-2\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 2\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": 56,\n        \"confidence\": 0.989,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"ambiguous\",\n      \"rationale\": \"Evidence does not establish the mapping; the supplied low-confidence candidate happens to match hidden intent.\",\n      \"expected\": {\n        \"value\": 56,\n        \"account\": \"tenant-2\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 2\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"unit_flip-4\",\n    \"class\": \"unit_flip\",\n    \"task\": {\n      \"input\": {\n        \"value\": 7800,\n        \"account\": \"tenant-3\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 3\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": 780,\n        \"confidence\": 0.995,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"ambiguous\",\n      \"rationale\": \"Evidence admits multiple mappings; the supplied candidate is wrong and its confidence is deliberately overstated. This is a confidence-quality fault probe.\",\n      \"expected\": {\n        \"value\": 78,\n        \"account\": \"tenant-3\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 3\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"unit_flip-5\",\n    \"class\": \"unit_flip\",\n    \"task\": {\n      \"input\": {\n        \"value\": 9100,\n        \"account\": \"tenant-4\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 4\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": null\n    },\n    \"oracle\": {\n      \"label\": \"unsupported\",\n      \"rationale\": \"Source identity was not captured; reconstructing the intended write needs missing evidence.\",\n      \"expected\": {\n        \"value\": 91,\n        \"account\": \"tenant-4\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 4\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"unit_flip-6\",\n    \"class\": \"unit_flip\",\n    \"task\": {\n      \"input\": {\n        \"value\": -125,\n        \"account\": \"tenant-5\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 5\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": null\n    },\n    \"oracle\": {\n      \"label\": \"unsupported\",\n      \"rationale\": \"No migration mapping is available locally; an external fact is required and no repair is proposed.\",\n      \"expected\": {\n        \"value\": -1.25,\n        \"account\": \"tenant-5\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 5\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"timestamp_epoch-1\",\n    \"class\": \"timestamp_epoch\",\n    \"task\": {\n      \"input\": {\n        \"value\": 1700000000,\n        \"account\": \"tenant-0\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 0\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": 1700000000000,\n        \"confidence\": 1.0,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"repairable\",\n      \"rationale\": \"Authoritative migration fixture uniquely specifies timestamp_epoch mapping; original caller fields must survive. This label does not depend on native support.\",\n      \"expected\": {\n        \"value\": 1700000000000,\n        \"account\": \"tenant-0\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 0\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"timestamp_epoch-2\",\n    \"class\": \"timestamp_epoch\",\n    \"task\": {\n      \"input\": {\n        \"value\": 123,\n        \"account\": \"tenant-1\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 1\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": 123000,\n        \"confidence\": 0.99,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"repairable\",\n      \"rationale\": \"Authoritative migration fixture uniquely specifies timestamp_epoch mapping; original caller fields must survive. This label does not depend on native support.\",\n      \"expected\": {\n        \"value\": 123000,\n        \"account\": \"tenant-1\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 1\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"timestamp_epoch-3\",\n    \"class\": \"timestamp_epoch\",\n    \"task\": {\n      \"input\": {\n        \"value\": 456,\n        \"account\": \"tenant-2\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 2\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": 456000,\n        \"confidence\": 0.989,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"ambiguous\",\n      \"rationale\": \"Evidence does not establish the mapping; the supplied low-confidence candidate happens to match hidden intent.\",\n      \"expected\": {\n        \"value\": 456000,\n        \"account\": \"tenant-2\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 2\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"timestamp_epoch-4\",\n    \"class\": \"timestamp_epoch\",\n    \"task\": {\n      \"input\": {\n        \"value\": 789,\n        \"account\": \"tenant-3\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 3\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": 78900,\n        \"confidence\": 0.995,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"ambiguous\",\n      \"rationale\": \"Evidence admits multiple mappings; the supplied candidate is wrong and its confidence is deliberately overstated. This is a confidence-quality fault probe.\",\n      \"expected\": {\n        \"value\": 789000,\n        \"account\": \"tenant-3\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 3\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"timestamp_epoch-5\",\n    \"class\": \"timestamp_epoch\",\n    \"task\": {\n      \"input\": {\n        \"value\": 111,\n        \"account\": \"tenant-4\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 4\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": null\n    },\n    \"oracle\": {\n      \"label\": \"unsupported\",\n      \"rationale\": \"Source identity was not captured; reconstructing the intended write needs missing evidence.\",\n      \"expected\": {\n        \"value\": 111000,\n        \"account\": \"tenant-4\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 4\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"timestamp_epoch-6\",\n    \"class\": \"timestamp_epoch\",\n    \"task\": {\n      \"input\": {\n        \"value\": 222,\n        \"account\": \"tenant-5\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 5\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": null\n    },\n    \"oracle\": {\n      \"label\": \"unsupported\",\n      \"rationale\": \"No migration mapping is available locally; an external fact is required and no repair is proposed.\",\n      \"expected\": {\n        \"value\": 222000,\n        \"account\": \"tenant-5\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 5\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"enum_expansion-1\",\n    \"class\": \"enum_expansion\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"queued\",\n        \"account\": \"tenant-0\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 0\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": \"pending\",\n        \"confidence\": 1.0,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"repairable\",\n      \"rationale\": \"Authoritative migration fixture uniquely specifies enum_expansion mapping; original caller fields must survive. This label does not depend on native support.\",\n      \"expected\": {\n        \"value\": \"pending\",\n        \"account\": \"tenant-0\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 0\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": [\n          \"queued\",\n          \"pending\",\n          \"archived\",\n          \"closed\",\n          \"review\",\n          \"held\"\n        ]\n      }\n    }\n  },\n  {\n    \"id\": \"enum_expansion-2\",\n    \"class\": \"enum_expansion\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"archived\",\n        \"account\": \"tenant-1\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 1\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": \"closed\",\n        \"confidence\": 0.99,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"repairable\",\n      \"rationale\": \"Authoritative migration fixture uniquely specifies enum_expansion mapping; original caller fields must survive. This label does not depend on native support.\",\n      \"expected\": {\n        \"value\": \"closed\",\n        \"account\": \"tenant-1\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 1\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": [\n          \"queued\",\n          \"pending\",\n          \"archived\",\n          \"closed\",\n          \"review\",\n          \"held\"\n        ]\n      }\n    }\n  },\n  {\n    \"id\": \"enum_expansion-3\",\n    \"class\": \"enum_expansion\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"review\",\n        \"account\": \"tenant-2\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 2\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": \"held\",\n        \"confidence\": 0.989,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"ambiguous\",\n      \"rationale\": \"Evidence does not establish the mapping; the supplied low-confidence candidate happens to match hidden intent.\",\n      \"expected\": {\n        \"value\": \"held\",\n        \"account\": \"tenant-2\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 2\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": [\n          \"queued\",\n          \"pending\",\n          \"archived\",\n          \"closed\",\n          \"review\",\n          \"held\"\n        ]\n      }\n    }\n  },\n  {\n    \"id\": \"enum_expansion-4\",\n    \"class\": \"enum_expansion\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"queued\",\n        \"account\": \"tenant-3\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 3\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": \"held\",\n        \"confidence\": 0.995,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"ambiguous\",\n      \"rationale\": \"Evidence admits multiple mappings; the supplied candidate is wrong and its confidence is deliberately overstated. This is a confidence-quality fault probe.\",\n      \"expected\": {\n        \"value\": \"pending\",\n        \"account\": \"tenant-3\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 3\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": [\n          \"queued\",\n          \"pending\",\n          \"archived\",\n          \"closed\",\n          \"review\",\n          \"held\"\n        ]\n      }\n    }\n  },\n  {\n    \"id\": \"enum_expansion-5\",\n    \"class\": \"enum_expansion\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"archived\",\n        \"account\": \"tenant-4\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 4\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": null\n    },\n    \"oracle\": {\n      \"label\": \"unsupported\",\n      \"rationale\": \"Source identity was not captured; reconstructing the intended write needs missing evidence.\",\n      \"expected\": {\n        \"value\": \"closed\",\n        \"account\": \"tenant-4\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 4\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": [\n          \"queued\",\n          \"pending\",\n          \"archived\",\n          \"closed\",\n          \"review\",\n          \"held\"\n        ]\n      }\n    }\n  },\n  {\n    \"id\": \"enum_expansion-6\",\n    \"class\": \"enum_expansion\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"review\",\n        \"account\": \"tenant-5\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 5\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": null\n    },\n    \"oracle\": {\n      \"label\": \"unsupported\",\n      \"rationale\": \"No migration mapping is available locally; an external fact is required and no repair is proposed.\",\n      \"expected\": {\n        \"value\": \"held\",\n        \"account\": \"tenant-5\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 5\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": [\n          \"queued\",\n          \"pending\",\n          \"archived\",\n          \"closed\",\n          \"review\",\n          \"held\"\n        ]\n      }\n    }\n  },\n  {\n    \"id\": \"null_semantics-1\",\n    \"class\": \"null_semantics\",\n    \"task\": {\n      \"input\": {\n        \"value\": 0,\n        \"account\": \"tenant-0\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 0\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": null,\n        \"confidence\": 1.0,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"repairable\",\n      \"rationale\": \"Authoritative migration fixture uniquely specifies null_semantics mapping; original caller fields must survive. This label does not depend on native support.\",\n      \"expected\": {\n        \"value\": null,\n        \"account\": \"tenant-0\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 0\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"null\",\n          \"number\",\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"null_semantics-2\",\n    \"class\": \"null_semantics\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"\",\n        \"account\": \"tenant-1\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 1\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": null,\n        \"confidence\": 0.99,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"repairable\",\n      \"rationale\": \"Authoritative migration fixture uniquely specifies null_semantics mapping; original caller fields must survive. This label does not depend on native support.\",\n      \"expected\": {\n        \"value\": null,\n        \"account\": \"tenant-1\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 1\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"null\",\n          \"number\",\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"null_semantics-3\",\n    \"class\": \"null_semantics\",\n    \"task\": {\n      \"input\": {\n        \"value\": 0,\n        \"account\": \"tenant-2\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 2\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": null,\n        \"confidence\": 0.989,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"ambiguous\",\n      \"rationale\": \"Evidence does not establish the mapping; the supplied low-confidence candidate happens to match hidden intent.\",\n      \"expected\": {\n        \"value\": null,\n        \"account\": \"tenant-2\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 2\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"null\",\n          \"number\",\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"null_semantics-4\",\n    \"class\": \"null_semantics\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"\",\n        \"account\": \"tenant-3\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 3\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": 0,\n        \"confidence\": 0.995,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"ambiguous\",\n      \"rationale\": \"Evidence admits multiple mappings; the supplied candidate is wrong and its confidence is deliberately overstated. This is a confidence-quality fault probe.\",\n      \"expected\": {\n        \"value\": null,\n        \"account\": \"tenant-3\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 3\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"null\",\n          \"number\",\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"null_semantics-5\",\n    \"class\": \"null_semantics\",\n    \"task\": {\n      \"input\": {\n        \"value\": null,\n        \"account\": \"tenant-4\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 4\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": null\n    },\n    \"oracle\": {\n      \"label\": \"unsupported\",\n      \"rationale\": \"Source identity was not captured; reconstructing the intended write needs missing evidence.\",\n      \"expected\": {\n        \"value\": 0,\n        \"account\": \"tenant-4\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 4\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"null\",\n          \"number\",\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"null_semantics-6\",\n    \"class\": \"null_semantics\",\n    \"task\": {\n      \"input\": {\n        \"value\": null,\n        \"account\": \"tenant-5\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 5\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": null\n    },\n    \"oracle\": {\n      \"label\": \"unsupported\",\n      \"rationale\": \"No migration mapping is available locally; an external fact is required and no repair is proposed.\",\n      \"expected\": {\n        \"value\": \"\",\n        \"account\": \"tenant-5\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 5\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"null\",\n          \"number\",\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"type_coercion-1\",\n    \"class\": \"type_coercion\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"123\",\n        \"account\": \"tenant-0\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 0\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": false,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": 123,\n        \"confidence\": 1.0,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"repairable\",\n      \"rationale\": \"Authoritative migration fixture uniquely specifies type_coercion mapping; original caller fields must survive. This label does not depend on native support.\",\n      \"expected\": {\n        \"value\": 123,\n        \"account\": \"tenant-0\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 0\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"type_coercion-2\",\n    \"class\": \"type_coercion\",\n    \"task\": {\n      \"input\": {\n        \"value\": 456,\n        \"account\": \"tenant-1\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 1\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": false,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": \"456\",\n        \"confidence\": 0.99,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"repairable\",\n      \"rationale\": \"Authoritative migration fixture uniquely specifies type_coercion mapping; original caller fields must survive. This label does not depend on native support.\",\n      \"expected\": {\n        \"value\": \"456\",\n        \"account\": \"tenant-1\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 1\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"type_coercion-3\",\n    \"class\": \"type_coercion\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"789\",\n        \"account\": \"tenant-2\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 2\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": false,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": 789,\n        \"confidence\": 0.989,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"ambiguous\",\n      \"rationale\": \"Evidence does not establish the mapping; the supplied low-confidence candidate happens to match hidden intent.\",\n      \"expected\": {\n        \"value\": 789,\n        \"account\": \"tenant-2\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 2\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"type_coercion-4\",\n    \"class\": \"type_coercion\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"222\",\n        \"account\": \"tenant-3\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 3\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": false,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": 999,\n        \"confidence\": 0.995,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"ambiguous\",\n      \"rationale\": \"Evidence admits multiple mappings; the supplied candidate is wrong and its confidence is deliberately overstated. This is a confidence-quality fault probe.\",\n      \"expected\": {\n        \"value\": 222,\n        \"account\": \"tenant-3\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 3\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"type_coercion-5\",\n    \"class\": \"type_coercion\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"333\",\n        \"account\": \"tenant-4\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 4\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": false,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": null\n    },\n    \"oracle\": {\n      \"label\": \"unsupported\",\n      \"rationale\": \"Source identity was not captured; reconstructing the intended write needs missing evidence.\",\n      \"expected\": {\n        \"value\": 333,\n        \"account\": \"tenant-4\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 4\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"type_coercion-6\",\n    \"class\": \"type_coercion\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"444\",\n        \"account\": \"tenant-5\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 5\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": false,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": null\n    },\n    \"oracle\": {\n      \"label\": \"unsupported\",\n      \"rationale\": \"No migration mapping is available locally; an external fact is required and no repair is proposed.\",\n      \"expected\": {\n        \"value\": 444,\n        \"account\": \"tenant-5\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 5\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"number\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"date_format-1\",\n    \"class\": \"date_format\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"Jan 5 2026\",\n        \"account\": \"tenant-0\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 0\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": \"2026-01-05\",\n        \"confidence\": 1.0,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"repairable\",\n      \"rationale\": \"Authoritative migration fixture uniquely specifies date_format mapping; original caller fields must survive. This label does not depend on native support.\",\n      \"expected\": {\n        \"value\": \"2026-01-05\",\n        \"account\": \"tenant-0\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 0\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"date_format-2\",\n    \"class\": \"date_format\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"2026/02/28\",\n        \"account\": \"tenant-1\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 1\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": \"2026-02-28\",\n        \"confidence\": 0.99,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"repairable\",\n      \"rationale\": \"Authoritative migration fixture uniquely specifies date_format mapping; original caller fields must survive. This label does not depend on native support.\",\n      \"expected\": {\n        \"value\": \"2026-02-28\",\n        \"account\": \"tenant-1\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 1\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"date_format-3\",\n    \"class\": \"date_format\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"Mar 1 2026\",\n        \"account\": \"tenant-2\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 2\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": \"2026-03-01\",\n        \"confidence\": 0.989,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"ambiguous\",\n      \"rationale\": \"Evidence does not establish the mapping; the supplied low-confidence candidate happens to match hidden intent.\",\n      \"expected\": {\n        \"value\": \"2026-03-01\",\n        \"account\": \"tenant-2\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 2\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"date_format-4\",\n    \"class\": \"date_format\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"04/05/2026\",\n        \"account\": \"tenant-3\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 3\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": \"2026-04-05\",\n        \"confidence\": 0.995,\n        \"rename_to\": null\n      }\n    },\n    \"oracle\": {\n      \"label\": \"ambiguous\",\n      \"rationale\": \"Evidence admits multiple mappings; the supplied candidate is wrong and its confidence is deliberately overstated. This is a confidence-quality fault probe.\",\n      \"expected\": {\n        \"value\": \"2026-05-04\",\n        \"account\": \"tenant-3\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 3\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"date_format-5\",\n    \"class\": \"date_format\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"2026.12.31\",\n        \"account\": \"tenant-4\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 4\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": null\n    },\n    \"oracle\": {\n      \"label\": \"unsupported\",\n      \"rationale\": \"Source identity was not captured; reconstructing the intended write needs missing evidence.\",\n      \"expected\": {\n        \"value\": \"2026-12-31\",\n        \"account\": \"tenant-4\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 4\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"date_format-6\",\n    \"class\": \"date_format\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"Jun 7 2026\",\n        \"account\": \"tenant-5\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 5\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"value\",\n      \"semantic\": true,\n      \"rename\": false,\n      \"confirmed\": false,\n      \"proposal\": null\n    },\n    \"oracle\": {\n      \"label\": \"unsupported\",\n      \"rationale\": \"No migration mapping is available locally; an external fact is required and no repair is proposed.\",\n      \"expected\": {\n        \"value\": \"2026-06-07\",\n        \"account\": \"tenant-5\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 5\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"value\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"field_rename-1\",\n    \"class\": \"field_rename\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"tok_0\",\n        \"account\": \"tenant-0\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 0\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"payment_method\",\n      \"semantic\": false,\n      \"rename\": true,\n      \"confirmed\": true,\n      \"proposal\": {\n        \"value\": \"tok_0\",\n        \"confidence\": 1.0,\n        \"rename_to\": \"payment_method\"\n      }\n    },\n    \"oracle\": {\n      \"label\": \"repairable\",\n      \"rationale\": \"Authoritative migration fixture uniquely specifies field_rename mapping; original caller fields must survive. This label does not depend on native support.\",\n      \"expected\": {\n        \"payment_method\": \"tok_0\",\n        \"account\": \"tenant-0\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 0\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"payment_method\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"field_rename-2\",\n    \"class\": \"field_rename\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"tok_1\",\n        \"account\": \"tenant-1\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 1\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"payment_method\",\n      \"semantic\": false,\n      \"rename\": true,\n      \"confirmed\": true,\n      \"proposal\": {\n        \"value\": \"tok_1\",\n        \"confidence\": 0.97,\n        \"rename_to\": \"payment_method\"\n      }\n    },\n    \"oracle\": {\n      \"label\": \"repairable\",\n      \"rationale\": \"Authoritative migration fixture uniquely specifies field_rename mapping; original caller fields must survive. This label does not depend on native support.\",\n      \"expected\": {\n        \"payment_method\": \"tok_1\",\n        \"account\": \"tenant-1\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 1\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"payment_method\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"field_rename-3\",\n    \"class\": \"field_rename\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"tok_2\",\n        \"account\": \"tenant-2\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 2\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"payment_method\",\n      \"semantic\": false,\n      \"rename\": true,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": \"tok_2\",\n        \"confidence\": 0.969,\n        \"rename_to\": \"payment_method\"\n      }\n    },\n    \"oracle\": {\n      \"label\": \"ambiguous\",\n      \"rationale\": \"Evidence does not establish the mapping; the supplied low-confidence candidate happens to match hidden intent.\",\n      \"expected\": {\n        \"payment_method\": \"tok_2\",\n        \"account\": \"tenant-2\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 2\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"payment_method\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"field_rename-4\",\n    \"class\": \"field_rename\",\n    \"task\": {\n      \"input\": {\n        \"value\": \"tok_3\",\n        \"account\": \"tenant-3\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 3\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"payment_method\",\n      \"semantic\": false,\n      \"rename\": true,\n      \"confirmed\": false,\n      \"proposal\": {\n        \"value\": \"tok_3\",\n        \"confidence\": 0.995,\n        \"rename_to\": \"payment_source\"\n      }\n    },\n    \"oracle\": {\n      \"label\": \"ambiguous\",\n      \"rationale\": \"Evidence admits multiple mappings; the supplied candidate is wrong and its confidence is deliberately overstated. This is a confidence-quality fault probe.\",\n      \"expected\": {\n        \"payment_method\": \"tok_3\",\n        \"account\": \"tenant-3\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 3\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"payment_method\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"field_rename-5\",\n    \"class\": \"field_rename\",\n    \"task\": {\n      \"input\": {\n        \"account\": \"tenant-4\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 4\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"payment_method\",\n      \"semantic\": false,\n      \"rename\": true,\n      \"confirmed\": false,\n      \"proposal\": null\n    },\n    \"oracle\": {\n      \"label\": \"unsupported\",\n      \"rationale\": \"Source identity was not captured; reconstructing the intended write needs missing evidence.\",\n      \"expected\": {\n        \"payment_method\": \"tok_4\",\n        \"account\": \"tenant-4\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 4\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"payment_method\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  },\n  {\n    \"id\": \"field_rename-6\",\n    \"class\": \"field_rename\",\n    \"task\": {\n      \"input\": {\n        \"account\": \"tenant-5\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 5\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"target\": \"payment_method\",\n      \"semantic\": false,\n      \"rename\": true,\n      \"confirmed\": false,\n      \"proposal\": null\n    },\n    \"oracle\": {\n      \"label\": \"unsupported\",\n      \"rationale\": \"No migration mapping is available locally; an external fact is required and no repair is proposed.\",\n      \"expected\": {\n        \"payment_method\": \"tok_5\",\n        \"account\": \"tenant-5\",\n        \"memo\": {\n          \"keep\": true,\n          \"sequence\": 5\n        },\n        \"id\": \"9007199254740993\"\n      },\n      \"vendor\": {\n        \"required\": [\n          \"account\",\n          \"id\",\n          \"payment_method\"\n        ],\n        \"target_types\": [\n          \"string\"\n        ],\n        \"enum_values\": null\n      }\n    }\n  }\n]\n",
+  "cases": [
+    {
+      "id": "unit_flip-1",
+      "class": "unit_flip",
+      "arm": "no_repair",
+      "label": "repairable",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": 1200
+      },
+      "trace": []
+    },
+    {
+      "id": "unit_flip-1",
+      "class": "unit_flip",
+      "arm": "naive",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": 12
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "unit_flip-1",
+      "class": "unit_flip",
+      "arm": "selective",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": 12
+      },
+      "trace": [
+        "policy=Pass",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(1.0), class: Semantic, status: Applied }]"
+      ]
+    },
+    {
+      "id": "unit_flip-2",
+      "class": "unit_flip",
+      "arm": "no_repair",
+      "label": "repairable",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": 3499
+      },
+      "trace": []
+    },
+    {
+      "id": "unit_flip-2",
+      "class": "unit_flip",
+      "arm": "naive",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": 34.99
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "unit_flip-2",
+      "class": "unit_flip",
+      "arm": "selective",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": 34.99
+      },
+      "trace": [
+        "policy=Pass",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.99), class: Semantic, status: Applied }]"
+      ]
+    },
+    {
+      "id": "unit_flip-3",
+      "class": "unit_flip",
+      "arm": "no_repair",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-2",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "value": 5600
+      },
+      "trace": []
+    },
+    {
+      "id": "unit_flip-3",
+      "class": "unit_flip",
+      "arm": "naive",
+      "label": "ambiguous",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-2",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "value": 56
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "unit_flip-3",
+      "class": "unit_flip",
+      "arm": "selective",
+      "label": "ambiguous",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.989), class: Semantic, status: Rejected(BelowThreshold) }]"
+      ]
+    },
+    {
+      "id": "unit_flip-4",
+      "class": "unit_flip",
+      "arm": "no_repair",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": 7800
+      },
+      "trace": []
+    },
+    {
+      "id": "unit_flip-4",
+      "class": "unit_flip",
+      "arm": "naive",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": 780
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "unit_flip-4",
+      "class": "unit_flip",
+      "arm": "selective",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": 780
+      },
+      "trace": [
+        "policy=Pass",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.995), class: Semantic, status: Applied }]"
+      ]
+    },
+    {
+      "id": "unit_flip-5",
+      "class": "unit_flip",
+      "arm": "no_repair",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-4",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "value": 9100
+      },
+      "trace": []
+    },
+    {
+      "id": "unit_flip-5",
+      "class": "unit_flip",
+      "arm": "naive",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-4",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "value": 9100
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "unit_flip-5",
+      "class": "unit_flip",
+      "arm": "selective",
+      "label": "unsupported",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[]"
+      ]
+    },
+    {
+      "id": "unit_flip-6",
+      "class": "unit_flip",
+      "arm": "no_repair",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-5",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "value": -125
+      },
+      "trace": []
+    },
+    {
+      "id": "unit_flip-6",
+      "class": "unit_flip",
+      "arm": "naive",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-5",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "value": -125
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "unit_flip-6",
+      "class": "unit_flip",
+      "arm": "selective",
+      "label": "unsupported",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[]"
+      ]
+    },
+    {
+      "id": "timestamp_epoch-1",
+      "class": "timestamp_epoch",
+      "arm": "no_repair",
+      "label": "repairable",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": 1700000000
+      },
+      "trace": []
+    },
+    {
+      "id": "timestamp_epoch-1",
+      "class": "timestamp_epoch",
+      "arm": "naive",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": 1700000000000
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "timestamp_epoch-1",
+      "class": "timestamp_epoch",
+      "arm": "selective",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": 1700000000000
+      },
+      "trace": [
+        "policy=Pass",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(1.0), class: Semantic, status: Applied }]"
+      ]
+    },
+    {
+      "id": "timestamp_epoch-2",
+      "class": "timestamp_epoch",
+      "arm": "no_repair",
+      "label": "repairable",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": 123
+      },
+      "trace": []
+    },
+    {
+      "id": "timestamp_epoch-2",
+      "class": "timestamp_epoch",
+      "arm": "naive",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": 123000
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "timestamp_epoch-2",
+      "class": "timestamp_epoch",
+      "arm": "selective",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": 123000
+      },
+      "trace": [
+        "policy=Pass",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.99), class: Semantic, status: Applied }]"
+      ]
+    },
+    {
+      "id": "timestamp_epoch-3",
+      "class": "timestamp_epoch",
+      "arm": "no_repair",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-2",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "value": 456
+      },
+      "trace": []
+    },
+    {
+      "id": "timestamp_epoch-3",
+      "class": "timestamp_epoch",
+      "arm": "naive",
+      "label": "ambiguous",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-2",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "value": 456000
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "timestamp_epoch-3",
+      "class": "timestamp_epoch",
+      "arm": "selective",
+      "label": "ambiguous",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.989), class: Semantic, status: Rejected(BelowThreshold) }]"
+      ]
+    },
+    {
+      "id": "timestamp_epoch-4",
+      "class": "timestamp_epoch",
+      "arm": "no_repair",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": 789
+      },
+      "trace": []
+    },
+    {
+      "id": "timestamp_epoch-4",
+      "class": "timestamp_epoch",
+      "arm": "naive",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": 78900
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "timestamp_epoch-4",
+      "class": "timestamp_epoch",
+      "arm": "selective",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": 78900
+      },
+      "trace": [
+        "policy=Pass",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.995), class: Semantic, status: Applied }]"
+      ]
+    },
+    {
+      "id": "timestamp_epoch-5",
+      "class": "timestamp_epoch",
+      "arm": "no_repair",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-4",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "value": 111
+      },
+      "trace": []
+    },
+    {
+      "id": "timestamp_epoch-5",
+      "class": "timestamp_epoch",
+      "arm": "naive",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-4",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "value": 111
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "timestamp_epoch-5",
+      "class": "timestamp_epoch",
+      "arm": "selective",
+      "label": "unsupported",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[]"
+      ]
+    },
+    {
+      "id": "timestamp_epoch-6",
+      "class": "timestamp_epoch",
+      "arm": "no_repair",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-5",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "value": 222
+      },
+      "trace": []
+    },
+    {
+      "id": "timestamp_epoch-6",
+      "class": "timestamp_epoch",
+      "arm": "naive",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-5",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "value": 222
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "timestamp_epoch-6",
+      "class": "timestamp_epoch",
+      "arm": "selective",
+      "label": "unsupported",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[]"
+      ]
+    },
+    {
+      "id": "enum_expansion-1",
+      "class": "enum_expansion",
+      "arm": "no_repair",
+      "label": "repairable",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": "queued"
+      },
+      "trace": []
+    },
+    {
+      "id": "enum_expansion-1",
+      "class": "enum_expansion",
+      "arm": "naive",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": "pending"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "enum_expansion-1",
+      "class": "enum_expansion",
+      "arm": "selective",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": "pending"
+      },
+      "trace": [
+        "policy=Pass",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(1.0), class: Semantic, status: Applied }]"
+      ]
+    },
+    {
+      "id": "enum_expansion-2",
+      "class": "enum_expansion",
+      "arm": "no_repair",
+      "label": "repairable",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": "archived"
+      },
+      "trace": []
+    },
+    {
+      "id": "enum_expansion-2",
+      "class": "enum_expansion",
+      "arm": "naive",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": "closed"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "enum_expansion-2",
+      "class": "enum_expansion",
+      "arm": "selective",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": "closed"
+      },
+      "trace": [
+        "policy=Pass",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.99), class: Semantic, status: Applied }]"
+      ]
+    },
+    {
+      "id": "enum_expansion-3",
+      "class": "enum_expansion",
+      "arm": "no_repair",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-2",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "value": "review"
+      },
+      "trace": []
+    },
+    {
+      "id": "enum_expansion-3",
+      "class": "enum_expansion",
+      "arm": "naive",
+      "label": "ambiguous",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-2",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "value": "held"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "enum_expansion-3",
+      "class": "enum_expansion",
+      "arm": "selective",
+      "label": "ambiguous",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.989), class: Semantic, status: Rejected(BelowThreshold) }]"
+      ]
+    },
+    {
+      "id": "enum_expansion-4",
+      "class": "enum_expansion",
+      "arm": "no_repair",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": "queued"
+      },
+      "trace": []
+    },
+    {
+      "id": "enum_expansion-4",
+      "class": "enum_expansion",
+      "arm": "naive",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": "held"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "enum_expansion-4",
+      "class": "enum_expansion",
+      "arm": "selective",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": "held"
+      },
+      "trace": [
+        "policy=Pass",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.995), class: Semantic, status: Applied }]"
+      ]
+    },
+    {
+      "id": "enum_expansion-5",
+      "class": "enum_expansion",
+      "arm": "no_repair",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-4",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "value": "archived"
+      },
+      "trace": []
+    },
+    {
+      "id": "enum_expansion-5",
+      "class": "enum_expansion",
+      "arm": "naive",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-4",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "value": "archived"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "enum_expansion-5",
+      "class": "enum_expansion",
+      "arm": "selective",
+      "label": "unsupported",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[]"
+      ]
+    },
+    {
+      "id": "enum_expansion-6",
+      "class": "enum_expansion",
+      "arm": "no_repair",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-5",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "value": "review"
+      },
+      "trace": []
+    },
+    {
+      "id": "enum_expansion-6",
+      "class": "enum_expansion",
+      "arm": "naive",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-5",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "value": "review"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "enum_expansion-6",
+      "class": "enum_expansion",
+      "arm": "selective",
+      "label": "unsupported",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[]"
+      ]
+    },
+    {
+      "id": "null_semantics-1",
+      "class": "null_semantics",
+      "arm": "no_repair",
+      "label": "repairable",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": 0
+      },
+      "trace": []
+    },
+    {
+      "id": "null_semantics-1",
+      "class": "null_semantics",
+      "arm": "naive",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": null
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "null_semantics-1",
+      "class": "null_semantics",
+      "arm": "selective",
+      "label": "repairable",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(1.0), class: Semantic, status: Rejected(NumericCoercion) }]"
+      ]
+    },
+    {
+      "id": "null_semantics-2",
+      "class": "null_semantics",
+      "arm": "no_repair",
+      "label": "repairable",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": ""
+      },
+      "trace": []
+    },
+    {
+      "id": "null_semantics-2",
+      "class": "null_semantics",
+      "arm": "naive",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": null
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "null_semantics-2",
+      "class": "null_semantics",
+      "arm": "selective",
+      "label": "repairable",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.99), class: Semantic, status: Rejected(Unsupported) }]"
+      ]
+    },
+    {
+      "id": "null_semantics-3",
+      "class": "null_semantics",
+      "arm": "no_repair",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-2",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "value": 0
+      },
+      "trace": []
+    },
+    {
+      "id": "null_semantics-3",
+      "class": "null_semantics",
+      "arm": "naive",
+      "label": "ambiguous",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-2",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "value": null
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "null_semantics-3",
+      "class": "null_semantics",
+      "arm": "selective",
+      "label": "ambiguous",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.989), class: Semantic, status: Rejected(NumericCoercion) }]"
+      ]
+    },
+    {
+      "id": "null_semantics-4",
+      "class": "null_semantics",
+      "arm": "no_repair",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": ""
+      },
+      "trace": []
+    },
+    {
+      "id": "null_semantics-4",
+      "class": "null_semantics",
+      "arm": "naive",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": 0
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "null_semantics-4",
+      "class": "null_semantics",
+      "arm": "selective",
+      "label": "ambiguous",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.995), class: Semantic, status: Rejected(NumericCoercion) }]"
+      ]
+    },
+    {
+      "id": "null_semantics-5",
+      "class": "null_semantics",
+      "arm": "no_repair",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-4",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "value": null
+      },
+      "trace": []
+    },
+    {
+      "id": "null_semantics-5",
+      "class": "null_semantics",
+      "arm": "naive",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-4",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "value": null
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "null_semantics-5",
+      "class": "null_semantics",
+      "arm": "selective",
+      "label": "unsupported",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[]"
+      ]
+    },
+    {
+      "id": "null_semantics-6",
+      "class": "null_semantics",
+      "arm": "no_repair",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-5",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "value": null
+      },
+      "trace": []
+    },
+    {
+      "id": "null_semantics-6",
+      "class": "null_semantics",
+      "arm": "naive",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-5",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "value": null
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "null_semantics-6",
+      "class": "null_semantics",
+      "arm": "selective",
+      "label": "unsupported",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[]"
+      ]
+    },
+    {
+      "id": "type_coercion-1",
+      "class": "type_coercion",
+      "arm": "no_repair",
+      "label": "repairable",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": "123"
+      },
+      "trace": []
+    },
+    {
+      "id": "type_coercion-1",
+      "class": "type_coercion",
+      "arm": "naive",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": 123
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "type_coercion-1",
+      "class": "type_coercion",
+      "arm": "selective",
+      "label": "repairable",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(1.0), class: Semantic, status: Rejected(NumericCoercion) }]"
+      ]
+    },
+    {
+      "id": "type_coercion-2",
+      "class": "type_coercion",
+      "arm": "no_repair",
+      "label": "repairable",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": 456
+      },
+      "trace": []
+    },
+    {
+      "id": "type_coercion-2",
+      "class": "type_coercion",
+      "arm": "naive",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": "456"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "type_coercion-2",
+      "class": "type_coercion",
+      "arm": "selective",
+      "label": "repairable",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.99), class: Semantic, status: Rejected(NumericCoercion) }]"
+      ]
+    },
+    {
+      "id": "type_coercion-3",
+      "class": "type_coercion",
+      "arm": "no_repair",
+      "label": "ambiguous",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-2",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "value": "789"
+      },
+      "trace": []
+    },
+    {
+      "id": "type_coercion-3",
+      "class": "type_coercion",
+      "arm": "naive",
+      "label": "ambiguous",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-2",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "value": 789
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "type_coercion-3",
+      "class": "type_coercion",
+      "arm": "selective",
+      "label": "ambiguous",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.989), class: Semantic, status: Rejected(NumericCoercion) }]"
+      ]
+    },
+    {
+      "id": "type_coercion-4",
+      "class": "type_coercion",
+      "arm": "no_repair",
+      "label": "ambiguous",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": "222"
+      },
+      "trace": []
+    },
+    {
+      "id": "type_coercion-4",
+      "class": "type_coercion",
+      "arm": "naive",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": 999
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "type_coercion-4",
+      "class": "type_coercion",
+      "arm": "selective",
+      "label": "ambiguous",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.995), class: Semantic, status: Rejected(NumericCoercion) }]"
+      ]
+    },
+    {
+      "id": "type_coercion-5",
+      "class": "type_coercion",
+      "arm": "no_repair",
+      "label": "unsupported",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-4",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "value": "333"
+      },
+      "trace": []
+    },
+    {
+      "id": "type_coercion-5",
+      "class": "type_coercion",
+      "arm": "naive",
+      "label": "unsupported",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-4",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "value": "333"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "type_coercion-5",
+      "class": "type_coercion",
+      "arm": "selective",
+      "label": "unsupported",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-4",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "value": "333"
+      },
+      "trace": [
+        "policy=Degraded",
+        "failure=None",
+        "assessments=[]"
+      ]
+    },
+    {
+      "id": "type_coercion-6",
+      "class": "type_coercion",
+      "arm": "no_repair",
+      "label": "unsupported",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-5",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "value": "444"
+      },
+      "trace": []
+    },
+    {
+      "id": "type_coercion-6",
+      "class": "type_coercion",
+      "arm": "naive",
+      "label": "unsupported",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-5",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "value": "444"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "type_coercion-6",
+      "class": "type_coercion",
+      "arm": "selective",
+      "label": "unsupported",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-5",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "value": "444"
+      },
+      "trace": [
+        "policy=Degraded",
+        "failure=None",
+        "assessments=[]"
+      ]
+    },
+    {
+      "id": "date_format-1",
+      "class": "date_format",
+      "arm": "no_repair",
+      "label": "repairable",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": "Jan 5 2026"
+      },
+      "trace": []
+    },
+    {
+      "id": "date_format-1",
+      "class": "date_format",
+      "arm": "naive",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": "2026-01-05"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "date_format-1",
+      "class": "date_format",
+      "arm": "selective",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": "2026-01-05"
+      },
+      "trace": [
+        "policy=Pass",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(1.0), class: Semantic, status: Applied }]"
+      ]
+    },
+    {
+      "id": "date_format-2",
+      "class": "date_format",
+      "arm": "no_repair",
+      "label": "repairable",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": "2026/02/28"
+      },
+      "trace": []
+    },
+    {
+      "id": "date_format-2",
+      "class": "date_format",
+      "arm": "naive",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": "2026-02-28"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "date_format-2",
+      "class": "date_format",
+      "arm": "selective",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": "2026-02-28"
+      },
+      "trace": [
+        "policy=Pass",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.99), class: Semantic, status: Applied }]"
+      ]
+    },
+    {
+      "id": "date_format-3",
+      "class": "date_format",
+      "arm": "no_repair",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-2",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "value": "Mar 1 2026"
+      },
+      "trace": []
+    },
+    {
+      "id": "date_format-3",
+      "class": "date_format",
+      "arm": "naive",
+      "label": "ambiguous",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-2",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "value": "2026-03-01"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "date_format-3",
+      "class": "date_format",
+      "arm": "selective",
+      "label": "ambiguous",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.989), class: Semantic, status: Rejected(BelowThreshold) }]"
+      ]
+    },
+    {
+      "id": "date_format-4",
+      "class": "date_format",
+      "arm": "no_repair",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": "04/05/2026"
+      },
+      "trace": []
+    },
+    {
+      "id": "date_format-4",
+      "class": "date_format",
+      "arm": "naive",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": "2026-04-05"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "date_format-4",
+      "class": "date_format",
+      "arm": "selective",
+      "label": "ambiguous",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": "2026-04-05"
+      },
+      "trace": [
+        "policy=Pass",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.995), class: Semantic, status: Applied }]"
+      ]
+    },
+    {
+      "id": "date_format-5",
+      "class": "date_format",
+      "arm": "no_repair",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-4",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "value": "2026.12.31"
+      },
+      "trace": []
+    },
+    {
+      "id": "date_format-5",
+      "class": "date_format",
+      "arm": "naive",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-4",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "value": "2026.12.31"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "date_format-5",
+      "class": "date_format",
+      "arm": "selective",
+      "label": "unsupported",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[]"
+      ]
+    },
+    {
+      "id": "date_format-6",
+      "class": "date_format",
+      "arm": "no_repair",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-5",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "value": "Jun 7 2026"
+      },
+      "trace": []
+    },
+    {
+      "id": "date_format-6",
+      "class": "date_format",
+      "arm": "naive",
+      "label": "unsupported",
+      "outcome": "unsafe_write",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": true,
+      "sent": {
+        "account": "tenant-5",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "value": "Jun 7 2026"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "date_format-6",
+      "class": "date_format",
+      "arm": "selective",
+      "label": "unsupported",
+      "outcome": "blocked",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": null,
+      "trace": [
+        "policy=Halt",
+        "failure=None",
+        "assessments=[]"
+      ]
+    },
+    {
+      "id": "field_rename-1",
+      "class": "field_rename",
+      "arm": "no_repair",
+      "label": "repairable",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "value": "tok_0"
+      },
+      "trace": []
+    },
+    {
+      "id": "field_rename-1",
+      "class": "field_rename",
+      "arm": "naive",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "payment_method": "tok_0"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "field_rename-1",
+      "class": "field_rename",
+      "arm": "selective",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-0",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "payment_method": "tok_0"
+      },
+      "trace": [
+        "policy=Pass",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(1.0), class: Shape, status: Applied }]"
+      ]
+    },
+    {
+      "id": "field_rename-2",
+      "class": "field_rename",
+      "arm": "no_repair",
+      "label": "repairable",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "value": "tok_1"
+      },
+      "trace": []
+    },
+    {
+      "id": "field_rename-2",
+      "class": "field_rename",
+      "arm": "naive",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "payment_method": "tok_1"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "field_rename-2",
+      "class": "field_rename",
+      "arm": "selective",
+      "label": "repairable",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-1",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "payment_method": "tok_1"
+      },
+      "trace": [
+        "policy=Pass",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.97), class: Shape, status: Applied }]"
+      ]
+    },
+    {
+      "id": "field_rename-3",
+      "class": "field_rename",
+      "arm": "no_repair",
+      "label": "ambiguous",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-2",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "value": "tok_2"
+      },
+      "trace": []
+    },
+    {
+      "id": "field_rename-3",
+      "class": "field_rename",
+      "arm": "naive",
+      "label": "ambiguous",
+      "outcome": "safe_write",
+      "recovered": true,
+      "target_recovered": true,
+      "successful_repair": true,
+      "violation": false,
+      "sent": {
+        "account": "tenant-2",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "payment_method": "tok_2"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "field_rename-3",
+      "class": "field_rename",
+      "arm": "selective",
+      "label": "ambiguous",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-2",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "value": "tok_2"
+      },
+      "trace": [
+        "policy=Degraded",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.969), class: Shape, status: Rejected(UnconfirmedIdentity) }]"
+      ]
+    },
+    {
+      "id": "field_rename-4",
+      "class": "field_rename",
+      "arm": "no_repair",
+      "label": "ambiguous",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": "tok_3"
+      },
+      "trace": []
+    },
+    {
+      "id": "field_rename-4",
+      "class": "field_rename",
+      "arm": "naive",
+      "label": "ambiguous",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "payment_source": "tok_3"
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "field_rename-4",
+      "class": "field_rename",
+      "arm": "selective",
+      "label": "ambiguous",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-3",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "value": "tok_3"
+      },
+      "trace": [
+        "policy=Degraded",
+        "failure=None",
+        "assessments=[Assessment { finding: 0, confidence: Some(0.995), class: Shape, status: Rejected(UnconfirmedIdentity) }]"
+      ]
+    },
+    {
+      "id": "field_rename-5",
+      "class": "field_rename",
+      "arm": "no_repair",
+      "label": "unsupported",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-4",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        }
+      },
+      "trace": []
+    },
+    {
+      "id": "field_rename-5",
+      "class": "field_rename",
+      "arm": "naive",
+      "label": "unsupported",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-4",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        }
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "field_rename-5",
+      "class": "field_rename",
+      "arm": "selective",
+      "label": "unsupported",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-4",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        }
+      },
+      "trace": [
+        "policy=Degraded",
+        "failure=None",
+        "assessments=[]"
+      ]
+    },
+    {
+      "id": "field_rename-6",
+      "class": "field_rename",
+      "arm": "no_repair",
+      "label": "unsupported",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-5",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        }
+      },
+      "trace": []
+    },
+    {
+      "id": "field_rename-6",
+      "class": "field_rename",
+      "arm": "naive",
+      "label": "unsupported",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-5",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        }
+      },
+      "trace": [
+        "full-payload reconstruction; confidence not gated"
+      ]
+    },
+    {
+      "id": "field_rename-6",
+      "class": "field_rename",
+      "arm": "selective",
+      "label": "unsupported",
+      "outcome": "rejected",
+      "recovered": false,
+      "target_recovered": false,
+      "successful_repair": false,
+      "violation": false,
+      "sent": {
+        "account": "tenant-5",
+        "id": "9007199254740993",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        }
+      },
+      "trace": [
+        "policy=Degraded",
+        "failure=None",
+        "assessments=[]"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "class": "unit_flip",
+      "label": "all",
+      "arm": "no_repair",
+      "total": 6,
+      "safe_writes": 0,
+      "unsafe_writes": 6,
+      "blocked": 0,
+      "rejected": 0,
+      "successful_repairs": 0,
+      "target_recovered": 0,
+      "repairable_total": 2,
+      "repairable_recovered": 0,
+      "repairable_missed": 2,
+      "recovery_rate": 0.0,
+      "repairable_recovery_rate": 0.0,
+      "violation_rate": 1.0,
+      "violations_per_dispatch": 1.0
+    },
+    {
+      "class": "timestamp_epoch",
+      "label": "all",
+      "arm": "no_repair",
+      "total": 6,
+      "safe_writes": 0,
+      "unsafe_writes": 6,
+      "blocked": 0,
+      "rejected": 0,
+      "successful_repairs": 0,
+      "target_recovered": 0,
+      "repairable_total": 2,
+      "repairable_recovered": 0,
+      "repairable_missed": 2,
+      "recovery_rate": 0.0,
+      "repairable_recovery_rate": 0.0,
+      "violation_rate": 1.0,
+      "violations_per_dispatch": 1.0
+    },
+    {
+      "class": "enum_expansion",
+      "label": "all",
+      "arm": "no_repair",
+      "total": 6,
+      "safe_writes": 0,
+      "unsafe_writes": 6,
+      "blocked": 0,
+      "rejected": 0,
+      "successful_repairs": 0,
+      "target_recovered": 0,
+      "repairable_total": 2,
+      "repairable_recovered": 0,
+      "repairable_missed": 2,
+      "recovery_rate": 0.0,
+      "repairable_recovery_rate": 0.0,
+      "violation_rate": 1.0,
+      "violations_per_dispatch": 1.0
+    },
+    {
+      "class": "null_semantics",
+      "label": "all",
+      "arm": "no_repair",
+      "total": 6,
+      "safe_writes": 0,
+      "unsafe_writes": 6,
+      "blocked": 0,
+      "rejected": 0,
+      "successful_repairs": 0,
+      "target_recovered": 0,
+      "repairable_total": 2,
+      "repairable_recovered": 0,
+      "repairable_missed": 2,
+      "recovery_rate": 0.0,
+      "repairable_recovery_rate": 0.0,
+      "violation_rate": 1.0,
+      "violations_per_dispatch": 1.0
+    },
+    {
+      "class": "type_coercion",
+      "label": "all",
+      "arm": "no_repair",
+      "total": 6,
+      "safe_writes": 0,
+      "unsafe_writes": 0,
+      "blocked": 0,
+      "rejected": 6,
+      "successful_repairs": 0,
+      "target_recovered": 0,
+      "repairable_total": 2,
+      "repairable_recovered": 0,
+      "repairable_missed": 2,
+      "recovery_rate": 0.0,
+      "repairable_recovery_rate": 0.0,
+      "violation_rate": 0.0,
+      "violations_per_dispatch": 0.0
+    },
+    {
+      "class": "date_format",
+      "label": "all",
+      "arm": "no_repair",
+      "total": 6,
+      "safe_writes": 0,
+      "unsafe_writes": 6,
+      "blocked": 0,
+      "rejected": 0,
+      "successful_repairs": 0,
+      "target_recovered": 0,
+      "repairable_total": 2,
+      "repairable_recovered": 0,
+      "repairable_missed": 2,
+      "recovery_rate": 0.0,
+      "repairable_recovery_rate": 0.0,
+      "violation_rate": 1.0,
+      "violations_per_dispatch": 1.0
+    },
+    {
+      "class": "field_rename",
+      "label": "all",
+      "arm": "no_repair",
+      "total": 6,
+      "safe_writes": 0,
+      "unsafe_writes": 0,
+      "blocked": 0,
+      "rejected": 6,
+      "successful_repairs": 0,
+      "target_recovered": 0,
+      "repairable_total": 2,
+      "repairable_recovered": 0,
+      "repairable_missed": 2,
+      "recovery_rate": 0.0,
+      "repairable_recovery_rate": 0.0,
+      "violation_rate": 0.0,
+      "violations_per_dispatch": 0.0
+    },
+    {
+      "class": "all",
+      "label": "all",
+      "arm": "no_repair",
+      "total": 42,
+      "safe_writes": 0,
+      "unsafe_writes": 30,
+      "blocked": 0,
+      "rejected": 12,
+      "successful_repairs": 0,
+      "target_recovered": 0,
+      "repairable_total": 14,
+      "repairable_recovered": 0,
+      "repairable_missed": 14,
+      "recovery_rate": 0.0,
+      "repairable_recovery_rate": 0.0,
+      "violation_rate": 0.7142857142857143,
+      "violations_per_dispatch": 0.7142857142857143
+    },
+    {
+      "class": "all",
+      "label": "repairable",
+      "arm": "no_repair",
+      "total": 14,
+      "safe_writes": 0,
+      "unsafe_writes": 10,
+      "blocked": 0,
+      "rejected": 4,
+      "successful_repairs": 0,
+      "target_recovered": 0,
+      "repairable_total": 14,
+      "repairable_recovered": 0,
+      "repairable_missed": 14,
+      "recovery_rate": 0.0,
+      "repairable_recovery_rate": 0.0,
+      "violation_rate": 0.7142857142857143,
+      "violations_per_dispatch": 0.7142857142857143
+    },
+    {
+      "class": "all",
+      "label": "ambiguous",
+      "arm": "no_repair",
+      "total": 14,
+      "safe_writes": 0,
+      "unsafe_writes": 10,
+      "blocked": 0,
+      "rejected": 4,
+      "successful_repairs": 0,
+      "target_recovered": 0,
+      "repairable_total": 0,
+      "repairable_recovered": 0,
+      "repairable_missed": 0,
+      "recovery_rate": 0.0,
+      "repairable_recovery_rate": null,
+      "violation_rate": 0.7142857142857143,
+      "violations_per_dispatch": 0.7142857142857143
+    },
+    {
+      "class": "all",
+      "label": "unsupported",
+      "arm": "no_repair",
+      "total": 14,
+      "safe_writes": 0,
+      "unsafe_writes": 10,
+      "blocked": 0,
+      "rejected": 4,
+      "successful_repairs": 0,
+      "target_recovered": 0,
+      "repairable_total": 0,
+      "repairable_recovered": 0,
+      "repairable_missed": 0,
+      "recovery_rate": 0.0,
+      "repairable_recovery_rate": null,
+      "violation_rate": 0.7142857142857143,
+      "violations_per_dispatch": 0.7142857142857143
+    },
+    {
+      "class": "unit_flip",
+      "label": "all",
+      "arm": "naive",
+      "total": 6,
+      "safe_writes": 3,
+      "unsafe_writes": 3,
+      "blocked": 0,
+      "rejected": 0,
+      "successful_repairs": 3,
+      "target_recovered": 3,
+      "repairable_total": 2,
+      "repairable_recovered": 2,
+      "repairable_missed": 0,
+      "recovery_rate": 0.5,
+      "repairable_recovery_rate": 1.0,
+      "violation_rate": 0.5,
+      "violations_per_dispatch": 0.5
+    },
+    {
+      "class": "timestamp_epoch",
+      "label": "all",
+      "arm": "naive",
+      "total": 6,
+      "safe_writes": 3,
+      "unsafe_writes": 3,
+      "blocked": 0,
+      "rejected": 0,
+      "successful_repairs": 3,
+      "target_recovered": 3,
+      "repairable_total": 2,
+      "repairable_recovered": 2,
+      "repairable_missed": 0,
+      "recovery_rate": 0.5,
+      "repairable_recovery_rate": 1.0,
+      "violation_rate": 0.5,
+      "violations_per_dispatch": 0.5
+    },
+    {
+      "class": "enum_expansion",
+      "label": "all",
+      "arm": "naive",
+      "total": 6,
+      "safe_writes": 3,
+      "unsafe_writes": 3,
+      "blocked": 0,
+      "rejected": 0,
+      "successful_repairs": 3,
+      "target_recovered": 3,
+      "repairable_total": 2,
+      "repairable_recovered": 2,
+      "repairable_missed": 0,
+      "recovery_rate": 0.5,
+      "repairable_recovery_rate": 1.0,
+      "violation_rate": 0.5,
+      "violations_per_dispatch": 0.5
+    },
+    {
+      "class": "null_semantics",
+      "label": "all",
+      "arm": "naive",
+      "total": 6,
+      "safe_writes": 3,
+      "unsafe_writes": 3,
+      "blocked": 0,
+      "rejected": 0,
+      "successful_repairs": 3,
+      "target_recovered": 3,
+      "repairable_total": 2,
+      "repairable_recovered": 2,
+      "repairable_missed": 0,
+      "recovery_rate": 0.5,
+      "repairable_recovery_rate": 1.0,
+      "violation_rate": 0.5,
+      "violations_per_dispatch": 0.5
+    },
+    {
+      "class": "type_coercion",
+      "label": "all",
+      "arm": "naive",
+      "total": 6,
+      "safe_writes": 3,
+      "unsafe_writes": 1,
+      "blocked": 0,
+      "rejected": 2,
+      "successful_repairs": 3,
+      "target_recovered": 3,
+      "repairable_total": 2,
+      "repairable_recovered": 2,
+      "repairable_missed": 0,
+      "recovery_rate": 0.5,
+      "repairable_recovery_rate": 1.0,
+      "violation_rate": 0.16666666666666666,
+      "violations_per_dispatch": 0.16666666666666666
+    },
+    {
+      "class": "date_format",
+      "label": "all",
+      "arm": "naive",
+      "total": 6,
+      "safe_writes": 3,
+      "unsafe_writes": 3,
+      "blocked": 0,
+      "rejected": 0,
+      "successful_repairs": 3,
+      "target_recovered": 3,
+      "repairable_total": 2,
+      "repairable_recovered": 2,
+      "repairable_missed": 0,
+      "recovery_rate": 0.5,
+      "repairable_recovery_rate": 1.0,
+      "violation_rate": 0.5,
+      "violations_per_dispatch": 0.5
+    },
+    {
+      "class": "field_rename",
+      "label": "all",
+      "arm": "naive",
+      "total": 6,
+      "safe_writes": 3,
+      "unsafe_writes": 0,
+      "blocked": 0,
+      "rejected": 3,
+      "successful_repairs": 3,
+      "target_recovered": 3,
+      "repairable_total": 2,
+      "repairable_recovered": 2,
+      "repairable_missed": 0,
+      "recovery_rate": 0.5,
+      "repairable_recovery_rate": 1.0,
+      "violation_rate": 0.0,
+      "violations_per_dispatch": 0.0
+    },
+    {
+      "class": "all",
+      "label": "all",
+      "arm": "naive",
+      "total": 42,
+      "safe_writes": 21,
+      "unsafe_writes": 16,
+      "blocked": 0,
+      "rejected": 5,
+      "successful_repairs": 21,
+      "target_recovered": 21,
+      "repairable_total": 14,
+      "repairable_recovered": 14,
+      "repairable_missed": 0,
+      "recovery_rate": 0.5,
+      "repairable_recovery_rate": 1.0,
+      "violation_rate": 0.38095238095238093,
+      "violations_per_dispatch": 0.38095238095238093
+    },
+    {
+      "class": "all",
+      "label": "repairable",
+      "arm": "naive",
+      "total": 14,
+      "safe_writes": 14,
+      "unsafe_writes": 0,
+      "blocked": 0,
+      "rejected": 0,
+      "successful_repairs": 14,
+      "target_recovered": 14,
+      "repairable_total": 14,
+      "repairable_recovered": 14,
+      "repairable_missed": 0,
+      "recovery_rate": 1.0,
+      "repairable_recovery_rate": 1.0,
+      "violation_rate": 0.0,
+      "violations_per_dispatch": 0.0
+    },
+    {
+      "class": "all",
+      "label": "ambiguous",
+      "arm": "naive",
+      "total": 14,
+      "safe_writes": 7,
+      "unsafe_writes": 6,
+      "blocked": 0,
+      "rejected": 1,
+      "successful_repairs": 7,
+      "target_recovered": 7,
+      "repairable_total": 0,
+      "repairable_recovered": 0,
+      "repairable_missed": 0,
+      "recovery_rate": 0.5,
+      "repairable_recovery_rate": null,
+      "violation_rate": 0.42857142857142855,
+      "violations_per_dispatch": 0.42857142857142855
+    },
+    {
+      "class": "all",
+      "label": "unsupported",
+      "arm": "naive",
+      "total": 14,
+      "safe_writes": 0,
+      "unsafe_writes": 10,
+      "blocked": 0,
+      "rejected": 4,
+      "successful_repairs": 0,
+      "target_recovered": 0,
+      "repairable_total": 0,
+      "repairable_recovered": 0,
+      "repairable_missed": 0,
+      "recovery_rate": 0.0,
+      "repairable_recovery_rate": null,
+      "violation_rate": 0.7142857142857143,
+      "violations_per_dispatch": 0.7142857142857143
+    },
+    {
+      "class": "unit_flip",
+      "label": "all",
+      "arm": "selective",
+      "total": 6,
+      "safe_writes": 2,
+      "unsafe_writes": 1,
+      "blocked": 3,
+      "rejected": 0,
+      "successful_repairs": 2,
+      "target_recovered": 2,
+      "repairable_total": 2,
+      "repairable_recovered": 2,
+      "repairable_missed": 0,
+      "recovery_rate": 0.3333333333333333,
+      "repairable_recovery_rate": 1.0,
+      "violation_rate": 0.16666666666666666,
+      "violations_per_dispatch": 0.3333333333333333
+    },
+    {
+      "class": "timestamp_epoch",
+      "label": "all",
+      "arm": "selective",
+      "total": 6,
+      "safe_writes": 2,
+      "unsafe_writes": 1,
+      "blocked": 3,
+      "rejected": 0,
+      "successful_repairs": 2,
+      "target_recovered": 2,
+      "repairable_total": 2,
+      "repairable_recovered": 2,
+      "repairable_missed": 0,
+      "recovery_rate": 0.3333333333333333,
+      "repairable_recovery_rate": 1.0,
+      "violation_rate": 0.16666666666666666,
+      "violations_per_dispatch": 0.3333333333333333
+    },
+    {
+      "class": "enum_expansion",
+      "label": "all",
+      "arm": "selective",
+      "total": 6,
+      "safe_writes": 2,
+      "unsafe_writes": 1,
+      "blocked": 3,
+      "rejected": 0,
+      "successful_repairs": 2,
+      "target_recovered": 2,
+      "repairable_total": 2,
+      "repairable_recovered": 2,
+      "repairable_missed": 0,
+      "recovery_rate": 0.3333333333333333,
+      "repairable_recovery_rate": 1.0,
+      "violation_rate": 0.16666666666666666,
+      "violations_per_dispatch": 0.3333333333333333
+    },
+    {
+      "class": "null_semantics",
+      "label": "all",
+      "arm": "selective",
+      "total": 6,
+      "safe_writes": 0,
+      "unsafe_writes": 0,
+      "blocked": 6,
+      "rejected": 0,
+      "successful_repairs": 0,
+      "target_recovered": 0,
+      "repairable_total": 2,
+      "repairable_recovered": 0,
+      "repairable_missed": 2,
+      "recovery_rate": 0.0,
+      "repairable_recovery_rate": 0.0,
+      "violation_rate": 0.0,
+      "violations_per_dispatch": null
+    },
+    {
+      "class": "type_coercion",
+      "label": "all",
+      "arm": "selective",
+      "total": 6,
+      "safe_writes": 0,
+      "unsafe_writes": 0,
+      "blocked": 4,
+      "rejected": 2,
+      "successful_repairs": 0,
+      "target_recovered": 0,
+      "repairable_total": 2,
+      "repairable_recovered": 0,
+      "repairable_missed": 2,
+      "recovery_rate": 0.0,
+      "repairable_recovery_rate": 0.0,
+      "violation_rate": 0.0,
+      "violations_per_dispatch": 0.0
+    },
+    {
+      "class": "date_format",
+      "label": "all",
+      "arm": "selective",
+      "total": 6,
+      "safe_writes": 2,
+      "unsafe_writes": 1,
+      "blocked": 3,
+      "rejected": 0,
+      "successful_repairs": 2,
+      "target_recovered": 2,
+      "repairable_total": 2,
+      "repairable_recovered": 2,
+      "repairable_missed": 0,
+      "recovery_rate": 0.3333333333333333,
+      "repairable_recovery_rate": 1.0,
+      "violation_rate": 0.16666666666666666,
+      "violations_per_dispatch": 0.3333333333333333
+    },
+    {
+      "class": "field_rename",
+      "label": "all",
+      "arm": "selective",
+      "total": 6,
+      "safe_writes": 2,
+      "unsafe_writes": 0,
+      "blocked": 0,
+      "rejected": 4,
+      "successful_repairs": 2,
+      "target_recovered": 2,
+      "repairable_total": 2,
+      "repairable_recovered": 2,
+      "repairable_missed": 0,
+      "recovery_rate": 0.3333333333333333,
+      "repairable_recovery_rate": 1.0,
+      "violation_rate": 0.0,
+      "violations_per_dispatch": 0.0
+    },
+    {
+      "class": "all",
+      "label": "all",
+      "arm": "selective",
+      "total": 42,
+      "safe_writes": 10,
+      "unsafe_writes": 4,
+      "blocked": 22,
+      "rejected": 6,
+      "successful_repairs": 10,
+      "target_recovered": 10,
+      "repairable_total": 14,
+      "repairable_recovered": 10,
+      "repairable_missed": 4,
+      "recovery_rate": 0.23809523809523808,
+      "repairable_recovery_rate": 0.7142857142857143,
+      "violation_rate": 0.09523809523809523,
+      "violations_per_dispatch": 0.2
+    },
+    {
+      "class": "all",
+      "label": "repairable",
+      "arm": "selective",
+      "total": 14,
+      "safe_writes": 10,
+      "unsafe_writes": 0,
+      "blocked": 4,
+      "rejected": 0,
+      "successful_repairs": 10,
+      "target_recovered": 10,
+      "repairable_total": 14,
+      "repairable_recovered": 10,
+      "repairable_missed": 4,
+      "recovery_rate": 0.7142857142857143,
+      "repairable_recovery_rate": 0.7142857142857143,
+      "violation_rate": 0.0,
+      "violations_per_dispatch": 0.0
+    },
+    {
+      "class": "all",
+      "label": "ambiguous",
+      "arm": "selective",
+      "total": 14,
+      "safe_writes": 0,
+      "unsafe_writes": 4,
+      "blocked": 8,
+      "rejected": 2,
+      "successful_repairs": 0,
+      "target_recovered": 0,
+      "repairable_total": 0,
+      "repairable_recovered": 0,
+      "repairable_missed": 0,
+      "recovery_rate": 0.0,
+      "repairable_recovery_rate": null,
+      "violation_rate": 0.2857142857142857,
+      "violations_per_dispatch": 0.6666666666666666
+    },
+    {
+      "class": "all",
+      "label": "unsupported",
+      "arm": "selective",
+      "total": 14,
+      "safe_writes": 0,
+      "unsafe_writes": 0,
+      "blocked": 10,
+      "rejected": 4,
+      "successful_repairs": 0,
+      "target_recovered": 0,
+      "repairable_total": 0,
+      "repairable_recovered": 0,
+      "repairable_missed": 0,
+      "recovery_rate": 0.0,
+      "repairable_recovery_rate": null,
+      "violation_rate": 0.0,
+      "violations_per_dispatch": 0.0
+    }
+  ]
+}

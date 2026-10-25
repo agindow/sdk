@@ -1,0 +1,32 @@
+{
+  "contract": "finding",
+  "version": 2,
+  "id": "find_01HQ8Z4A5B6C7D8E9F0G1H2J3K",
+  "ts": "2026-10-17T14:05:00Z",
+  "tool": "stripe.create_customer",
+  "vendor": "stripe",
+  "classification": "shape",
+  "conclusion": "Stripe's changelog confirms `source` was renamed to `payment_method`; the mapping is 1:1 and no unit or meaning change accompanies it.",
+  "citations": [
+    {
+      "url": "https://docs.stripe.com/changelog/2026-10-17",
+      "quote": "The legacy `source` parameter has been renamed to `payment_method`.",
+      "retrieved_at": "2026-10-17T14:04:31Z"
+    }
+  ],
+  "confidence": 0.93,
+  "drift_id": "drift_01HQ8Z3K4M5N6P7Q8R9S0T1V2W",
+  "tenant": "acme",
+  "investigation_id": "inv_fixture",
+  "revision": 1,
+  "expires_at": "2026-10-24T14:05:00Z",
+  "operation": "write",
+  "field": "/source",
+  "contract_version": "cv_stripe_2026_10_17a",
+  "fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "evidence_kind": "vendor",
+  "visibility": "public",
+  "hypothesis": false,
+  "uncertainty": "Declaration does not prove the correctness of a specific write.",
+  "recommended_action": "review_vendor_migration"
+}

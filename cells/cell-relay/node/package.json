@@ -1,0 +1,49 @@
+{
+  "name": "agindow",
+  "version": "0.1.0-alpha.1",
+  "description": "API drift firewall for AI agents on Node (Rust/WASM)",
+  "type": "module",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/agindow/sdk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agindow/sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/agindow/sdk/issues"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "api",
+    "drift",
+    "firewall",
+    "llm",
+    "wasm",
+    "guard",
+    "sdk",
+    "observability"
+  ],
+  "engines": { "node": ">=22" },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "bin": {
+    "agindow": "./dist/cli.cjs"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": { "@opentelemetry/api": ">=1.9.0 <2" },
+  "peerDependenciesMeta": { "@opentelemetry/api": { "optional": true } },
+  "exports": { ".": {
+    "import": { "types": "./dist/esm/index.d.ts", "default": "./dist/esm/index.js" },
+    "require": { "types": "./dist/cjs/index.d.ts", "default": "./dist/cjs/index.js" }
+  } },
+  "files": ["dist", "LICENSE", "NOTICE", "README.md"],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "vitest run --config vitest.config.ts",
+    "bench": "node scripts/bench.mjs"
+  }
+}

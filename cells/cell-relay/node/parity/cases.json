@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "sync-reference-observe",
+      "scenario": "pass",
+      "mode": "observe",
+      "operation": "read",
+      "args": {
+        "value": 1
+      },
+      "recorded": {
+        "ok": true
+      }
+    },
+    {
+      "id": "async-reference-repair",
+      "scenario": "async",
+      "mode": "repair",
+      "operation": "read",
+      "args": {
+        "value": 1
+      },
+      "recorded": {
+        "ok": true
+      }
+    },
+    {
+      "id": "fault-preserves-original",
+      "scenario": "fault",
+      "mode": "strict",
+      "operation": "write",
+      "args": {},
+      "recorded": {
+        "ok": true
+      }
+    },
+    {
+      "id": "request-halt-zero-dispatch",
+      "scenario": "halt_request",
+      "mode": "repair",
+      "operation": "write",
+      "args": {},
+      "recorded": {
+        "ok": true
+      }
+    },
+    {
+      "id": "response-halt-retains-outcome",
+      "scenario": "halt_response",
+      "mode": "strict",
+      "operation": "write",
+      "args": {},
+      "recorded": {
+        "ok": true
+      }
+    },
+    {
+      "id": "observe-suppresses-halt",
+      "scenario": "halt_request",
+      "mode": "observe",
+      "operation": "write",
+      "args": {},
+      "recorded": {
+        "ok": true
+      }
+    },
+    {
+      "id": "unclassified-error-identity",
+      "scenario": "error",
+      "mode": "repair",
+      "operation": "read",
+      "args": {},
+      "recorded": {
+        "error": "original"
+      }
+    },
+    {
+      "id": "wasm-request-repair-write",
+      "scenario": "wasm_request",
+      "mode": "repair",
+      "operation": "write",
+      "args": {
+        "value": 100
+      },
+      "recorded": {
+        "value": 100
+      }
+    },
+    {
+      "id": "wasm-response-strict-write",
+      "scenario": "wasm_response",
+      "mode": "strict",
+      "operation": "write",
+      "args": {
+        "value": 100
+      },
+      "recorded": {
+        "value": 100
+      }
+    },
+    {
+      "id": "wasm-request-observe-write",
+      "scenario": "wasm_request",
+      "mode": "observe",
+      "operation": "write",
+      "args": {
+        "value": 100
+      },
+      "recorded": {
+        "value": 100
+      }
+    },
+    {
+      "id": "wasm-response-repair-read",
+      "scenario": "wasm_response",
+      "mode": "repair",
+      "operation": "read",
+      "args": {
+        "value": 100
+      },
+      "recorded": {
+        "value": 100
+      }
+    },
+    {
+      "id": "wasm-budget-strict-write",
+      "scenario": "wasm_budget",
+      "mode": "strict",
+      "operation": "write",
+      "args": {
+        "value": 100
+      },
+      "recorded": {
+        "value": 100
+      }
+    }
+  ]
+}

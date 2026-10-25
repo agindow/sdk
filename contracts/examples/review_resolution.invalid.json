@@ -1,0 +1,85 @@
+{
+  "contract": "review_resolution",
+  "version": 1,
+  "case": {
+    "contract": "review_case",
+    "version": 1,
+    "id": "aud_review_1",
+    "created_at": "2026-10-17T14:00:00Z",
+    "scope": {
+      "tenant": "acme",
+      "connection": "conn_1",
+      "vendor": "stripe",
+      "operation": "create_customer",
+      "contract_version": "cv_stripe_2026_10_17a",
+      "repair_id": "rename-source-v1"
+    },
+    "audit": {
+      "id": "aud_review_1",
+      "ts": "2026-10-17T14:00:00Z",
+      "tool": "stripe.create_customer",
+      "operation": "write",
+      "mode": "strict",
+      "drift": {
+        "class": "shape",
+        "side": "request",
+        "changes": [
+          {
+            "path": "source",
+            "kind": "field_renamed",
+            "to": "payment_method"
+          }
+        ]
+      },
+      "decision": "blocked",
+      "patch": null,
+      "proof": {
+        "contract_version": "cv_stripe_2026_10_17a",
+        "verified_against": "registry",
+        "write_integrity": false,
+        "idempotency_key": "ord_8842-charge"
+      },
+      "metadata": {
+        "workflow": "nightly-recon",
+        "tenant": "acme"
+      },
+      "confidence": 0.98
+    },
+    "dispatched": false,
+    "evidence": [
+      {
+        "side": "request",
+        "decision": "halt",
+        "reason": "unresolved_drift",
+        "confidence": null,
+        "verification": "not_run",
+        "changes": [
+          {
+            "path": "source",
+            "to": "payment_method",
+            "kind": "Renamed",
+            "class": "shape",
+            "reason": "ConfirmedIdentity"
+          }
+        ],
+        "proposals": [
+          {
+            "finding": "0",
+            "kind": "rename",
+            "to": "payment_method",
+            "replacement_hex": null,
+            "detector": "0.98",
+            "applicability": "1",
+            "confidence": 0.98,
+            "assessment": "Rejected(BelowThreshold)"
+          }
+        ]
+      }
+    ]
+  },
+  "revision": 1,
+  "decision": "automatic",
+  "actor": "reviewer",
+  "ts": "2026-10-17T14:00:30Z",
+  "note": "Validated authoritative rename evidence"
+}

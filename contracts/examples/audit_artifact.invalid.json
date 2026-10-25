@@ -1,0 +1,15 @@
+{
+  "id": "aud_01HQ8Z3K4M5N6P7Q8R9S0T1V2W",
+  "ts": "2026-10-17T14:00:11.204Z",
+  "tool": "stripe.create_customer",
+  "operation": "write",
+  "mode": "repair",
+  "drift": null,
+  "decision": "approved",
+  "patch": null,
+  "proof": {
+    "contract_version": "cv_stripe_2026_10_17a",
+    "verified_against": "registry",
+    "write_integrity": true
+  }
+}

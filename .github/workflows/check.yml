@@ -1,0 +1,45 @@
+name: check
+
+# Clean-clone gate from BUILD.md: Rust workspace, WASM guest, Node and Python
+# SDKs, plus the cross-language parity suite.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install wasm-bindgen
+        run: cargo install wasm-bindgen-cli --version 0.2.129 --locked
+
+      - name: Node dependencies
+        run: pnpm install
+
+      - name: Build runtime and stage Python guest
+        run: pnpm build
+
+      - name: Python dependencies
+        run: uv sync --directory cells/cell-relay/python --frozen
+
+      - name: Lint and test
+        run: pnpm lint && pnpm test

@@ -1,0 +1,1014 @@
+{
+  "version": 1,
+  "corpus": "[\n  {\n    \"id\": \"unit_flip-1\",\n    \"input\": {\n      \"value\": 1200,\n      \"account\": \"tenant-0\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 0\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": 12,\n      \"account\": \"tenant-0\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 0\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": 12,\n    \"confidence\": 1,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"unit_flip\"\n  },\n  {\n    \"id\": \"unit_flip-2\",\n    \"input\": {\n      \"value\": 3499,\n      \"account\": \"tenant-1\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 1\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": 34.99,\n      \"account\": \"tenant-1\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 1\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": 34.99,\n    \"confidence\": 0.99,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"unit_flip\"\n  },\n  {\n    \"id\": \"unit_flip-3\",\n    \"input\": {\n      \"value\": 0,\n      \"account\": \"tenant-2\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 2\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": 0,\n      \"account\": \"tenant-2\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 2\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": 0,\n    \"confidence\": 0.989,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"unit_flip\"\n  },\n  {\n    \"id\": \"unit_flip-4\",\n    \"input\": {\n      \"value\": -125,\n      \"account\": \"tenant-3\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 3\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": -1.25,\n      \"account\": \"tenant-3\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 3\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": 42,\n    \"confidence\": 0.5,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"unit_flip\"\n  },\n  {\n    \"id\": \"unit_flip-5\",\n    \"input\": {\n      \"value\": 9999,\n      \"account\": \"tenant-4\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 4\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": 99.99,\n      \"account\": \"tenant-4\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 4\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": 99.99,\n    \"confidence\": 0.98,\n    \"confirmed\": false,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"unit_flip\"\n  },\n  {\n    \"id\": \"unit_flip-6\",\n    \"input\": {\n      \"value\": 1250,\n      \"account\": \"tenant-5\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 5\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": 12.5,\n      \"account\": \"tenant-5\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 5\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": 12.5,\n    \"confidence\": 0.97,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"unit_flip\"\n  },\n  {\n    \"id\": \"timestamp_epoch-1\",\n    \"input\": {\n      \"value\": 1700000000,\n      \"account\": \"tenant-0\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 0\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": 1700000000000,\n      \"account\": \"tenant-0\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 0\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": 1700000000000,\n    \"confidence\": 1,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"timestamp_epoch\"\n  },\n  {\n    \"id\": \"timestamp_epoch-2\",\n    \"input\": {\n      \"value\": 0,\n      \"account\": \"tenant-1\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 1\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": 0,\n      \"account\": \"tenant-1\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 1\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": 0,\n    \"confidence\": 0.99,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"timestamp_epoch\"\n  },\n  {\n    \"id\": \"timestamp_epoch-3\",\n    \"input\": {\n      \"value\": 1,\n      \"account\": \"tenant-2\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 2\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": 1000,\n      \"account\": \"tenant-2\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 2\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": 1000,\n    \"confidence\": 0.989,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"timestamp_epoch\"\n  },\n  {\n    \"id\": \"timestamp_epoch-4\",\n    \"input\": {\n      \"value\": 1700000123,\n      \"account\": \"tenant-3\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 3\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": 1700000123000,\n      \"account\": \"tenant-3\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 3\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": 42,\n    \"confidence\": 0.5,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"timestamp_epoch\"\n  },\n  {\n    \"id\": \"timestamp_epoch-5\",\n    \"input\": {\n      \"value\": 999,\n      \"account\": \"tenant-4\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 4\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": 999000,\n      \"account\": \"tenant-4\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 4\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": 999000,\n    \"confidence\": 0.98,\n    \"confirmed\": false,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"timestamp_epoch\"\n  },\n  {\n    \"id\": \"timestamp_epoch-6\",\n    \"input\": {\n      \"value\": 123,\n      \"account\": \"tenant-5\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 5\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": 123000,\n      \"account\": \"tenant-5\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 5\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": 123000,\n    \"confidence\": 0.97,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"timestamp_epoch\"\n  },\n  {\n    \"id\": \"enum_expansion-1\",\n    \"input\": {\n      \"value\": \"new\",\n      \"account\": \"tenant-0\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 0\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": \"pending\",\n      \"account\": \"tenant-0\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 0\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"pending\",\n    \"confidence\": 1,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"enum_expansion\"\n  },\n  {\n    \"id\": \"enum_expansion-2\",\n    \"input\": {\n      \"value\": \"queued\",\n      \"account\": \"tenant-1\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 1\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": \"pending\",\n      \"account\": \"tenant-1\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 1\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"pending\",\n    \"confidence\": 0.99,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"enum_expansion\"\n  },\n  {\n    \"id\": \"enum_expansion-3\",\n    \"input\": {\n      \"value\": \"archived\",\n      \"account\": \"tenant-2\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 2\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": \"closed\",\n      \"account\": \"tenant-2\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 2\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"closed\",\n    \"confidence\": 0.989,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"enum_expansion\"\n  },\n  {\n    \"id\": \"enum_expansion-4\",\n    \"input\": {\n      \"value\": \"blocked\",\n      \"account\": \"tenant-3\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 3\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": \"held\",\n      \"account\": \"tenant-3\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 3\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"closed\",\n    \"confidence\": 0.5,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"enum_expansion\"\n  },\n  {\n    \"id\": \"enum_expansion-5\",\n    \"input\": {\n      \"value\": \"review\",\n      \"account\": \"tenant-4\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 4\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": \"held\",\n      \"account\": \"tenant-4\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 4\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"held\",\n    \"confidence\": 0.98,\n    \"confirmed\": false,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"enum_expansion\"\n  },\n  {\n    \"id\": \"enum_expansion-6\",\n    \"input\": {\n      \"value\": \"unknown\",\n      \"account\": \"tenant-5\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 5\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": \"held\",\n      \"account\": \"tenant-5\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 5\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"held\",\n    \"confidence\": 0.97,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"enum_expansion\"\n  },\n  {\n    \"id\": \"null_semantics-1\",\n    \"input\": {\n      \"value\": 0,\n      \"account\": \"tenant-0\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 0\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": null,\n      \"account\": \"tenant-0\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 0\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": null,\n    \"confidence\": 1,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"null_semantics\"\n  },\n  {\n    \"id\": \"null_semantics-2\",\n    \"input\": {\n      \"value\": \"\",\n      \"account\": \"tenant-1\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 1\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": null,\n      \"account\": \"tenant-1\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 1\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": null,\n    \"confidence\": 0.99,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"null_semantics\"\n  },\n  {\n    \"id\": \"null_semantics-3\",\n    \"input\": {\n      \"value\": null,\n      \"account\": \"tenant-2\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 2\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": 0,\n      \"account\": \"tenant-2\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 2\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": 0,\n    \"confidence\": 0.989,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"null_semantics\"\n  },\n  {\n    \"id\": \"null_semantics-4\",\n    \"input\": {\n      \"value\": null,\n      \"account\": \"tenant-3\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 3\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": \"\",\n      \"account\": \"tenant-3\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 3\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"\",\n    \"confidence\": 0.5,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"null_semantics\"\n  },\n  {\n    \"id\": \"null_semantics-5\",\n    \"input\": {\n      \"value\": 0,\n      \"account\": \"tenant-4\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 4\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": null,\n      \"account\": \"tenant-4\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 4\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": null,\n    \"confidence\": 0.98,\n    \"confirmed\": false,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"null_semantics\"\n  },\n  {\n    \"id\": \"null_semantics-6\",\n    \"input\": {\n      \"value\": \"\",\n      \"account\": \"tenant-5\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 5\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": null,\n      \"account\": \"tenant-5\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 5\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": null,\n    \"confidence\": 0.97,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"null_semantics\"\n  },\n  {\n    \"id\": \"type_coercion-1\",\n    \"input\": {\n      \"value\": \"123\",\n      \"account\": \"tenant-0\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 0\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": 123,\n      \"account\": \"tenant-0\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 0\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": 123,\n    \"confidence\": 1,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": false,\n    \"target\": \"value\",\n    \"class\": \"type_coercion\"\n  },\n  {\n    \"id\": \"type_coercion-2\",\n    \"input\": {\n      \"value\": 123,\n      \"account\": \"tenant-1\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 1\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": \"123\",\n      \"account\": \"tenant-1\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 1\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"123\",\n    \"confidence\": 0.97,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": false,\n    \"target\": \"value\",\n    \"class\": \"type_coercion\"\n  },\n  {\n    \"id\": \"type_coercion-3\",\n    \"input\": {\n      \"value\": \"true\",\n      \"account\": \"tenant-2\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 2\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": true,\n      \"account\": \"tenant-2\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 2\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": true,\n    \"confidence\": 0.969,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": false,\n    \"target\": \"value\",\n    \"class\": \"type_coercion\"\n  },\n  {\n    \"id\": \"type_coercion-4\",\n    \"input\": {\n      \"value\": true,\n      \"account\": \"tenant-3\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 3\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": \"true\",\n      \"account\": \"tenant-3\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 3\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"true\",\n    \"confidence\": 0.5,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": false,\n    \"target\": \"value\",\n    \"class\": \"type_coercion\"\n  },\n  {\n    \"id\": \"type_coercion-5\",\n    \"input\": {\n      \"value\": \"001\",\n      \"account\": \"tenant-4\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 4\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": 1,\n      \"account\": \"tenant-4\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 4\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": 1,\n    \"confidence\": 0.99,\n    \"confirmed\": false,\n    \"rename\": false,\n    \"semantic\": false,\n    \"target\": \"value\",\n    \"class\": \"type_coercion\"\n  },\n  {\n    \"id\": \"type_coercion-6\",\n    \"input\": {\n      \"value\": \"false\",\n      \"account\": \"tenant-5\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 5\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": false,\n      \"account\": \"tenant-5\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 5\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": false,\n    \"confidence\": 0.96,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": false,\n    \"target\": \"value\",\n    \"class\": \"type_coercion\"\n  },\n  {\n    \"id\": \"date_format-1\",\n    \"input\": {\n      \"value\": \"Jan 5 2026\",\n      \"account\": \"tenant-0\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 0\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": \"2026-01-05\",\n      \"account\": \"tenant-0\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 0\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"2026-01-05\",\n    \"confidence\": 1,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"date_format\"\n  },\n  {\n    \"id\": \"date_format-2\",\n    \"input\": {\n      \"value\": \"05/01/2026\",\n      \"account\": \"tenant-1\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 1\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": \"2026-01-05\",\n      \"account\": \"tenant-1\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 1\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"2026-01-05\",\n    \"confidence\": 0.99,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"date_format\"\n  },\n  {\n    \"id\": \"date_format-3\",\n    \"input\": {\n      \"value\": \"2026/02/28\",\n      \"account\": \"tenant-2\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 2\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": \"2026-02-28\",\n      \"account\": \"tenant-2\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 2\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"2026-02-28\",\n    \"confidence\": 0.989,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"date_format\"\n  },\n  {\n    \"id\": \"date_format-4\",\n    \"input\": {\n      \"value\": \"Mar 1 2026\",\n      \"account\": \"tenant-3\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 3\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": \"2026-03-01\",\n      \"account\": \"tenant-3\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 3\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"2026-01-03\",\n    \"confidence\": 0.5,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"date_format\"\n  },\n  {\n    \"id\": \"date_format-5\",\n    \"input\": {\n      \"value\": \"04/05/2026\",\n      \"account\": \"tenant-4\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 4\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": \"2026-05-04\",\n      \"account\": \"tenant-4\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 4\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"2026-05-04\",\n    \"confidence\": 0.98,\n    \"confirmed\": false,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"date_format\"\n  },\n  {\n    \"id\": \"date_format-6\",\n    \"input\": {\n      \"value\": \"2026.12.31\",\n      \"account\": \"tenant-5\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 5\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"value\": \"2026-12-31\",\n      \"account\": \"tenant-5\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 5\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"2026-12-31\",\n    \"confidence\": 0.97,\n    \"confirmed\": true,\n    \"rename\": false,\n    \"semantic\": true,\n    \"target\": \"value\",\n    \"class\": \"date_format\"\n  },\n  {\n    \"id\": \"field_rename-1\",\n    \"input\": {\n      \"value\": \"tok_a\",\n      \"account\": \"tenant-0\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 0\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"payment_method\": \"tok_a\",\n      \"account\": \"tenant-0\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 0\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"tok_a\",\n    \"confidence\": 1,\n    \"confirmed\": true,\n    \"rename\": true,\n    \"semantic\": false,\n    \"target\": \"payment_method\",\n    \"class\": \"field_rename\"\n  },\n  {\n    \"id\": \"field_rename-2\",\n    \"input\": {\n      \"value\": \"tok_b\",\n      \"account\": \"tenant-1\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 1\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"payment_method\": \"tok_b\",\n      \"account\": \"tenant-1\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 1\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"tok_b\",\n    \"confidence\": 0.97,\n    \"confirmed\": true,\n    \"rename\": true,\n    \"semantic\": false,\n    \"target\": \"payment_method\",\n    \"class\": \"field_rename\"\n  },\n  {\n    \"id\": \"field_rename-3\",\n    \"input\": {\n      \"value\": \"tok_c\",\n      \"account\": \"tenant-2\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 2\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"payment_method\": \"tok_c\",\n      \"account\": \"tenant-2\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 2\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"tok_c\",\n    \"confidence\": 0.969,\n    \"confirmed\": true,\n    \"rename\": true,\n    \"semantic\": false,\n    \"target\": \"payment_method\",\n    \"class\": \"field_rename\"\n  },\n  {\n    \"id\": \"field_rename-4\",\n    \"input\": {\n      \"value\": \"tok_d\",\n      \"account\": \"tenant-3\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 3\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"payment_method\": \"tok_d\",\n      \"account\": \"tenant-3\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 3\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"tok_d\",\n    \"confidence\": 0.5,\n    \"confirmed\": true,\n    \"rename\": true,\n    \"semantic\": false,\n    \"target\": \"payment_method\",\n    \"class\": \"field_rename\"\n  },\n  {\n    \"id\": \"field_rename-5\",\n    \"input\": {\n      \"value\": \"tok_e\",\n      \"account\": \"tenant-4\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 4\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"payment_method\": \"tok_e\",\n      \"account\": \"tenant-4\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 4\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"tok_e\",\n    \"confidence\": 0.99,\n    \"confirmed\": false,\n    \"rename\": true,\n    \"semantic\": false,\n    \"target\": \"payment_method\",\n    \"class\": \"field_rename\"\n  },\n  {\n    \"id\": \"field_rename-6\",\n    \"input\": {\n      \"value\": \"tok_f\",\n      \"account\": \"tenant-5\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 5\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"expected\": {\n      \"payment_method\": \"tok_f\",\n      \"account\": \"tenant-5\",\n      \"memo\": {\n        \"keep\": true,\n        \"sequence\": 5\n      },\n      \"id\": \"9007199254740993\"\n    },\n    \"proposal\": \"tok_f\",\n    \"confidence\": 0.96,\n    \"confirmed\": true,\n    \"rename\": true,\n    \"semantic\": false,\n    \"target\": \"payment_method\",\n    \"class\": \"field_rename\"\n  }\n]\n",
+  "cases": [
+    {
+      "id": "unit_flip-1",
+      "class": "unit_flip",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "unit_flip-1",
+      "class": "unit_flip",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "unit_flip-1",
+      "class": "unit_flip",
+      "arm": "selective",
+      "dispatched": true,
+      "recovered": true,
+      "violation": false
+    },
+    {
+      "id": "unit_flip-2",
+      "class": "unit_flip",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "unit_flip-2",
+      "class": "unit_flip",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "unit_flip-2",
+      "class": "unit_flip",
+      "arm": "selective",
+      "dispatched": true,
+      "recovered": true,
+      "violation": false
+    },
+    {
+      "id": "unit_flip-3",
+      "class": "unit_flip",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": true,
+      "violation": false
+    },
+    {
+      "id": "unit_flip-3",
+      "class": "unit_flip",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "unit_flip-3",
+      "class": "unit_flip",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "unit_flip-4",
+      "class": "unit_flip",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "unit_flip-4",
+      "class": "unit_flip",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "unit_flip-4",
+      "class": "unit_flip",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "unit_flip-5",
+      "class": "unit_flip",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "unit_flip-5",
+      "class": "unit_flip",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "unit_flip-5",
+      "class": "unit_flip",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "unit_flip-6",
+      "class": "unit_flip",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "unit_flip-6",
+      "class": "unit_flip",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "unit_flip-6",
+      "class": "unit_flip",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "timestamp_epoch-1",
+      "class": "timestamp_epoch",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "timestamp_epoch-1",
+      "class": "timestamp_epoch",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "timestamp_epoch-1",
+      "class": "timestamp_epoch",
+      "arm": "selective",
+      "dispatched": true,
+      "recovered": true,
+      "violation": false
+    },
+    {
+      "id": "timestamp_epoch-2",
+      "class": "timestamp_epoch",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": true,
+      "violation": false
+    },
+    {
+      "id": "timestamp_epoch-2",
+      "class": "timestamp_epoch",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "timestamp_epoch-2",
+      "class": "timestamp_epoch",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "timestamp_epoch-3",
+      "class": "timestamp_epoch",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "timestamp_epoch-3",
+      "class": "timestamp_epoch",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "timestamp_epoch-3",
+      "class": "timestamp_epoch",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "timestamp_epoch-4",
+      "class": "timestamp_epoch",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "timestamp_epoch-4",
+      "class": "timestamp_epoch",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "timestamp_epoch-4",
+      "class": "timestamp_epoch",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "timestamp_epoch-5",
+      "class": "timestamp_epoch",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "timestamp_epoch-5",
+      "class": "timestamp_epoch",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "timestamp_epoch-5",
+      "class": "timestamp_epoch",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "timestamp_epoch-6",
+      "class": "timestamp_epoch",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "timestamp_epoch-6",
+      "class": "timestamp_epoch",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "timestamp_epoch-6",
+      "class": "timestamp_epoch",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "enum_expansion-1",
+      "class": "enum_expansion",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "enum_expansion-1",
+      "class": "enum_expansion",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "enum_expansion-1",
+      "class": "enum_expansion",
+      "arm": "selective",
+      "dispatched": true,
+      "recovered": true,
+      "violation": false
+    },
+    {
+      "id": "enum_expansion-2",
+      "class": "enum_expansion",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "enum_expansion-2",
+      "class": "enum_expansion",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "enum_expansion-2",
+      "class": "enum_expansion",
+      "arm": "selective",
+      "dispatched": true,
+      "recovered": true,
+      "violation": false
+    },
+    {
+      "id": "enum_expansion-3",
+      "class": "enum_expansion",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "enum_expansion-3",
+      "class": "enum_expansion",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "enum_expansion-3",
+      "class": "enum_expansion",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "enum_expansion-4",
+      "class": "enum_expansion",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "enum_expansion-4",
+      "class": "enum_expansion",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "enum_expansion-4",
+      "class": "enum_expansion",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "enum_expansion-5",
+      "class": "enum_expansion",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "enum_expansion-5",
+      "class": "enum_expansion",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "enum_expansion-5",
+      "class": "enum_expansion",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "enum_expansion-6",
+      "class": "enum_expansion",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "enum_expansion-6",
+      "class": "enum_expansion",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "enum_expansion-6",
+      "class": "enum_expansion",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "null_semantics-1",
+      "class": "null_semantics",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "null_semantics-1",
+      "class": "null_semantics",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "null_semantics-1",
+      "class": "null_semantics",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "null_semantics-2",
+      "class": "null_semantics",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "null_semantics-2",
+      "class": "null_semantics",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "null_semantics-2",
+      "class": "null_semantics",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "null_semantics-3",
+      "class": "null_semantics",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "null_semantics-3",
+      "class": "null_semantics",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "null_semantics-3",
+      "class": "null_semantics",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "null_semantics-4",
+      "class": "null_semantics",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "null_semantics-4",
+      "class": "null_semantics",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "null_semantics-4",
+      "class": "null_semantics",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "null_semantics-5",
+      "class": "null_semantics",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "null_semantics-5",
+      "class": "null_semantics",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "null_semantics-5",
+      "class": "null_semantics",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "null_semantics-6",
+      "class": "null_semantics",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "null_semantics-6",
+      "class": "null_semantics",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "null_semantics-6",
+      "class": "null_semantics",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "type_coercion-1",
+      "class": "type_coercion",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "type_coercion-1",
+      "class": "type_coercion",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "type_coercion-1",
+      "class": "type_coercion",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "type_coercion-2",
+      "class": "type_coercion",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "type_coercion-2",
+      "class": "type_coercion",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "type_coercion-2",
+      "class": "type_coercion",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "type_coercion-3",
+      "class": "type_coercion",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "type_coercion-3",
+      "class": "type_coercion",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "type_coercion-3",
+      "class": "type_coercion",
+      "arm": "selective",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "type_coercion-4",
+      "class": "type_coercion",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "type_coercion-4",
+      "class": "type_coercion",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "type_coercion-4",
+      "class": "type_coercion",
+      "arm": "selective",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "type_coercion-5",
+      "class": "type_coercion",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "type_coercion-5",
+      "class": "type_coercion",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "type_coercion-5",
+      "class": "type_coercion",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "type_coercion-6",
+      "class": "type_coercion",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "type_coercion-6",
+      "class": "type_coercion",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "type_coercion-6",
+      "class": "type_coercion",
+      "arm": "selective",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "date_format-1",
+      "class": "date_format",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "date_format-1",
+      "class": "date_format",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "date_format-1",
+      "class": "date_format",
+      "arm": "selective",
+      "dispatched": true,
+      "recovered": true,
+      "violation": false
+    },
+    {
+      "id": "date_format-2",
+      "class": "date_format",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "date_format-2",
+      "class": "date_format",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "date_format-2",
+      "class": "date_format",
+      "arm": "selective",
+      "dispatched": true,
+      "recovered": true,
+      "violation": false
+    },
+    {
+      "id": "date_format-3",
+      "class": "date_format",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "date_format-3",
+      "class": "date_format",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "date_format-3",
+      "class": "date_format",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "date_format-4",
+      "class": "date_format",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "date_format-4",
+      "class": "date_format",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "date_format-4",
+      "class": "date_format",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "date_format-5",
+      "class": "date_format",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "date_format-5",
+      "class": "date_format",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "date_format-5",
+      "class": "date_format",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "date_format-6",
+      "class": "date_format",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": true
+    },
+    {
+      "id": "date_format-6",
+      "class": "date_format",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "date_format-6",
+      "class": "date_format",
+      "arm": "selective",
+      "dispatched": false,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "field_rename-1",
+      "class": "field_rename",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "field_rename-1",
+      "class": "field_rename",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "field_rename-1",
+      "class": "field_rename",
+      "arm": "selective",
+      "dispatched": true,
+      "recovered": true,
+      "violation": false
+    },
+    {
+      "id": "field_rename-2",
+      "class": "field_rename",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "field_rename-2",
+      "class": "field_rename",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "field_rename-2",
+      "class": "field_rename",
+      "arm": "selective",
+      "dispatched": true,
+      "recovered": true,
+      "violation": false
+    },
+    {
+      "id": "field_rename-3",
+      "class": "field_rename",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "field_rename-3",
+      "class": "field_rename",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "field_rename-3",
+      "class": "field_rename",
+      "arm": "selective",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "field_rename-4",
+      "class": "field_rename",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "field_rename-4",
+      "class": "field_rename",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "field_rename-4",
+      "class": "field_rename",
+      "arm": "selective",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "field_rename-5",
+      "class": "field_rename",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "field_rename-5",
+      "class": "field_rename",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "field_rename-5",
+      "class": "field_rename",
+      "arm": "selective",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "field_rename-6",
+      "class": "field_rename",
+      "arm": "no_repair",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    },
+    {
+      "id": "field_rename-6",
+      "class": "field_rename",
+      "arm": "naive",
+      "dispatched": true,
+      "recovered": true,
+      "violation": true
+    },
+    {
+      "id": "field_rename-6",
+      "class": "field_rename",
+      "arm": "selective",
+      "dispatched": true,
+      "recovered": false,
+      "violation": false
+    }
+  ]
+}

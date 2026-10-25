@@ -1,0 +1,35 @@
+{
+  "contract": "notification",
+  "version": 1,
+  "id": "ntf_4f2c9a6e1b7d0385a1c4e6f8092b3d5c",
+  "ts": "2026-10-21T12:00:00Z",
+  "tenant": "acme",
+  "scope": {
+    "connection": "conn_1",
+    "vendor": "stripe",
+    "operation": "create_customer"
+  },
+  "finding": {
+    "class": "shape",
+    "side": "request"
+  },
+  "severity": "warning",
+  "occurrences": {
+    "count": 3,
+    "first_seen": "2026-10-21T09:00:00Z",
+    "last_seen": "2026-10-21T11:59:00Z"
+  },
+  "consolidation": {
+    "day": 20747,
+    "mode": "individual",
+    "ordinal": 2,
+    "count": 1
+  },
+  "audit_refs": [
+    "aud_review_1"
+  ],
+  "payload": {
+    "source": "sk_live_51Nxxxxxxxxxxxxxxxxxxxx",
+    "bytes": "deadbeef"
+  }
+}

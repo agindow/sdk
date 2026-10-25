@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ContractSnapshot",
+  "description": "The vendor contracts cell-relay is currently allowed to serve: one entry per tool, each with its contract version, policy and observed fields. Produced by cell-registry, consumed by cell-relay (agindow-runtime-contract.md \u00a73.3, \u00a74).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "version",
+    "generated_at",
+    "tools"
+  ],
+  "properties": {
+    "contract": {
+      "enum": [
+        "contract_snapshot"
+      ]
+    },
+    "version": {
+      "type": "integer",
+      "const": 2
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/tool"
+      }
+    }
+  },
+  "$defs": {
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tool",
+        "contract_version"
+      ],
+      "properties": {
+        "tool": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contract_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operation": {
+          "enum": [
+            "read",
+            "write",
+            "unknown"
+          ]
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/field"
+          }
+        },
+        "policy": {
+          "$ref": "#/$defs/policy"
+        }
+      }
+    },
+    "field": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "type"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "enum": [
+            "string",
+            "number",
+            "integer",
+            "boolean",
+            "object",
+            "array",
+            "null"
+          ]
+        },
+        "nullable": {
+          "type": "boolean"
+        },
+        "enum": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "Observed value set, when the field is an enumeration."
+        },
+        "high_precision": {
+          "type": "boolean",
+          "description": "This field's numbers may exceed 64 bits; keep them verbatim. A precision hint, not a validation constraint; missing or false selects Observed."
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fail_closed": {
+          "type": "boolean",
+          "description": "When true, semantic drift on this tool fails closed instead of passing through (agindow-runtime-contract.md \u00a74.1)."
+        }
+      }
+    }
+  }
+}

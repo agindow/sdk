@@ -1,0 +1,30 @@
+{
+  "id": "aud_01HQ8Z3K4M5N6P7Q8R9S0T1V2W",
+  "ts": "2026-10-17T14:00:11.204Z",
+  "tool": "stripe.create_customer",
+  "operation": "write",
+  "mode": "repair",
+  "drift": {
+    "class": "shape",
+    "side": "request",
+    "vendor": "stripe",
+    "changes": [{ "path": "source", "kind": "field_renamed", "to": "payment_method" }],
+    "first_seen": "2026-10-17T13:41:02Z",
+    "occurrences": 143
+  },
+  "decision": "repaired",
+  "patch": {
+    "applied": true,
+    "fields_changed": ["source"],
+    "selective": true,
+    "reasoning": "field_renamed; high-frequency co-occurrence in 143 prior events",
+    "byte_identical": false
+  },
+  "proof": {
+    "contract_version": "cv_stripe_2026_10_17a",
+    "verified_against": "registry",
+    "write_integrity": true,
+    "idempotency_key": "ord_8842-charge"
+  },
+  "metadata": { "workflow": "nightly-recon", "tenant": "acme" }
+}

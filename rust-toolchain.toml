@@ -1,0 +1,6 @@
+# One toolchain for the repo and for CI. `stable` rather than a pinned version
+# because every crate is a scaffold today; EPIC-02's byte-identity work is where
+# a pinned channel earns its keep.
+[toolchain]
+channel = "stable"
+components = ["clippy", "rustfmt"]

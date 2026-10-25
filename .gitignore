@@ -3,7 +3,18 @@ examples/node/package-lock.json
 __pycache__/
 *.pyc
 .venv/
+.env*/
 examples/python/.venv/
 dist/
 *.egg-info/
 .DS_Store
+
+# Runtime build output and tool caches
+target/
+.turbo/
+*.tsbuildinfo
+.uv-cache/
+.pytest_cache/
+.mypy_cache/
+coverage/
+.wrangler/

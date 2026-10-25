@@ -1,0 +1,19 @@
+services:
+  agent:
+    image: ${AGINDOW_AGENT_IMAGE:?Set the application image}
+    volumes:
+      - socket:/socket
+  guard:
+    image: agindow-sidecar:local
+    build:
+      context: ../../..
+      dockerfile: cells/cell-relay/sidecar/Dockerfile
+    network_mode: service:agent
+    environment:
+      AGINDOW_CONNECTIONS: ${AGINDOW_CONNECTIONS:?Set explicit connection bindings}
+      AGINDOW_SOCKET: /socket/agindow.sock
+      AGINDOW_BIND: 127.0.0.1:8789
+    volumes:
+      - socket:/socket
+volumes:
+  socket:

@@ -1,0 +1,33 @@
+{
+  "tool": "payments.create_charge",
+  "idempotency_key": "agw-01HQ8Z3K9Lq2eZvKYlo2C0nQ4rTe",
+  "amount": 1999,
+  "currency": "usd",
+  "capture_method": "automatic",
+  "customer": {
+    "id": "cus_MxK9Lq2eZvKYlo",
+    "email": "ada@example.com",
+    "name": "Ada Lovelace",
+    "shipping": {
+      "line1": "12 Analytical Engine Way",
+      "city": "London",
+      "postal_code": "EC1A 1BB",
+      "country": "GB"
+    }
+  },
+  "metadata": {
+    "order_id": "ord_8842-charge",
+    "agent": "checkout-v3",
+    "attempt": "1"
+  },
+  "payment_method": {
+    "type": "card",
+    "card": { "brand": "visa", "last4": "4242", "exp_month": 11, "exp_year": 2029 }
+  },
+  "line_items": [
+    { "sku": "AGW-001", "quantity": 2, "unit_amount": 999, "taxable": true },
+    { "sku": "AGW-002", "quantity": 1, "unit_amount": 1, "taxable": true }
+  ],
+  "statement_descriptor": "AGINDOW",
+  "metadata_version": 2
+}

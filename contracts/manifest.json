@@ -1,0 +1,112 @@
+{
+  "contracts": [
+    {
+      "name": "notification",
+      "version": 1,
+      "type": "Notification",
+      "envelope": true
+    },
+    {
+      "name": "drift_event",
+      "version": 1,
+      "type": "DriftEvent",
+      "envelope": true
+    },
+    {
+      "name": "contract_snapshot",
+      "version": 2,
+      "type": "ContractSnapshot",
+      "envelope": true
+    },
+    {
+      "name": "finding",
+      "version": 2,
+      "type": "Finding",
+      "envelope": true
+    },
+    {
+      "name": "audit_artifact",
+      "version": 1,
+      "type": "AuditArtifact",
+      "envelope": false
+    },
+    {
+      "name": "field_profile",
+      "version": 1,
+      "type": "FieldProfile",
+      "envelope": true
+    },
+    {
+      "name": "profile_snapshot",
+      "version": 1,
+      "type": "ProfileSnapshot",
+      "envelope": true
+    },
+    {
+      "name": "review_case",
+      "version": 1,
+      "type": "ReviewCase",
+      "envelope": true
+    },
+    {
+      "name": "review_resolution",
+      "version": 1,
+      "type": "ReviewResolution",
+      "envelope": true
+    },
+    {
+      "name": "recovery_event",
+      "version": 1,
+      "type": "RecoveryEvent",
+      "envelope": true
+    },
+    {
+      "name": "shadow_review",
+      "version": 1,
+      "type": "ShadowReview",
+      "envelope": true
+    },
+    {
+      "name": "investigation_job",
+      "version": 1,
+      "type": "InvestigationJob",
+      "envelope": true
+    },
+    {
+      "name": "investigation_completion",
+      "version": 1,
+      "type": "InvestigationCompletion",
+      "envelope": true
+    },
+    {
+      "name": "peer_observation",
+      "version": 1,
+      "type": "PeerObservation",
+      "envelope": true
+    },
+    {
+      "name": "credential_event",
+      "version": 1,
+      "type": "CredentialEvent",
+      "envelope": true
+    },
+    {
+      "name": "dashboard_read",
+      "version": 2,
+      "type": "DashboardRead",
+      "envelope": false
+    },
+    {
+      "name": "dashboard_query",
+      "version": 2,
+      "type": "DashboardQuery",
+      "envelope": false
+    },
+    {
+      "name": "dashboard_error",
+      "version": 1,
+      "type": "DashboardError",
+      "envelope": false
+    }
+  ]
+}

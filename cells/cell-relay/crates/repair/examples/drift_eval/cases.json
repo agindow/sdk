@@ -1,0 +1,2014 @@
+[
+  {
+    "id": "unit_flip-1",
+    "class": "unit_flip",
+    "task": {
+      "input": {
+        "value": 1200,
+        "account": "tenant-0",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": 12,
+        "confidence": 1.0,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "repairable",
+      "rationale": "Authoritative migration fixture uniquely specifies unit_flip mapping; original caller fields must survive. This label does not depend on native support.",
+      "expected": {
+        "value": 12,
+        "account": "tenant-0",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "unit_flip-2",
+    "class": "unit_flip",
+    "task": {
+      "input": {
+        "value": 3499,
+        "account": "tenant-1",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": 34.99,
+        "confidence": 0.99,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "repairable",
+      "rationale": "Authoritative migration fixture uniquely specifies unit_flip mapping; original caller fields must survive. This label does not depend on native support.",
+      "expected": {
+        "value": 34.99,
+        "account": "tenant-1",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "unit_flip-3",
+    "class": "unit_flip",
+    "task": {
+      "input": {
+        "value": 5600,
+        "account": "tenant-2",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": 56,
+        "confidence": 0.989,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "ambiguous",
+      "rationale": "Evidence does not establish the mapping; the supplied low-confidence candidate happens to match hidden intent.",
+      "expected": {
+        "value": 56,
+        "account": "tenant-2",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "unit_flip-4",
+    "class": "unit_flip",
+    "task": {
+      "input": {
+        "value": 7800,
+        "account": "tenant-3",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": 780,
+        "confidence": 0.995,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "ambiguous",
+      "rationale": "Evidence admits multiple mappings; the supplied candidate is wrong and its confidence is deliberately overstated. This is a confidence-quality fault probe.",
+      "expected": {
+        "value": 78,
+        "account": "tenant-3",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "unit_flip-5",
+    "class": "unit_flip",
+    "task": {
+      "input": {
+        "value": 9100,
+        "account": "tenant-4",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": null
+    },
+    "oracle": {
+      "label": "unsupported",
+      "rationale": "Source identity was not captured; reconstructing the intended write needs missing evidence.",
+      "expected": {
+        "value": 91,
+        "account": "tenant-4",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "unit_flip-6",
+    "class": "unit_flip",
+    "task": {
+      "input": {
+        "value": -125,
+        "account": "tenant-5",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": null
+    },
+    "oracle": {
+      "label": "unsupported",
+      "rationale": "No migration mapping is available locally; an external fact is required and no repair is proposed.",
+      "expected": {
+        "value": -1.25,
+        "account": "tenant-5",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "timestamp_epoch-1",
+    "class": "timestamp_epoch",
+    "task": {
+      "input": {
+        "value": 1700000000,
+        "account": "tenant-0",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": 1700000000000,
+        "confidence": 1.0,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "repairable",
+      "rationale": "Authoritative migration fixture uniquely specifies timestamp_epoch mapping; original caller fields must survive. This label does not depend on native support.",
+      "expected": {
+        "value": 1700000000000,
+        "account": "tenant-0",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "timestamp_epoch-2",
+    "class": "timestamp_epoch",
+    "task": {
+      "input": {
+        "value": 123,
+        "account": "tenant-1",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": 123000,
+        "confidence": 0.99,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "repairable",
+      "rationale": "Authoritative migration fixture uniquely specifies timestamp_epoch mapping; original caller fields must survive. This label does not depend on native support.",
+      "expected": {
+        "value": 123000,
+        "account": "tenant-1",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "timestamp_epoch-3",
+    "class": "timestamp_epoch",
+    "task": {
+      "input": {
+        "value": 456,
+        "account": "tenant-2",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": 456000,
+        "confidence": 0.989,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "ambiguous",
+      "rationale": "Evidence does not establish the mapping; the supplied low-confidence candidate happens to match hidden intent.",
+      "expected": {
+        "value": 456000,
+        "account": "tenant-2",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "timestamp_epoch-4",
+    "class": "timestamp_epoch",
+    "task": {
+      "input": {
+        "value": 789,
+        "account": "tenant-3",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": 78900,
+        "confidence": 0.995,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "ambiguous",
+      "rationale": "Evidence admits multiple mappings; the supplied candidate is wrong and its confidence is deliberately overstated. This is a confidence-quality fault probe.",
+      "expected": {
+        "value": 789000,
+        "account": "tenant-3",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "timestamp_epoch-5",
+    "class": "timestamp_epoch",
+    "task": {
+      "input": {
+        "value": 111,
+        "account": "tenant-4",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": null
+    },
+    "oracle": {
+      "label": "unsupported",
+      "rationale": "Source identity was not captured; reconstructing the intended write needs missing evidence.",
+      "expected": {
+        "value": 111000,
+        "account": "tenant-4",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "timestamp_epoch-6",
+    "class": "timestamp_epoch",
+    "task": {
+      "input": {
+        "value": 222,
+        "account": "tenant-5",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": null
+    },
+    "oracle": {
+      "label": "unsupported",
+      "rationale": "No migration mapping is available locally; an external fact is required and no repair is proposed.",
+      "expected": {
+        "value": 222000,
+        "account": "tenant-5",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "enum_expansion-1",
+    "class": "enum_expansion",
+    "task": {
+      "input": {
+        "value": "queued",
+        "account": "tenant-0",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": "pending",
+        "confidence": 1.0,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "repairable",
+      "rationale": "Authoritative migration fixture uniquely specifies enum_expansion mapping; original caller fields must survive. This label does not depend on native support.",
+      "expected": {
+        "value": "pending",
+        "account": "tenant-0",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": [
+          "queued",
+          "pending",
+          "archived",
+          "closed",
+          "review",
+          "held"
+        ]
+      }
+    }
+  },
+  {
+    "id": "enum_expansion-2",
+    "class": "enum_expansion",
+    "task": {
+      "input": {
+        "value": "archived",
+        "account": "tenant-1",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": "closed",
+        "confidence": 0.99,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "repairable",
+      "rationale": "Authoritative migration fixture uniquely specifies enum_expansion mapping; original caller fields must survive. This label does not depend on native support.",
+      "expected": {
+        "value": "closed",
+        "account": "tenant-1",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": [
+          "queued",
+          "pending",
+          "archived",
+          "closed",
+          "review",
+          "held"
+        ]
+      }
+    }
+  },
+  {
+    "id": "enum_expansion-3",
+    "class": "enum_expansion",
+    "task": {
+      "input": {
+        "value": "review",
+        "account": "tenant-2",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": "held",
+        "confidence": 0.989,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "ambiguous",
+      "rationale": "Evidence does not establish the mapping; the supplied low-confidence candidate happens to match hidden intent.",
+      "expected": {
+        "value": "held",
+        "account": "tenant-2",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": [
+          "queued",
+          "pending",
+          "archived",
+          "closed",
+          "review",
+          "held"
+        ]
+      }
+    }
+  },
+  {
+    "id": "enum_expansion-4",
+    "class": "enum_expansion",
+    "task": {
+      "input": {
+        "value": "queued",
+        "account": "tenant-3",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": "held",
+        "confidence": 0.995,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "ambiguous",
+      "rationale": "Evidence admits multiple mappings; the supplied candidate is wrong and its confidence is deliberately overstated. This is a confidence-quality fault probe.",
+      "expected": {
+        "value": "pending",
+        "account": "tenant-3",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": [
+          "queued",
+          "pending",
+          "archived",
+          "closed",
+          "review",
+          "held"
+        ]
+      }
+    }
+  },
+  {
+    "id": "enum_expansion-5",
+    "class": "enum_expansion",
+    "task": {
+      "input": {
+        "value": "archived",
+        "account": "tenant-4",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": null
+    },
+    "oracle": {
+      "label": "unsupported",
+      "rationale": "Source identity was not captured; reconstructing the intended write needs missing evidence.",
+      "expected": {
+        "value": "closed",
+        "account": "tenant-4",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": [
+          "queued",
+          "pending",
+          "archived",
+          "closed",
+          "review",
+          "held"
+        ]
+      }
+    }
+  },
+  {
+    "id": "enum_expansion-6",
+    "class": "enum_expansion",
+    "task": {
+      "input": {
+        "value": "review",
+        "account": "tenant-5",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": null
+    },
+    "oracle": {
+      "label": "unsupported",
+      "rationale": "No migration mapping is available locally; an external fact is required and no repair is proposed.",
+      "expected": {
+        "value": "held",
+        "account": "tenant-5",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": [
+          "queued",
+          "pending",
+          "archived",
+          "closed",
+          "review",
+          "held"
+        ]
+      }
+    }
+  },
+  {
+    "id": "null_semantics-1",
+    "class": "null_semantics",
+    "task": {
+      "input": {
+        "value": 0,
+        "account": "tenant-0",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": null,
+        "confidence": 1.0,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "repairable",
+      "rationale": "Authoritative migration fixture uniquely specifies null_semantics mapping; original caller fields must survive. This label does not depend on native support.",
+      "expected": {
+        "value": null,
+        "account": "tenant-0",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "null",
+          "number",
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "null_semantics-2",
+    "class": "null_semantics",
+    "task": {
+      "input": {
+        "value": "",
+        "account": "tenant-1",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": null,
+        "confidence": 0.99,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "repairable",
+      "rationale": "Authoritative migration fixture uniquely specifies null_semantics mapping; original caller fields must survive. This label does not depend on native support.",
+      "expected": {
+        "value": null,
+        "account": "tenant-1",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "null",
+          "number",
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "null_semantics-3",
+    "class": "null_semantics",
+    "task": {
+      "input": {
+        "value": 0,
+        "account": "tenant-2",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": null,
+        "confidence": 0.989,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "ambiguous",
+      "rationale": "Evidence does not establish the mapping; the supplied low-confidence candidate happens to match hidden intent.",
+      "expected": {
+        "value": null,
+        "account": "tenant-2",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "null",
+          "number",
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "null_semantics-4",
+    "class": "null_semantics",
+    "task": {
+      "input": {
+        "value": "",
+        "account": "tenant-3",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": 0,
+        "confidence": 0.995,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "ambiguous",
+      "rationale": "Evidence admits multiple mappings; the supplied candidate is wrong and its confidence is deliberately overstated. This is a confidence-quality fault probe.",
+      "expected": {
+        "value": null,
+        "account": "tenant-3",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "null",
+          "number",
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "null_semantics-5",
+    "class": "null_semantics",
+    "task": {
+      "input": {
+        "value": null,
+        "account": "tenant-4",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": null
+    },
+    "oracle": {
+      "label": "unsupported",
+      "rationale": "Source identity was not captured; reconstructing the intended write needs missing evidence.",
+      "expected": {
+        "value": 0,
+        "account": "tenant-4",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "null",
+          "number",
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "null_semantics-6",
+    "class": "null_semantics",
+    "task": {
+      "input": {
+        "value": null,
+        "account": "tenant-5",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": null
+    },
+    "oracle": {
+      "label": "unsupported",
+      "rationale": "No migration mapping is available locally; an external fact is required and no repair is proposed.",
+      "expected": {
+        "value": "",
+        "account": "tenant-5",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "null",
+          "number",
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "type_coercion-1",
+    "class": "type_coercion",
+    "task": {
+      "input": {
+        "value": "123",
+        "account": "tenant-0",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": false,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": 123,
+        "confidence": 1.0,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "repairable",
+      "rationale": "Authoritative migration fixture uniquely specifies type_coercion mapping; original caller fields must survive. This label does not depend on native support.",
+      "expected": {
+        "value": 123,
+        "account": "tenant-0",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "type_coercion-2",
+    "class": "type_coercion",
+    "task": {
+      "input": {
+        "value": 456,
+        "account": "tenant-1",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": false,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": "456",
+        "confidence": 0.99,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "repairable",
+      "rationale": "Authoritative migration fixture uniquely specifies type_coercion mapping; original caller fields must survive. This label does not depend on native support.",
+      "expected": {
+        "value": "456",
+        "account": "tenant-1",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "type_coercion-3",
+    "class": "type_coercion",
+    "task": {
+      "input": {
+        "value": "789",
+        "account": "tenant-2",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": false,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": 789,
+        "confidence": 0.989,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "ambiguous",
+      "rationale": "Evidence does not establish the mapping; the supplied low-confidence candidate happens to match hidden intent.",
+      "expected": {
+        "value": 789,
+        "account": "tenant-2",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "type_coercion-4",
+    "class": "type_coercion",
+    "task": {
+      "input": {
+        "value": "222",
+        "account": "tenant-3",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": false,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": 999,
+        "confidence": 0.995,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "ambiguous",
+      "rationale": "Evidence admits multiple mappings; the supplied candidate is wrong and its confidence is deliberately overstated. This is a confidence-quality fault probe.",
+      "expected": {
+        "value": 222,
+        "account": "tenant-3",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "type_coercion-5",
+    "class": "type_coercion",
+    "task": {
+      "input": {
+        "value": "333",
+        "account": "tenant-4",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": false,
+      "rename": false,
+      "confirmed": false,
+      "proposal": null
+    },
+    "oracle": {
+      "label": "unsupported",
+      "rationale": "Source identity was not captured; reconstructing the intended write needs missing evidence.",
+      "expected": {
+        "value": 333,
+        "account": "tenant-4",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "type_coercion-6",
+    "class": "type_coercion",
+    "task": {
+      "input": {
+        "value": "444",
+        "account": "tenant-5",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": false,
+      "rename": false,
+      "confirmed": false,
+      "proposal": null
+    },
+    "oracle": {
+      "label": "unsupported",
+      "rationale": "No migration mapping is available locally; an external fact is required and no repair is proposed.",
+      "expected": {
+        "value": 444,
+        "account": "tenant-5",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "number"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "date_format-1",
+    "class": "date_format",
+    "task": {
+      "input": {
+        "value": "Jan 5 2026",
+        "account": "tenant-0",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": "2026-01-05",
+        "confidence": 1.0,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "repairable",
+      "rationale": "Authoritative migration fixture uniquely specifies date_format mapping; original caller fields must survive. This label does not depend on native support.",
+      "expected": {
+        "value": "2026-01-05",
+        "account": "tenant-0",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "date_format-2",
+    "class": "date_format",
+    "task": {
+      "input": {
+        "value": "2026/02/28",
+        "account": "tenant-1",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": "2026-02-28",
+        "confidence": 0.99,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "repairable",
+      "rationale": "Authoritative migration fixture uniquely specifies date_format mapping; original caller fields must survive. This label does not depend on native support.",
+      "expected": {
+        "value": "2026-02-28",
+        "account": "tenant-1",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "date_format-3",
+    "class": "date_format",
+    "task": {
+      "input": {
+        "value": "Mar 1 2026",
+        "account": "tenant-2",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": "2026-03-01",
+        "confidence": 0.989,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "ambiguous",
+      "rationale": "Evidence does not establish the mapping; the supplied low-confidence candidate happens to match hidden intent.",
+      "expected": {
+        "value": "2026-03-01",
+        "account": "tenant-2",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "date_format-4",
+    "class": "date_format",
+    "task": {
+      "input": {
+        "value": "04/05/2026",
+        "account": "tenant-3",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": {
+        "value": "2026-04-05",
+        "confidence": 0.995,
+        "rename_to": null
+      }
+    },
+    "oracle": {
+      "label": "ambiguous",
+      "rationale": "Evidence admits multiple mappings; the supplied candidate is wrong and its confidence is deliberately overstated. This is a confidence-quality fault probe.",
+      "expected": {
+        "value": "2026-05-04",
+        "account": "tenant-3",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "date_format-5",
+    "class": "date_format",
+    "task": {
+      "input": {
+        "value": "2026.12.31",
+        "account": "tenant-4",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": null
+    },
+    "oracle": {
+      "label": "unsupported",
+      "rationale": "Source identity was not captured; reconstructing the intended write needs missing evidence.",
+      "expected": {
+        "value": "2026-12-31",
+        "account": "tenant-4",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "date_format-6",
+    "class": "date_format",
+    "task": {
+      "input": {
+        "value": "Jun 7 2026",
+        "account": "tenant-5",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "id": "9007199254740993"
+      },
+      "target": "value",
+      "semantic": true,
+      "rename": false,
+      "confirmed": false,
+      "proposal": null
+    },
+    "oracle": {
+      "label": "unsupported",
+      "rationale": "No migration mapping is available locally; an external fact is required and no repair is proposed.",
+      "expected": {
+        "value": "2026-06-07",
+        "account": "tenant-5",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "value"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "field_rename-1",
+    "class": "field_rename",
+    "task": {
+      "input": {
+        "value": "tok_0",
+        "account": "tenant-0",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "id": "9007199254740993"
+      },
+      "target": "payment_method",
+      "semantic": false,
+      "rename": true,
+      "confirmed": true,
+      "proposal": {
+        "value": "tok_0",
+        "confidence": 1.0,
+        "rename_to": "payment_method"
+      }
+    },
+    "oracle": {
+      "label": "repairable",
+      "rationale": "Authoritative migration fixture uniquely specifies field_rename mapping; original caller fields must survive. This label does not depend on native support.",
+      "expected": {
+        "payment_method": "tok_0",
+        "account": "tenant-0",
+        "memo": {
+          "keep": true,
+          "sequence": 0
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "payment_method"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "field_rename-2",
+    "class": "field_rename",
+    "task": {
+      "input": {
+        "value": "tok_1",
+        "account": "tenant-1",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "id": "9007199254740993"
+      },
+      "target": "payment_method",
+      "semantic": false,
+      "rename": true,
+      "confirmed": true,
+      "proposal": {
+        "value": "tok_1",
+        "confidence": 0.97,
+        "rename_to": "payment_method"
+      }
+    },
+    "oracle": {
+      "label": "repairable",
+      "rationale": "Authoritative migration fixture uniquely specifies field_rename mapping; original caller fields must survive. This label does not depend on native support.",
+      "expected": {
+        "payment_method": "tok_1",
+        "account": "tenant-1",
+        "memo": {
+          "keep": true,
+          "sequence": 1
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "payment_method"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "field_rename-3",
+    "class": "field_rename",
+    "task": {
+      "input": {
+        "value": "tok_2",
+        "account": "tenant-2",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "id": "9007199254740993"
+      },
+      "target": "payment_method",
+      "semantic": false,
+      "rename": true,
+      "confirmed": false,
+      "proposal": {
+        "value": "tok_2",
+        "confidence": 0.969,
+        "rename_to": "payment_method"
+      }
+    },
+    "oracle": {
+      "label": "ambiguous",
+      "rationale": "Evidence does not establish the mapping; the supplied low-confidence candidate happens to match hidden intent.",
+      "expected": {
+        "payment_method": "tok_2",
+        "account": "tenant-2",
+        "memo": {
+          "keep": true,
+          "sequence": 2
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "payment_method"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "field_rename-4",
+    "class": "field_rename",
+    "task": {
+      "input": {
+        "value": "tok_3",
+        "account": "tenant-3",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "id": "9007199254740993"
+      },
+      "target": "payment_method",
+      "semantic": false,
+      "rename": true,
+      "confirmed": false,
+      "proposal": {
+        "value": "tok_3",
+        "confidence": 0.995,
+        "rename_to": "payment_source"
+      }
+    },
+    "oracle": {
+      "label": "ambiguous",
+      "rationale": "Evidence admits multiple mappings; the supplied candidate is wrong and its confidence is deliberately overstated. This is a confidence-quality fault probe.",
+      "expected": {
+        "payment_method": "tok_3",
+        "account": "tenant-3",
+        "memo": {
+          "keep": true,
+          "sequence": 3
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "payment_method"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "field_rename-5",
+    "class": "field_rename",
+    "task": {
+      "input": {
+        "account": "tenant-4",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "id": "9007199254740993"
+      },
+      "target": "payment_method",
+      "semantic": false,
+      "rename": true,
+      "confirmed": false,
+      "proposal": null
+    },
+    "oracle": {
+      "label": "unsupported",
+      "rationale": "Source identity was not captured; reconstructing the intended write needs missing evidence.",
+      "expected": {
+        "payment_method": "tok_4",
+        "account": "tenant-4",
+        "memo": {
+          "keep": true,
+          "sequence": 4
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "payment_method"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  },
+  {
+    "id": "field_rename-6",
+    "class": "field_rename",
+    "task": {
+      "input": {
+        "account": "tenant-5",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "id": "9007199254740993"
+      },
+      "target": "payment_method",
+      "semantic": false,
+      "rename": true,
+      "confirmed": false,
+      "proposal": null
+    },
+    "oracle": {
+      "label": "unsupported",
+      "rationale": "No migration mapping is available locally; an external fact is required and no repair is proposed.",
+      "expected": {
+        "payment_method": "tok_5",
+        "account": "tenant-5",
+        "memo": {
+          "keep": true,
+          "sequence": 5
+        },
+        "id": "9007199254740993"
+      },
+      "vendor": {
+        "required": [
+          "account",
+          "id",
+          "payment_method"
+        ],
+        "target_types": [
+          "string"
+        ],
+        "enum_values": null
+      }
+    }
+  }
+]

@@ -1,0 +1,55 @@
+[project]
+name = "agindow"
+version = "0.1.0a0"
+description = "API drift firewall for AI agents on Python (Rust/WASM)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+keywords = [
+    "ai",
+    "agents",
+    "api",
+    "drift",
+    "firewall",
+    "llm",
+    "wasm",
+    "guard",
+    "sdk",
+    "observability",
+]
+dependencies = [
+    "wasmtime==46.0.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/agindow/sdk"
+Repository = "https://github.com/agindow/sdk"
+Issues = "https://github.com/agindow/sdk/issues"
+
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "hatchling>=1.27,<2",
+    "mypy>=1.15,<2",
+    "pydantic>=2.11,<3",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agindow"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/agindow/_guest.wasm" = "agindow/_guest.wasm"
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "tests", "scripts", "examples", "pyproject.toml", "uv.lock", "README.md", "LICENSE", "NOTICE"]
+
+[tool.hatch.build.targets.sdist.force-include]
+"src/agindow/_guest.wasm" = "src/agindow/_guest.wasm"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src", "tests", "scripts", "examples"]

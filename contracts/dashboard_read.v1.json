@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agindow.com/contracts/dashboard_read.v1.json",
+  "title": "DashboardRead",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "live"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "unknown_reason": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "fields": {
+            "type": "object",
+            "maxProperties": 16,
+            "additionalProperties": {
+              "type": "string",
+              "maxLength": 512
+            }
+          },
+          "truncated": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "environment",
+          "created_at",
+          "status",
+          "fields",
+          "truncated"
+        ]
+      }
+    },
+    "next_cursor": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 2048
+    },
+    "source_freshness": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "generated_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "stale": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "source",
+        "generated_at",
+        "stale"
+      ]
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "available",
+            "unavailable",
+            "disabled",
+            "not_configured",
+            "retention_expired"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "request_id": {
+      "type": "string",
+      "maxLength": 256
+    }
+  },
+  "required": [
+    "data",
+    "next_cursor",
+    "source_freshness",
+    "capability",
+    "request_id"
+  ]
+}

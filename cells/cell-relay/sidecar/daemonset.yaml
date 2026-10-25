@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: agindow-sidecar
+spec:
+  selector:
+    matchLabels:
+      app: agindow-sidecar
+  template:
+    metadata:
+      labels:
+        app: agindow-sidecar
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      automountServiceAccountToken: false
+      initContainers:
+        - name: socket-directory
+          image: busybox:1.37.0
+          command: [sh, -c, 'chown 65532:65532 /socket && chmod 0700 /socket']
+          securityContext:
+            runAsUser: 0
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: [ALL]
+              add: [CHOWN, FOWNER]
+          volumeMounts:
+            - name: socket
+              mountPath: /socket
+      containers:
+        - name: guard
+          image: agindow-sidecar:local
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 65532
+            runAsGroup: 65532
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: [ALL]
+          env:
+            - name: AGINDOW_BIND
+              value: 127.0.0.1:8789
+            - name: AGINDOW_SOCKET
+              value: /socket/agindow.sock
+            - name: AGINDOW_INSTANCE_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: AGINDOW_CONNECTIONS
+              valueFrom:
+                secretKeyRef:
+                  name: agindow-sidecar
+                  key: connections
+          readinessProbe:
+            httpGet:
+              host: 127.0.0.1
+              path: /healthz
+              port: 8789
+          livenessProbe:
+            httpGet:
+              host: 127.0.0.1
+              path: /healthz
+              port: 8789
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              memory: 192Mi
+          volumeMounts:
+            - name: socket
+              mountPath: /socket
+      volumes:
+        - name: socket
+          hostPath:
+            path: /var/run/agindow
+            type: DirectoryOrCreate

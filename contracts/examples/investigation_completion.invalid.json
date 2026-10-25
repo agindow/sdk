@@ -1,0 +1,28 @@
+{
+  "contract": "investigation_completion",
+  "version": 1,
+  "id": "complete_a",
+  "tenant": "tenant-a",
+  "investigation_id": "inv_a",
+  "audit_id": "audit-a",
+  "call_id": "call-a",
+  "connection": "connection-a",
+  "tool": "vendor.read",
+  "vendor": "vendor",
+  "operation": "read",
+  "contract_version": "cv1",
+  "field": "/amount",
+  "fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "ts": "2026-10-21T12:00:00Z",
+  "expires_at": "2026-10-22T12:00:00Z",
+  "status": "partial",
+  "summary": "Hypothesis: Vendor changed meaning.",
+  "hypothesis": false,
+  "confidence": 0.3,
+  "uncertainty": "Cause not established.",
+  "recommended_action": "review_contract",
+  "citations": [],
+  "finding_refs": [
+    "finding-a"
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InvestigationCompletion",
+  "description": "TII-18 attributed completion content. No payload, credential or write authority. Contract section 10.52.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tenant",
+    "investigation_id",
+    "audit_id",
+    "call_id",
+    "connection",
+    "tool",
+    "vendor",
+    "operation",
+    "contract_version",
+    "field",
+    "fingerprint",
+    "contract",
+    "version",
+    "ts",
+    "expires_at",
+    "status",
+    "summary",
+    "hypothesis",
+    "confidence",
+    "uncertainty",
+    "recommended_action",
+    "citations",
+    "finding_refs"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "tenant": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "investigation_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "audit_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "call_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "connection": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "tool": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "vendor": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "operation": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "contract_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "field": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "fingerprint": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "contract": {
+      "enum": [
+        "investigation_completion"
+      ]
+    },
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "enum": [
+        "complete",
+        "partial"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "hypothesis": {
+      "type": "boolean",
+      "const": true
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "uncertainty": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "recommended_action": {
+      "enum": [
+        "review_vendor_migration",
+        "review_contract",
+        "contact_vendor",
+        "request_scoped_repair_review"
+      ]
+    },
+    "citations": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "$ref": "#/$defs/citation"
+      }
+    },
+    "finding_refs": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      }
+    }
+  },
+  "$defs": {
+    "citation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "quote",
+        "retrieved_at"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

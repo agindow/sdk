@@ -1,0 +1,25 @@
+name: Dependency review
+
+# On every PR, fail if a newly introduced dependency brings a known
+# moderate-or-worse vulnerability or a license outside the Apache-2.0-compatible
+# permissive set. Complements Dependabot (existing deps) with a PR-time gate.
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  dependency-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: moderate
+          allow-licenses: Apache-2.0, MIT, BSD-2-Clause, BSD-3-Clause, ISC, 0BSD, CC0-1.0, Unlicense, Python-2.0, Python-2.0.1
+          comment-summary-in-pr: on-failure
