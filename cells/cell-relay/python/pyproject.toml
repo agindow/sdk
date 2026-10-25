@@ -18,7 +18,7 @@ keywords = [
     "observability",
 ]
 dependencies = [
-    "wasmtime==46.0.1",
+    "wasmtime==50.0.1",
 ]
 
 [project.urls]
