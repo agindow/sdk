@@ -1985,6 +1985,27 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6ce2be8dc25455e1f91df71bfa12ad37d7af1092ae736f3a6cd0e37bc7810596"
 
 [[package]]
+name = "strum"
+version = "0.28.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9628de9b8791db39ceda2b119bbe13134770b56c138ec1d3af810d045c04f9bd"
+dependencies = [
+ "strum_macros",
+]
+
+[[package]]
+name = "strum_macros"
+version = "0.28.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ab85eea0270ee17587ed4156089e10b9e6880ee688791d45a905f5b1ca36f664"
+dependencies = [
+ "heck",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.119",
+]
+
+[[package]]
 name = "subtle"
 version = "2.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2463,9 +2484,9 @@ dependencies = [
 
 [[package]]
 name = "wasm-streams"
-version = "0.5.0"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9d1ec4f6517c9e11ae630e200b2b65d193279042e28edd4a2cda233e46670bbb"
+checksum = "e7d3be8814f5ba5f074491a469eed3d73c273ffad955f25ed1635efac4b0d269"
 dependencies = [
  "futures-util",
  "js-sys",
@@ -2664,9 +2685,9 @@ dependencies = [
 
 [[package]]
 name = "worker"
-version = "0.7.5"
+version = "0.8.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7267f3baa986254a8dace6f6a7c6ab88aef59f00c03aaad6749e048b5faaf6f6"
+checksum = "8d26f867aa88ccf66c91b5a804762e4ef001330b574de06988070798f41e19ce"
 dependencies = [
  "async-trait",
  "bytes",
@@ -2682,11 +2703,12 @@ dependencies = [
  "serde-wasm-bindgen",
  "serde_json",
  "serde_urlencoded",
+ "strum",
  "tokio",
  "url",
  "wasm-bindgen",
  "wasm-bindgen-futures",
- "wasm-streams 0.5.0",
+ "wasm-streams 0.6.0",
  "web-sys",
  "worker-macros",
  "worker-sys",
@@ -2694,25 +2716,25 @@ dependencies = [
 
 [[package]]
 name = "worker-macros"
-version = "0.7.5"
+version = "0.8.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7410081121531ec2fa111ab17b911efc601d7b6d590c0a92b847874ebeff0030"
+checksum = "e81207058311798db94d25f1107d6abccec9424b7f5f8163600a44b37ccee876"
 dependencies = [
  "async-trait",
  "proc-macro2",
  "quote",
- "syn 2.0.119",
+ "strum",
+ "syn 3.0.9",
  "wasm-bindgen",
- "wasm-bindgen-futures",
  "wasm-bindgen-macro-support",
  "worker-sys",
 ]
 
 [[package]]
 name = "worker-sys"
-version = "0.7.5"
+version = "0.8.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4777582bf8a04174a034cb336f3702eb0e5cb444a67fdaa4fd44454ff7e2dd95"
+checksum = "2972c15e3a8be4a546ee1bbb8d9cfbb3fbcb29f4163e79188b78e3b1cdf3d95f"
 dependencies = [
  "cfg-if",
  "js-sys",
