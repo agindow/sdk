@@ -33,7 +33,7 @@ build-backend = "hatchling.build"
 [dependency-groups]
 dev = [
     "hatchling>=1.27,<2",
-    "mypy>=1.15,<2",
+    "mypy>=1.15,<3",
     "pydantic>=2.11,<3",
 ]
 
