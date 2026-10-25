@@ -66,22 +66,22 @@ transport, header injection or a transformer pipeline.
 ## Adapters
 
 - **`toolAdapter`** — maps and arrays of plain `func`/`execute`/`invoke`
-  definitions and maps of functions. Keys, symbols, opaque schema identity,
-  descriptions and flags survive. Stateful executors retain their original tool
-  receiver. Named class tools with a schema use `invoke` (including LangChain
+Definitions and maps of functions. Keys, symbols, opaque schema identity,
+Descriptions and flags survive. Stateful executors retain their original tool
+Receiver. Named class tools with a schema use `invoke` (including LangChain
   ToolCall formatting); unrecognized branded classes remain untouched with a
-  warning. Batch/stream framework paths are not qualified by the invoke adapter.
+Warning. Batch/stream framework paths are not qualified by the invoke adapter.
 - **`clientAdapter(client, { tool })`** — wraps only `get`, `post`, `put`,
   `patch`, `delete`, `request`, `fetch`, `proxy`. Storage/auth helpers never
-  enter guard. Use Pipedream's `client.proxy` surface; wrapping its whole
-  container does not discover nested clients.
+Enter guard. Use Pipedream's `client.proxy` surface; wrapping its whole
+Container does not discover nested clients.
 - **`httpAdapter(fetch)`** — retains the original Response on the no-repair path.
   Inspects bounded JSON with known content length (at most 1 MiB).
   `httpAdapter(expressApp)` inspects complete JSON `end` chunks; streaming
   `write` paths skip response inspection.
 - **`wrap`** — selects supported tool/client/HTTP shapes. Mixed HTTP/tool maps
-  throw `AgindowSetupError` with explicit adapter alternatives. Ordinary
-  functions reduce to `guard`.
+Throw `AgindowSetupError` with explicit adapter alternatives. Ordinary
+Functions reduce to `guard`.
 
 Verified replacements require the trusted engine seam, explicit verification
 and confidence gates. Observation never applies a replacement. The statistical
@@ -148,7 +148,7 @@ await sdk.ready;
 const result = sdk.guard( => ({ value: 1 }), { tool: 'vendor.read' });
 const receipt = await sdk.drainAudit(async artifact => {
   // Persist artifact.id durably before acknowledging.
-  console.log(JSON.stringify(artifact));
+Console.log(JSON.stringify(artifact));
 });
 ```
 

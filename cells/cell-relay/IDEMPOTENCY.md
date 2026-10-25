@@ -13,11 +13,11 @@ use agw_guard::idempotency::{Access, Bindings, Limits, Request, Store};
 let store = Store::new(tenant, Limits::default,
     Bindings::new("Idempotency-Key", supported_durability_header)?)?;
 let result = store.execute(Request {
-    connection, operation, key: Some(idempotency_key), durability: requested_hint,
+Connection, operation, key: Some(idempotency_key), durability: requested_hint,
 }, |forwarding| {
     // Apply on every host-supplied attempt, including an explicitly repaired one.
-    forwarding.apply_headers(&mut upstream_headers);
-    send_owned_response(upstream_headers)
+Forwarding.apply_headers(&mut upstream_headers);
+Send_owned_response(upstream_headers)
 })?;
 match result {
     Access::Completed(replay) => deliver_original(replay.value),

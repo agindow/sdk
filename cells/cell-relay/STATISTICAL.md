@@ -43,7 +43,7 @@ plan shape snapshots also run 's inspection comparator. They preserve its
 uncertainty: learned/observed structure does not become authoritative shape proof.
 The engine retains all mixed findings and typed statistical reports, methods,
 sample counts, raw p-values, hypotheses, generations and suppression decisions.
- routes the combined findings; the shared `agw_policy` matrix owns policy.
+Routes the combined findings; the shared `agw_policy` matrix owns policy.
 Complete malformed bodies reuse 's disposition. Truncated, duplicate-key,
 resource-limited and parser-faulted bodies cannot supply statistical drift.
 
@@ -57,7 +57,7 @@ shared breaker. Three failed calls open its one-second monotonic cooldown.
 
 The policy prerequisite is 's pure matrix in `agw-policy`. This ticket adds
 that boundary and its exhaustive matrix test; 's selective repair integration,
-HTTP/SDK and streaming drivers remain separate. composes this call's
+HTTP/SDK and streaming drivers remain separate. Composes this call's
 statistical evidence into one audit artifact (below). Strict reads halt on
 unverified drift as specified by the runtime contract; repair reads fail open. Observe
 preserves original bytes and outcomes in every case.
@@ -125,11 +125,11 @@ node cells/cell-relay/perf/run-availability.mjs
 
 The integrated native Criterion fixture includes call entry, lossless parsing,
 transient extraction, applicable adapters, materiality, routing,
- policy, containment, and evidence destruction on both sides. Baseline setup,
+Policy, containment, and evidence destruction on both sides. Baseline setup,
 network/streaming, capture acquisition, SDK/WASM and final audit composition are
 excluded. Fixtures use 128 samples per window, observe mode, 100 measurements,
 1 s warmup and 3 s sampling. Results are local measurements, not an integrated
-latency gate or a production SLA. separately gates native bypass means.
+latency gate or a production SLA. Separately gates native bypass means.
 
 Local run on October 17, 2026: Apple M2, Darwin arm64, Rust 1.99.1, release
 profile. Arithmetic iteration means from Criterion's `new/estimates.json`:
@@ -145,10 +145,10 @@ These are fixture means, not p50/p99 validation or a portable latency guarantee.
 Criterion reports remain under `target/criterion/statistical/` (not committed).
 
 See for acceptance criteria,
- for policy ownership and the
+For policy ownership and the
 the runtime contract for the decisions.
 
- optionally attaches frozen request/response invariant selections to this
+Optionally attaches frozen request/response invariant selections to this
 same plan and call-level containment. See [invariant execution](./INVARIANTS.md)
 for exact projection, enum additions, shared policy, per-phase audit drafts and
 the local integrated native p99 gate. Empty statistical fields are supported.

@@ -25,7 +25,7 @@ const sdk = createAgindow({ mode: 'observe' });
 await sdk.ready;
 const client = new Nango({ secretKey: process.env.NANGO_SECRET_KEY ?? '' });
 const proxy = sdk.clientAdapter(client, {
-  tool: (request: { endpoint: string }) => `nango/${request.endpoint}`,
+Tool: (request: { endpoint: string }) => `nango/${request.endpoint}`,
 });
 ```
 
@@ -46,7 +46,7 @@ import { createAgindow } from 'agindow';
 const sdk = createAgindow({ mode: 'observe' });
 await sdk.ready;
 export const guardedFetch = sdk.httpAdapter(fetch, {
-  tool: 'vendor.operation', operation: 'read',
+Tool: 'vendor.operation', operation: 'read',
 });
 ```
 

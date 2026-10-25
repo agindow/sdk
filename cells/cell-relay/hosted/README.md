@@ -16,7 +16,7 @@ pnpm --filter cell-relay exec wrangler deploy --dry-run --config hosted/wrangler
 ```
 
 `WASM_BINDGEN_BIN`, `ESBUILD_BIN`, and `AGINDOW_WORKER_BUILD` can name local
-executables. worker 0.7.5 retains the repository Rust MSRV; compatibility date
+executables. Worker 0.7.5 retains the repository Rust MSRV; compatibility date
 2026-08-06 matches the pinned local workerd runtime. Tests execute the compiled
 release Rust/WASM Worker, with an outbound stub and no vendor/network calls.
 

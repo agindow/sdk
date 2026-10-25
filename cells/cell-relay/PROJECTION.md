@@ -10,16 +10,16 @@ with `Policy::new(mode, precision_source, allow_unsafe_integers, limits)`:
 
 - `Mode::ExactOnly` requires exact equality with the actual binary f64 rational.
 - `Mode::Approximate(Budget::new(absolute, relative)?)` requires finite nonnegative
-  budgets. Zero budgets permit no error; negative zero normalizes to positive zero.
+Budgets. Zero budgets permit no error; negative zero normalizes to positive zero.
 - `PrecisionSource { revision, hint }` names a nonzero caller-selected immutable
-  contract revision. `Hint::Absent` and `Hint::Observed` (an explicit false hint)
-  authorize Observed precision but remain separate policy identities.
+Contract revision. `Hint::Absent` and `Hint::Observed` (an explicit false hint)
+Authorize Observed precision but remain separate policy identities.
   `Hint::HighPrecision` refuses even small integer variants. The host must supply
-  the real selected hint/revision; this library cannot authenticate provenance or
-  recover a per-field hint from a numeric variant.
+The real selected hint/revision; this library cannot authenticate provenance or
+Recover a per-field hint from a numeric variant.
 - `allow_unsafe_integers` is a required explicit boolean. Mathematical integers outside ±(2^53−1), including decimal
-  and exponent spellings, require true. Unrepresentable variants and retained
-  plain integer tokens wider than the i64/u64 model always refuse.
+And exponent spellings, require true. Unrepresentable variants and retained
+Plain integer tokens wider than the i64/u64 model always refuse.
 
 ```rust,ignore
 use agw_stats::windows::{Projection, projection::{self, Budget, Hint, Limits, Mode, Policy, PrecisionSource}};
@@ -27,7 +27,7 @@ use agw_stats::windows::{Projection, projection::{self, Budget, Hint, Limits, Mo
 let policy = Policy::new(
     Mode::Approximate(Budget::new(1e-12, 1e-15)?),
     PrecisionSource { revision: 42, hint: Hint::Absent },
-    false,
+False,
     Limits::default,
 )?;
 selection.projection = Projection::Decimal(policy);
@@ -44,7 +44,7 @@ exact absolute/relative error fractions and an exactness flag. Fractions are exa
 nonnegative numerator/denominator decimal strings, not necessarily reduced.
 The relative error for original zero is absent. `projection::compare` requires
 identical baseline/observed policies and retains both projected windows with the
- diagnosis and conversion hypothesis. No repair candidate is returned.
+Diagnosis and conversion hypothesis. No repair candidate is returned.
 Existing guard, sampled-significance and profile export paths continue to use
 their existing authorization; they do not discard the new provenance implicitly.
 

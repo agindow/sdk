@@ -1,8 +1,8 @@
 # false-positive controls
 
 `agw_stats::control` is a standalone, synchronous local library. It performs no
-I/O and makes no guard, policy, repair or delivery decisions. the runtime contract
-specifies its rules. supplies snapshots, owns routing, and
+I/O and makes no guard, policy, repair or delivery decisions. The runtime contract
+specifies its rules. Supplies snapshots, owns routing, and
 will connect controls to guarded evaluations. No production qualification or
 latency guarantee is claimed.
 

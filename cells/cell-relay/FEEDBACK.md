@@ -41,7 +41,7 @@ hosts retain that outcome and verify it and idempotency before any replay.
 
 The audit URL encodes the audit ID as one path segment. It identifies the returned
 audit draft; this library does not make the retrieval service available.
- composes statistical diagnosis evidence into the audit artifact; this
+Composes statistical diagnosis evidence into the audit artifact; this
 adapter consumes outcomes and does not wire the statistical guard or SDKs.
 
 ## Measuring recovery
@@ -84,9 +84,9 @@ Delivery and qualification follow-ups are tracked explicitly: SDK/HTTP feedback
 wiring belongs to,
 ,
 ,
- and
+And
 .
- owns production recovery
+Owns production recovery
 measurement and qualification.
 
 's [explicit replay adapter](./IDEMPOTENCY.md) retains this feedback with the

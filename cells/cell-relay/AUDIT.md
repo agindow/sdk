@@ -16,7 +16,7 @@ composing statistical evidence before publication.
 `artifact::validate` rejects, before storage or publication:
 
 - `patch.applied` and `patch.byte_identical` not complementary (a repair always
-  breaks byte identity — the runtime contract);
+Breaks byte identity — the runtime contract);
 - an applied patch that names no changed field;
 - a `repaired` decision without an applied patch;
 - `occurrences` or `first_seen` present without the other;

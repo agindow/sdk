@@ -53,7 +53,7 @@ tests exercise both absolute and relative threshold failures.
 
 ## optimization
 
- profiled the failing matrix before changing code. On the 64-KiB anchor
+Profiled the failing matrix before changing code. On the 64-KiB anchor
 case, host capture (`captureBytes`, including its escape scan and UTF-8 encode)
 was 28.3 µs p50 / 86.4 µs p99; each guest phase (one JS-to-WASM byte copy,
 UTF-8 parse, projection and detector/significance work) was ~76 µs; request

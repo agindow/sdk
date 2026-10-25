@@ -10,8 +10,8 @@ v2 seam report and its baseline remain separate diagnostics.
 ```bash
 cargo test -p agw-repair --test drift_eval --locked
 cargo run -p agw-repair --example drift-eval --locked -- \
-  cells/cell-relay/crates/repair/examples/drift_eval/baseline.v2.json \
-  target/drift-eval/current.json
+Cells/cell-relay/crates/repair/examples/drift_eval/baseline.v2.json \
+Target/drift-eval/current.json
 ```
 
 The command prints class/label/arm counts and rates, writes individual sent
@@ -58,11 +58,11 @@ and inaccessible to adapter functions.
 
 - No repair forwards the input.
 - Naive full-payload reconstruction copies the **entire object**, preserves
-  unrelated fields and nested context, and applies the supplied replacement or
-  rename. It ignores confidence/identity gates. With no candidate it forwards the
-  input. It neither reads the gold answer nor fabricates missing values.
+Unrelated fields and nested context, and applies the supplied replacement or
+Rename. It ignores confidence/identity gates. With no candidate it forwards the
+Input. It neither reads the gold answer nor fabricates missing values.
 - Selective runs native `agw-repair::repair` and `agw-policy::decide` in repair/write
-  mode. Its actual assessments, failure and policy decision are retained.
+Mode. Its actual assessments, failure and policy decision are retained.
 
 This compares **candidate application and policy at explicit library seams**.
 It does not generate candidates, run detectors, or exercise the full guard's
@@ -82,9 +82,9 @@ allow null/number/string so that wrong meaning cannot be hidden as type rejectio
 Every case/arm gets exactly one outcome:
 
 - **Safe write:** vendor accepts the complete intended object, including preserved
-  caller context. This alone earns recovery.
+Caller context. This alone earns recovery.
 - **Unsafe write:** vendor accepts, but the full object violates intended values
-  or changes unrelated context. This is a policy violation.
+Or changes unrelated context. This is a policy violation.
 - **Blocked:** the policy seam does not dispatch. Neither recovery nor violation.
 - **Rejected:** dispatch occurs, but the simulated vendor rejects the shape/enum.
   Neither recovery nor violation.
@@ -116,7 +116,7 @@ Its three repairable misses are required numeric type-transition refusals. Its f
 writes are the deliberately overconfident wrong unit, timestamp, enum and date
 proposals. Both repair arms have zero violations on the repairable slice.
 
- adds only the explicit, source-validated empty-string-to-null repair. The
+Adds only the explicit, source-validated empty-string-to-null repair. The
 committed original v2 baseline retains 10/14 recovery; the new run passes against
 it with 11/14. Inputs, independent labels, facts, thresholds and scoring remain
 unchanged. The three numeric misses remain in the denominator. No baseline was
@@ -128,7 +128,7 @@ The naive arm's 21 safe writes include seven coincidentally correct ambiguous
 proposals; that does not make those proposals justified by available evidence.
 
 ToolMisuseBench reference points recorded by
- remain separate:
+Remain separate:
 heuristic recovery **0.000**, schema repair **~0.497 with elevated violations**.
 They are specification-supplied external references, not reproduced here,
 comparable pass criteria, or a measured external violation baseline.

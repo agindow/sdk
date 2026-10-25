@@ -35,7 +35,7 @@ most 128 cases and 8 MiB serialized bytes. Evidence exceeding limits is rejected
 whole rather than silently abbreviated. `contracts` applies equivalent semantic
 checks on the TS consumer boundary.
 
- supplies the local queue, human
+Supplies the local queue, human
 receipts and SLA alerts; consumes
 those receipts as descriptive confidence priors. Hosts provide authentication,
 durable storage, delivery, polling and notifications. This implementation has no

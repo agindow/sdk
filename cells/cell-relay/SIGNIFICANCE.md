@@ -2,7 +2,7 @@
 
 `agw_stats::significance` computes significance from raw windows and connects it
 to 's materiality interface. Original detector APIs remain descriptive and
-unchanged. the runtime contract defines the methods and caller obligations. This is a
+unchanged. The runtime contract defines the methods and caller obligations. This is a
 standalone library; owns guard execution. No runtime is enabled by default.
 
 ## API and local gates
@@ -81,7 +81,7 @@ The adapter rejects a total below its local minimum or outside 1–4096. Hosts m
 sum all local families; independent calls cannot discover one another's tests.
 For enum families with unknown future vocabulary, predeclare a conservative upper
 bound (up to 512/category comparison), rather than counting only new categories.
- applies Bonferroni **once** to the returned unadjusted p-value. Changing
+Applies Bonferroni **once** to the returned unadjusted p-value. Changing
 `total_tests` cannot change a feature's computed p-value.
 
 Every side is capped at 4096 samples; enum sides are capped at 256 unique values.

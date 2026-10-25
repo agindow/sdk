@@ -43,7 +43,7 @@ that stream for side-channel inspection, recording parse failures as
 classification input rather than raising them. `agw-diff` now provides the
 standalone differ described below. `agw-invariants` now provides the DSL/local store and explicit native execution
 ([usage and limits](./INVARIANTS.md)); `agw-policy` supplies the shared / policy matrix; `agw-stats` supplies standalone unit and enum evidence; `agw-repair` has the numeric coercion fence and
- selective repair library, and
+Selective repair library, and
 `agw-audit` carries generated contract types with the tests that
 hold them to `contracts/examples/` — types, not engine behaviour. `agw-notify`
 builds the frozen `notification` v1 envelope from an eligible alert and
@@ -217,12 +217,12 @@ package and its own scoped commands (`Cargo.toml` says so too).
 ## Not here yet
 
 - **WASM bindings** (`wasm/`) — EPIC-07. Criterion benches exist in `agw-audit`
-  and `agw-guard`; is what turns the tech stack's budgets into
+And `agw-guard`; is what turns the tech stack's budgets into
   CI-enforced measurements instead of local runs.
 - **Drift detection, repair, and policy** — the rest of EPIC-02 and EPIC-03+. The
-  working reference for this cell's *shape* is still the TypeScript prototype in
+Working reference for this cell's *shape* is still the TypeScript prototype in
   [`prototype/`](../../prototype/README.md), which is not part of this workspace
-  and stays on plain npm.
+And stays on plain npm.
 
 ---
 
@@ -251,7 +251,7 @@ assert_eq!(result, Progress::Established { version: 1 });
 
 After driving a `Tee` to completion, pass `tee.captured` and `tee.truncated`.
 The learner reads raw JSON tokens, preserving integer/number shape without float
-conversion. also supplies a lossless `Inspection` tree; the learner
+conversion. Also supplies a lossless `Inspection` tree; the learner
 retains its standalone byte entry point. The original response bytes remain
 owned by forwarding and are never rewritten by learning.
 
@@ -280,7 +280,7 @@ integers as `Verbatim`. Both serialize their original spelling.
 
 `Tee::into_inspection` uses the default; use
 `into_inspection_with_precision(Precision)` to supply a whole-document decision.
- adds `inspect_fields(captured, truncated, &FieldPrecisions)` for exact
+Adds `inspect_fields(captured, truncated, &FieldPrecisions)` for exact
 field-local decisions. `Value::Object` contains
 entry vectors, preserving duplicate keys so numeric evidence is never discarded.
 The tree has a 128-node path-depth limit (root zero). Parse failures remain
@@ -341,7 +341,7 @@ requires ≥0.97, semantic ≥0.99, and strict requires ≥0.99. Unknown drift i
 repaired. Rename findings must have confirmed identity and the exact sibling
 destination. Statistical identity evidence is available through `agw_diff::rename`. Explicit scalar
 replacement is not value synthesis or numeric arithmetic; numeric type changes
-are refused as semantic even when the input finding is mislabeled. permits
+are refused as semantic even when the input finding is mislabeled. Permits
 only an actually empty string to literal null under an explicit semantic
 `NullMeaningChanged`/`MeaningChanged` proposal at ≥0.99 confidence. All other
 type changes remain unsupported or numerically fenced; independent guard
@@ -593,44 +593,44 @@ and. See the runtime contract and the three `windows_*` integration suites.
 significance, materiality, routing and the shared policy matrix on actual native
 request/response calls. Activation is explicit; `NullEngine` stays the default.
 The library preserves completed upstream outcomes on response halts and admits
-no more than one optional local investigation job per call. composes the
+no more than one optional local investigation job per call. Composes the
 statistical evidence into one audit artifact; HTTP/SDK/streaming drivers,
 default-engine wiring and WASM statistical budgets remain separate.
 
- adds bounded local window staging, lossless v1 projection, a durable native
+Adds bounded local window staging, lossless v1 projection, a durable native
 background outbox and tenant-bound HTTPS transport. See [profile export](./EXPORT.md).
- qualified isolated staging export with synthetic observations;
+Qualified isolated staging export with synthetic observations;
 the default guard does not collect or send.
 
- adds explicitly selected aggregate snapshot refresh, a bounded local cache,
+Adds explicitly selected aggregate snapshot refresh, a bounded local cache,
 revision/generation fences and separate native/WASM host transports. Historical
 rollups never become exact detector windows. See [profile refresh](./REFRESH.md).
- qualified native/WASM refresh and recovery against staging;
-no scheduler starts by default. See the the hosted qualification evidence.
+Qualified native/WASM refresh and recovery against staging;
+no scheduler starts by default. See the hosted qualification evidence.
 
- adds standalone [bounded call-level array sampling](./SAMPLING.md) with
+Adds standalone [bounded call-level array sampling](./SAMPLING.md) with
 explicit policy identity and conditional significance adapters.
 
- adds [precision-budgeted unit inputs](./PROJECTION.md), with explicit
+Adds [precision-budgeted unit inputs](./PROJECTION.md), with explicit
 exact/bounded policies and local error provenance.
 
- adds [cross-endpoint consistency](./CROSS_ENDPOINT.md): bounded paired-profile
+Adds [cross-endpoint consistency](./CROSS_ENDPOINT.md): bounded paired-profile
 candidates and workflow-scoped local observations, consumed through immutable
 snapshots in the existing native guard. No peer fetch or automatic activation.
 
- adds an explicit background [qualification/activation controller](./ACTIVATION.md)
+Adds an explicit background [qualification/activation controller](./ACTIVATION.md)
 with staged native publications; default construction remains disabled and no
 production calibration dataset is supplied.
 
- supplies [strict human review handoffs](./REVIEW.md): bounded off-path evidence, local outbox and replay retention; hosted delivery remains separate.
+Supplies [strict human review handoffs](./REVIEW.md): bounded off-path evidence, local outbox and replay retention; hosted delivery remains separate.
 
- adds the local [audit publication and retrieval](./AUDIT.md) seam:
+Adds the local [audit publication and retrieval](./AUDIT.md) seam:
 honesty-validated artifacts for every decision (bypasses included), bounded
 recurrence and append-only storage, a host-drained NDJSON sink outbox and
 the tech stack OTLP/JSON metrics; the durable registry archive and its
 opt-in authenticated read route are documented there (the runtime contract).
 
- adds native durable audit delivery: `Publisher::stage` transfers queued
+Adds native durable audit delivery: `Publisher::stage` transfers queued
 artifacts off-path into `agw_audit::delivery::Outbox`, and caller-owned bounded
 drains deliver through tenant-bound HTTPS or the existing NDJSON sink. Retry
 reservations and counters survive restart; registry ingestion acknowledges stored,
@@ -646,7 +646,7 @@ run. Package tests cover offline install, size, tool/outcome identity,
 policy halts and faults. A CI-gated local agent-loop benchmark covers the default
 engine only; retains integrated statistical latency qualification.
 
- extends this package with config-file resolution, immutable events,
+Extends this package with config-file resolution, immutable events,
 optional OTel spans, explicit tool/client/fetch/Express adapters, offline
 simulation/report and a limited Nango code generator. The
 [Nango guide](./node/NANGO.md) states the exact surfaces and limitations.

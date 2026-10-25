@@ -1,7 +1,7 @@
 # Cross-endpoint consistency
 
 Runtime the runtime contract adds explicitly selected cross-endpoint checks to the
- native guard. Defaults stay `NullEngine`. No network request, store lock,
+Native guard. Defaults stay `NullEngine`. No network request, store lock,
 remote registry or LLM runs during a guarded call.
 
 ## Correlation and scope
@@ -80,7 +80,7 @@ Selections validate versions, rule bounds and decoded pointers administratively.
 At most 16 rules apply to an operation; every selected rule must name the plan's
 operation on one side. Each field uses standard pointer escapes, at most 256 bytes
 and 32 components. Request and response sources remain distinct. Combine local
- and cross-endpoint rules in the same plan; contract versions must agree and
+And cross-endpoint rules in the same plan; contract versions must agree and
 rule IDs cannot collide. Invalid attachments reject before runtime. Customers can
 pin an immutable selection version, override a rule in an explicit replacement
 selection, or disable it by omitting it. Nothing automatically upgrades a plan.
@@ -103,7 +103,7 @@ bypasses through existing containment, with one bypass per call and original
 outcome identity preserved.
 
 Divergence becomes a named semantic invariant finding, sharing routing and
- policy with local/shape/statistical findings. Observe passes with evidence;
+Policy with local/shape/statistical findings. Observe passes with evidence;
 repair reads degrade loudly and writes/unknown operations halt; strict retains
 its explicit opt-in escalation. A request halt dispatches zero times. A response
 halt preserves the completed original attempt; it cannot undo a write.

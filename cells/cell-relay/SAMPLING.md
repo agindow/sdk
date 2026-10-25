@@ -18,11 +18,11 @@ leaves and traversal through arrays also reject.
 use agw_stats::windows::{Projection, sampled::{Draw, Policy, Selection, Store}};
 
 let selection = Selection {
-    scope, // Exact tenant/connection/vendor/operation/side/field/segment/window/generation.
-    array: "/orders".into,
-    item: "/total".into,
-    policy: Policy { version: "orders-v1".into, max_items: 1000 },
-    projection: Projection::Disabled,
+Scope, // Exact tenant/connection/vendor/operation/side/field/segment/window/generation.
+Array: "/orders".into,
+Item: "/total".into,
+Policy: Policy { version: "orders-v1".into, max_items: 1000 },
+Projection: Projection::Disabled,
 };
 let mut store = Store::new(limits)?;
 store.record(&[Draw { selection: &selection, entropy }], &inspection, at)?;
@@ -63,7 +63,7 @@ Before using `snapshot.evidence(Assumptions {... })`, the host must attest to
 `UnsupportedAssumptions` with no statistical report. The returned adapter offers
 `completeness`, `coercion`, `charset`, `enumeration`, and `unit`, each requiring the
 predeclared global hypothesis-family size. These wrap unchanged and expose
- materiality decisions. Insufficient detector denominators produce no tests.
+Materiality decisions. Insufficient detector denominators produce no tests.
 Completeness counts admitted calls; enum counts string-bearing calls; units count
 safe numeric calls. Descriptive windows alone do not establish significance.
 Seasonal selection and comparisons remain host responsibilities; this store does

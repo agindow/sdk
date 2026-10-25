@@ -66,8 +66,8 @@ nonempty and at most 4096 bytes. Queue operations do not copy customer bodies.
 Errors are local `Result`s for future availability containment.
 
 Runtime contract the runtime contract defines the seam.
- owns guard integration;
- owns policy, EPIC-05 invariant execution, and EPIC-09 hosted investigation.
+Owns guard integration;
+Owns policy, EPIC-05 invariant execution, and EPIC-09 hosted investigation.
 The default engine remains `NullEngine`. No wire schema or latency guarantee is
 introduced.
 

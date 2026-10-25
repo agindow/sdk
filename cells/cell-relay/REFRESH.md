@@ -3,7 +3,7 @@ Background synchronization implements the runtime contract
 using frozen [`profile_snapshot` v1](../../contracts/profile_snapshot.v1.json).
 This is an explicit library/host boundary; no background thread starts by default.
 `NullEngine` remains the default. Aggregate snapshots cannot make the statistical
-guard ready: `exact_detector_inputs` always returns unavailable. exact
+guard ready: `exact_detector_inputs` always returns unavailable. Exact
 windows and the detector provider retain their existing lifecycle.
 
 ## Selection and evidence
@@ -28,18 +28,18 @@ and repair proof. There is no conversion into an exact `windows::Snapshot`.
 1. Construct a bounded `Cache` and explicitly admit selected slots. Save returned
    IDs. Startup makes those slots due immediately.
 2. On a background timer, call `begin(monotonic_ms)` to detach a `Job`. At most one
-   job per selected slot can be in flight. No mutex/cache borrow spans network I/O.
+Job per selected slot can be in flight. No mutex/cache borrow spans network I/O.
 3. Fetch the job using a transport below. Pass its bytes or typed failure to
    `complete(job, result, monotonic_ms)`. The cache checks deadline, selection
-   epoch, full scope, generation, version, provenance, counters and revision before
-   replacing one immutable `Arc` in local memory.
+Epoch, full scope, generation, version, provenance, counters and revision before
+Replacing one immutable `Arc` in local memory.
 4. On an invalidation hint, call `notify(id, monotonic_ms)`. Hints coalesce; they
-   cannot reset retry backoff or force another concurrent fetch. Notifications are
-   caller-owned, optional hints; the recovery timer remains necessary.
+Cannot reset retry backoff or force another concurrent fetch. Notifications are
+Caller-owned, optional hints; the recovery timer remains necessary.
 5. At call start, `read(id, monotonic_ms)` performs a bounded local map lookup and
    `Arc` clone. It accepts no transport, async callback or storage handle. Retain
-   the returned handle for the call. A missing/expired snapshot is unavailable;
-   use existing guard availability handling. Do not mark aggregate inputs ready.
+The returned handle for the call. A missing/expired snapshot is unavailable;
+Use existing guard availability handling. Do not mark aggregate inputs ready.
 
 Choose a poll interval shorter than `refresh_ms`; successful refresh cadence is
 bounded by refresh period + owner polling lag + transport duration. This is an
@@ -79,15 +79,15 @@ history because the latest-hour DO cache cannot serve selected seasonal
 slots. No second latest-snapshot/seasonality policy is introduced.
 
 - Native: `refresh::native::HttpsReader` invokes installed curl over HTTPS, with
-  no redirect following. Token and request use private stdin config, never argv.
+No redirect following. Token and request use private stdin config, never argv.
   Request cap is 8 KiB, response cap 128 KiB, with bounded connect/total time.
 - WASM: [`wasm/refresh.ts`](./wasm/refresh.ts) exports `createSnapshotTransport`.
   A host with standard fetch/Request/AbortController supplies the endpoint,
-  tenant and reader token. Send `Job::body` JSON with the job timeout; return
-  the bytes to the same Rust cache owner's `complete`. It bounds streams and
-  cancels timeouts, refuses redirects, and requires no Worker binding. The host
-  owns guest invocation/ABI and must honor fetch cancellation. No automatic WASM
-  runtime scheduling or new guest export is implied.
+Tenant and reader token. Send `Job::body` JSON with the job timeout; return
+The bytes to the same Rust cache owner's `complete`. It bounds streams and
+Cancels timeouts, refuses redirects, and requires no Worker binding. The host
+Owns guest invocation/ABI and must honor fetch cancellation. No automatic WASM
+Runtime scheduling or new guest export is implied.
 
 TLS and configured credentials authenticate the registry. The provenance string
 is an additional checked protocol discriminator, not a signature. Transport
@@ -131,6 +131,6 @@ cargo run -p agw-stats --example refresh_snapshot < /private/tmp/selected-profil
 ```
 
 Record sanitized revision, refresh lag, wrong-tenant denial, outage/expiry recovery
-and selected-history retention in the the hosted qualification evidence.
+and selected-history retention in the hosted qualification evidence.
 Do not claim hosted delivery from local tests. No public route, credentials or
 production rollout is enabled by this change.

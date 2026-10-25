@@ -3,7 +3,7 @@ The explicit local pipeline implements the runtime contract.
 It does not enable collection or networking on the default guard. The native
 background sender supports Unix hosts with `curl` installed. Local staging and
 projection also compile for WASM; a WASM background transport is not supplied.
- subsequently qualified the authenticated boundary in isolated staging
+Subsequently qualified the authenticated boundary in isolated staging
 with actual relay exports from synthetic observations. Temporary access was
 revoked; no continuous collector is enabled.
 
@@ -101,14 +101,14 @@ token only on that tenant's native host. Never accept a tenant identifier from a
 request as authorization. The receiver authenticates the token, validates at
 most 64 KiB of streamed body, compares its tenant with the trusted map and awaits
 Queue acceptance before returning 202. Missing credentials/configuration, tenant
-mismatches and Queue failures cannot acknowledge delivery. snapshot reads
+mismatches and Queue failures cannot acknowledge delivery. Snapshot reads
 use a separate tenant-bound reader credential and `/profile-snapshots` route.
 
 Deployment requires the operator to supply this secret and an intended HTTPS
 route while retaining existing Queue/DO/database bindings. Default configuration
-keeps public routes disabled. Follow the the staging runbook
+keeps public routes disabled. Follow the staging runbook
 for isolated staging qualification;
-owns remote snapshot loading. the hosted qualification evidence
+owns remote snapshot loading. The hosted qualification evidence
 records completed isolated staging qualification and access revocation.
 
 ## Verification

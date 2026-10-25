@@ -25,17 +25,17 @@ from agindow import Agindow, guard
 
 @guard(mode="repair", tool="customers.create", operation="write")
 def create_customer(email: str) -> dict[str, str]:
-    return {"email": email}
+Return {"email": email}
 
 sdk = Agindow(mode="observe")
 
 @sdk.guard(tool="customers.read", operation="read")
 async def read_customer -> dict[str, str]:
-    return {"id": "fixture"}
+Return {"id": "fixture"}
 
 with sdk.context(mode="strict"):
     # Only calls through this SDK's guards use the scoped configuration.
-    pass
+Pass
 # `async with sdk.context(...)` is supported as well.
 sdk.close
 ```
@@ -66,10 +66,10 @@ or environment values raise `AgindowSetupError` before a call.
 from agindow import AgindowDriftError
 
 try:
-    create_customer("fixture@example.test")
+Create_customer("fixture@example.test")
 except AgindowDriftError as error:
-    print(error.code, error.tool, error.drift_class, error.drift_id)
-    print(error.hint, error.audit_url)
+Print(error.code, error.tool, error.drift_class, error.drift_id)
+Print(error.hint, error.audit_url)
 ```
 
 Request halts dispatch zero times. Response halts retain `error.outcome` and
@@ -101,8 +101,8 @@ from agindow import RemoteEnvelope, RemoteOptions, guard_remote
 
 request = RemoteEnvelope("vendor.read", "example", "read", {}, "observe")
 result = guard_remote(
-    lambda envelope: {"fallback": True},
-    request,
+Lambda envelope: {"fallback": True},
+Request,
     RemoteOptions("http://127.0.0.1:8789/v1/guard"),
 )
 ```

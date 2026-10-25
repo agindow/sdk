@@ -9,8 +9,8 @@ their results are not a like-for-like accuracy improvement.
 ```bash
 cargo test -p agw-repair --test guarded_eval --locked
 cargo run -p agw-repair --example guarded-eval --locked -- \
-  cells/cell-relay/crates/repair/examples/drift_eval/guarded/baseline.v3.json \
-  target/drift-eval/guarded-current.json
+Cells/cell-relay/crates/repair/examples/drift_eval/guarded/baseline.v3.json \
+Target/drift-eval/guarded-current.json
 ```
 
 The command writes evidence before comparison, including failed comparisons.
@@ -30,7 +30,7 @@ request slice are checked by identity on availability bypass.
 fixture contract, loaded before execution. It declares numeric scaling, explicit
 source/value migration mappings or rename identity, and preservation of every
 other caller field. Missing authority is explicit for ambiguous/unsupported
-cases. allows only an explicit empty-string-to-null mapping. Mapping facts do
+cases. Allows only an explicit empty-string-to-null mapping. Mapping facts do
 not bypass the numeric fence on the other three repairable type transitions. The verifier is given only
 original input, facts, patched bytes and applied finding indices. It receives no
 proposal, confidence, gold expected write, label, rationale or vendor schema.

@@ -28,7 +28,7 @@ receipt. There is no implicit environment-variable opt-out.
 Observe, verified repair, malformed-body and availability rules are unchanged.
 Unknown operations receive conservative write policy. Mode and protection occupy
 one atomic configuration word, loaded once per call. Changes cannot alter a
-request/response pair already in progress. call audits record the effective
+request/response pair already in progress. Call audits record the effective
 `fail_closed` value in `metadata.agindow_policy`; administrative actor/time lives
 in the separate control receipt. Original bytes and completed upstream outcomes
 remain available through the existing guard APIs.

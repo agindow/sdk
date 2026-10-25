@@ -49,23 +49,23 @@ or safe blocking-write activation.
 ## Publication and host integration
 
 1. Create a controller with the trusted scope and explicit bounds. Configure a
-   scoped policy and customer controls; absent authorization leaves candidates inactive.
+Scoped policy and customer controls; absent authorization leaves candidates inactive.
 2. Run replay in a background worker and append all receipts, including negative,
-   incomplete and expired windows. Use a monotonically advancing host clock.
+Incomplete and expired windows. Use a monotonically advancing host clock.
 3. `prepare(candidate, stage, now)` records a decision and compiles a complete
-   immutable replacement. Inspect `Prepared::decision` for promote/reject/defer
-   reasons, complete authorization, controls, counts and retained evidence.
+Immutable replacement. Inspect `Prepared::decision` for promote/reject/defer
+Reasons, complete authorization, controls, counts and retained evidence.
 4. Publish through `publish_with(pending, now, |generation|...)`, calling
    `Engine::publish_activation(side, generation)` in the callback and mapping its
-   error. The engine must already be explicitly configured as statistical. Publication rechecks expiry at commit, and next-stage replay starts after the
-   actual publication time. Its publisher validates the whole replacement before one Arc swap, retaining all
-   unrelated statistical/shape selections and the readiness breaker. A default
-   engine or existing explicit customer selection refuses replacement.
+Error. The engine must already be explicitly configured as statistical. Publication rechecks expiry at commit, and next-stage replay starts after the
+Actual publication time. Its publisher validates the whole replacement before one Arc swap, retaining all
+Unrelated statistical/shape selections and the readiness breaker. A default
+Engine or existing explicit customer selection refuses replacement.
 5. For customer edits, call `configure` then `reconcile_with` with the same atomic
-   publisher. Local overrides replace exact IDs; disables also remove paired
-   rules. Unsupported paired overrides require an explicitly selected customer
-   plan, which automatic publication cannot overwrite. Pins to unavailable versions
-   fail without a fallback. Revocation requires a higher revision to authorize again.
+Publisher. Local overrides replace exact IDs; disables also remove paired
+Rules. Unsupported paired overrides require an explicitly selected customer
+Plan, which automatic publication cannot overwrite. Pins to unavailable versions
+Fail without a fallback. Revocation requires a higher revision to authorize again.
 
 Preparation records controller revisions. Any new receipt, customer edit or prior
 publication invalidates pending work. A foreign controller's prepared plan is

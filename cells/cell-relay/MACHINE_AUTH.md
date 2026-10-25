@@ -27,16 +27,16 @@ Node creates an ephemeral Ed25519 proof key in process:
 import { createRemoteAuth, workloadIdentity, guardRemote } from 'agindow';
 
 const auth = await createRemoteAuth({
-  acquire: workloadIdentity({
-    exchangeEndpoint: 'https://guard.example/v1/token',
-    registration: 'registered-workload', tools: ['read'],
+Acquire: workloadIdentity({
+ExchangeEndpoint: 'https://guard.example/v1/token',
+Registration: 'registered-workload', tools: ['read'],
     // Or supply an assertion callback for a platform endpoint/workload API.
     // AGINDOW_IDENTITY_TOKEN_FILE is read automatically when tokenFile is absent.
   }),
-  onDiagnostic: reason => console.info(reason), // fixed labels only
+OnDiagnostic: reason => console.info(reason), // fixed labels only
 });
 try {
-  await guardRemote(original, envelope, { endpoint: 'https://guard.example/v1/guard', auth });
+Await guardRemote(original, envelope, { endpoint: 'https://guard.example/v1/guard', auth });
 } finally { auth.close; }
 ```
 
@@ -62,7 +62,7 @@ Legacy auth is explicit: a direct `apiKey`/`api_key` is accepted only in the
 callback receives `legacy_unbound`. In a keyless session, fallback requires both
 `allowLegacyFallback`/`allow_legacy_fallback` and a valid legacy key. Combining
 an auth session and direct API key is a setup error. The session never silently
-substitutes the key after refresh failure. still owns issuance/revocation.
+substitutes the key after refresh failure. Still owns issuance/revocation.
 
 ## Hosted configuration
 
@@ -71,7 +71,7 @@ administrator-supplied JSON snapshot with:
 
 - `issuer`: the exact Agindow signing issuer.
 - `keys`: 1–64 `{ issuer, kid, x, until }` public Ed25519 keys. `until` is Unix
-  seconds, at most 300s after refresh. Old and new kids may overlap.
+Seconds, at most 300s after refresh. Old and new kids may overlap.
 - `keyless_only`: tenant IDs that reject every legacy key.
 - `legacy_until`: absolute overlap deadline, at most 900s after configuration.
   Zero disables legacy auth for every tenant under this snapshot.
@@ -80,7 +80,7 @@ Connection bindings retain their fixed tenant/URL/operation, with an optional
 `environment` (default `live`). Request data cannot override that context.
 Keyless-only operation does not need `GUARD_KEYS`. Token quotas are bounded,
 isolate-local 1000 calls per tenant per minute, not billing entitlements.
-DPoP uses the `DPoP` authorization scheme. mTLS uses `Bearer` with a certificate
+DPoP uses the `DPoP` authorization scheme. MTLS uses `Bearer` with a certificate
 bound token; only Cloudflare-attested `cf.tlsClientAuth`, verified `SUCCESS`,
 supplies its SHA-256 peer fingerprint. Client headers never establish TLS identity.
 Local tests qualify proof enforcement; real client-certificate termination is
@@ -91,12 +91,12 @@ Those retained outcomes still require the same token and are process-local.
 secret `GUARD_IDENTITY_EXCHANGE`:
 
 - `issuer`, `kid`, `signing_seed`: the Agindow issuer, current signing kid and
-  base64url 32-byte Agindow signing seed. This is Agindow's key, never a vendor key.
+Base64url 32-byte Agindow signing seed. This is Agindow's key, never a vendor key.
 - `keys`: up to 64 provider `{ issuer, kid, x, until }` snapshots; add `y`
-  for a P-256 key (both coordinates are 32-byte base64url). Include the
+For a P-256 key (both coordinates are 32-byte base64url). Include the
   Agindow public key here too if delegation is enabled.
 - `registrations`: up to 256 `{ id, kid, audiences, issuer, subject, audience,
-  tenant, environment, connection, tools, current, private_key_jwt }` grants.
+Tenant, environment, connection, tools, current, private_key_jwt }` grants.
   `audience` is the assertion audience; `audiences` is the allowed output set.
   Subjects are exact matches, never patterns.
 

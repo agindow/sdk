@@ -13,7 +13,7 @@ provenance. It snapshots `RuntimeConfig::begin_call` once, then constructs
 capture, pipeline, draft and upstream closure. Unknown operations follow writes.
 
 `Pipeline::detect` supplies a complete side-matched report and bounded
- proposals. `Pipeline::verify` independently checks the patched payload and
+Proposals. `Pipeline::verify` independently checks the patched payload and
 the supplied applied finding indices against authoritative evidence. A callback
 returning false leaves the original bytes subject to policy; an error or unwind
 bypasses. No default verifier, remote callback, registry fetch or LLM call exists.
@@ -52,7 +52,7 @@ hypothesis/note claims are replaced. Applied patch paths carry `request:` or
 `response:` prefixes, while `X-Agindow-Patch` gives a compact selective field
 count. Payload verification does not establish write integrity or idempotency:
 those stale proof claims are cleared. Contract version and verification source
-remain host-supplied provenance. owns statistical evidence composition;
+remain host-supplied provenance. Owns statistical evidence composition;
 / own structured errors and storage/publication.
 
 Validation:
@@ -71,7 +71,7 @@ not production repair calibration or new native/WASM latency claims.
 
 ## Explicit replay safety
 
- adds `Call::execute_once` as an opt-in boundary around this call path.
+Adds `Call::execute_once` as an opt-in boundary around this call path.
 It validates write keys before inspection, serializes identical keys and retains
 the original terminal result, including blocks, bypasses and completed response
 halts. It caches final audit/feedback and moves repaired response bytes without

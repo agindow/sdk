@@ -1,6 +1,6 @@
 # Standalone invariants
 
-`agw-invariants` implements the runtime contract. adds explicit native
+`agw-invariants` implements the runtime contract. Adds explicit native
 guard execution , described below. Standalone compilation/evaluation
 remains independent of the guard.
 
@@ -24,11 +24,11 @@ comparisons, and allocates nothing. There is no text parser.
 use agw_invariants::{compile, Form, Rule, Scalar, Verdict};
 
 let rules = [Rule {
-    id: "gross-total".into,
-    form: Form::Sum {
-        total: "total".into,
-        terms: vec!["amount".into, "tax".into],
-        tolerance: 0,
+Id: "gross-total".into,
+Form: Form::Sum {
+Total: "total".into,
+Terms: vec!["amount".into, "tax".into],
+Tolerance: 0,
     },
 }];
 let program = compile(&rules, &["total", "amount", "tax"])?;
@@ -113,7 +113,7 @@ timestamp parsing or sampling grants permission to project decimals. Incomplete
 captures produce no invariant findings; missing/wrong-type/array/numeric evidence
 is unavailable per rule and cannot suppress another rule's confirmed violation.
 Cross-endpoint operands are caller-correlated fields in the supplied document;
- still owns acquiring and validating cross-endpoint evidence.
+Still owns acquiring and validating cross-endpoint evidence.
 
 | Mode | Read finding | Write/unknown finding |
 |---|---|---|
@@ -127,7 +127,7 @@ and strict modes. Vocabulary alone cannot detect a same-label meaning change;
 explicit arithmetic/relational constraints can independently detect its effect.
 No candidate learning or automatic repair is enabled.
 
- routes invariant violations internally to verification, then the shared
+Routes invariant violations internally to verification, then the shared
 policy matrix sees their confirmed semantic class with repair unavailable. Enum
 additions route as semantic diffs. Mixed shape/statistical/invariant findings
 survive and the strongest policy decision wins. A request halt dispatches zero
@@ -149,7 +149,7 @@ pinned selections and `cache` otherwise; this is local selection provenance.
 `write_integrity` stays false, and patch evidence records unapplied, byte-identical
 payloads. Passing a suite does not prove a write correct. These are invariant-only
 per-phase drafts; the full mixed reports remain in `Phase.report`/`records`.
- can compose this evidence into the per-call statistical artifact when a
+Can compose this evidence into the per-call statistical artifact when a
 call runs the statistical engine; hosts own other composition, persistence,
 metrics and delivery of headers and warnings. No frozen contract changes or
 fourth wire drift class are needed.
@@ -171,11 +171,11 @@ containment and result drop; setup, I/O, streaming and WASM are excluded. Report
 include environment and nearest-rank percentiles at `target/ti22-invariants.json`.
 This local fixture gate is not a production latency guarantee for maximal suites.
 
- adds [workflow-scoped cross-endpoint observations and consistency](./CROSS_ENDPOINT.md),
+Adds [workflow-scoped cross-endpoint observations and consistency](./CROSS_ENDPOINT.md),
 with paired-profile candidates, explicit correlation/revision, immutable local
 snapshots, age/skew fences and native guard/audit integration. The earlier
 cross-endpoint DSL form still supports caller-supplied slots independently.
 
- now provides optional background [qualification and activation](./ACTIVATION.md).
+Now provides optional background [qualification and activation](./ACTIVATION.md).
 Explicit selection remains supported; profiles and candidates never authorize
 activation without customer policy and independent qualification evidence.
