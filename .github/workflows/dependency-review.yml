@@ -2,7 +2,7 @@ name: Dependency review
 
 # On every PR, fail if a newly introduced dependency brings a known
 # moderate-or-worse vulnerability or a license outside the Apache-2.0-compatible
-# permissive set. Complements Dependabot (existing deps) with a PR-time gate.
+# permissive set.
 
 on:
   pull_request:

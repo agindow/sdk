@@ -35,10 +35,10 @@ that detection is calibrated or production-qualified — it is not.
 ## Automated scanning
 
 This repository runs GitHub code scanning (CodeQL for JavaScript/TypeScript and
-Python), OpenSSF Scorecard, and dependency review on pull requests. Dependabot
-opens version-update PRs for Actions, npm, Cargo and the Python package.
-Findings appear under **Security → Code scanning** and **Dependabot**. They
-complement — they do not replace — private vulnerability reports above.
+Python), OpenSSF Scorecard, and dependency review on pull requests. Findings
+appear under **Security → Code scanning**. They complement — they do not
+replace — private vulnerability reports above. Dependency version bumps are
+reviewed upstream and land here on the next export.
 
 ## What to expect
 
