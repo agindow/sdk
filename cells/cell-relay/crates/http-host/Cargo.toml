@@ -30,7 +30,7 @@ agw-audit = { path = "../audit" }
 serde = { workspace = true }
 serde_json = { workspace = true, features = ["raw_value"] }
 chrono = { workspace = true }
-sha2 = "0.10"
+sha2 = "0.11"
 subtle = "2"
 futures-util = { version = "0.3", optional = true }
 ed25519-dalek = { version = "2.2.0", default-features = false, features = ["std"] }

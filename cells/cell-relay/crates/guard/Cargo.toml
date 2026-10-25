@@ -43,7 +43,7 @@ name = "invariants"
 harness = false
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
-sha2 = "0.10.9"
+sha2 = "0.11.1"
 url = "2.5.8"
 
 [[bench]]
