@@ -2,8 +2,8 @@
 
 Frozen JSON Schemas for every message that crosses a cell boundary, plus the
 validators and generated types all five cells share. Ticket:
-[`TI-02`](../tasks/tickets/tier-1/EPIC-01/TI-02.md). Behaviour comes from
-[`agindow-runtime-contract.md`](../agindow-runtime-contract.md) — the section
+. Behaviour comes from
+[the runtime contract](/agindow-runtime-contract.md) — the section
 citations below point into it.
 
 Nothing here is documentation: the schemas are build inputs. CI compiles them,
@@ -14,34 +14,25 @@ when generated code is stale.
 
 | Contract | Producer → consumer | Envelope | Grounding |
 |---|---|---|---|
-| `dashboard_query` / `dashboard_read` v2, `dashboard_error` v1 | console ↔ private registry identity boundary | no | TII-39; [read bounds](../cells/cell-registry/DASHBOARD_READS.md) |
+| `dashboard_query` / `dashboard_read` v2, `dashboard_error` v1 | console ↔ private registry identity boundary | no |; |
 | `credential_event` | relay → registry/console | yes | contract §10.53 |
-| `drift_event` | cell-relay → cell-registry, cell-cortex | yes | contract §3, §3.2, §4.1 |
-| `contract_snapshot` | cell-registry → cell-relay | yes | contract §3.3, §4 |
-| `finding` v2 | cell-cortex → cell-registry | yes | contract §4.1, §5, §10.52 |
-| `investigation_job` | background relay → cell-cortex | yes | contract §10.52 |
-| `investigation_completion` | cell-cortex → registry/console | yes | contract §10.52 |
-| `peer_observation` | background cortex → explicit native publisher | yes | contract §10.52 |
-| `field_profile` | background collector → cell-registry | yes | contract §10.22 |
-| `profile_snapshot` | cell-registry → background relay refresher | yes | contract §10.22 |
-| `review_case` | cell-relay → cell-console | yes | contract §10.38 |
-| `review_resolution` | cell-console → cell-registry | yes | contract §10.38 |
-| `notification` | cell-relay → cell-registry, channel senders | yes | contract §10.39 |
-| `recovery_event` | deployed feedback surface → cell-registry | yes | contract §10.35 |
-| `audit_artifact` | cell-relay → cell-console, cell-surface | **no** | contract §3.3 (the public shape, verbatim) |
-
-**Envelope** means the message carries `contract` (a single-value `enum`) and
+| `drift_eventcontract_snapshot` | the registry → cell-relay | yes | contract §3.3, §4 |
+| `findinginvestigation_jobinvestigation_completionpeer_observation` | background cortex → explicit native publisher | yes | contract §10.52 |
+| `field_profile` | background collector → the registry | yes | contract §10.22 |
+| `profile_snapshot` | the registry → background relay refresher | yes | contract §10.22 |
+| `review_casereview_resolutionnotification` | cell-relay → the registry, channel senders | yes | contract §10.39 |
+| `recovery_event` | deployed feedback surface → the registry | yes | contract §10.35 |
+| `audit_artifactcontract` (a single-value `enum`) and
 `version` (an integer `const`) so a queue consumer knows which schema to
 validate before parsing. `audit_artifact` deliberately has none: it is the
 public shape customers and agents read, and it is exactly what contract §3.3
 shows. `hypothesis`/`detail`/`note` are the §4a fields, optional.
-TI-47 keeps the public v1 shape frozen and versions its composed evidence inside
+Keeps the public v1 shape frozen and versions its composed evidence inside
 the open `metadata.agindow_statistical` member. Rust generated types and the
 TypeScript validator both replay
 `examples/audit_artifact.statistical.valid.json` (contract §10.41).
 
 ## Layout
-
 ```
 contracts/
 ├── manifest.json                  # the version registry — see below
@@ -56,7 +47,6 @@ contracts/
 │   └── index.ts
 └── package.json                   # workspace package `contracts`
 ```
-
 `manifest.json` is the one place a contract version is registered. The TS
 generator, the Rust build script and the CI suite all read it, and a schema
 file that is *not* listed fails CI — so “generated everywhere, validated
@@ -67,7 +57,6 @@ nowhere” cannot happen silently.
 A released schema may only change in its **annotations** (`title`,
 `description`, `examples`, …). Any semantic delta — including an added
 *optional* field — fails CI:
-
 ```
 contracts/drift_event.v1.json: 2 semantic change(s) to a frozen v1 contract:
     + $.properties.tenant = {"type":"string"}
@@ -75,7 +64,6 @@ contracts/drift_event.v1.json: 2 semantic change(s) to a frozen v1 contract:
   A frozen version may only change in its notes (title/description/…) —
   release contracts/drift_event.v2.json for anything else, or revert the change.
 ```
-
 This is stricter than the usual “breaking changes only” rule, and on purpose:
 our validators are **closed** (`additionalProperties: false` everywhere except
 `metadata`), so a field added in place is *rejected* by an already-deployed
@@ -83,7 +71,6 @@ consumer. With closed validation there is no such thing as an additive change;
 the only safe path is a new version.
 
 To change a contract:
-
 ```bash
 cp contracts/drift_event.v1.json contracts/drift_event.v2.json   # edit v2
 # re-stamp the envelope: properties.version.const must be 2
@@ -94,7 +81,6 @@ pnpm contracts:freeze        # freezes the new version (never touches old ones)
 pnpm contracts:generate      # regenerates the TypeScript types
 pnpm check:contracts         # focused suite; pnpm check runs it too
 ```
-
 That sequence is executed, not just described: `clears a real release: v2
 registered, v1 kept on disk for rollback` in `tests/unit/contracts.test.ts`
 performs every step against a temp copy and asserts the tree comes up clean.
@@ -155,29 +141,29 @@ languages.
 - **Numeric bounds are enforced in TypeScript only.** ajv checks `minimum`/
   `maximum` on every boundary; typify maps `minimum: 1` integers to
   `NonZero*` but does not check fractional bounds. If a Rust consumer ever
-  needs a bound enforced, it gets an explicit check (or a typify patch) here.
+Needs a bound enforced, it gets an explicit check (or a typify patch) here.
 - **The strict frozen model costs a version bump** for changes the JSON Schema
-  ecosystem would call additive. That is the trade: closed validators get
-  provable compatibility, and the diff names the remedy.
+Ecosystem would call additive. That is the trade: closed validators get
+Provable compatibility, and the diff names the remedy.
 - **Annotations are not entirely free in practice**: descriptions are embedded
-  as docs in the generated types, so an annotation-only edit also runs
+As docs in the generated types, so an annotation-only edit also runs
   `pnpm contracts:generate`. It does not need a new version.
 
 ## Evolution
 
 - **Protobuf / buf** is the documented path if event types outgrow JSON Schema
-  — trigger and rationale in [`TECH_STACK.md` §8](../tasks/TECH_STACK.md).
+  — trigger and rationale in.
   Today: five types, public surfaces (this shape, the guard API, `/openapi.json`)
-  must stay JSON anyway, and buf/protoc would add toolchain freshness to the gate.
+Must stay JSON anyway, and buf/protoc would add toolchain freshness to the gate.
 - **`change.kind` is deliberately an open string.** The taxonomy grows with the
-  detectors; a new kind must not require a contract version. Space-drift
-  cases in the registry must tolerate unknown kinds.
+Detectors; a new kind must not require a contract version. Space-drift
+Cases in the registry must tolerate unknown kinds.
 - **`contract_snapshot` v2** adds optional boolean `fields[].high_precision`
-  (TI-38, runtime contract §10.18). Missing/false selects Observed; true keeps
-  oversized integers verbatim. This is metadata, not a payload constraint.
+  (, runtime contract §10.18). Missing/false selects Observed; true keeps
+Oversized integers verbatim. This is metadata, not a payload constraint.
   Frozen v1 remains on disk and CI checks its baseline after supersession.
-  `field_profile` v1 carries TI-18 bounded statistical summaries; it is separate
-  from structural snapshots. **`finding` enrichment detail** is v2 work — TII-17.
+  `field_profile` v1 carries bounded statistical summaries; it is separate
+From structural snapshots. **`finding` enrichment detail** is v2 work —.
 
 `field_profile` v1 uses schema-directed Rust adapters in `agw-audit` for fixed
 64-element arrays, JSON Pointers, bounded identifiers and the exact envelope
@@ -188,14 +174,14 @@ serde's built-in array-length limit. Other profile numeric bounds remain TS-only
 generation, grain/bucket and rollup revision/window count. Its embedded field
 profile preserves v1 statistics; scope/interval/generation and numeric accounting
 checks are additional runtime requirements. It carries no exact sample vocabulary,
-confidence or repair proof. See [refresh protocol](../cells/cell-relay/REFRESH.md).
+confidence or repair proof. See [refresh protocol](/cells/cell-relay/REFRESH.md).
 
-## Customer notification envelopes (TII-28)
+## Customer notification envelopes
 
 `parseNotification` validates the closed `notification` v1 envelope and then
 enforces what JSON Schema cannot: the `ntf_` plus 32-hex identity, 1–256 byte
 identifiers and at most 32 audit references, explicit ordered UTC times
-(`first_seen ≤ last_seen ≤ ts`), coherent TI-19 consolidation counts, and
+(`first_seen ≤ last_seen ≤ ts`), coherent consolidation counts, and
 credential/payload rejection across every string. A consolidated summary reuses
 the identity; an individual alert requires at least one audit reference and
 exactly one consolidated finding. Maximum envelope size is 8 KiB.
@@ -203,9 +189,9 @@ exactly one consolidated finding. Maximum envelope size is 8 KiB.
 The Rust `agw-notify` crate re-derives those rules for its generated types and
 owns deterministic `ntf_` identity plus a bounded, volatile emission handoff.
 Neither side claims durability or delivery; webhook and email transport remain
-TII-29/TII-30. See contract §10.39.
+/. See contract §10.39.
 
-## Human review envelopes (TI-28)
+## Human review envelopes
 
 `parseReviewCase` and `parseReviewResolution` validate the schema plus bounded
 JSON/semantic invariants, then detach and recursively freeze the admitted value.
@@ -222,9 +208,9 @@ size is 128 KiB, depth 64, 50,000 nodes, two phases, 4,096 changes/64 proposals
 per phase, 256 scalar characters per identity and 4,096 per note. Invalid or
 incomplete evidence fails whole. Raw replacement tokens use lowercase hex to
 preserve exact bytes. No envelope authorizes replay, proves write integrity or
-changes a frozen contract. See [native review](../cells/cell-relay/REVIEW.md).
+changes a frozen contract. See [native review](/cells/cell-relay/REVIEW.md).
 
-### TII-11 shadow review
+### shadow review
 
 `shadow_review` v1 preserves the actual observe audit and observed outcome, full
 admitted phase evidence, and optional actor-attributed resolution. It is separate
@@ -234,15 +220,14 @@ canonically identifies ordered plan operations for durable feedback. No approval
 is proof that a write succeeded. Semantic checks are in TypeScript; generated
 Rust types express the JSON schema and do not replace those checks.
 
-
-## Shared provisional packaging (TII-45)
+## Shared provisional packaging
 
 The source-only `contracts/packaging` subpath exports
 [`LAUNCH_PACKAGING`](./src/packaging.ts): the reviewed v2 launch recommendation,
 research provenance, currency/billing period, scope, incident allowances and
 customer cloud-history retention. Public pricing and registry launch defaults
 consume this same artifact. It is commercial reference data, not a cross-cell
-wire family, detector input or approval to sell. TII-42 still requires a separately
+wire family, detector input or approval to sell. Still requires a separately
 approved immutable host catalog. No frozen schema/baseline is changed.
 
 `tests/unit/metering-pricing.test.ts` checks artifact-to-research alignment and
@@ -250,7 +235,7 @@ shared meter identity; console pricing fixtures check the rendered amounts,
 periods, allowances, limits and provisional status. Any new commercial offer or
 price change remains owned by pricing review, not public copy.
 
-## Shared editorial documentation (TII-47)
+## Shared editorial documentation
 
 The source-only `contracts/docs` export contains the v1 versioned product-doc tree
 and the HTTP description used by the surface signer. It is editorial build input,
@@ -258,4 +243,4 @@ not a new message family. The reviewed digest in `docs/publication.v1.json` bind
 human content, generated Markdown and its OpenAPI pointer; both consumer builds
 refuse divergence and run the existing local HTTP example against the real MCP
 transport before emitting. No frozen schema or runtime validator changes.
-See the console [publication procedure](../cells/cell-console/applications/public/docs/README.md).
+See the console.

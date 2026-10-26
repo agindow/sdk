@@ -8,7 +8,7 @@ account, database or hosted runner. Node >=22 and TypeScript are enough to build
 the compiled runner uses only Node built-ins.
 
 This implements and
-the runtime contract.
+[runtime contract §11](/agindow-runtime-contract.md#11-the-benchmark--sequencing-and-timeline--settled).
 It extends the internal eval's scoring concepts, without importing its cases,
 results, engine or thresholds. The internal eval has 42 synthetic cases and
 fixture-supplied findings. This public development set has 280 synthetic cases:
@@ -62,7 +62,6 @@ Reports must always show both metrics, never a recovery-only headline.
 ## Reproduce from public artifacts
 
 From the repository root:
-
 ```sh
 pnpm install --frozen-lockfile
 pnpm exec tsc -p cells/cell-relay/public-benchmark/tsconfig.json
@@ -70,7 +69,6 @@ node cells/cell-relay/public-benchmark/dist/cli.js baselines cells/cell-relay/pu
 cmp /tmp/baselines.json cells/cell-relay/public-benchmark/baselines.v1.json
 pnpm exec vitest run tests/unit/public-benchmark*.test.ts
 ```
-
 Alternatively compile the TS files with a standalone TypeScript installation and
 Node types using the same strict settings. The source runner requires no runtime
 npm dependencies. The two baseline arms preserve the entire original object:
@@ -87,11 +85,9 @@ version and fresh commitments and signatures; never compare incompatible sets.
 ## Run your own agents
 
 An executable receives one JSON object on stdin per fresh process:
-
 ```json
 {"id":"case-id","payload":{"value":1},"finding":null}
 ```
-
 It must emit one JSON object on stdout, with the identical ID and `write` equal
 to its resulting JSON object, or null for an explicit block. Logging belongs on
 stderr. Scenarios, classes, expected writes and labels are excluded from agent
@@ -100,11 +96,9 @@ are never official held-out scores. Do not supply development-case lookup agents
 as generalization evidence. The runner bounds each process to ten seconds and
 2 MiB output, invokes it without a shell, and fails the run on invalid output.
 Your executable runs with your local privileges; this runner is not a sandbox.
-
 ```sh
 node cells/cell-relay/public-benchmark/dist/cli.js run cells/cell-relay/public-benchmark/development.v1.json my-agent runtime -- node /absolute/path/to/agent.cjs > /tmp/my-report.json
 ```
-
 `repo-and-pr` replaces `runtime` for a repository tool adapter. Precomputed
 submissions can use `score CORPUS SUBMISSION`, where SUBMISSION is a JSON object
 with `entry`, `category` and `results` (an array of the per-case stdout objects).
@@ -122,12 +116,10 @@ and attest synthetic-only authorship. Do not import the private drift corpus.
 No sealed cases, seeds, identity list, generator output, or oracle may be committed
 to the public repository. A **custodian** runs this command on a private machine,
 with the sealed path on private storage outside the checkout:
-
 ```sh
 node cells/cell-relay/public-benchmark/dist/cli.js seal cells/cell-relay/public-benchmark/development.v1.json /private/storage/heldout-v1.json heldout-v1 /tmp/heldout-commitment.json
 node cells/cell-relay/public-benchmark/dist/cli.js verify-heldout cells/cell-relay/public-benchmark/development.v1.json /private/storage/heldout-v1.json /tmp/heldout-commitment.json
 ```
-
 `seal` uses cryptographic randomness for fixture values, creates private bytes
 with mode 0600 and exclusive writes, checks disjoint IDs **and** payloads, and
 outputs a separate commitment containing **only version and SHA-256 of exact
@@ -150,12 +142,10 @@ through a trusted channel. Never trust identities/keys supplied inside a report.
 Test keys in the unit suite are not validators or sign-offs.
 
 With commitment and reproduced baseline report array available:
-
 ```sh
 node cells/cell-relay/public-benchmark/dist/cli.js digest
 node cells/cell-relay/public-benchmark/dist/cli.js statement cells/cell-relay/public-benchmark/development.v1.json /tmp/baselines.json /tmp/heldout-commitment.json > /tmp/statement.json
 ```
-
 Each validator signs the **exact statement bytes**, Ed25519, and returns a
 base64 signature. The statement binds methodology/source digest, exact sealed
 commitment, and each canonical baseline report hash. `statement` has no trailing
@@ -164,11 +154,9 @@ Trust roots are a separately reviewed JSON array of `{id, publicKey}` (PEM);
 attestations are an array of `{validator, signature}`. The release command checks
 2–3 distinct trusted identities and keys, all signatures, both reproduced baseline
 arms, complete metrics and corpus identity:
-
 ```sh
 node cells/cell-relay/public-benchmark/dist/cli.js release cells/cell-relay/public-benchmark/development.v1.json /tmp/baselines.json /tmp/heldout-commitment.json /tmp/attestations.json /tmp/trusted-validators.json > /tmp/launch.json
 ```
-
 Publish only a successfully generated launch artifact with its reviewed trust
 roots and public artifacts. Do not publish an empty board or call local baseline
 reports validator-run scores. An Agindow entry or any substituted arm is refused.

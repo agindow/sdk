@@ -4,7 +4,6 @@ This file is **not** published to npm. App developers use
 `npm install agindow` — see [README.md](./README.md).
 
 Rebuild the WASM guest and package artifacts from the AGINDOW monorepo root:
-
 ```bash
 pnpm install
 rustup target add wasm32-unknown-unknown
@@ -21,7 +20,6 @@ node cells/cell-relay/node/examples/offline.mjs
 cd cells/cell-relay/node && npm pack
 # npm publish --access public
 ```
-
 `AGINDOW_WASM_BINDGEN` selects an alternate generator binary. Pack size must
 stay under 5,000,000 bytes unpacked (including WASM). Publish checklist:
-[SDK.md](../../../SDK.md).
+.

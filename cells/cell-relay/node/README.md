@@ -4,7 +4,6 @@ API drift firewall for AI agents on Node — repair drift in-flight, prove the
 write was correct. **Pre-alpha** on npm as `agindow` (Node ≥22,
 Apache-2.0, ESM/CJS and TypeScript declarations). Runs a Rust/WASM engine in
 process. OpenTelemetry is an optional peer dependency.
-
 ```ts
 import { createAgindow } from 'agindow';
 
@@ -14,7 +13,6 @@ const tools = sdk.toolAdapter(existingTools);
 sdk.configure({ mode: 'repair' });
 const unsubscribe = sdk.on('bypass', event => console.warn(event));
 ```
-
 `guard(fn, { tool, operation })` preserves sync/async behavior, argument arrays,
 receiver, result identity and original exceptions. `toolName` resolves a dynamic
 identity. `inputShape: 'raw'` admits a sole string/byte argument without JSON
@@ -98,14 +96,12 @@ engine phases. Await `ready` first. It never invokes an upstream callable or
 fabricates repair confidence.
 
 After `npm install agindow`, the CLI binary is **`agindow`**:
-
 ```bash
-npx agindow report./src
-npx agindow report./src --snapshot./local-drift.json
-npx agindow codegen./local-contracts.json
-npx agindow scan./nango-project --snapshot./local-contracts.json
+npx agindow report ./src
+npx agindow report ./src --snapshot ./local-drift.json
+npx agindow codegen ./local-contracts.json
+npx agindow scan ./nango-project --snapshot ./local-contracts.json
 ```
-
 Report never executes scanned source or writes a project file. Missing evidence
 is unavailable, not a clean result. `AGINDOW_DISABLED=true` is a generation-time
 opt-out. `AGINDOW_BRANDING=off` omits the CLI banner at build time.
@@ -126,11 +122,9 @@ to 200 million cooperative units (not a wall-clock deadline). Durable replay and
 hosted audit delivery remain separate work.
 
 ## Install
-
 ```bash
 npm install agindow
 ```
-
 The package includes the prebuilt WASM guest. You do **not** need Rust, a
 monorepo checkout, or a local engine build to use the SDK.
 
@@ -141,17 +135,15 @@ returns an untouched successful HTTP Response. It falls back exactly once on
 5xx/transport failures and emits one bypass event. Write/unknown envelopes require
 an upstream-enforced `idempotency_key`. Local synchronous guards never acquire a
 remote dependency.
-
 ```js
 const sdk = createAgindow({ audit: { tenant: 'example', capacity: 64 } });
 await sdk.ready;
-const result = sdk.guard( => ({ value: 1 }), { tool: 'vendor.read' });
+const result = sdk.guard(() => ({ value: 1 }), { tool: 'vendor.read' })();
 const receipt = await sdk.drainAudit(async artifact => {
   // Persist artifact.id durably before acknowledging.
-Console.log(JSON.stringify(artifact));
+  console.log(JSON.stringify(artifact));
 });
 ```
-
 Audit publication is disabled without explicit options. Default bounds are 64
 records / 512 KiB serialized (maximum 256 / 1 MiB, 128 KiB per artifact). Hosts
 own persistence and retry; no durable SDK audit guarantee is claimed. Opt-in

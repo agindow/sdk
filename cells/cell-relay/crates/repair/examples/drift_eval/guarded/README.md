@@ -1,18 +1,16 @@
 # guarded qualification — profile v3
 
-Internal synthetic qualification of 's explicit native guard,
-under the runtime contract.
-The separate [v2 conditional seam](../README.md) remains a diagnostic and is embedded
+Internal synthetic qualification of,
+under [contract §10.2](/agindow-runtime-contract.md).
+The separate remains a diagnostic and is embedded
 as `seam` in each v3 report. These profiles exercise different evidence boundaries;
 their results are not a like-for-like accuracy improvement.
-
 ```bash
 cargo test -p agw-repair --test guarded_eval --locked
 cargo run -p agw-repair --example guarded-eval --locked -- \
-Cells/cell-relay/crates/repair/examples/drift_eval/guarded/baseline.v3.json \
-Target/drift-eval/guarded-current.json
+  cells/cell-relay/crates/repair/examples/drift_eval/guarded/baseline.v3.json \
+  target/drift-eval/guarded-current.json
 ```
-
 The command writes evidence before comparison, including failed comparisons.
 Expected panic probes use Rust's ordinary panic hook, so the CLI prints injected
 panic messages even though the guard contains them and the command succeeds.
@@ -26,7 +24,7 @@ arms share the same supplied findings/candidates. Guarded execution calls real
 actual dispatch callback are scored. The boxed upstream outcome and original
 request slice are checked by identity on availability bypass.
 
-[verification.v1.json](../verification.v1.json) is a separately authored caller
+Is a separately authored caller
 fixture contract, loaded before execution. It declares numeric scaling, explicit
 source/value migration mappings or rename identity, and preservation of every
 other caller field. Missing authority is explicit for ambiguous/unsupported

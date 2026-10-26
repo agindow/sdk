@@ -8,11 +8,9 @@ budgets. `compare.mjs` rejects missing, duplicate, extra and divergent rows.
 
 After building/staging both packages and syncing the locked Python environment,
 run this from the checkout:
-
 ```bash
 node cells/cell-relay/node/parity/run.mjs
 ```
-
 The relay test task runs the comparison in CI. Node tests mutation-check the
 comparison itself. Python tests copy its actual wrapper, disable a halt or make
 bypass throw, and require the cross-language command to fail. No external
@@ -22,7 +20,7 @@ Normalization checks call counts, result/error identity, retained outcome,
 mode/classification, sync/async behavior, receiver/argument preservation and
 bypass counts. Python uses snake_case, bound-method receivers and a synchronous
 ready boolean after local loading. These language differences and the Python
-primitive slice's limits are documented in the wrapper API and the Python
+primitive slice's limits are documented in wrapper API §12.4 and the Python
 SDK guide. Framework/HTTP adapters remain Node surfaces.
 
 This runner requires the repository's sibling Python project; the Node tarball

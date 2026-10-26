@@ -1,7 +1,7 @@
 # Standalone invariants
 
-`agw-invariants` implements the runtime contract. Adds explicit native
-guard execution , described below. Standalone compilation/evaluation
+`agw-invariants` implements runtime contract §10.30. Adds explicit native
+guard execution (§10.31), described below. Standalone compilation/evaluation
 remains independent of the guard.
 
 The DSL is typed Rust, with six forms:
@@ -19,26 +19,24 @@ Compile outside the request path. Names resolve to positional slots once; each
 compiled rule holds a specialized function pointer and prepared operands, without
 an AST. Evaluation accepts a borrowed slice, uses bounded arithmetic/string
 comparisons, and allocates nothing. There is no text parser.
-
 ```rust
 use agw_invariants::{compile, Form, Rule, Scalar, Verdict};
 
 let rules = [Rule {
-Id: "gross-total".into,
-Form: Form::Sum {
-Total: "total".into,
-Terms: vec!["amount".into, "tax".into],
-Tolerance: 0,
+    id: "gross-total".into(),
+    form: Form::Sum {
+        total: "total".into(),
+        terms: vec!["amount".into(), "tax".into()],
+        tolerance: 0,
     },
 }];
 let program = compile(&rules, &["total", "amount", "tax"])?;
 const VALUES: [Scalar<'static>; 3] = [
     Scalar::Integer(120), Scalar::Integer(100), Scalar::Integer(20),
 ];
-assert_eq!(program.rules[0].evaluate(&VALUES), Verdict::Pass);
-# Ok::<, agw_invariants::Error>()
+assert_eq!(program.rules()[0].evaluate(&VALUES), Verdict::Pass);
+# Ok::<(), agw_invariants::Error>(())
 ```
-
 Caller projections must use exact i64 quantities in consistent units. Sums and
 differences widen to i128, including opposite signed extremes. Decimals, booleans,
 null, missing fields, incomplete bodies and unsupported numeric representations
@@ -82,20 +80,18 @@ rustdoc and lint every target. Compilation/store/learning errors are administrat
 
 Attach frozen snapshots to the existing `agw_guard::statistical::Plan`. Statistical
 fields may be empty when only invariants are configured. No default engine changes.
-
 ```rust,no_run
 use agw_diff::Side;
 use agw_guard::{invariant::Selection, statistical::{Engine, Plan}};
 // `identity` is the trusted tenant/connection/vendor/operation/segment scope.
-// `request_snapshot` and `response_snapshot` come from Store::select.
+// `request_snapshot` and `response_snapshot` come from `Store::select`.
 let plan = Plan::new(identity, vec![])?
-   .with_invariants(Side::Request, Selection::new(request_snapshot)?)?
-   .with_invariants(Side::Response, Selection::new(response_snapshot)?)?;
+    .with_invariants(Side::Request, Selection::new(request_snapshot)?)?
+    .with_invariants(Side::Response, Selection::new(response_snapshot)?)?;
 let engine = Engine::statistical(plan);
 // engine.begin_call(context, operation, audit_ref, work_budget, inference_budget)
-//.dispatch(request_body, outbox, operation_once, response_capture)
+//     .dispatch(request_body, outbox, operation_once, response_capture)
 ```
-
 Snapshots retain compilation binding order. For guard integration, every binding
 must be an object-only JSON Pointer (256 bytes, at most 32 decoded components),
 with standard `~0` and `~1` escapes. `/` selects an empty property name. Arrays
@@ -119,7 +115,7 @@ Still owns acquiring and validating cross-endpoint evidence.
 |---|---|---|
 | observe | Pass with warning/evidence | Pass with warning/evidence |
 | repair | Degraded, original outcome | Halt |
-| strict | Halt (explicit opt-in, the runtime contract) | Halt |
+| strict | Halt (explicit opt-in, contract §4.2) | Halt |
 
 An enum addition is a separate informational `enum_expanded` semantic finding.
 It never becomes `invariant_violated` and still halts unproven writes in repair

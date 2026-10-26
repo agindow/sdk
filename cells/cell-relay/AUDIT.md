@@ -1,14 +1,14 @@
 # Audit publication, delivery and retrieval
 
 Every call publishes exactly one artifact conforming to the closed
-[`audit_artifact` v1](../../contracts/audit_artifact.v1.json) schema — clean,
+Schema — clean,
 observed, degraded, repaired, bypassed or blocked. A bypass is evidence too, so
 nothing filters by decision. Publication is a local, best-effort pipeline in
 `agw-audit`: validate honesty, stamp recurrence, append to an append-only
 bounded store, enqueue once for a host-driven sink outbox and project the
 the tech stack metrics. No call awaits delivery, and the only outcome that
 stops a publication is local store refusal — callers may ignore it. The
-in-path guard never depends on this crate (the runtime contract); owns
+in-path guard never depends on this crate (contract §10.40); owns
 composing statistical evidence before publication.
 
 ## Honesty rules the schema cannot express
@@ -16,7 +16,7 @@ composing statistical evidence before publication.
 `artifact::validate` rejects, before storage or publication:
 
 - `patch.applied` and `patch.byte_identical` not complementary (a repair always
-Breaks byte identity — the runtime contract);
+Breaks byte identity — contract §3.1);
 - an applied patch that names no changed field;
 - a `repaired` decision without an applied patch;
 - `occurrences` or `first_seen` present without the other;
@@ -90,13 +90,13 @@ same outcome forwards through `Publisher::publish` and returns its non-blocking
 result or `None`; a store refusal, full outbox or failing sink never changes the
 upstream outcome, the decision or policy, and composition never awaits delivery.
 The shared fixture
-[`audit_artifact.statistical.valid.json`](../../contracts/examples/audit_artifact.statistical.valid.json)
+
 round-trips through the frozen schema. See [STATISTICAL.md](./STATISTICAL.md)
-and the runtime contract.
+and runtime contract §10.41.
 
 ## Durable archive and retrieval (the registry)
 
-Migration `004_audit_artifacts.sql`
+Migration
 adds a Postgres table whose trigger rejects every `UPDATE`, `DELETE` and
 `TRUNCATE` outside `purge_expired_audit_artifacts(at)`. Appends go through
 `append_audit_artifact` under one advisory lock per `(tenant, id)`: an identical
@@ -124,19 +124,17 @@ same queued item concurrently. No library starts a timer or thread.
 
 At a caller-owned interval (for example, one second), run this on the host's
 background worker, outside guarded calls:
-
 ```rust,ignore
 // Setup once: private parent directory must already exist.
-let mut spool = Outbox::open(path, "acme", Limits::default)?;
+let mut spool = Outbox::open(path, "acme", Limits::default())?;
 let mut sender = HttpsSender::new(
     "https://registry.example/v1/audit", "acme", producer_token, 5_000,
 )?;
 // One host tick; recover errors here, never propagate them into a guarded call.
 publisher.stage(&mut spool, 32)?;
 spool.drain(unix_time_ms, 32, &mut sender)?;
-let delivery_metrics = spool.metrics.export_json(Utc::now);
+let delivery_metrics = spool.metrics().export_json(Utc::now());
 ```
-
 Each staging/drain tick is capped at 1,024 items. `stage` removes a publisher
 front only after fsync/atomic-rename admission succeeds. Release publisher ownership before network delivery. Filesystem work is
 off-path; if a host shares a publisher with guarded calls, use nonblocking
@@ -221,11 +219,9 @@ and argv. `tests/audit-ingress.test.ts` covers the auth/validation matrix;
 `tests/audit-delivery-runtime.test.ts` runs the production Worker in workerd
 against real PGlite append, duplicate, conflict, retrieval and retention purge.
 Regenerate its shared publication fixture with:
-
 ```bash
-cargo run -p agw-audit --example publish_audit > crates/audit/tests/support/relay-audit.json
+cargo run -p agw-audit --example publish_audit > cells/cell-relay/crates/audit/tests/support/relay-audit.json
 ```
-
 A Rust test locks the fixture to the real publisher's stamped output.
 
 ## Limits
@@ -240,6 +236,6 @@ qualification is. The registry
 route is off by default; enabling it and applying migration 004 to staging are
 deployment steps, not claims made here.
 
-Contract: the runtime contract.
+Contract: [§10.40](/agindow-runtime-contract.md#1040-ti-29--audit-artifacts-recurrence-and-durable-retrieval).
 Tests: `cargo test -p agw-audit`,
 `cargo test -p agw-audit`.

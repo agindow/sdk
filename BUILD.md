@@ -23,7 +23,7 @@ cargo install wasm-bindgen-cli --version 0.2.129 --locked
 ## Gate
 
 ```bash
-pnpm install
+pnpm install --frozen-lockfile
 pnpm build   # cargo build --workspace, WASM guest, Node dist, Python guest staging
 uv sync --directory cells/cell-relay/python --frozen
 pnpm lint    # cargo fmt/clippy/doc, tsc, mypy
@@ -75,5 +75,6 @@ with `include_str!` at a fixed relative depth. Moving `contracts/` or
 
 - `contracts/` — frozen wire schemas, validators, examples and baselines
 - `cells/cell-relay/` — the runtime cell (crates, hosts, SDKs, fixtures)
+- `agindow-runtime-contract.md`, `wrapper-api.md` — public behavior specifications
 - `examples/` — install-from-registry samples
 - `skills/` — agent integration guidance

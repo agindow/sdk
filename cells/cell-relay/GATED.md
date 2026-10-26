@@ -4,7 +4,7 @@
 and selective repair library for bounded JSON captures. It is an opt-in library
 seam; the default statistical engine remains `NullEngine` and streaming/SDK
 integration is separate. See runtime contract
-the runtime contract.
+[§10.34](/agindow-runtime-contract.md#1034-ti-24--explicit-two-layer-native-call-execution).
 
 The host prepares a local `Pipeline`, one shared `AvailabilityGate`, and a valid
 generated `AuditArtifact` draft carrying identity, operation and selected contract
@@ -56,12 +56,10 @@ remain host-supplied provenance. Owns statistical evidence composition;
 / own structured errors and storage/publication.
 
 Validation:
-
 ```sh
 cargo test -p agw-guard --test gated --test gated_edges --test gated_detector
 cargo test -p agw-policy
 ```
-
 The detector fixture runs actual identity-backed comparison and independent
 target-schema verification over 's token patcher, retaining `1e400` verbatim.
 Other fixtures cover modes/operations/classes/repair outcomes, faults in each

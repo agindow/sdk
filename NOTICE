@@ -30,7 +30,6 @@ Scope
 --------------------------------------------------------------------------------
 
 This NOTICE applies to the Work distributed under the Apache License, Version
-2.0. Portions of this repository designated as proprietary in
-`tasks/TECH_STACK.md` §6 — the control plane, registry, and dashboard — are not
-covered by the Apache License and are licensed separately. Those portions do
-not exist in this repository yet.
+2.0. This repository contains only Apache-2.0 components. AGINDOW's hosted
+control plane, shared corpus, calibration data and operational systems are
+separate works and are not included here.

@@ -6,7 +6,6 @@ is the default and detects nothing. This source is deployment-ready configuratio
 no live deployment or hosted latency qualification has been performed.
 
 Install the pinned build tools and build from the repository root:
-
 ```sh
 cargo install wasm-bindgen-cli --version 0.2.129 --locked
 cargo install worker-build --version 0.7.5 --locked
@@ -14,7 +13,6 @@ pnpm --filter cell-relay run build:hosted
 pnpm --filter cell-relay run test:hosted
 pnpm --filter cell-relay exec wrangler deploy --dry-run --config hosted/wrangler.jsonc
 ```
-
 `WASM_BINDGEN_BIN`, `ESBUILD_BIN`, and `AGINDOW_WORKER_BUILD` can name local
 executables. Worker 0.7.5 retains the repository Rust MSRV; compatibility date
 2026-08-06 matches the pinned local workerd runtime. Tests execute the compiled
@@ -28,7 +26,6 @@ optional bound headers and explicit local statistical selection. No envelope
 can supply a credential or arbitrary upstream URL. Writes/unknown operations
 require an upstream-enforced `idempotency_key`; the host never retries.
 GET/HEAD bindings carry no body; bind read RPCs to POST when arguments are needed.
-
 ```sh
 pnpm --filter cell-relay exec wrangler dev --env local --config hosted/wrangler.jsonc
 curl http://localhost:8787/healthz
@@ -36,7 +33,6 @@ curl http://localhost:8787/v1/guard -H 'Authorization: Bearer local-example' \
   -H 'Content-Type: application/json' \
   --data '{"tool":"read","connection":"example","operation":"read","args":{},"mode":"observe"}'
 ```
-
 Quota counters are bounded and **isolate-local**, not globally enforced billing
 entitlements. `X-RateLimit-Limit/Remaining/Reset` and `X-Agindow-Quota-Scope`
 make that explicit. Credentials use a constant-time digest comparison. Modes are
@@ -62,5 +58,5 @@ using it. Registry I/O is never a dependency of a guard decision. Live mTLS,
 distributed quotas, durable replay, default selective repair, deployment and
 production qualification remain pending; no source manifest supplies those claims.
 
-Opt-in EPIC-14 machine identity adds local token/proof validation and a bounded
-`/v1/token` exchange. Configuration and limitations: [machine identity](../MACHINE_AUTH.md).
+Opt-in machine identity adds local token/proof validation and a bounded
+`/v1/token` exchange. Configuration and limitations:.

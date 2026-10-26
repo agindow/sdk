@@ -5,7 +5,6 @@ This file is **not** published to PyPI. App developers use `pip install agindow`
 
 The Python wheel embeds the **same** WASM bytes as `agindow`. Build the
 Node guest first, then the wheel, from the AGINDOW monorepo root:
-
 ```bash
 pnpm install --frozen-lockfile
 node cells/cell-relay/node/scripts/build.mjs
@@ -17,6 +16,5 @@ node cells/cell-relay/node/parity/run.mjs
 uv run --directory cells/cell-relay/python --frozen python scripts/build.py
 # twine upload dist/*
 ```
-
 Requires Rust `wasm32-unknown-unknown` and wasm-bindgen CLI **0.2.129**.
-Publish checklist: [SDK.md](../../../SDK.md).
+Publish checklist:.

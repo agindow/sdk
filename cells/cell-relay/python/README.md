@@ -9,37 +9,33 @@ The default engine detects nothing until you configure protection. Statistical
 windows require explicit local baseline/live selections.
 
 ## Install
-
 ```bash
 pip install agindow
 # or: uv add agindow
 ```
-
 The wheel includes the prebuilt WASM guest. You do **not** need Rust, Node, or a
 monorepo checkout to use the SDK.
 
 ## Decorators, async and contexts
-
 ```python
 from agindow import Agindow, guard
 
 @guard(mode="repair", tool="customers.create", operation="write")
 def create_customer(email: str) -> dict[str, str]:
-Return {"email": email}
+    return {"email": email}
 
 sdk = Agindow(mode="observe")
 
 @sdk.guard(tool="customers.read", operation="read")
-async def read_customer -> dict[str, str]:
-Return {"id": "fixture"}
+async def read_customer() -> dict[str, str]:
+    return {"id": "fixture"}
 
 with sdk.context(mode="strict"):
     # Only calls through this SDK's guards use the scoped configuration.
-Pass
+    pass
 # `async with sdk.context(...)` is supported as well.
-sdk.close
+sdk.close()
 ```
-
 Context managers scope guarded calls; they cannot intercept arbitrary Python
 statements. Overrides use ContextVar, nest and remain isolated across async
 tasks. Each call freezes configuration until completion. `configure(mode="repair")`
@@ -61,17 +57,15 @@ Resolution: explicit keywords > environment > nearest JSON `.agindowrc` >
 defaults. Shared env vars match Node (`AGINDOW_MODE`, `AGINDOW_KEY`,
 `AGINDOW_ENDPOINT`, `AGINDOW_BUFFER`, `AGINDOW_FAIL_CLOSED`). Invalid explicit
 or environment values raise `AgindowSetupError` before a call.
-
 ```python
 from agindow import AgindowDriftError
 
 try:
-Create_customer("fixture@example.test")
+    create_customer("fixture@example.test")
 except AgindowDriftError as error:
-Print(error.code, error.tool, error.drift_class, error.drift_id)
-Print(error.hint, error.audit_url)
+    print(error.code, error.tool, error.drift_class, error.drift_id)
+    print(error.hint, error.audit_url)
 ```
-
 Request halts dispatch zero times. Response halts retain `error.outcome` and
 warn against blind replay. Upstream exceptions survive as `error.__cause__`.
 Missing audit IDs/URLs remain empty rather than fabricated.
@@ -95,18 +89,16 @@ qualification is claimed. Inspection is bounded to detached JSON projections.
 
 Local decorators stay offline. Remote execution is a separate HTTP API using
 stdlib HTTP transport; it never redirects or retries through AGINDOW:
-
 ```python
 from agindow import RemoteEnvelope, RemoteOptions, guard_remote
 
 request = RemoteEnvelope("vendor.read", "example", "read", {}, "observe")
 result = guard_remote(
-Lambda envelope: {"fallback": True},
-Request,
+    lambda envelope: {"fallback": True},
+    request,
     RemoteOptions("http://127.0.0.1:8789/v1/guard"),
 )
 ```
-
 `RemoteResponse` retains the original status/headers and streaming `body`.
 Any 5xx/refusal/timeout/reset invokes the original callable once and emits one
 bypass. Writes/unknown operations require the same upstream idempotency key in

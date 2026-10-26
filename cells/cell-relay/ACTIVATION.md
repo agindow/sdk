@@ -1,6 +1,6 @@
 # Local invariant activation
 
-`agw_invariants::activation` implements the runtime contract. It is an explicit
+`agw_invariants::activation` implements runtime contract §10.33. It is an explicit
 background library; constructing a guard still selects `NullEngine`. It does not
 schedule jobs, fetch profiles, run an LLM, authorize repair or change call modes.
 
@@ -105,13 +105,11 @@ Byte identity and `write_integrity: false` remain explicit. Final audit delivery
 hosted signed distribution/persistence remain separate work.
 
 ## Verification
-
 ```bash
 cargo test -p agw-invariants --test activation --test activation_evidence
 cargo test -p agw-guard --test activation --test activation_cross
 cargo bench -p agw-guard --bench invariants
 node cells/cell-relay/perf/run-availability.mjs
 ```
-
 The native invariant benchmark measures its fixed integrated fixture, not background
 replay or production activation throughput. The availability gate is separate.

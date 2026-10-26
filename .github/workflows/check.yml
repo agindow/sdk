@@ -33,7 +33,7 @@ jobs:
         run: cargo install wasm-bindgen-cli --version 0.2.129 --locked
 
       - name: Node dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Build runtime and stage Python guest
         run: pnpm build

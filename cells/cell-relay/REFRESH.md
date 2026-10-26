@@ -1,6 +1,6 @@
 # Selected profile refresh
-Background synchronization implements the runtime contract
-using frozen [`profile_snapshot` v1](../../contracts/profile_snapshot.v1.json).
+Background synchronization implements [contract §10.22](/agindow-runtime-contract.md)
+using frozen.
 This is an explicit library/host boundary; no background thread starts by default.
 `NullEngine` remains the default. Aggregate snapshots cannot make the statistical
 guard ready: `exact_detector_inputs` always returns unavailable. Exact
@@ -107,16 +107,13 @@ includes a remote request.
 Local suites cover authenticated Worker/Neon boundaries in workerd, real PGlite
 rollups, ingestion, WASM host transport, native curl controls, monotonic
 scheduling, conflicts/expiry/reselection and original guarded error identity.
-
 ```bash
 cargo test -p agw-stats --test refresh
 cargo test -p agw-guard --test profile_refresh
 cargo check -p agw-stats --target wasm32-unknown-unknown
-cargo test -p agw-audit
+pnpm --filter cell-registry exec vitest run tests/profile-refresh*.test.ts
 pnpm --filter cell-relay exec vitest run --config wasm/vitest.config.ts
 ```
-
-hosted qualification
 completed with actual relay exports from synthetic observations, native/WASM
 cache validation and recovery. Temporary credentials/bridge access were revoked.
 For a separately authorized repeat exercise, on the isolated staging
@@ -125,12 +122,10 @@ or service binding. Ingest traffic first, wait for Queue commit, then select
 its exact scope/bucket/bounds. With endpoint, tenant and token set in the protected
 `AGINDOW_PROFILE_ENDPOINT`, `AGINDOW_PROFILE_TENANT`, `AGINDOW_PROFILE_READER_TOKEN`
 environment variables, run:
-
 ```bash
 cargo run -p agw-stats --example refresh_snapshot < /private/tmp/selected-profile.json
 ```
-
 Record sanitized revision, refresh lag, wrong-tenant denial, outage/expiry recovery
-and selected-history retention in the hosted qualification evidence.
+and selected-history retention in the.
 Do not claim hosted delivery from local tests. No public route, credentials or
 production rollout is enabled by this change.

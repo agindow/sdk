@@ -3,16 +3,15 @@
 `agw_guard::feedback::Feedback::from_outcome(&outcome)` borrows a bounded
 call outcome and returns optional agent feedback. It does not execute, retry,
 throw, publish an audit artifact, or replace the original upstream outcome.
-See the runtime contract and
+See [runtime contract §7 and §10.35](/agindow-runtime-contract.md) and
 .
 
 For a halt, send `feedback.http_status` (409) and serialize `feedback.payload`.
 Strict mode uses `drift_halted`; repair-mode semantic/unknown write halts use
-`drift_blocked`. The separately exposed `ErrorCode` pins the eight HTTP error
+`drift_blocked`. The separately exposed `ErrorCode` pins the eight §7 HTTP error
 codes, including `internal` (500 as representative of 5xx, which clients bypass).
 
 Example payload for a strict request halt with confirmed rename evidence:
-
 ```json
 {
   "error": "drift_halted",
@@ -23,7 +22,6 @@ Example payload for a strict request halt with confirmed rename evidence:
   "audit": "https://api.agindow.com/v1/audit/aud_example"
 }
 ```
-
 For `drift_passthrough`, `http_status` is `None`: attach the payload as additive
 notification metadata and preserve upstream HTTP status/body. Do not turn this
 into an HTTP error response. Clean, observed, repaired and availability-bypassed
@@ -71,11 +69,9 @@ controlled fixture. That validates accounting, not agent effectiveness. Producti
 recovery rates and a causal improvement over unstructured feedback remain unmeasured.
 
 ## Verification
-
 ```sh
 cargo test -p agw-guard --test feedback --test feedback_edges --test feedback_recovery
 ```
-
 Tests pin the taxonomy, mode/class/operation matrix, availability skips, JSON
 round-trip, human-readable hints, request dispatch, response outcome retention,
 malformed feedback, mixed semantic safety, URL escaping and bounded deduplication.

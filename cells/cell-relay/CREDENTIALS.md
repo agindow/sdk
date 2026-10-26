@@ -1,9 +1,9 @@
-# Credential evidence and cutover (EPIC-13)
+# Credential evidence and cutover
 
 Local, unpublished library surfaces implementing
-– and
-the runtime contract. Local qualification results and remaining review limits are recorded in
-the hosted qualification evidence. No provider is
+And
+[contract §10.53](/agindow-runtime-contract.md). Local qualification results and remaining review limits are recorded in
+. No provider is
 contacted by these libraries and no credential is minted, revoked or read.
 
 ## Response evidence
@@ -81,12 +81,10 @@ only a complete successful plan promotes. Credential failure, execution fault,
 timeout, explicit abort or unsuccessful budget exhaustion aborts verification.
 
 ## Offline readiness CLI
-
 ```sh
 agindow rotation-readiness events.ndjson facts.ndjson \
   --as-of 2026-10-22T12:00:00Z --json --require=verifiable
 ```
-
 Both inputs are NDJSON. Events use `credential_event` v1. Each capability fact
 has `tenant`, `connection`, `observed_at` (UTC Z), `source`, `dual_key`
 (`yes|no|unknown`), `mint` (`manual|api|none|unknown`), and `replacement`
@@ -115,7 +113,6 @@ if any row fails that verdict. No network, bindings, secrets or file mutation
 are involved.
 
 ## Reproducible checks
-
 ```sh
 node cells/cell-relay/node/scripts/verify-rotation.mjs
 cargo test -p agw-guard --test credential --test credential_bounds --test credential_health \
@@ -123,7 +120,6 @@ cargo test -p agw-guard --test credential --test credential_bounds --test creden
 cargo test -p agw-audit --test credential_wire
 cargo bench -p agw-guard --bench credentials
 ```
-
 The offline script transpiles only the report and contracts in a temporary
 folder, checks deterministic output and exit codes, and streams 1,000,000 distinct events
 under a 64 MiB Node heap. It does not build or require the WASM guest. See the linked evidence for measured native benchmarks and the final gate result.

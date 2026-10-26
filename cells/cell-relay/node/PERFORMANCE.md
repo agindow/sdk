@@ -3,9 +3,8 @@
 This harness invokes the production the `loadWasm`/`bindGuest` boundary and
 's actual detector, significance, routing, policy and containment code.
 No production SLA or Python/Worker latency claim follows from these fixtures.
-the runtime contract freezes the budget matrix before measurement; records the
+Contract §10.44 freezes the budget matrix before measurement; §10.46 records the
 host/guest UTF-8 byte boundary used by the optimized run.
-
 ```sh
 AGINDOW_WASM_BINDGEN=wasm-bindgen node cells/cell-relay/node/scripts/build.mjs
 node cells/cell-relay/node/scripts/probe-statistical.mjs
@@ -13,7 +12,6 @@ node cells/cell-relay/node/scripts/bench-statistical.mjs
 node cells/cell-relay/node/scripts/bench-bypass.mjs
 node cells/cell-relay/node/scripts/check-statistical.mjs
 ```
-
 Run without concurrent builds/tests. Each of 351 statistical cases has 1,000
 warmups and 5,000 individually timed calls. All modes/operation kinds, all five
 actual detector kinds, clean/material/suppressed evidence, both/request-versus-
@@ -74,7 +72,7 @@ The host boundary now projects captured JSON to UTF-8 bytes once and passes a
 Escape-bearing strings still use `JSON.stringify`; surrogate-containing or
 otherwise unrepresentable values are rejected exactly as before. The wasm
 pointer/length ABI is unchanged, so Python and Node share the identical guest.
-the runtime contract and wrapper record the decision.
+Contract §10.46 and wrapper §12.11 record the decision.
 
 ## Retained local run — 2026-10-21 UTC
 

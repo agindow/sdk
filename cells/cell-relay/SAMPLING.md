@@ -1,7 +1,7 @@
 # Explicit call-level array sampling
 
 `agw_stats::windows::sampled` is an opt-in local library, governed by runtime
-contract the runtime contract. Object-only stores
+contract [§10.28](/agindow-runtime-contract.md). Object-only stores
 keep their original JSON Pointer behavior. There is no default guard, profile
 export/refresh or array repair integration.
 
@@ -13,23 +13,21 @@ properties only and must start with `/`; v1 does not select a root array.
 Escaped names, empty names, literal `*` and numeric property names work; wildcards and recursive traversal do not. Every item must be an
 object. Null/scalar/array items reject even when unselected; selected container
 leaves and traversal through arrays also reject.
-
 ```rust,ignore
 use agw_stats::windows::{Projection, sampled::{Draw, Policy, Selection, Store}};
 
 let selection = Selection {
-Scope, // Exact tenant/connection/vendor/operation/side/field/segment/window/generation.
-Array: "/orders".into,
-Item: "/total".into,
-Policy: Policy { version: "orders-v1".into, max_items: 1000 },
-Projection: Projection::Disabled,
+    scope, // Exact tenant/connection/vendor/operation/side/field/segment/window/generation.
+    array: "/orders".into(),
+    item: "/total".into(),
+    policy: Policy { version: "orders-v1".into(), max_items: 1000 },
+    projection: Projection::Disabled,
 };
 let mut store = Store::new(limits)?;
 store.record(&[Draw { selection: &selection, entropy }], &inspection, at)?;
 // Publish explicitly after the baseline floor; collect fresh live calls.
 store.publish(&selection)?;
 ```
-
 Every admitted call supplies one opportunity for each selection, regardless of
 array length. A 1,000-item call counts once toward a 20-call floor. Missing/null/
 empty arrays return `NoOpportunity` and admit nothing; a selected object's absent

@@ -17,7 +17,6 @@ verified-repair seam is available to trusted engine integrations. Installing a
 wrapper alone does not establish protection or qualify a latency budget.
 
 ## A: guard proxy calls
-
 ```ts
 import { Nango } from '@nangohq/node';
 import { createAgindow } from 'agindow';
@@ -25,10 +24,9 @@ const sdk = createAgindow({ mode: 'observe' });
 await sdk.ready;
 const client = new Nango({ secretKey: process.env.NANGO_SECRET_KEY ?? '' });
 const proxy = sdk.clientAdapter(client, {
-Tool: (request: { endpoint: string }) => `nango/${request.endpoint}`,
+  tool: (request: { endpoint: string }) => `nango/${request.endpoint}`,
 });
 ```
-
 `get`, `post`, `put`, `patch`, `delete`, `request`, `fetch` and `proxy` are the
 complete method allow-list. `auth`, `connect`, `disconnect`, `batchSave`,
 `getCheckpoint` and `saveCheckpoint` never enter drift evaluation. Class helpers
@@ -40,16 +38,14 @@ An action-output callable can be guarded explicitly with `sdk.guard` and an
 explicit tool/operation. It cannot inspect a provider call hidden inside Nango.
 
 ## B: guard a Node proxy script
-
 ```ts
 import { createAgindow } from 'agindow';
 const sdk = createAgindow({ mode: 'observe' });
 await sdk.ready;
 export const guardedFetch = sdk.httpAdapter(fetch, {
-Tool: 'vendor.operation', operation: 'read',
+  tool: 'vendor.operation', operation: 'read',
 });
 ```
-
 No-repair results retain the original Response and stream. Complete JSON
 inspection uses a bounded copy, not a replacement body. A verified repair can
 produce a new body and reports `byte_identical: false`. Body bytes exposed by
@@ -61,14 +57,12 @@ outcome evidence and warns against blind replay.
 ## C: generate the local action/sync gate
 
 Build the checkout, then inspect the generator's demonstration input:
-
 ```bash
 node cells/cell-relay/node/scripts/build.mjs
-node cells/cell-relay/node/dist/cli.cjs report./my-nango-project
+node cells/cell-relay/node/dist/cli.cjs report ./my-nango-project
 node cells/cell-relay/node/dist/cli.cjs codegen cells/cell-relay/node/examples/nango-contracts.json
-node cells/cell-relay/node/dist/cli.cjs scan./my-nango-project --snapshot./my-local-contracts.json
+node cells/cell-relay/node/dist/cli.cjs scan ./my-nango-project --snapshot ./my-local-contracts.json
 ```
-
 After packing/installing the local tarball, `agindow` is the same CLI. The
 example contract is fictional test evidence, not a claim about Stripe's API.
 Supply your own authoritative identity/type evidence before adding a rename.
@@ -107,7 +101,7 @@ the real-Nango-project report run on October 20, 2026. A deployed Nango dryrun
 has not been performed. The builder skill ships under
 [skills/guarding-nango-functions/SKILL.md](./skills/guarding-nango-functions/SKILL.md).
 Partner publication, template review, a joint launch and OEM agreement remain
-pending; see the delivery record.
+pending; see the.
 
 The sandbox restrictions and error convention were checked against Nango's
 [function-building skill](https://github.com/NangoHQ/skills/blob/main/skills/building-nango-functions/SKILL.md).

@@ -83,6 +83,8 @@ Examples depend only on the published packages.
 | `cells/cell-relay/node/`, `python/` | SDK sources, tests, parity fixtures and examples |
 | `cells/cell-relay/public-benchmark/`, `perf/` | synthetic evaluation and latency tooling |
 | `contracts/` | frozen wire schemas, validators, examples and baselines |
+| `agindow-runtime-contract.md` | normative runtime behavior and availability rules |
+| `wrapper-api.md` | shared Node/Python integration surface and adapter contract |
 
 Build, lint and test from a clean clone: [BUILD.md](./BUILD.md). The gates run
 the same Rust workspace, WASM guest and SDK test suites used before each alpha

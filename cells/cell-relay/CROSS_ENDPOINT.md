@@ -1,6 +1,6 @@
 # Cross-endpoint consistency
 
-Runtime the runtime contract adds explicitly selected cross-endpoint checks to the
+Runtime contract §10.32 adds explicitly selected cross-endpoint checks to the
 Native guard. Defaults stay `NullEngine`. No network request, store lock,
 remote registry or LLM runs during a guarded call.
 
@@ -59,23 +59,21 @@ lifetimes. Retention/removal is explicit; no eviction silently
 changes a live snapshot.
 
 ## Native guard usage
-
 ```rust,no_run
 use agw_guard::{cross_endpoint::Selection, statistical::{Engine, Plan}};
 
 // `identity` comes from the trusted host; accepted rules are customer-selected.
 let plan = Plan::new(identity, vec![])?
-   .with_cross_endpoint(Selection::new(rule_version, contract_version, accepted_rules)?)?;
+    .with_cross_endpoint(Selection::new(rule_version, contract_version, accepted_rules)?)?;
 let engine = Engine::statistical(plan);
 
 // Acquire local evidence before entering the guard; this never fetches a peer.
 let snapshot = observations.snapshot(&workflow_scope);
 let result = engine
-   .begin_call(context, operation, audit_ref, work_budget, 0)
-   .with_workflow(snapshot, current_sequence)
-   .dispatch(request_body, None, original_operation_once, response_capture);
+    .begin_call(context, operation, audit_ref, work_budget, 0)
+    .with_workflow(snapshot, current_sequence)
+    .dispatch(request_body, None, original_operation_once, response_capture);
 ```
-
 Selections validate versions, rule bounds and decoded pointers administratively.
 At most 16 rules apply to an operation; every selected rule must name the plan's
 operation on one side. Each field uses standard pointer escapes, at most 256 bytes
@@ -145,6 +143,6 @@ Store acquisition, setup, network, streaming and WASM are excluded. The report
 `target/ti22-invariants.json` retains per-fixture measurements and environment;
 it is a local fixture gate, not a production or maximum-workload guarantee.
 
-Planned follow-ups: background peer acquisition
-and opt-in qualification/activation.
+Planned follow-ups:
+and.
 Both start at Todo; existing explicit observation publication and selection remain supported.

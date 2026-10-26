@@ -1,31 +1,29 @@
 # — native idempotency and replay safety
 
 The explicit `agw_guard::idempotency` boundary implements
-the runtime contract. Keep one
+[runtime contract §5 and §10.37](/agindow-runtime-contract.md). Keep one
 `Store` per authenticated tenant and reuse it across that tenant's calls. Its
 key is exactly `(connection, idempotency_key)`, case-sensitive. Separate stores,
 processes or hosts do not share reservations.
-
 ```rust,ignore
 use agw_guard::idempotency::{Access, Bindings, Limits, Request, Store};
 
 // Set bindings from the endpoint's known capabilities; no provider is guessed.
-let store = Store::new(tenant, Limits::default,
+let store = Store::new(tenant, Limits::default(),
     Bindings::new("Idempotency-Key", supported_durability_header)?)?;
 let result = store.execute(Request {
-Connection, operation, key: Some(idempotency_key), durability: requested_hint,
+    connection, operation, key: Some(idempotency_key), durability: requested_hint,
 }, |forwarding| {
     // Apply on every host-supplied attempt, including an explicitly repaired one.
-Forwarding.apply_headers(&mut upstream_headers);
-Send_owned_response(upstream_headers)
+    forwarding.apply_headers(&mut upstream_headers);
+    send_owned_response(upstream_headers)
 })?;
 match result {
     Access::Completed(replay) => deliver_original(replay.value),
-    Access::InProgress => attach_to_current_call,
-    Access::Indeterminate => reconcile_the_existing_write,
+    Access::InProgress => attach_to_current_call(),
+    Access::Indeterminate => reconcile_the_existing_write(),
 }
 ```
-
 Writes and `unknown` operations require a key in every mode, even while the
 engine is warming. Missing/invalid keys return `invalid_request` (400) before
 evaluation or dispatch. Keys are 1–256 visible ASCII bytes, without whitespace
@@ -38,7 +36,7 @@ header names. `Forwarding::apply_headers` replaces all case-insensitive copies
 of the claimed header, appending one exact supplied value. Other headers and
 customer body bytes are untouched. Reuse the immutable forwarding view on every
 explicit transport attempt. No retry, repair proposal or backoff is generated
-by the store; retry ceilings remain deferred in the runtime contract.
+by the store; retry ceilings remain deferred in contract §10.5.
 
 ## Original outcomes and concurrency
 
@@ -123,7 +121,6 @@ publication/retrieval remains.
 No hosted/SDK transport, automatic retries, default-engine switch, durable cache,
 statistical final-audit composition, streaming response cache, production
 qualification or provider persistence guarantee is added.
-
 ```sh
 cargo test -p agw-guard --test idempotency --test idempotency_concurrency --test idempotency_gated
 ```

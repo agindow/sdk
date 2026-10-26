@@ -1,5 +1,5 @@
 # Relay profile export
-The explicit local pipeline implements the runtime contract.
+The explicit local pipeline implements [contract §10.22](/agindow-runtime-contract.md).
 It does not enable collection or networking on the default guard. The native
 background sender supports Unix hosts with `curl` installed. Local staging and
 projection also compile for WASM; a WASM background transport is not supplied.
@@ -39,7 +39,6 @@ outbox on disk failure: retain its in-memory state and retry. Uncommitted local
 staging can be lost on process failure; committed envelopes replay exactly.
 
 Pump only from the background lifecycle, for example:
-
 ```rust,ignore
 // Background owner only; these handles never enter guard evaluation.
 let mut outbox = Outbox::open(spool_path, limits)?;
@@ -49,7 +48,6 @@ outbox.pump(utc_epoch_ms, |body| match sender.send(body) {
     Err(error) => { report_transport_error(error); false }
 })?;
 ```
-
 Each pump sends at most one profile. Attempt reservations and exponential
 backoff deadlines persist before sending. Backoff caps at one hour, configuration
 permits at most 100 attempts, and exhausted entries become durable `losses`.
@@ -90,11 +88,9 @@ publication and retries to the existing bounded DLQ on failure.
 
 The registry Worker implements `POST /profiles`, disabled unless the optional
 `PROFILE_PRODUCERS` secret is configured. Its secret value is JSON:
-
 ```json
 [{"tenant":"operator-owned-tenant","sha256":"64 lowercase hex characters"}]
 ```
-
 Use a unique random bearer credential of at least 32 bytes per producer tenant;
 store its SHA-256 digest in this map (maximum 256 entries). Provision the actual
 token only on that tenant's native host. Never accept a tenant identifier from a
@@ -106,9 +102,9 @@ use a separate tenant-bound reader credential and `/profile-snapshots` route.
 
 Deployment requires the operator to supply this secret and an intended HTTPS
 route while retaining existing Queue/DO/database bindings. Default configuration
-keeps public routes disabled. Follow the staging runbook
+keeps public routes disabled. Follow the
 for isolated staging qualification;
-owns remote snapshot loading. The hosted qualification evidence
+owns remote snapshot loading.
 records completed isolated staging qualification and access revocation.
 
 ## Verification
@@ -122,10 +118,8 @@ through authenticated ingress and real SQL, duplicate/reordered delivery,
 consumer recreation, and the production Worker/Queue binding in workerd.
 
 Regenerate the shared test fixture after intentional projection changes:
-
 ```bash
 cargo run -p agw-stats --example export_profiles > cells/cell-relay/crates/stats/tests/support/relay-profile.json
 ```
-
 Rust asserts exact equality against that fixture; TypeScript validates it with
 the actual frozen schema and counter checks. Neither test calls a remote service.

@@ -11,7 +11,7 @@ family reserves 535 slots per comparison: 1 magnitude + 512 enum categories +
 5 completeness + 6 type + 11 charset/format features. All slots, including unused
 and non-finding slots, remain in the Bonferroni denominator. There is no
 production independence, repeated-peeking or calibration guarantee. Seasonal
-selection is explicit host input under the runtime contract; no fallback or
+selection is explicit host input under runtime contract §10.23; no fallback or
 pooling occurs in this guard.
 
 ## Executing a call
@@ -59,7 +59,7 @@ The policy prerequisite is 's pure matrix in `agw-policy`. This ticket adds
 that boundary and its exhaustive matrix test; 's selective repair integration,
 HTTP/SDK and streaming drivers remain separate. Composes this call's
 statistical evidence into one audit artifact (below). Strict reads halt on
-unverified drift as specified by the runtime contract; repair reads fail open. Observe
+unverified drift as specified by contract §2; repair reads fail open. Observe
 preserves original bytes and outcomes in every case.
 
 Investigation uses only 's bounded outbox. One shared call reservation admits
@@ -97,15 +97,14 @@ artifact through 's local publisher and returns `None` on local store or
 honesty refusal. A full outbox still returns a publication with `queued: false`;
 it never awaits a sink, replaces the upstream outcome or changes policy.
 The shared fixture `contracts/examples/audit_artifact.statistical.valid.json`
-round-trips through the frozen schema in Rust and TypeScript. See the runtime contract and [AUDIT.md](./AUDIT.md).
+round-trips through the frozen schema in Rust and TypeScript. See runtime contract
+§10.41 and [AUDIT.md](./AUDIT.md).
 
 Run:
-
 ```sh
 cargo test -p agw-guard --test statistical_audit --test statistical_audit_limits
 npx vitest run tests/unit/contracts.test.ts
 ```
-
 ## Resource and latency validation
 
 The cooperative work allowance precharges parsing/extraction and result copying,
@@ -117,12 +116,10 @@ conservative accounting, not elapsed time or measured RSS. Exhaustion bypasses;
 process OOM/abort and preemption remain outside native unwind containment.
 
 Run:
-
 ```sh
 cargo bench -p agw-guard --bench statistical
 node cells/cell-relay/perf/run-availability.mjs
 ```
-
 The integrated native Criterion fixture includes call entry, lossless parsing,
 transient extraction, applicable adapters, materiality, routing,
 Policy, containment, and evidence destruction on both sides. Baseline setup,
@@ -146,7 +143,7 @@ Criterion reports remain under `target/criterion/statistical/` (not committed).
 
 See for acceptance criteria,
 For policy ownership and the
-the runtime contract for the decisions.
+[runtime contract](/agindow-runtime-contract.md) §10.27 for the decisions.
 
 Optionally attaches frozen request/response invariant selections to this
 same plan and call-level containment. See [invariant execution](./INVARIANTS.md)

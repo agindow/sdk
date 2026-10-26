@@ -7,22 +7,18 @@ This is an explicit tool-execution endpoint. Existing applications need to
 support that envelope or adapt their callables; it does not intercept TLS.
 
 Build and run from the repository root:
-
 ```sh
 cargo build --release -p agw-http-host --bin agindow-sidecar
 export AGINDOW_CONNECTIONS='{"conn_example/vendor.read":{"url":"http://127.0.0.1:8787/read","method":"POST","operation":"read"}}'
 AGINDOW_SOCKET=/tmp/agindow-example.sock target/release/agindow-sidecar
 ```
-
 In another terminal (the example upstream must be running):
-
 ```sh
 curl --unix-socket /tmp/agindow-example.sock http://localhost/healthz
 curl --unix-socket /tmp/agindow-example.sock http://localhost/v1/guard \
   -H 'Content-Type: application/json' \
   --data '{"tool":"vendor.read","connection":"conn_example","operation":"read","args":{},"mode":"observe"}'
 ```
-
 All configuration is environment-based: `AGINDOW_BIND` (loopback only, default
 127.0.0.1:8789), `AGINDOW_SOCKET`, `AGINDOW_INSTANCE_ID`, `AGINDOW_WORK` and
 `AGINDOW_CONNECTIONS`. Bindings map `connection/tool` to a fixed URL, method,
@@ -48,11 +44,9 @@ Socket RTT qualification is a separate benchmark; a unit test is not a timing
 claim.
 
 Build the static Linux image from the repository root:
-
 ```sh
-docker build -f cells/cell-relay/sidecar/Dockerfile -t agindow-sidecar:local.
+docker build -f cells/cell-relay/sidecar/Dockerfile -t agindow-sidecar:local .
 ```
-
 The scratch image includes a Rust/musl binary and embedded TLS roots. It has no
 shell, curl, Node or OpenSSL runtime dependency. `compose.yaml` shares a network
 namespace with the configured application image. The DaemonSet manifest uses a

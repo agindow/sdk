@@ -65,12 +65,11 @@ path/rule and 1 MiB total text before allocating dispatches. Audit references ar
 nonempty and at most 4096 bytes. Queue operations do not copy customer bodies.
 Errors are local `Result`s for future availability containment.
 
-Runtime contract the runtime contract defines the seam.
+Runtime contract [§10.25](/agindow-runtime-contract.md) defines the seam.
 Owns guard integration;
-Owns policy, EPIC-05 invariant execution, and EPIC-09 hosted investigation.
+Owns policy, invariant execution, and hosted investigation.
 The default engine remains `NullEngine`. No wire schema or latency guarantee is
 introduced.
-
 ```bash
 cargo test -p agw-stats --test router --test router_cost --test router_review
 ```

@@ -2,7 +2,7 @@
 
 `agw_stats::significance` computes significance from raw windows and connects it
 to 's materiality interface. Original detector APIs remain descriptive and
-unchanged. The runtime contract defines the methods and caller obligations. This is a
+unchanged. Contract §10.24 defines the methods and caller obligations. This is a
 standalone library; owns guard execution. No runtime is enabled by default.
 
 ## API and local gates
@@ -90,7 +90,6 @@ budget. Paths are capped at 1024 bytes for compatibility. Validate inputs
 before allocating statistical-test work. Invalid/oversized input returns a local
 error for future guard containment; no I/O, audit mutation, payload rewriting,
 policy execution or notification delivery occurs.
-
 ```sh
 cargo test -p agw-stats --test significance_math --test significance_adapters --test significance_limits
 ```

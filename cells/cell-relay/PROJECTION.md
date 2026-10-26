@@ -1,7 +1,7 @@
 # Precision-budgeted unit inputs
 
 `agw_stats::windows::projection` supplies explicit decimal/exponent-to-f64
-materialization under runtime contract the runtime contract.
+materialization under runtime contract [§10.29](/agindow-runtime-contract.md).
 This produces local analytical inputs and proof of conversion error. It does
 not modify payloads, authorize repairs, or change detector thresholds.
 
@@ -20,23 +20,21 @@ Recover a per-field hint from a numeric variant.
 - `allow_unsafe_integers` is a required explicit boolean. Mathematical integers outside ±(2^53−1), including decimal
 And exponent spellings, require true. Unrepresentable variants and retained
 Plain integer tokens wider than the i64/u64 model always refuse.
-
 ```rust,ignore
 use agw_stats::windows::{Projection, projection::{self, Budget, Hint, Limits, Mode, Policy, PrecisionSource}};
 
 let policy = Policy::new(
     Mode::Approximate(Budget::new(1e-12, 1e-15)?),
     PrecisionSource { revision: 42, hint: Hint::Absent },
-False,
-    Limits::default,
+    false,
+    Limits::default(),
 )?;
 selection.projection = Projection::Decimal(policy);
 // Record complete inspections and explicitly publish the selected baseline.
-let report = projection::compare("/amount", snapshot.baseline, snapshot.live)?;
-let diagnosis = report.detection;
-let inputs_and_proofs = report.observed;
+let report = projection::compare("/amount", snapshot.baseline(), snapshot.live())?;
+let diagnosis = report.detection();
+let inputs_and_proofs = report.observed();
 ```
-
 `Window::unit` preserves its original safe-integer authorization. New policies
 use `Window::projected_unit`, returning values plus numeric sample indexes,
 caller timestamps and per-sample authorization, original token, projected value,

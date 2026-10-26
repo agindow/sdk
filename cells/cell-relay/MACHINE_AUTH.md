@@ -1,7 +1,6 @@
-# Local machine identity — EPIC-14
-
-Contract the runtime contract and
-the wrapper API define the
+# Local machine identity
+Contract [§10.56](/agindow-runtime-contract.md) and
+[wrapper API §12.13](/wrapper-api.md) define the
 per-surface decision. This is opt-in local code. Nothing is deployed, no live
 identity provider is qualified, and the SDK's embedded behavior is unchanged.
 
@@ -22,24 +21,22 @@ both equal the registered client ID; only the current registered kid can mint.
 ## SDK setup
 
 Node creates an ephemeral Ed25519 proof key in process:
-
 ```ts
 import { createRemoteAuth, workloadIdentity, guardRemote } from 'agindow';
 
 const auth = await createRemoteAuth({
-Acquire: workloadIdentity({
-ExchangeEndpoint: 'https://guard.example/v1/token',
-Registration: 'registered-workload', tools: ['read'],
+  acquire: workloadIdentity({
+    exchangeEndpoint: 'https://guard.example/v1/token',
+    registration: 'registered-workload', tools: ['read'],
     // Or supply an assertion callback for a platform endpoint/workload API.
     // AGINDOW_IDENTITY_TOKEN_FILE is read automatically when tokenFile is absent.
   }),
-OnDiagnostic: reason => console.info(reason), // fixed labels only
+  onDiagnostic: reason => console.info(reason), // fixed labels only
 });
 try {
-Await guardRemote(original, envelope, { endpoint: 'https://guard.example/v1/guard', auth });
-} finally { auth.close; }
+  await guardRemote(original, envelope, { endpoint: 'https://guard.example/v1/guard', auth });
+} finally { auth.close(); }
 ```
-
 Python uses `RemoteAuth(workload_identity(...), ProofSigner(public_x, sign))`
 and `RemoteOptions(endpoint, auth=auth)`. `public_x` is the base64url Ed25519
 public coordinate; `sign(bytes)` returns a 64-byte signature through the host's

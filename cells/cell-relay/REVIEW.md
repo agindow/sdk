@@ -6,7 +6,7 @@ confidence ≥0.99 proceed. Availability faults still bypass once. The default
 engine remains `NullEngine`; this is an opt-in native library path.
 
 After execution, `review::case(&outcome, &scope)` constructs a frozen
-[`review_case` v1](../../contracts/review_case.v1.json) envelope. Scope binds the
+Envelope. Scope binds the
 tenant, connection, vendor, operation, selected contract version and caller's
 repair identity. The case uses the original blocked audit ID/time, includes
 request/response decision reports, proposed operations, exact replacement-token
@@ -41,5 +41,5 @@ those receipts as descriptive confidence priors. Hosts provide authentication,
 durable storage, delivery, polling and notifications. This implementation has no
 hosted queue, scheduler, automatic retry/execution or calibrated safety claim.
 
-Contract: the runtime contract.
+Contract: [§10.38](/agindow-runtime-contract.md#1038-ti-28--human-review-and-bounded-confidence-feedback).
 Tests: `cargo test -p agw-guard --test review`.

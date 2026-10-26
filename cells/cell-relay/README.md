@@ -11,9 +11,9 @@
 | Rule | Where |
 |---|---|
 | No synchronous dependency on another cell, a database, or an LLM | the tech stack |
-| Never reserialize the client's payload — byte-identity is structural | the runtime contract, the agent guide |
-| Reads never block; shape drift fails open, semantic drift fails closed | the runtime contract |
-| Any internal fault becomes `bypassed`, never a thrown error | the runtime contract |
+| Never reserialize the client's payload — byte-identity is structural | contract §3, the agent guide |
+| Reads never block; shape drift fails open, semantic drift fails closed | contract §4.2 |
+| Any internal fault becomes `bypassed`, never a thrown error | contract §4.1 |
 | Availability-gate path < 10 µs, faster than the working path | the tech stack |
 
 These are why the cell owns its own pipeline: a broken neighbour must not be able
@@ -26,15 +26,15 @@ Directories follow the tech stack; package names carry the `agw-` prefix.
 | Crate | Responsibility | Lands with |
 |---|---|---|
 | `agw-node-guest` | embedded Node WASM binding and local statistical selection | |
-| `agw-guard` | interception, byte-passthrough forwarding, mode dispatch | EPIC-02 |
-| `agw-inspector` | streaming tee, schema inference | EPIC-02, EPIC-03 |
-| `agw-diff` | shape diff, classification | EPIC-03 |
-| `agw-stats` | Tier 1 statistical detectors | EPIC-04 |
-| `agw-invariants` | cross-field invariant checks | EPIC-05 |
-| `agw-repair` | selective patch synthesis | EPIC-03 |
-| `agw-policy` | fail-open/close gates, availability gate | EPIC-02, EPIC-06 |
-| `agw-audit` | audit artifact construction; generated cross-cell contract types | EPIC-06 |
-| `agw-notify` | channel-neutral notification envelopes and bounded off-path emission | EPIC-11 |
+| `agw-guard` | interception, byte-passthrough forwarding, mode dispatch | |
+| `agw-inspector` | streaming tee, schema inference |, |
+| `agw-diff` | shape diff, classification | |
+| `agw-stats` | Tier 1 statistical detectors | |
+| `agw-invariants` | cross-field invariant checks | |
+| `agw-repair` | selective patch synthesis | |
+| `agw-policy` | fail-open/close gates, availability gate |, |
+| `agw-audit` | audit artifact construction; generated cross-cell contract types | |
+| `agw-notify` | channel-neutral notification envelopes and bounded off-path emission | |
 
 `agw-guard` and `agw-inspector` carry the engine behaviour that exists:
 `proxy::forward` streams an upstream body to the client byte-for-byte,
@@ -71,7 +71,7 @@ mismatch) has shape drift, confidence zero and repair skipped. Observe/repair
 reads degrade; writes bypass. Strict returns `Halt` for human escalation.
 Incomplete captures have no drift finding; parser faults bypass in every mode.
 Caller-owned `History` accumulates scoped occurrences and first-seen timestamps
-with one active entry. See the runtime contract for scope and draft semantics.
+with one active entry. See contract §10.17 for scope and draft semantics.
 
 This is a library seam. Callers must publish returned artifacts/warnings and
 honor `Halt` before dispatch. Forwarding remains streaming, `NullEngine` remains
@@ -84,18 +84,16 @@ immutable call snapshots. Startup precedence is explicit config > `AGINDOW_MODE`
 > `repair`; a per-request override wins for that call only. Both supplied startup
 sources must be valid even if one is shadowed. Values are exact lowercase
 `observe`, `repair`, `strict`; invalid inputs return errors before execution.
-
 ```rust,no_run
 use agw_guard::config::{Config, RuntimeConfig};
 
-let runtime = RuntimeConfig::from_env(Config::default)?;
+let runtime = RuntimeConfig::from_env(Config::default())?;
 let call = runtime.begin_call(None)?;
 // A local control-plane owner can update all clones without restart.
 runtime.reload_mode("strict")?;
 // `call` retains its original mode; the next begin_call sees strict.
-# Ok::<, Box<dyn std::error::Error>>()
+# Ok::<(), Box<dyn std::error::Error>>(())
 ```
-
 Use the same `CallContext` throughout the call: `mode` feeds future policy
 logic, `forward(upstream, overhead)` claims `X-Agindow-Mode` and wraps the body
 in the bounded tee, and `audit(draft)` finalizes the mode on an owned generated
@@ -155,7 +153,6 @@ operation runs. Cleanup panics yield `Bypassed(Panic)` without changing
 readiness or circuit state; successful cleanup retains the admission reason.
 
 Run the same absolute performance check as CI from the repo root:
-
 ```bash
 node cells/cell-relay/perf/run-availability.mjs
 ```
@@ -190,25 +187,19 @@ arm64, Rust 1.99.1, Node 22.21.1, release/bench profile. Bypass mean upper bound
 not-ready 4.40 ns, open-breaker 26.56 ns, fresh-error 7.06 ns; normal inspection
 mean lower bound 3,416.82 ns. These are observations on this machine, not a
 production SLA. To deliberately fail the same measured reports with a 1 ns limit:
-
 ```bash
 node cells/cell-relay/perf/check-availability.mjs target/criterion/availability 1
 ```
-
 ## Run
-
 ```bash
-cargo build --workspace # from the repo root, clean clone
+cargo build --workspace            # from the repo root, clean clone
 cargo clippy --workspace --all-targets -- -D warnings
-cargo test --workspace # agw-guard forwarding + agw-inspector tee + agw-audit contract tests
+cargo test --workspace             # guard forwarding + inspector tee + audit contract tests
 ```
-
 Cell-scoped, the way CI runs it:
-
 ```bash
 pnpm exec turbo run build lint test --filter=cell-relay
 ```
-
 `package.json` exists only so Turborepo can address this cell by name; the
 scripts shell out to cargo. Because the cargo workspace currently *is* this cell,
 those commands are workspace-scoped — a second Rust cell would need its own
@@ -216,17 +207,17 @@ package and its own scoped commands (`Cargo.toml` says so too).
 
 ## Not here yet
 
-- **WASM bindings** (`wasm/`) — EPIC-07. Criterion benches exist in `agw-audit`
+- **WASM bindings** (`wasm/`) —. Criterion benches exist in `agw-audit`
 And `agw-guard`; is what turns the tech stack's budgets into
   CI-enforced measurements instead of local runs.
-- **Drift detection, repair, and policy** — the rest of EPIC-02 and EPIC-03+. The
+- **Drift detection, repair, and policy** — the rest of and +. The
 Working reference for this cell's *shape* is still the TypeScript prototype in
-  [`prototype/`](../../prototype/README.md), which is not part of this workspace
+ , which is not part of this workspace
 And stays on plain npm.
 
 ---
 
-*Cell boundaries: [`../README.md`](../README.md) · Stack: the tech stack*
+*Cell boundaries:*
 
 ## Schema learning
 
@@ -236,19 +227,17 @@ spec by the caller. No spec or service is required. Exact vendor/operation keys
 isolate version histories. The first N valid samples publish a baseline;
 subsequent observations return `Frozen`. Call `begin` to explicitly relearn,
 retaining older versions. Reads return borrowed immutable baselines.
-
 ```rust
 use std::num::NonZeroUsize;
 use agw_inspector::inference::{BaselineStore, Key, Limits, Progress};
 
-let mut store = BaselineStore::new(NonZeroUsize::MIN, Limits::default);
+let mut store = BaselineStore::new(NonZeroUsize::MIN, Limits::default());
 let key = Key::new("vendor", "GET /users");
-store.begin(key.clone, None)?;
+store.begin(key.clone(), None)?;
 let result = store.observe(&key, br#"{"data":{"email":"a@example.com"}}"#, false)?;
 assert_eq!(result, Progress::Established { version: 1 });
-# Ok::<, agw_inspector::inference::LearnError>()
+# Ok::<(), agw_inspector::inference::LearnError>(())
 ```
-
 After driving a `Tee` to completion, pass `tee.captured` and `tee.truncated`.
 The learner reads raw JSON tokens, preserving integer/number shape without float
 conversion. Also supplies a lossless `Inspection` tree; the learner
@@ -267,7 +256,7 @@ nodes, 128 keys and 32 versions per key. Failed learning attempts leave existing
 state intact; errors are learning outcomes, never drift verdicts. Callers must
 handle them through availability containment when integrating this library.
 This seam adds no alerts, persistence, OpenAPI loader or guard integration.
-See the runtime contract for the exact rules.
+See runtime contract §10.11 for the exact rules.
 
 ## Lossless structured inspection
 
@@ -311,12 +300,10 @@ resource limits are not vendor drift. Complete malformed bodies are shape with
 no repair. Learned presence differences remain unknown. Metadata changes need
 explicit evidence; identical shapes alone cannot establish semantic safety.
 No guard, forwarding, policy or audit transport invokes this library yet.
-
 ```bash
 cargo test -p agw-diff
 cargo bench -p agw-diff --bench shape_diff
 ```
-
 The native benchmark gates nearest-rank p50 <50 µs and p99 <500 µs over 20,000
 samples per branch after 2,000 warmup iterations. Its nested payment/20-line-item
 fixture covers unchanged and changed inspection conversion/diff/report disposal.
@@ -359,7 +346,7 @@ Handle `Outcome::failure` before interpreting the result. It records
 incomplete/malformed/mismatched captures, duplicate keys, invalid reports and
 resource failures separately from drift. Internal failures are availability
 bypass inputs; a complete unparseable capture remains non-repairable and its
-existing `malformed_body` finding still follows the runtime contract policy. Resource preflight can reject before
+existing `malformed_body` finding still follows contract §4.4 policy. Resource preflight can reject before
 copying an oversized report; the caller still owns that report. For ordinary
 rejections, assessments retain reasons/confidence and `unresolved` retains
 findings for the policy caller. Applied proposals remove only their findings;
@@ -372,11 +359,9 @@ cross-cell `Patch` with `applied: true`, `selective: true`, concrete
 patch, aggregate applied confidence and the execution mode into an owned draft.
 It preserves the caller's decision and proof. Policy enforcement, write-integrity
 verification and audit publication remain separate future work.
-
 ```bash
 cargo test -p agw-repair
 ```
-
 ## Statistical rename evidence
 
 `agw_diff::rename::match_fields(removed, added)` borrows typed histograms for
@@ -394,19 +379,17 @@ and resource limits yield an explicit error before any result is returned.
 Limits: 64 fields/side, 256 bins/field, 1 MiB total metadata.
 
 Confidence decreases with divergence, low volume and sparse coverage using
-the runtime contract. It is deterministic evidence,
+[contract §10.15](/agindow-runtime-contract.md). It is deterministic evidence,
 not a calibrated probability. A confirmed low-volume match can remain below the
 repair gate. Callers assign a scope-unique shared identity to matched nodes
 and supply the detector score to alongside independent applicability.
 Semantic child checks and repair thresholds still apply. The integration test
 `rename_evidence` exercises this handoff, exact-byte repair and observe mode.
 No traffic collection, persistence, guard wiring or latency claim is included.
-
 ```bash
 cargo test -p agw-diff --test rename
 cargo test -p agw-repair --test rename_evidence
 ```
-
 ## Per-field precision snapshots
 
 `contract_snapshot` v2 carries optional `high_precision` booleans. Compile one
@@ -424,7 +407,7 @@ including `\e` for empty keys; the legacy `paths` API is unchanged.
 
 Map compilation is bounded to 4096 entries / 1 MiB of path text. Compile outside
 forwarding and handle errors at snapshot loading/availability containment. No
-registry delivery or default-engine wiring is added. See the runtime contract.
+registry delivery or default-engine wiring is added. See contract §10.18.
 
 ## Unit-conversion evidence
 
@@ -440,18 +423,16 @@ and PSI must reach 0.2 to return `Drift(finding)`. Signed median ratios within
 2% of 100, 0.01, 1000 or 0.001 receive typed `UnitConversion` evidence; other
 significant shifts remain semantic without a diagnosis. Zero baseline medians
 cannot suggest a ratio. Sign-only flips are invisible to magnitude metrics.
-See the runtime contract for exact formulas.
+See [contract §10.19](/agindow-runtime-contract.md) for exact formulas.
 
 `finding.audit(draft, side)` stamps generated v1 semantic drift and optional
 `unit_conversion`/detail, clears stale patch and proof claims, and retains the
 caller-owned policy decision. This API has no payload rewriting or repair
-proposal. It neither executes the write block nor wires the guard, collects
+proposal. It neither executes the §4 write block nor wires the guard, collects
 traffic, publishes artifacts or establishes production calibration/latency.
-
 ```bash
 cargo test -p agw-stats
 ```
-
 ## Cardinality and enum growth
 
 `agw_stats::enumeration::compare(path, baseline, observations)` borrows a known
@@ -472,16 +453,14 @@ additions in changes and all novelty under `metadata.agindow_enum_growth`, and
 clears stale repair/proof claims while retaining caller-owned policy. No wire
 schema changes are needed. Limits: 256 baseline entries, 256 observed distinct
 values, 4096 observations, 4096 bytes per string/path and 1 MiB total input text.
-See the runtime contract for exact boundaries.
+See [contract §10.20](/agindow-runtime-contract.md) for exact boundaries.
 
 This is standalone evidence without persistence, first-ever histories, numeric
 enums, guard wiring or policy execution. / still own configurable
 floors, cross-detector weighting, alert routing and production validation.
-
 ```bash
 cargo test -p agw-stats --test enumeration
 ```
-
 ## Completeness, type consistency and string fingerprints
 
 `agw_stats::field::{completeness, coercion, charset}` compare two borrowed
@@ -508,13 +487,11 @@ Limits are 4096 observations/window, 4096 UTF-8 bytes per path/string/numeric to
 and 1 MiB combined text. Containers count only as a top-level type. Invalid numeric
 tokens and resource limits return errors even for sparse windows. Profiles and
 reports own counts only; no payload mutation, guard, policy, registry or audit
-publication is added. See the runtime contract.
-
+publication is added. See [contract §10.21](/agindow-runtime-contract.md).
 ```bash
 cargo test -p agw-stats --test field_detectors
 cargo bench -p agw-stats --bench field_detectors
 ```
-
 The native benchmark gates each detector's nearest-rank p99 <2 ms over 10,000
 measurements after 2,000 warm-ups. Each fixed fixture has 128 samples per window:
 integer→null, integer→string, and ISO timestamp→month/day. It includes validation,
@@ -585,7 +562,7 @@ snapshots. The caller owns retention/removal and external snapshot lifetimes.
 `set_available(false)` exposes an outer provider/refresh fault locally while
 retaining the baseline; snapshot acquisition invokes no provider, network, clock
 or storage API. Guard execution, export and remote refresh remain,
-and. See the runtime contract and the three `windows_*` integration suites.
+and. See contract §10.26 and the three `windows_*` integration suites.
 
 ## Explicit statistical execution
 
@@ -606,7 +583,7 @@ Adds explicitly selected aggregate snapshot refresh, a bounded local cache,
 revision/generation fences and separate native/WASM host transports. Historical
 rollups never become exact detector windows. See [profile refresh](./REFRESH.md).
 Qualified native/WASM refresh and recovery against staging;
-no scheduler starts by default. See the hosted qualification evidence.
+no scheduler starts by default. See the.
 
 Adds standalone [bounded call-level array sampling](./SAMPLING.md) with
 explicit policy identity and conditional significance adapters.
@@ -628,7 +605,7 @@ Adds the local [audit publication and retrieval](./AUDIT.md) seam:
 honesty-validated artifacts for every decision (bypasses included), bounded
 recurrence and append-only storage, a host-drained NDJSON sink outbox and
 the tech stack OTLP/JSON metrics; the durable registry archive and its
-opt-in authenticated read route are documented there (the runtime contract).
+opt-in authenticated read route are documented there (contract §10.40).
 
 Adds native durable audit delivery: `Publisher::stage` transfers queued
 artifacts off-path into `agw_audit::delivery::Outbox`, and caller-owned bounded
@@ -679,7 +656,7 @@ Node publication is opt-in through `audit: { tenant }`. Completed guest calls
 compose one frozen v1 artifact into a bounded FIFO; `drainAudit(sink)` is explicit,
 ordered and off-path. Failed sinks retain the same ID. Capacity drops are counted;
 retirement/restart loses guest memory. No guest network, timers or threads exist.
-The host owns durable persistence and delivery. Wrapper and the runtime contract
+The host owns durable persistence and delivery. Wrapper §12.10 and contract §10.40
 state the ABI and bounds.
 
 [The embedded performance methodology](./node/PERFORMANCE.md) records the real
@@ -689,7 +666,7 @@ this Node boundary. Unmet budgets remain visible; no production SLA is implied.
 
 ## Credential evidence and cutover
 
-[EPIC-13 local surfaces](CREDENTIALS.md) add bounded response evidence, a closed
+[ local surfaces](CREDENTIALS.md) add bounded response evidence, a closed
 credential-event boundary, tenant-owned health projection, opaque-binding canary
 and overlap state machines, and the offline readiness report. These remain In
 Review pending native execution and latency qualification. No minting, secret

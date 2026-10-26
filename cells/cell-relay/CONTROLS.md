@@ -1,7 +1,7 @@
 # false-positive controls
 
 `agw_stats::control` is a standalone, synchronous local library. It performs no
-I/O and makes no guard, policy, repair or delivery decisions. The runtime contract
+I/O and makes no guard, policy, repair or delivery decisions. Contract §10.23
 specifies its rules. Supplies snapshots, owns routing, and
 will connect controls to guarded evaluations. No production qualification or
 latency guarantee is claimed.
@@ -101,7 +101,6 @@ evidence. Positive counts expose missed detections; the false-positive gate alon
 makes no recall guarantee. Synthetic regression fixtures exercise the machinery
 but cannot close 's production criterion. No production dataset or agreed
 production threshold exists yet; stays Blocked until that replay passes.
-
 ```sh
 cargo test -p agw-stats --test control_selection --test control_materiality --test control_budget --test control_replay
 ```
