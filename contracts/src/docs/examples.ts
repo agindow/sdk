@@ -1,11 +1,12 @@
+import { sdkMatrix } from './sdk-matrix.generated.js';
 /** Exact published code is compiled and executed by the build gate. */
 import type { DocCodeSample, DocSnippet } from './model.js';
 
 const node = (code: string): DocCodeSample => ({
-  label: 'ts', language: 'ts', matrix: 'node-local/0.1.0-alpha.1', code,
+  label: 'ts', language: 'ts', matrix: `node-local/${sdkMatrix.node.version}`, code,
 });
 const python = (code: string): DocCodeSample => ({
-  label: 'py', language: 'python', matrix: 'python-local/0.1.0a0', code,
+  label: 'py', language: 'python', matrix: `python-local/${sdkMatrix.python.version}`, code,
 });
 /** Pair TypeScript and Python samples in one Better Auth–style tabbed block. */
 export const sdkTabs = (ts: string, py: string): DocSnippet => ({ samples: [node(ts), python(py)] });
@@ -131,7 +132,7 @@ export const pythonExample = sdkTabs(nodeFixture, pythonFixture);
 export const observeExample = sdkTabs(observeTs, observePy);
 export const auditExample = sdkTabs(auditTs, auditPy);
 
-export const cliExample = shellTabs('node cells/cell-relay/node/dist/cli.cjs report ./contracts', 'cli-local/0.1.0-alpha.1');
+export const cliExample = shellTabs('npx --no-install agindow report .', `cli-local/${sdkMatrix.cli.version}`);
 export const buildExample = shellTabs(`pnpm install --frozen-lockfile
 rustup target add wasm32-unknown-unknown
 cargo install wasm-bindgen-cli --version 0.2.129 --locked

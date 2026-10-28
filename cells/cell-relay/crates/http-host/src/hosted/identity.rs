@@ -3,13 +3,13 @@ use crate::{
     auth::Permit,
     machine::{Claims, Context, Denial, MachineGate, ProofRequest},
 };
-use std::cell::RefCell;
+use std::{cell::RefCell, collections::BTreeMap};
 use worker::Env;
 struct Cached {
     manifest: String,
     gate: MachineGate,
 }
-thread_local! { static CACHE:RefCell<Option<Cached>>=const { RefCell::new(None) };
+thread_local! { static CACHE:RefCell<BTreeMap<String,Cached>>=const { RefCell::new(BTreeMap::new()) };
 static DENIAL:RefCell<Option<Denial>>=const{RefCell::new(None)}; }
 pub struct RequestAuth<'a> {
     pub tls_peer: Option<&'a str>,
@@ -41,9 +41,16 @@ pub fn admit(
     let Some(manifest) = env.secret("GUARD_MACHINE_AUTH").ok().map(|v| v.to_string()) else {
         return Ok(None);
     };
+    let manifest = super::owner::manifest(env, &manifest, now)
+        .map_err(|_| status(Denial::Unavailable))?
+        .unwrap_or(manifest);
     CACHE.with(|cell| {
-        let mut slot = cell.try_borrow_mut().map_err(|_| 503u16)?;
-        if let Some(c) = slot.as_mut() {
+        let mut slots = cell.try_borrow_mut().map_err(|_| 503u16)?;
+        let namespace = super::owner::namespace(env);
+        if !slots.contains_key(&namespace) && slots.len() >= 256 {
+            return Err(status(Denial::Capacity));
+        }
+        if let Some(c) = slots.get_mut(&namespace) {
             if c.manifest != manifest {
                 c.gate
                     .refresh(&manifest, now)
@@ -51,12 +58,16 @@ pub fn admit(
                 c.manifest = manifest;
             }
         } else {
-            *slot = Some(Cached {
-                gate: MachineGate::new(&manifest, now).map_err(|_| status(Denial::Unavailable))?,
-                manifest,
-            });
+            slots.insert(
+                namespace.clone(),
+                Cached {
+                    gate: MachineGate::new(&manifest, now)
+                        .map_err(|_| status(Denial::Unavailable))?,
+                    manifest,
+                },
+            );
         }
-        let c = slot.as_mut().ok_or(503u16)?;
+        let c = slots.get_mut(&namespace).ok_or(503u16)?;
         let dpop = auth.authorization.strip_prefix("DPoP ");
         let mtls = auth
             .authorization

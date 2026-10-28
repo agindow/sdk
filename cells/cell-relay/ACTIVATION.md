@@ -1,8 +1,9 @@
 # Local invariant activation
 
 `agw_invariants::activation` implements runtime contract §10.33. It is an explicit
-background library; constructing a guard still selects `NullEngine`. It does not
-schedule jobs, fetch profiles, run an LLM, authorize repair or change call modes.
+background library; constructing a guard defaults to the statistical guest with an
+unselected empty plan. It does not schedule jobs, fetch profiles, run an
+LLM, authorize repair or change call modes.
 
 A `Controller` owns one exact tenant/connection/vendor/operation/contract scope.
 `Candidate` carries immutable local DSL definitions/bindings and optional

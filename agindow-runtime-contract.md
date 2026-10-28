@@ -1541,7 +1541,12 @@ sampling store (§10.28); it does not reinterpret object-only selectors.
 
 ### ✅ 10.27 Explicit statistical guard execution — SETTLED
 
-The native library defaults to `NullEngine`. Explicit activation supplies an
+The native library and published SDKs default to the packaged statistical engine.
+With no selection, it holds an empty plan: construction needs no credentials or
+windows, performs no eligible detector work and emits no fabricated findings.
+An empty plan preserves zero-friction passthrough and return identity; engine
+faults remain availability bypasses. Selective repair is never a default.
+Explicit activation supplies an
 immutable local plan with exact tenant/connection/vendor/endpoint/segment and
 selected generations on each side; no provider callback runs in-path.
 Call entry retains the plan and mode snapshot. Replacement affects later
@@ -1733,7 +1738,7 @@ Lossless i64 and bounded strings project directly; arrays, missing fields,
 containers and other numeric representations remain unavailable, per rule.
 Incomplete captures never produce invariant findings. Duplicate-key/resource/parser
 faults use the existing call-level containment; one bypass preserves the original
-outcome and skips later evaluation. Defaults remain NullEngine.
+outcome and skips later evaluation. Defaults use an empty statistical plan; detection requires explicit windows.
 
 Each violating rule yields semantic evidence with its ID, actual value, computed
 expected value/bounds/operator and configured tolerance; enum additions yield
@@ -1878,6 +1883,15 @@ Payload verification alone never asserts `write_integrity`; idempotency and
 call-wide write proof remain separate work. Malformed-body policy follows §4.4.
 No default-engine switch, streaming buffering, remote acquisition, statistical
 evidence composition, audit publication/storage or SDK wiring is added.
+
+Exposes an explicit packaged-guest playground entry point for one
+committed synthetic CRM mechanical rename. Exact reviewed input bytes admit
+trusted migration identity; the existing gated repair engine edits the field
+key and independently checks the reviewed target bytes before returning
+`repairApplied`/`verified` and before/after evidence. Untouched field bytes remain
+identical. No upstream operation occurs. Caller-supplied mappings, schema
+acceptance and confidence alone confer no authority. This path is never installed
+in ordinary Guest::begin or SDK guards; the default has no selective repair.
 
 ### 10.35 / — structured feedback and durable recovery measurement
 
@@ -2442,7 +2456,7 @@ a guarded call.
 The local `agindow` source package ships both JS module formats,
 declarations and the release Rust/WASM guest. It is not published to npm.
 Wrapper API §12.7 records its deliberately bounded public surface: generic tools
-and the default NullEngine, with explicit local statistical windows selecting
+and the default statistical guest, with explicit local statistical windows selecting
 . Dedicated platform/client/HTTP adapters remain. No remote registry,
 LLM, network, timer or filesystem access occurs during a guarded call.
 
@@ -2538,8 +2552,8 @@ The API is §2 HTTP, not a TLS interception proxy. A client must already support
 that envelope or explicitly adapt its tool callable.
 
 Both HTTP hosts use the identical Rust statistical Session and immutable mode
-snapshot. Local selections are explicit setup-only inputs. NullEngine remains
-the default and provides no drift detection or selective repair. Complete bounded
+snapshot. Local selections are explicit setup-only inputs. The statistical engine
+is the default; without windows it emits no findings and has no selective repair. Complete bounded
 responses can be inspected; streaming, unknown-length and oversized responses
 retain the stream and bypass unavailable inspection. Policy halts return the
 six-field 409, while internal faults preserve upstream bytes/status with
@@ -3034,6 +3048,81 @@ invoicing and production qualification remain separate host obligations.
 
 ### 10.56 – — bounded machine identity (2026-10-22)
 
+Approved multi-org extension (October 27, 2026):
+supersedes 's per-org operator policy binding for the opt-in hosted profile.
+A tenant-free format-2 host policy constrains the platform signer; verified
+membership selects deterministic isolated org authority/admission profiles.
+First registration durably pins generation without a per-org CLI bootstrap.
+Registration IDs carry profile routing hints; signature/tenant/profile checks
+supply authority, never the hint. A bounded host directory renews enrolled
+unchanged reviews only. Read catalog materialization is local to verified owners;
+no directory/identity/database call enters guard. Separate disabled configs and
+explicit primary/a smoke retirement avoid legacy imports. There are no existing
+customers (October 28 clarification), so no customer migration is required. Coordinates
+public guidance; no production enablement or qualification is authorized.
+
+Self-serve admission (October 27, 2026; user approved before implementation):
+Adds a separate private platform
+signer for verified owner-session intents. The signer and authority both
+enforce the installed reviewer policy: exact tenant/Test origin/profile/storage
+generation, connection/audience/read tools and immutable version/deadline. A
+constrained reviewer key cannot bootstrap multiple rows, change multiple rows,
+resume stopped/expired/revoked authority or extend an existing review deadline.
+Offline operator reviewer trust remains separate. Renewal cannot create rows.
+
+Public-only intents persist before signing, with actor/request digest idempotency,
+rolling quotas and generation/revision CAS. Uncertain commands reconcile before
+new mutation; background alarms do not depend on a browser remaining open.
+Admission storage is anchored to its original tenant/profile/generation and
+immutable policy versions. Empty admission storage cannot bootstrap over an
+already-active authority. Migration/recovery requires explicit operator setup;
+no manual-secret import or automatic resurrection is supplied. Intent receipts
+and tombstones fail closed at bounded capacity without evicting live fences.
+
+Adds owner-only Workloads UI
+and public setup. Submitted, admitted, delivered and fresh exchange-ready states
+are distinct. Ready requires matching owner acknowledgement, completed recovery,
+read-route validation, native issuer preparation and <=30-second freshness.
+Public handoff fields are re-viewable; private keys remain customer-side. Only
+the customer's actual signed exchange/read demonstrates key possession and dispatch.
+Dashboard cookies confer no token/guard authentication. No control/identity/SQL
+read enters guarded dispatch. Default feature/backend policy remains unconfigured;
+no hosted qualification or / completion is implied.
+
+Approved renewal decision (October 27, 2026; local implementation):
+Selects B: a private durable
+reviewed-policy authority with a renewal-only background job. Exact canonical
+registration digests, signed reviewer admissions, generation/revision fences and
+a maximum 30-day reviewed renewal mandate bound unchanged-row renewal. Admission
+snapshots remain at most 3600s; expired/revoked authority cannot silently resume.
+Lease delivery and renewal I/O stay outside guard execution. Auto mode separates
+exchange lease expiry from validation of already-issued tokens under local
+TTL/epoch/scope rules. Conservative stale-owner revocation lag is 66 minutes under
+the stated clock assumptions; execution disablement is a separate operator action.
+The user approved B before implementation. Local compiled fixtures cover these
+boundaries; hosted qualification remains pending. Replay/epoch/quarantine
+and qualification remain intact.
+
+Self-hosted owner profile (October 27, 2026; local implementation):
+route each registered workload to one execution owner. Keep guard proof admission
+local. Rotate issuer keys with every owner or WASM replay-state incarnation;
+old tokens/descendants return 503 instead of being admitted after state loss.
+Persist registration+jti assertion fences only at token exchange, before exposing
+a minted token. Bound access/assertions to 300s plus 30s skew, proof fences to
+180s/1024 entries and assertion fences to 1024 retained through expiry+30s.
+Fresh/lost durable state quarantines exchange for 360s. Keep a monotonic clock
+floor and never evict live fences. Recovery uses existing background SDK refresh,
+not an in-call IdP or store lookup. Allow 335s for a warm authority and 370s after
+empty-store quarantine (360s + 5s retry + 5s exchange). These bounds require an
+available authority, prompt local assertion signing and a running SDK scheduler;
+sustained partitions, expired host policy or a suspended workload have no finite
+recovery guarantee. Cache partitions derive from trusted owner activation, with
+1024 proof fences per workload and at most 256 retained native activations per
+isolate; saturation rejects without eviction. Workload routing
+hints are locators only. No global quota or exactly-once vendor-write claim is
+introduced. See the detailed owner/routing/storage migration decision in
+. Live qualification is separate.
+
 Decision owner: relay maintainers. This is an opt-in local implementation,
 not deployed identity infrastructure. Vendor credentials remain outside AGINDOW.
 Authenticated tenant administrators register issuer/subject rules and public
@@ -3118,3 +3207,28 @@ Required evidence: defect matrices, tenant-A/tenant-B isolation, stolen-token
 proof replay, keyless-only refusal, capacity saturation, controlled clock edges,
 SDK lifecycle parity and credential-output scans. No new contracts family or
 §7 taxonomy entry is introduced.
+
+### 10.57 — Explicit SDK selective repair
+
+Resolved: Node/Python ordinary inspection remains non-mutating by default.
+Construction may opt into reviewed tool/side-scoped top-level object-key rename
+rules, a migration identity, confidence and a local synchronous independent
+verifier over immutable original/patched JSON text. The shared Rust repair
+library prepares only targeted raw-span edits. The SDK applies only when the
+verifier returns true and mode is repair/strict; observe never mutates. Missing
+source preserves identity; collision, low confidence and verification refusal
+remain unresolved shape drift. Unresolved shape drift passes through in repair mode under shared Rust policy;
+strict halts unresolved matched drift. Existing statistical findings, halts,
+malformed results and bypass are never erased by repair preparation. Verifier
+faults, async results and unavailable capture use the availability bypass path,
+without retries, and retain original upstream exceptions.
+
+Boundaries: 16 rules, one per tool/side, simple 64-character ASCII object keys,
+complete captures <=1 MiB, existing.97/.99 thresholds. Opt-in divides the work
+allowance across statistical inspection and request/response preparation. No
+nested/array/unit/enum transformations or automatic discovery. Facts and business
+snapshots refresh outside calls; callbacks must not add synchronous cell, DB or
+LLM dependencies. Guest audit FIFO plus host-applied repair is a setup error
+until its artifact can accurately cover the combined path; repair events are
+local metadata, not durable evidence or persisted write correctness proof.
+See and wrapper API §12.23.

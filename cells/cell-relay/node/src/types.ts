@@ -1,3 +1,5 @@
+import type { SelectiveRepairOptions } from './selective.js';
+export type { SelectiveRepairOptions, RenameRule, RepairCheck } from './selective.js';
 import type { AuditDrain, AuditSink } from './audit.js';
 export type Mode = 'observe' | 'repair' | 'strict';
 export type Operation = 'read' | 'write' | 'unknown';
@@ -53,6 +55,7 @@ export type Transformer = (value: unknown) => unknown;
 export type AgindowConfig = Config;
 export type AgindowEvent = Event;
 export interface Options extends Config {
+  readonly selectiveRepair?: SelectiveRepairOptions | false;
   readonly audit?: { readonly tenant: string; readonly capacity?: number; readonly maxBytes?: number };
   readonly selection?: StatisticalSelection;
   readonly work?: number;

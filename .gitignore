@@ -3,7 +3,7 @@ examples/node/package-lock.json
 __pycache__/
 *.pyc
 .venv/
-.env*/
+.env*
 examples/python/.venv/
 dist/
 *.egg-info/
@@ -18,3 +18,7 @@ target/
 .mypy_cache/
 coverage/
 .wrangler/
+
+# Local credentials and deployment state
+.local/
+.dev.vars*

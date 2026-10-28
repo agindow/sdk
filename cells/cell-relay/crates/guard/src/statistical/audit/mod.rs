@@ -91,7 +91,10 @@ pub fn compose_with<O>(
     mut draft: AuditArtifact,
     applied: &[Applied<'_>],
 ) -> AuditArtifact {
-    let plan = outcome.plan.as_deref();
+    let plan = outcome
+        .plan
+        .as_deref()
+        .filter(|plan| !plan.has_no_selection());
     let mut entries = Vec::new();
     let mut changes: BTreeMap<(String, String, String, String), Change> = BTreeMap::new();
     let (mut request_drift, mut response_drift) = (false, false);

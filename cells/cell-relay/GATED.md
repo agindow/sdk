@@ -2,7 +2,7 @@
 
 `agw_guard::gated::Call` connects the existing availability gate, policy matrix
 and selective repair library for bounded JSON captures. It is an opt-in library
-seam; the default statistical engine remains `NullEngine` and streaming/SDK
+seam; the default statistical engine has an empty plan and streaming/SDK
 integration is separate. See runtime contract
 [§10.34](/agindow-runtime-contract.md#1034-ti-24--explicit-two-layer-native-call-execution).
 

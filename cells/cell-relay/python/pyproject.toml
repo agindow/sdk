@@ -1,6 +1,6 @@
 [project]
 name = "agindow"
-version = "0.1.0a0"
+version = "0.1.0a1"
 description = "API drift firewall for AI agents on Python (Rust/WASM)"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -32,6 +32,7 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
+    "cryptography==48.0.1",
     "hatchling>=1.27,<2",
     "mypy>=1.15,<2",
     "pydantic>=2.11,<3",

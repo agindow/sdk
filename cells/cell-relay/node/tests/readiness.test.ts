@@ -17,3 +17,15 @@ it('rejects malformed diagnostic metadata and freezes detector evidence', () => 
     } else expect(() => engine.begin({}, 'observe', 'read', true, 'op')).toThrow('invalid guest');
   }
 });
+it('default packaged guest uses statistical readiness without selected windows', async () => {
+  const { loadWasm } = await import('../dist/esm/wasm.js');
+  const engine = await loadWasm({});
+  const original = { value: 100 };
+  const clean = engine.begin(original, 'repair', 'write', true, 'op');
+  expect(clean.request).toMatchObject({ bypassed: false, halt: false, findings: 0, detectors: 0 });
+  clean.close();
+  engine.setReady?.(false);
+  const cold = engine.begin(original, 'repair', 'write', true, 'op');
+  expect(cold.request).toMatchObject({ bypassed: true, halt: false, findings: 0 });
+  cold.close();
+});

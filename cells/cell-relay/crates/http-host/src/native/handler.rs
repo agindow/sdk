@@ -24,7 +24,7 @@ pub async fn health(Extract(state): Extract<Arc<State>>) -> Response {
 }
 pub async fn registration(Extract(state): Extract<Arc<State>>) -> Response {
     axum::Json(json!({ "instance": state.settings.instance,
-        "routes": state.settings.routes.keys().collect::<Vec<_>>(), "default_engine": "NullEngine" })).into_response()
+        "routes": state.settings.routes.keys().collect::<Vec<_>>(), "default_engine": "Statistical" })).into_response()
 }
 fn error(status: StatusCode, code: &'static str) -> Response {
     (status, axum::Json(json!({ "error": code }))).into_response()

@@ -1,5 +1,5 @@
 # Explicit native statistical guard
-`agw_guard::statistical::Engine::default` is `NullEngine`. Explicitly opt into
+`agw_guard::statistical::Engine::default` is statistical with an empty plan. Configure windows to detect. Explicitly opt into
 `Engine::statistical(Plan::new(identity, fields)?)` using local snapshots.
 Nothing fetches profiles, calls a provider, or activates detection by default.
 Select the exact tenant, connection, vendor, endpoint, side, field, segment,
@@ -149,3 +149,7 @@ Optionally attaches frozen request/response invariant selections to this
 same plan and call-level containment. See [invariant execution](./INVARIANTS.md)
 for exact projection, enum additions, shared policy, per-phase audit drafts and
 the local integrated native p99 gate. Empty statistical fields are supported.
+
+Retains `Engine::NullEngine` only as an explicit native opt-out/test seam.
+No Node/Python/native constructor selects it implicitly. An unselected statistical
+plan performs no detector or capture work; readiness faults still bypass.

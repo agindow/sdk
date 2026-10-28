@@ -1,0 +1,27 @@
+{
+  "extends": "../../../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": [
+      "ES2022"
+    ],
+    "types": [],
+    "paths": {
+      "@agindow/native-host": [
+        "./native-host.d.ts"
+      ],
+      "@agindow/native-one": [
+        "./native-host.d.ts"
+      ],
+      "@agindow/native-two": [
+        "./native-host.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "./**/*.ts",
+    "../tests/support/owner-worker.ts"
+  ],
+  "files": [
+    "../../node_modules/@cloudflare/workers-types/index.d.ts"
+  ]
+}

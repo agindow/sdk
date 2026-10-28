@@ -1,3 +1,4 @@
+import { repairOptions, selectiveEngine } from './selective.js';
 import { randomUUID } from 'node:crypto';
 import { validateAudit, unavailableAudit } from './audit.js';
 import { fileURLToPath } from 'node:url';
@@ -11,6 +12,7 @@ interface GuestCall {
   free(): void;
 }
 interface Guest {
+  prepare_rename?(bytes: Uint8Array, source: string, target: string, confidence: number, mode: string, work: number): string;
   set_ready?(ready: boolean): void;
   enable_audit?(tenant: string, namespace: string, capacity: number, maxBytes: number): void;
   audit_peek?(): string;
@@ -68,7 +70,8 @@ export async function loadWasm(options: Options): Promise<Engine> {
 export function bindGuest(guest: Guest, options: Options): Engine {
   const active = guest.active();
   const selectedTool = options.selection?.operation;
-  const allowance = options.work ?? 200_000_000;
+  const totalAllowance = options.work ?? 200_000_000;
+  const allowance = options.selectiveRepair ? Math.floor(totalAllowance / 3) : totalAllowance;
   let retired = false;
   let draining = false;
   const publication = options.audit !== undefined;
@@ -77,7 +80,7 @@ export function bindGuest(guest: Guest, options: Options): Engine {
     if (retired) throw Error('guest retired');
     try { return work(); } catch (error) { retired = true; throw error; }
   };
-  return {
+  const engine: Engine = {
     setReady(ready) { enter(() => guest.set_ready?.(ready)); },
     async drainAudit(sink, limit = 64) {
       if (!publication || retired || draining || guest.audit_peek === undefined || guest.audit_ack === undefined
@@ -128,6 +131,13 @@ export function bindGuest(guest: Guest, options: Options): Engine {
       });
     },
   };
+  const repair = repairOptions(options.selectiveRepair, publication);
+  if (!repair) return engine;
+  if (!guest.prepare_rename) throw Error('selective repair guest unavailable');
+  return selectiveEngine(engine, repair, (before, rule, mode) => enter(() => {
+    if (!guest.prepare_rename) throw Error('selective repair guest unavailable');
+    return guest.prepare_rename(new TextEncoder().encode(before), rule.from, rule.to, rule.confidence, mode, allowance);
+  }));
 }
 // Replaced by the build script for each module format; no runtime discovery.
 declare const __AGINDOW_FILENAME__: string;

@@ -2,7 +2,7 @@
 Background synchronization implements [contract §10.22](/agindow-runtime-contract.md)
 using frozen.
 This is an explicit library/host boundary; no background thread starts by default.
-`NullEngine` remains the default. Aggregate snapshots cannot make the statistical
+The statistical guest is default; configure windows to detect. Aggregate snapshots cannot make the statistical
 guard ready: `exact_detector_inputs` always returns unavailable. Exact
 windows and the detector provider retain their existing lifecycle.
 

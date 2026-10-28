@@ -10,7 +10,7 @@ export const preview: DocPage = {
   sections: [
     {
       heading: 'Local interface preview',
-      text: 'AGINDOW is a pre-alpha API drift firewall. The default engine passes calls through without detecting drift until a detector is explicitly selected and configured. Coverage describes observed evidence and cannot prove every API change is safe. The local MCP interface exposes lookup_contract, query_drift, fetch_audit, simulate_repair and coverage_report. Requests require authorization; simulations never execute writes. A hosted endpoint is not available yet.',
+      text: 'AGINDOW is a pre-alpha API drift firewall. The statistical guest is default; configure windows to detect. Without a selection it emits no findings. Coverage describes observed evidence and cannot prove every API change is safe. The local MCP interface exposes lookup_contract, query_drift, fetch_audit, simulate_repair and coverage_report. Requests require authorization; simulations never execute writes. A hosted endpoint is not available yet.',
     },
     {
       heading: 'Runnable example',

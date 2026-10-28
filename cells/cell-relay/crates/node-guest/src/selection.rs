@@ -29,7 +29,7 @@ pub struct Samples {
 /// Setup-only exact local windows. No collection, pooling or remote selection.
 pub fn engine(json: &str) -> Result<Engine, String> {
     if json == "null" {
-        return Ok(Engine::NullEngine);
+        return Ok(Engine::default());
     }
     if json.len() > 2 * 1024 * 1024 {
         return Err("selection too large".into());

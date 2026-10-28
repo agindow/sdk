@@ -1,10 +1,10 @@
 import { docsRevision } from './model.js';
-const markdown = (operationId: string) => ({ get: { operationId, security: [], summary: 'Published documentation as Markdown',
-  responses: { '200': { description: 'Shared reviewed publication', content: { 'text/markdown': { schema: { type: 'string' } } } },
+const markdown = (operationId: string, summary: string) => ({ get: { operationId, security: [], summary,
+  responses: { '200': { description: 'Public developer documentation; no credentials required', content: { 'text/markdown': { schema: { type: 'string' } } } },
     '403': { description: 'Host or browser origin refused' } } } });
 /** This is the exact HTTP description consumed by the surface signer. */
 export const surfaceHttp = {
-  openapi: '3.1.0', info: { title: 'AGINDOW MCP', version: '0.1.0' },
+  openapi: '3.1.0', info: { title: 'AGINDOW MCP', version: '0.1.0', description: 'Read contracts, drift findings, audit evidence and coverage, or simulate a repair without executing vendor writes. Use your configured self-hosted evidence origin; no managed MCP service is currently available. Embedded SDK execution and POST /v1/guard are separate interfaces.' },
   paths: {
     '/mcp': { post: { operationId: 'mcp', summary: 'Stateless read-only MCP JSON-RPC transport',
       security: [{ bearer: [] }],
@@ -22,8 +22,8 @@ export const surfaceHttp = {
       responses: { '200': { description: 'OpenAPI document plus tools and x-agindow-signature; verify using an independently trusted key.',
         content: { 'application/json': { schema: { type: 'object', description: 'Signed OpenAPI 3.1 document with tool schemas' } } } },
         '403': { description: 'Host or browser origin refused' }, '503': { description: 'Signing unavailable' } } } },
-    '/llms.txt': markdown('llms'), '/llms-full.txt': markdown('llms-full'), '/docs.md': markdown('docs-markdown'),
-    '/spore.md': markdown('spore'),
+    '/llms.txt': markdown('llms', 'Public developer documentation index for coding agents'), '/llms-full.txt': markdown('llms-full', 'Full public developer documentation and integration skill'), '/docs.md': markdown('docs-markdown', 'Public developer manual: installation, configured detection, SDKs, guides and reference'),
+    '/spore.md': markdown('spore', 'Short public integration seed for projects'),
     '/canary.txt': { get: { operationId: 'canary', security: [], summary: 'Soft agent canary (unauthorized stop / legitimate doors)',
       responses: { '200': { description: 'Shared reviewed canary plain text', content: { 'text/plain': { schema: { type: 'string' } } } },
         '403': { description: 'Host or browser origin refused' } } } },

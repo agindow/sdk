@@ -3,6 +3,7 @@
 mod archive;
 mod exchange;
 mod identity;
+mod owner;
 mod registry;
 mod state;
 use crate::{
@@ -59,7 +60,7 @@ async fn handle(request: &mut Request, env: &Env) -> Result<Response> {
     }
     if request.path() == "/healthz" {
         return Response::from_json(
-            &serde_json::json!({"status":"ok","default_engine":"NullEngine"}),
+            &serde_json::json!({"status":"ok","default_engine":"Statistical"}),
         );
     }
     if request.path() != "/v1/guard" || request.method() != Method::Post {

@@ -435,7 +435,7 @@ HTTP adapters are outside the Python primitive slice. Shared fixture comparison
 normalizes these language representations while checking actual call counts,
 identity, exceptions, mode snapshots, halts and bypass events.
 
-Python delivery detail: the default NullEngine alone may use the guest's fused
+Python delivery detail: the default empty statistical plan alone may use the guest's fused
 `null_call` ABI. Rust executes both phases per invocation, and refuses selected
 engines on this path; no policy decision is cached or implemented in Python.
 Selected engines use the same suspended request/response session as Node.
@@ -457,6 +457,67 @@ fall back to — an ambiguous target, invalid config — it throws at setup inst
 (§12.1). Both paths are loud; neither is silent (§6).
 
 ### 12.6 Frontend and hosted control plane — PLANNED
+
+Decision (October 27, 2026): signup verification offers the existing
+link and a six-digit email code in the same message. Better Auth owns persistent,
+keyed-hashed, ten-minute, five-attempt, single-consumption code records. Only
+verification is mounted; no OTP login, recovery or signup authority is added.
+Resend rotates the code, link success clears pending codes, and verification
+never automatically signs in. All AGINDOW-controlled email paths share branded
+sender/layout and escaped HTML with plain-text alternatives; notification
+projection/receipt boundaries are unchanged.
+
+Decision (October 27, 2026; implementation pending): customer Usage and
+Billing follow the runtime environment selector. Test uses Stripe test-mode
+credentials/catalog/customers and sandbox entitlements; Production continues
+using live credentials/catalog/customers. Reads, Checkout/Portal, return/audit
+paths and lifecycle reconciliation remain mode-scoped. Missing test configuration
+never falls back to live. This supersedes only 's forced-live billing
+presentation decision; its other fixes remain applicable. See
+.
+
+Decision (October 27, 2026): window blur retains the current dashboard
+view. Focus rechecks authority with interaction disabled; any refusal or failed
+check discards tenant context. Navigation, sign-out and pagehide still clear it.
+This replaces ’s clear-on-blur presentation and grants no API authority.
+Customer Usage/Billing uses the organization’s live commercial scope regardless
+of the selected runtime environment, labels real billing and preserves explicit
+checkout confirmation. Operator sandbox billing APIs remain environment-scoped.
+
+Decision (October 26, 2026): public navigation may read a fresh boolean
+session projection from the dashboard host at GET `/api/session/navigation`.
+Exact configured public-origin credentialed CORS and CSP allow only that host;
+host-only session cookies never transit the public Worker. Raw context, tenant
+APIs and writes remain inaccessible. The response is private/no-store and bounded;
+failures remain unknown and show a neutral dashboard action. This advisory state
+grants no authority. Docs remain available during identity failure. Focus/history
+revalidation discards stale replies; browser storage is unnecessary.
+
+Supersedes 's browser cross-origin form transport: public auth
+entry routes hand off to the configured dashboard origin, which owns the forms,
+methods requests, mutations and host-only session cookie. Mail fragments survive
+the navigation without entering redirect headers. Only validated return paths
+cross the handoff; query capabilities are refused. Public navigation reads a
+bounded anonymous methods projection through an identity service binding at a
+same-origin public endpoint. It cannot forward browser cookies or proxy writes.
+
+Decision (October 26, 2026): the dashboard methods adapter distinguishes
+an explicit disabled identity profile (200, all methods disabled) from an
+unavailable, malformed or failed upstream profile (503, fixed unavailable error).
+Supported public-origin requests retain exact credentialed CORS on that error;
+private routes and foreign origins stay refused. Public/dashboard authentication
+uses one viewport-filling dark shell. Registration/recovery use route-specific
+availability labels; transport failures never imply missing deployment
+configuration or a fault in the user's connection. Retry re-reads authority.
+
+Decision (October 26, 2026): optional company OIDC uses openid-client
+6.8.1 with PKCE, nonce, single-use browser-bound durable state and mandatory
+signature checks. Exact-domain DNS claims, explicit personal-account linking,
+tested host-approved provider profiles and owner-versioned member/viewer
+enrollment remain separate authorities. No email-only linking or admission,
+required SSO, automatic role elevation or billing upgrade is allowed. Existing
+personal login is the recovery path. Configuration defaults unavailable; see
+.
 
 Decision (October 23, 2026): the hosted agent surface is a separate
 read-only Worker at the configured production HTTPS origin, with expiring
@@ -815,7 +876,7 @@ Response/stream objects pass through untouched and are not consumed for inspecti
 Loading is asynchronous and local. `ready` always settles; failed loading leaves
 calls bypassed. Strict does not wait inside synchronous calls: await `ready`
 explicitly before starting protected work. There is no automatic retry or egress.
-Default detection stays NullEngine. Explicit caller-supplied statistical windows
+The statistical guest is the default; configure windows to detect. Explicit caller-supplied statistical windows
 select the path; JSON inspection copies are bounded and never replace values.
 No automatic baseline collection is enabled. Unsupported objects bypass inspection.
 
@@ -839,7 +900,7 @@ Owns the full statistical/bypass matrix and owns artifact draining.
 ## 12.8 offline adapter and sandbox boundaries
 
 October 20, 2026: config files are read at SDK construction, never on a call.
-The Node default remains observe/NullEngine. `buffer` defaults to 100 (maximum
+The Node default remains observe with an empty statistical plan. `buffer` defaults to 100 (maximum
 100,000), spans use the optional application OTel API, and scoped-out tools
 emit a bypass without engine evaluation. Adapter failures retain the original
 entry and warn. Class tools with a named schema and `invoke` use that executor;
@@ -948,6 +1009,59 @@ local API, offline readiness input and verification boundaries.
 
 ### 12.13 — machine identity (2026-10-22)
 
+Approved multi-org extension (October 27, 2026):
+supersedes 's per-org operator policy binding for the opt-in hosted profile.
+A tenant-free format-2 host policy constrains the platform signer; verified
+membership selects deterministic isolated org authority/admission profiles.
+First registration durably pins generation without a per-org CLI bootstrap.
+Registration IDs carry profile routing hints; signature/tenant/profile checks
+supply authority, never the hint. A bounded host directory renews enrolled
+unchanged reviews only. Read catalog materialization is local to verified owners;
+no directory/identity/database call enters guard. Separate disabled configs and
+explicit primary/a smoke retirement avoid legacy imports. There are no existing
+customers (October 28 clarification), so no customer migration is required. Coordinates
+public guidance; no production enablement or qualification is authorized.
+
+Approved self-serve decision (October 27, 2026; local implementation):
+ /
+add a private policy-constrained platform signer and separate Workloads UI.
+Session-only `GET/POST /api/orgs/:organization/environments/:environment/workloads`
+requires authoritative owner membership; POST additionally requires same-origin
+CSRF, recent authentication and an Idempotency-Key. Tenant derives from membership;
+only configured Test read scopes are eligible. The identity host requires an
+explicit CUSTOMER_WORKLOADS binding and WORKLOAD_SELF_SERVE_ENABLED flag; empty
+backend/flag/policy refuses 503. Invalid public-only bodies return 400, missing
+session 401, permission/CSRF/recent-auth failure 403, conflicting intent 409 and
+quota/capacity refusal 429. Unknown methods/routes refuse 404.
+
+POST operations are create (connection/public JWK), rotate (ID/expected revision/
+public JWK) and revoke (ID/expected revision). Private d/PEM/unknown fields reject
+before durable intent persistence. Public handoff is re-viewable, never a secret
+reveal. Admission and owner delivery are distinct from <=30-second exchange
+readiness; the SDKs use only the customer's local private key and the existing
+remote-auth APIs. ConnectSelfHosted/connect_self_hosted are documented application
+helpers, not new SDK exports. Dashboard sessions never authenticate execution.
+No in-path network/database dependency or implicit bearer fallback is added.
+
+Approved renewal control plane (October 27, 2026; local implementation):
+Selects a private reviewed store
+and a renewal-only scheduled job (B). A reviewed mandate may authorize unchanged
+rows for at most 30 days; each effective admission snapshot remains at most one
+hour. Signed review changes and monotonic generation/revision/lease receipts
+prevent renewal from widening scope or resurrecting revoked policy. Renewal and
+delivery are off-path; auto-mode existing-token validation is separated from
+exchange snapshot expiry. No SDK call acquires or renews host registration policy. The
+ticket specifies residual revocation validity, explicit resume, migration and
+emergency-stop behavior. The user approved B before feature code. Manual operation
+and 's independent live qualification remain unchanged.
+
+ / decision (October 27, 2026): the dashboard labels its retained
+key administration as fallback. Shared docs own instructions for key-free
+embedded use and self-hosted keyless remote setup using public-key assertions.
+Setup links confer no registration or protection. Live qualification requires a
+selected HTTPS host and private operator registration; multi-instance/restart
+claims remain gated on. No OIDC-provider compatibility is implied.
+
 The per-surface authority, TTL, skew, proof, fault and revocation decisions are
 [contract §10.56](/agindow-runtime-contract.md). `RemoteOptions.auth`
 accepts a prepared in-memory session; setup/background refresh owns identity
@@ -962,10 +1076,36 @@ uses an injected signer so private-key custody remains with the host; Node can
 create an ephemeral Ed25519 signer in process. Algorithm/provider limitations
 and incomplete adoption must remain visible in the identity guide.
 
-Open follow-up: must settle the
-distributed replay authority, ownership fencing and restart/re-authentication
-protocol before implementation. Per-call shared-store lookups are not authorized
+Self-hosted replay design (October 27, 2026): one workload execution owner
+serializes proof admission locally. Owner/verifier restart rotates the signing
+epoch; old tokens become unavailable rather than entering empty replay state.
+Assertion jti hashes persist only at control-plane exchange, with 360s empty-store
+quarantine and no per-guard database lookup. Warm-authority recovery allows 335s;
+empty-store recovery allows 370s including quarantine, retry and exchange timeout,
+conditional on responsive authority/signing and a running scheduler. Sustained
+faults have no finite bound. Native caches isolate trusted workload activations;
+no caller routing hint supplies the cache namespace. The detailed limits, routing and
+recovery protocol are recorded in. This is not exactly-once vendor delivery.
+
+Implementation and qualification gate: records the
+selected replay authority, ownership fencing and restart/re-authentication
+protocol; local implementation is covered by compiled owner fixtures and live qualification remains pending. Per-call shared-store lookups are not authorized
 by the current local-validation contract; no global replay guarantee is implied.
+
+### 12.23 Explicit SDK selective repair
+
+Resolved: construction-only `selectiveRepair` (Node) / `selective_repair`
+(Python) accepts reviewed tool/side-scoped simple object-key rename rules and
+an independent synchronous verifier over immutable before/after JSON strings.
+Default is absent/off. Mode observe never applies a patch; repair/strict may
+apply only after the shared Rust repair engine and verifier accept. Unverified
+shape changes pass through in repair mode under the existing Rust policy. No existing
+statistical finding/halt, bypass or malformed result is cleared by this layer.
+One rule per tool/side, at most 16, confidence [0,1], existing.97/.99 thresholds.
+No async verifier or guard-time network lookup is supported. Invalid rules are
+setup errors. Guest audit FIFO cannot be combined until it can accurately record
+host-applied repair; normal repair events remain available. Only plain JSON
+object/RawJson captures are supported; unmatched calls preserve references.
 
 ## 13. Tickets
 

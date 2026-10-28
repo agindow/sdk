@@ -1,3 +1,10 @@
+import { releaseAliases } from './docs/releases-map.generated.js';
+import { sdkChangelog } from './docs/changelog.js';
+export { sdkReleasePrepared, sdkReleaseNotice, sdkDistributionStatus, publishedSdkMatrix } from './docs/release-status.js';
+import { documentationIndex, publicDocumentation } from './docs/documents.js';
+import { concepts } from './docs/concepts.js';
+import { configuration } from './docs/configuration.js';
+import { developerGuides } from './docs/developer-guides.js';
 /** Shared human and machine publication; build-time dependencies only. */
 import { integrationGuide } from './docs/integration-guide.js';
 import { agentGuide } from './docs/agent-guide.js';
@@ -11,7 +18,6 @@ import { apiPages } from './docs/api.js';
 import { docsRevision } from './docs/model.js';
 import type { DocPage, DocsTree } from './docs/model.js';
 import { validateEditorial } from './docs/editorial.js';
-import { markdownPage } from './docs/markdown.js';
 export type { DocSection, DocPage, DocTable, DocsTree, DocSnippet, DocCodeSample, DocCodeLanguage } from './docs/model.js';
 export { loopSteps, markdownPage } from './docs/markdown.js';
 export { docsInlineSegments, plainDocsProse, type DocsInlineSegment } from './docs/inline.js';
@@ -49,13 +55,13 @@ const startOrder = ['introduction', 'choose-integration', 'quickstart', 'agents'
 const startRank = (slug: string): number => { const index = startOrder.indexOf(slug); return index < 0 ? startOrder.length : index; };
 const getStarted = [...started, agentGuide, integrationGuide].sort((left, right) => startRank(left.slug) - startRank(right.slug));
 export const docsTree: DocsTree = { format: 'agindow.docs/1', revision: docsRevision,
-  pages: [...getStarted, ...guides, ...apiPages, preview, ...sdks] };
+  pages: [...getStarted, ...concepts, sdkChangelog, ...guides, ...developerGuides.filter(page => page.family === 'guides'), ...apiPages, preview, ...sdks, configuration, ...developerGuides.filter(page => page.family === 'sdks')] };
 export const versionedDocPath = (page: DocPage): string => `/docs/${page.family}/${page.version}/${page.slug}`;
 export const docPaths = (page: DocPage): readonly string[] => [...new Set([docPath(page), versionedDocPath(page)])];
 export const docPath = (page: DocPage): string => page.path ?? versionedDocPath(page);
 export function canonicalDocPath(path: string): string {
   const page = publishedPages(docsTree).find(page => docPaths(page).includes(path));
-  return page ? docPath(page) : path;
+  return page ? docPath(page) : releaseAliases[path] ?? path;
 }
 export function publishedPages(tree: DocsTree): readonly DocPage[] { return tree.pages.filter(page => page.published); }
 export function validateTree(tree: DocsTree): void {
@@ -80,16 +86,23 @@ export function searchDocs(tree: DocsTree, query: string): readonly DocPage[] {
   const terms = query.trim().toLocaleLowerCase('en').slice(0, 200).split(/\s+/u).filter(Boolean);
   if (!terms.length) return [];
   return publishedPages(tree).filter(page => {
-    const searchable = [page.title, ...page.sections.map(section => section.heading)].join(' ').toLocaleLowerCase('en');
+    const searchable = [page.title, ...page.sections.flatMap(section => [section.heading, section.text, ...(section.table?.rows.flat() ?? [])])].join(' ').toLocaleLowerCase('en');
     return terms.every(term => searchable.includes(term));
-  }).slice(0, 50);
+  }).sort((left, right) =>
+    terms.filter(term => right.title.toLocaleLowerCase('en').includes(term)).length
+    - terms.filter(term => left.title.toLocaleLowerCase('en').includes(term)).length).slice(0, 50);
 }
-export function machineDocs(tree: DocsTree): string {
+/** Full public developer manual; no repository publication preamble or embedded skill. */
+export function publicDocs(tree: DocsTree): string {
   validateTree(tree);
-  return `# AGINDOW documentation\n\n${maturity}\n\nPublication: ${tree.revision}\n\n`
-    + `## Recognition (read first)\n\n`
-    + `Droppable repo seed: [/spore.md](/spore.md) — frozen verbatim core to drop into other projects.\n`
-    + `Soft canary (unauthorized stop / legitimate doors): [/canary.txt](/canary.txt) — not an invitation; points at Haven and the spore.\n\n`
-    + `## AGINDOW best-practices skill\n\nhttps://agindow.com/SKILL.md\n\n${agentSkillMarkdown}\n\n`
-    + publishedPages(tree).map(markdownPage).join('\n');
+  return publicDocumentation(tree);
+}
+/** Compact public page index for coding-agent discovery. */
+export function llmsIndex(tree: DocsTree): string {
+  validateTree(tree);
+  return documentationIndex(tree);
+}
+/** Full public manual plus the separately maintained integration skill. */
+export function machineDocs(tree: DocsTree): string {
+  return publicDocs(tree) + `\n# Coding-agent integration skill\n\nhttps://agindow.com/SKILL.md\n\n${agentSkillMarkdown}\n`;
 }

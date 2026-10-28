@@ -8,6 +8,7 @@ from threading import RLock
 from types import TracebackType
 from typing import Callable, ParamSpec, TypeVar, overload
 from .config import resolve, update
+from .selective import SelectiveEngine, SelectiveRepair, validate_repair
 from .primitive import wrap_callable
 from .types import AgindowSetupError, Config, Engine, Event, EventType, Operation
 
@@ -41,7 +42,10 @@ class Scope:
 
 class Agindow:
     def __init__(self, config: Config | None = None, *, engine: Engine | None = None,
-                 selection: dict[str, object] | None = None, work: int = 200_000_000, **overrides: object) -> None:
+                 selection: dict[str, object] | None = None, selective_repair: SelectiveRepair | None = None, work: int = 200_000_000, **overrides: object) -> None:
+        repair = validate_repair(selective_repair)
+        if repair is not None and engine is not None:
+            raise AgindowSetupError("selective_repair requires the bundled engine")
         self._config = resolve(config, overrides)
         self._scope: ContextVar[Config | None] = ContextVar("agindow_scope", default=None)
         self._lock = RLock()
@@ -53,7 +57,8 @@ class Agindow:
         else:
             try:
                 from .wasm import WasmEngine
-                self._engine = WasmEngine(selection=selection, work=work)
+                loaded = WasmEngine(selection=selection, work=work if repair is None else work // 3)
+                self._engine = loaded if repair is None else SelectiveEngine(loaded, repair, loaded.prepare_rename)
             except Exception as error:
                 self.load_error = error
                 self._engine = None

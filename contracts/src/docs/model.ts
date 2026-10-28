@@ -33,10 +33,10 @@ export interface DocPage {
   readonly snippets?: readonly DocSnippet[];
 }
 export interface DocsTree { readonly format: 'agindow.docs/1'; readonly revision: string; readonly pages: readonly DocPage[] }
-export const docsRevision = 'docs-v1-2026-10-25-developer-reference';
+export const docsRevision = 'docs-v1-2026-10-28-public-developer-documents';
 export const modes: DocTable = { vocabulary: 'modes', columns: ['Mode', 'Repair', 'Incomplete repair / ambiguity'], rows: [
   ['observe', 'Never mutates', 'Log and audit only; preserves upstream outcomes.'],
-  ['repair', 'Selective, verified and confidence-gated', 'Reads fail open with degraded; semantic writes fail closed. Shape/unknown writes default fail closed, with explicit failClosed opt-out; malformed whole bodies pass through without repair.'],
+  ['repair', 'Selective, verified and confidence-gated', 'Reads fail open with degraded; semantic writes fail closed. Shape drift passes through; unknown writes default fail closed, with explicit failClosed opt-out; malformed whole bodies pass through without repair.'],
   ['strict', 'Selective, verified', 'Incomplete repair fails closed; confidence below 0.99 halts for review. Ignores failClosed opt-out. Infrastructure failures still bypass.'],
 ] };
 export const decisions: DocTable = { vocabulary: 'decisions', columns: ['Decision', 'Meaning'], rows: [

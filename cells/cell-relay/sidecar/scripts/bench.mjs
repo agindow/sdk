@@ -53,7 +53,7 @@ try {
   if (calls !== 12000) throw Error('wrong upstream counts');
   const summary = Object.fromEntries(Object.entries(raw).map(([key, values]) => [key, summarize(values)]));
   const report = { schema: 'agindow.sidecar-loop/1', samples: 5000, warmups: 1000, raw, summary, calls,
-    payloadBytes: Buffer.byteLength(payload), fixture: 'release NullEngine, Unix HTTP socket versus direct loopback upstream; keep-alive',
+    payloadBytes: Buffer.byteLength(payload), fixture: 'release empty statistical plan, Unix HTTP socket versus direct loopback upstream; keep-alive',
     estimator: 'nearest-rank individual paired added socket RTT; alternating guarded/control',
     environment: { node: process.version, platform: platform(), arch: arch(), cpu: cpus()[0]?.model },
     exclusions: ['cold process startup', 'statistical engine', 'remote network', 'deployment qualification'] };

@@ -1,22 +1,34 @@
 # agindow (Python)
 
-API drift firewall for AI agents on Python 3.11+ — repair drift in-flight, prove
-the write was correct. **Pre-alpha** on PyPI as `agindow`. Loads the **identical
+Inspect API calls made by AI agents for changes in data shape and meaning on
+Python 3.11+. **Pre-alpha** package for PyPI as `agindow`. Loads the **identical
 WASM bytes** built for `agindow` through Wasmtime. Python provides
 callable/configuration/availability glue — not a second drift engine.
 
-The default engine detects nothing until you configure protection. Statistical
-windows require explicit local baseline/live selections.
+The statistical guest is default. Configure explicit scoped baseline/live windows
+to detect drift. Selective repair is off by default. Enable reviewed rename rules and an independent verifier explicitly.
+
+Start with the Python tab of the [configured detection quickstart](https://agindow.com/docs/quickstart):
+save it as `detect.py` and run `python detect.py`. It asserts one local finding
+and unchanged/unconfigured/insufficient-window controls. The Python `ready`
+property is boolean, not awaitable.
+
+The embedded SDK needs no separate AGINDOW credential. Keep vendor credentials
+in your existing client. These fixtures do not establish production accuracy or
+persisted write correctness. See [capabilities](https://agindow.com/docs/capabilities).
 
 ## Install
 ```bash
-pip install agindow
-# or: uv add agindow
+pip install agindow==0.1.0a1
+# or: uv add agindow==0.1.0a1
 ```
 The wheel includes the prebuilt WASM guest. You do **not** need Rust, Node, or a
 monorepo checkout to use the SDK.
 
 ## Decorators, async and contexts
+
+This is a setup fixture, not detection. Configure selection as in Quickstart
+to produce a finding; selecting repair or strict does not configure a detector.
 ```python
 from agindow import Agindow, guard
 
@@ -78,7 +90,7 @@ telemetry, not hosted audit delivery.
 
 Parity fixtures run both public wrappers against the same WASM guest. The
 paired local agent-loop benchmark gates added p50 &lt;100 µs on the default
-NullEngine only (excludes model/network/import/statistical work).
+Unselected statistical plan only (excludes model/network/import/selected-detector work).
 
 Python `wrap` currently accepts callables. Node-specific tool/client/HTTP
 adapters, Nango codegen, OTel spans, report CLI and remote configuration/audit
@@ -108,3 +120,41 @@ worker thread for a synchronous fallback callable.
 Opt-in machine-identity helpers stay credential-free in embedded mode; they do
 not enable a hosted identity service by themselves. Sibling Node package:
 `agindow`.
+
+## Maintained detection example
+
+The complete [`detect.py`](./examples/detect.py) matches the published quickstart byte for byte.
+Run it after installing the pinned package in your environment. The documentation
+publication gate executes this same source against matching built SDK artifacts.
+
+## Public documentation and coding-agent resources
+
+Start with [Quickstart](https://agindow.com/docs/quickstart) and the
+[capability matrix](https://agindow.com/docs/capabilities). For Markdown, use
+[/docs.md](https://agindow.com/docs.md), the public developer manual.
+[/llms.txt](https://agindow.com/llms.txt) is the compact page index;
+[/llms-full.txt](https://agindow.com/llms-full.txt) adds full documentation and
+coding-agent guidance. These mirrors may return 503 on the public origin until
+an evidence service is enabled; the browser docs remain the starting point.
+
+The public [SKILL.md](https://agindow.com/SKILL.md) and
+[spore.md](https://agindow.com/spore.md) describe integration without enabling it
+automatically. [MCP tools](https://agindow.com/docs/api/tools) read evidence and
+simulate proposals; they never execute vendor writes. Signed
+[/openapi.json](https://agindow.com/openapi.json) belongs to a configured MCP
+origin, not an embedded SDK requirement or a managed execution endpoint.
+
+## Enable selective repair
+
+Repair is off by default. Construct `Agindow` with
+`selective_repair=SelectiveRepair(rules=(RenameRule(...),), verify=verify)`.
+`RenameRule` identifies `tool`, request/response `side`, top-level `source` and
+`target` keys, reviewed `migration` ID and `confidence`. The local synchronous
+verifier receives immutable `RepairCheck.before`, `.after` JSON strings and
+`.rule`; it must check intended meaning using independent authoritative data.
+Load that data outside calls. Start in `Config(mode="observe")`, then use
+`sdk.configure(mode="repair")` after evaluation; observe disables application.
+
+The shared Rust engine prepares selective key edits. Existing statistical
+findings/blocks remain in force. Numeric, nested and array migrations are outside
+this option. See the [runnable example and limits](https://agindow.com/docs/sdk/configuration#enable-selective-repair).

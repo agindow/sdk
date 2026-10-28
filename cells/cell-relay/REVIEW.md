@@ -2,8 +2,8 @@
 
 The explicit bounded-capture guard halts unresolved drift on reads, writes and
 unknown operations in strict mode. Only independently verified repairs at
-confidence ≥0.99 proceed. Availability faults still bypass once. The default
-engine remains `NullEngine`; this is an opt-in native library path.
+confidence ≥0.99 proceed. Availability faults still bypass once. The statistical
+guest is default; this review path remains an opt-in native library.
 
 After execution, `review::case(&outcome, &scope)` constructs a frozen
 Envelope. Scope binds the

@@ -1,3 +1,4 @@
+import { sdkDistributionStatus } from './release-status.js';
 /** Reviewed pre-alpha evaluation matrix (TII-108). Provenance: relay docs, package metadata, paired SDK matrix. */
 import { sdkMatrix } from './sdk-matrix.generated.js';
 
@@ -60,28 +61,28 @@ export const capabilityMatrix = {
     {
       id: 'detection',
       capability: 'Local drift detection',
-      evaluateToday: `Explicit statistical detection for ${families}. Public /try runs a labelled Unit finding in the browser against the same packaged WASM guest; /docs/quickstart remains the install path.`,
+      evaluateToday: `Explicit statistical detection for ${families}. Public /try collects actual responses from an API you select and compares status checks, your supplied schema and the same packaged guest. No finding is forced; /docs/quickstart remains the SDK install path.`,
       scope: 'Embedded WASM guest in published Node/Python SDKs. Native library seams exist separately and are not the default guest or every SDK adapter.',
       configuration: 'Select an explicit detector with scoped baseline/live windows, await readiness, then wrap calls. Mode (observe/repair/strict) does not configure a detector.',
-      limitation: 'The default engine passes calls through without detecting drift until a detector is selected and configured. Detection against production traffic has not been calibrated.',
+      limitation: 'The statistical guest is default; configure windows to detect. Without a selection it emits no findings. Detection against production traffic has not been calibrated.',
       evidence: { label: 'Playground', href: '/try' },
     },
     {
       id: 'sdks',
       capability: 'Node / Python SDKs',
-      evaluateToday: `Install published pre-alpha packages agindow@${sdkMatrix.node.version} (npm) and agindow==${sdkMatrix.python.version} (PyPI). Adapters, CLI report and parity fixtures exercise the shared WASM bytes.`,
+      evaluateToday: `Evaluate the ${sdkDistributionStatus} pre-alpha packages agindow@${sdkMatrix.node.version} (npm) and agindow==${sdkMatrix.python.version} (PyPI). Adapters, CLI report and parity fixtures exercise the shared WASM bytes.`,
       scope: `Declared package metadata: Node ${capabilityMatrixRuntimes.node.engines}; Python ${capabilityMatrixRuntimes.python.requires}. Tested at ${capabilityMatrixRuntimes.node.tested} and ${capabilityMatrixRuntimes.python.tested}; untested upper bounds are not claimed.`,
       configuration: 'Registry install only. Contributors changing the engine still build the shared WASM guest. No hosted key required for embedded use.',
-      limitation: 'Publication is not protection. Registry install does not enable detection, repair or hosted delivery.',
+      limitation: 'Publication is not protection. Registry install does not enable detection, repair or hosted delivery. Self-serve Workloads registration requires an enabled host-wide Test/read policy and backend, with isolated profiles from verified organization membership; defaults remain unconfigured and local fixtures do not qualify hosted onboarding.',
       evidence: { label: 'SDK docs', href: '/docs/sdk' },
     },
     {
       id: 'repair',
       capability: 'Repair proposals / verified repair',
-      evaluateToday: 'The opt-in native call path can propose selective patches and apply only independently verified repairs for mechanical renames confirmed by a trusted migration source. Synthetic internal repair-safety cases gate regressions.',
-      scope: 'Opt-in native call path and repair library. The default WASM guest does not supply selective repair output.',
-      configuration: 'Trusted engine integration, sufficient confidence, independent verification gates and repair/strict mode. Adapter install or mode alone is insufficient.',
-      limitation: 'Proposed ≠ applied. Schema acceptance and confidence alone cannot establish intent. Ambiguous semantic mappings are not safe migrations. Default guest has no selective repair.',
+      evaluateToday: 'The Node/Python SDKs and native call path can apply selective patches for reviewed mechanical renames only after independent verification. Evaluate the configured mappings against your own payloads before enabling application.',
+      scope: 'Node/Python opt-in reviewed top-level field renames using the shared Rust repair library; ordinary inspection is non-mutating.',
+      configuration: 'Explicit selectiveRepair/selective_repair rules, sufficient confidence, independent verification and repair/strict mode. Adapter install or mode alone is insufficient.',
+      limitation: 'Proposed ≠ applied. Schema acceptance and confidence alone cannot establish intent. Ambiguous semantic mappings are not safe migrations. Selective repair is off by default.',
       evidence: {
         label: 'Modes and repair limits',
         href: '/docs/modes',

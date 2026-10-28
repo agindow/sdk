@@ -37,5 +37,5 @@ admitted drift on both phases once per call, including observed, repaired and
 blocked calls; exclude clean calls, read calls and faults without drift evidence.
 The counter's epoch is the control revision that first changed protection to
 false, retained until restoration. Delivery, durable counters, authentication and
-a mounted hosted dashboard are not supplied here; the default engine remains
-`NullEngine`.
+a mounted hosted dashboard are not supplied here; the statistical guest is
+default and `NullEngine` is only an explicit native opt-out.

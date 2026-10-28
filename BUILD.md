@@ -63,7 +63,7 @@ node cells/cell-relay/perf/run-availability.mjs
 - `cells/cell-relay/node`: `npm pack --dry-run` must stay under 5 MB unpacked.
 - `cells/cell-relay/python`: `uv run --frozen python scripts/build.py` writes the
   wheel and sdist under `python/dist/`.
-- The default engine is `NullEngine`: installing or building does not enable
+- The statistical guest is default; configure windows to detect. Installing or building does not enable
   detection. Explicit selections are required, and no build here qualifies
   detection against production traffic.
 
@@ -78,3 +78,8 @@ with `include_str!` at a fixed relative depth. Moving `contracts/` or
 - `agindow-runtime-contract.md`, `wrapper-api.md` — public behavior specifications
 - `examples/` — install-from-registry samples
 - `skills/` — agent integration guidance
+
+The standalone export omits admission tests that require private dashboard or
+registry cells, and the combined admission mutation runner. Those cross-cell
+checks remain in the monorepo. The public admission runtime, policy and SDK tests
+remain available through `pnpm --filter cell-relay test:admission`.

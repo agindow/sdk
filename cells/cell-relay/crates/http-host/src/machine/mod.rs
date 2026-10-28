@@ -61,3 +61,5 @@ mod delegation;
 pub use delegation::DelegateRequest;
 mod gate;
 pub use gate::MachineGate;
+mod owner;
+pub use owner::OwnerEpoch;

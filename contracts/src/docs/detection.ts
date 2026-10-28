@@ -1,4 +1,5 @@
 /** Shared homepage + docs detection quickstart; executed by the publication gate. */
+import { detectionPython } from './detection-python.js';
 import type { DocSnippet } from './model.js';
 import { sdkMatrix } from './sdk-matrix.generated.js';
 
@@ -176,5 +177,5 @@ export const detectionExample: DocSnippet = {
     language: 'ts',
     matrix: `node-local/${sdkMatrix.node.version}`,
     code: detectionTs,
-  }],
+  }, { label: 'py', language: 'python', matrix: `python-local/${sdkMatrix.python.version}`, code: detectionPython }],
 };

@@ -179,7 +179,8 @@ fn truncated_malformed_duplicate_and_parser_fault_inputs_cannot_generate_statist
     Ok(())
 }
 #[test]
-fn null_engine_has_zero_friction_even_without_a_budget_or_valid_audit_reference() -> Result {
+fn empty_statistical_plan_has_zero_friction_even_without_a_budget_or_valid_audit_reference()
+-> Result {
     let engine = Engine::default();
     let runner = Runner::new(None, true, true);
     let output = engine

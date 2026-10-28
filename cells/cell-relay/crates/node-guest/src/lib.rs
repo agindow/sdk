@@ -1,6 +1,8 @@
 //! TI-30 production binding. Host values and upstream execution stay in Node.
 mod audit;
+mod playground;
 mod selection;
+mod selective;
 use agw_guard::{
     config::{Config, RuntimeConfig},
     statistical::{Body, Engine, Operation, Phase, Session},
@@ -107,14 +109,32 @@ impl Guest {
             .try_borrow()
             .map_or_else(|_| "null".into(), |queue| queue.stats())
     }
+    /// Fixture-scoped verified repair. No vendor I/O; not a default SDK pipeline.
+    pub fn playground_rename(&self, bytes: &[u8], mode: &str, work: u32) -> Result<String, String> {
+        playground::run(bytes, mode, work)
+    }
+    /// Prepare a generic reviewed rename. The SDK must independently verify it.
+    pub fn prepare_rename(
+        &self,
+        bytes: &[u8],
+        source: &str,
+        target: &str,
+        confidence: f64,
+        mode: &str,
+        work: u32,
+    ) -> Result<String, String> {
+        selective::prepare(bytes, source, target, confidence, mode, work)
+    }
     pub fn set_ready(&self, ready: bool) {
         self.engine.set_ready(ready);
     }
+    /// Whether selected evidence needs payload capture, not engine identity.
+    /// False still uses the constructed statistical engine and readiness gate.
     pub fn active(&self) -> bool {
         self.active
     }
     /// Fused core execution for hosts with expensive FFI crossings. Only the
-    /// immutable NullEngine may finish before upstream: it inspects neither
+    /// immutable empty statistical plan may finish before upstream: it inspects neither
     /// side and has no call-local evidence. Selected engines must suspend.
     pub fn null_call(
         &self,

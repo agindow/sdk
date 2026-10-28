@@ -1,18 +1,33 @@
 # agindow
 
-API drift firewall for AI agents on Node — repair drift in-flight, prove the
-write was correct. **Pre-alpha** on npm as `agindow` (Node ≥22,
-Apache-2.0, ESM/CJS and TypeScript declarations). Runs a Rust/WASM engine in
-process. OpenTelemetry is an optional peer dependency.
+Inspect API calls made by AI agents for changes in data shape and meaning.
+**Pre-alpha**, package on npm as `agindow@0.1.0-alpha.2` for Node 22+,
+with ESM/CJS and TypeScript declarations. The package embeds a Rust/WASM
+statistical guest. OpenTelemetry is an optional peer dependency.
+```sh
+npm install agindow@0.1.0-alpha.2
+```
+Start with the [configured detection quickstart](https://agindow.com/docs/quickstart).
+It selects explicit evidence windows, reports one labelled local finding and
+checks unchanged, unconfigured and insufficient-window controls. No vendor call
+or separate AGINDOW credential is needed. Vendor credentials stay in your
+application’s existing client. Selective repair is off by default. Enable reviewed rename rules and an independent verifier explicitly.
+
+The following is only a **wrapper setup fixture**, not drift detection:
 ```ts
 import { createAgindow } from 'agindow';
-
-const sdk = createAgindow({ mode: 'observe', buffer: 100 });
+const sdk = createAgindow({ mode: 'observe' });
 await sdk.ready;
-const tools = sdk.toolAdapter(existingTools);
-sdk.configure({ mode: 'repair' });
+const payload = { id: 'fixture' };
+const read = sdk.guard(() => payload, { tool: 'vendor.read', operation: 'read' });
+if (read() !== payload) throw Error('Original result changed');
 const unsubscribe = sdk.on('bypass', event => console.warn(event));
+unsubscribe();
 ```
+For defaults and selection fields, use the [configuration reference](https://agindow.com/docs/sdk/configuration).
+These packages are for evaluation; the fixture does not establish production
+accuracy, write correctness or hosted availability.
+
 `guard(fn, { tool, operation })` preserves sync/async behavior, argument arrays,
 receiver, result identity and original exceptions. `toolName` resolves a dynamic
 identity. `inputShape: 'raw'` admits a sole string/byte argument without JSON
@@ -21,7 +36,7 @@ as `AgindowDriftError.cause`. Response halts retain the completed `outcome` and
 warn against blind replay. Unavailable drift/audit IDs remain empty, never made
 up. Bypass status is delivered through events, never injected into returned data.
 
-The default remains **observe / NullEngine: no drift detection or repair**.
+The default is **observe with the statistical guest: configure windows to detect; no default selective repair**.
 Loading is asynchronous and local. `ready` always settles. Calls while loading,
 after failed loading, on unsupported captures or after a guest trap bypass once
 and invoke upstream at most once. Strict also bypasses while loading; await
@@ -149,3 +164,43 @@ records / 512 KiB serialized (maximum 256 / 1 MiB, 128 KiB per artifact). Hosts
 own persistence and retry; no durable SDK audit guarantee is claimed. Opt-in
 machine-identity helpers stay credential-free in embedded mode; they do not
 enable a hosted identity service by themselves.
+
+## Maintained detection example
+
+The complete [`detect.mts`](./examples/detect.mts) matches the published quickstart byte for byte.
+Run it after installing the pinned package in your environment. The documentation
+publication gate executes this same source against matching built SDK artifacts.
+
+## Public documentation and coding-agent resources
+
+Start with [Quickstart](https://agindow.com/docs/quickstart) and the
+[capability matrix](https://agindow.com/docs/capabilities). For Markdown, use
+[/docs.md](https://agindow.com/docs.md), the public developer manual.
+[/llms.txt](https://agindow.com/llms.txt) is the compact page index;
+[/llms-full.txt](https://agindow.com/llms-full.txt) adds full documentation and
+coding-agent guidance. These mirrors may return 503 on the public origin until
+an evidence service is enabled; the browser docs remain the starting point.
+
+The public [SKILL.md](https://agindow.com/SKILL.md) and
+[spore.md](https://agindow.com/spore.md) describe integration without enabling it
+automatically. [MCP tools](https://agindow.com/docs/api/tools) read evidence and
+simulate proposals; they never execute vendor writes. Signed
+[/openapi.json](https://agindow.com/openapi.json) belongs to a configured MCP
+origin, not an embedded SDK requirement or a managed execution endpoint.
+
+## Enable selective repair
+
+Repair is off by default. Pass `selectiveRepair: { rules, verify }` to
+`createAgindow`, starting in `mode: 'observe'`. Rules identify a reviewed
+`tool`, request/response `side`, top-level `from`/`to` keys, `migration` ID and
+`confidence`. `verify({ before, after, rule })` must independently check intended
+meaning against authoritative application evidence and return a synchronous
+boolean. Prepare that evidence outside guarded calls.
+
+After evaluation, `sdk.configure({ mode: 'repair' })` permits verified patches;
+`observe` disables application again. Mode alone supplies no migration rule.
+Unrelated statistical findings and blocks remain in force. Numeric, nested and
+array migrations are outside this option. Guest audit FIFO cannot be combined
+with this option; repair events provide local observation.
+
+See the [runnable Node/Python example and limits](https://agindow.com/docs/sdk/configuration#enable-selective-repair).

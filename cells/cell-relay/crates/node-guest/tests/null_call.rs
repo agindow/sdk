@@ -17,3 +17,15 @@ fn fused_null_call_uses_the_core_for_every_valid_mode_and_operation() -> Result<
     assert!(selected.null_call(0, 0, true, 0, 1.0).is_err());
     Ok(())
 }
+
+#[test]
+fn unselected_guest_constructs_a_statistical_engine() -> Result<(), String> {
+    assert!(matches!(
+        agw_node_guest::local_engine("null")?,
+        agw_guard::statistical::Engine::Statistical { .. }
+    ));
+    let guest = Guest::new("null", 0.0)?;
+    guest.set_ready(false);
+    assert!(!guest.null_call(0, 0, false, 0, 1.0)?);
+    Ok(())
+}

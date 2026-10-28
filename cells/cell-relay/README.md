@@ -1,6 +1,6 @@
 # cell-relay — the in-path engine
 
-**Rust** · Apache-2.0 (the tech stack) · **Byte-passthrough forwarding + bounded inspection tee + mode configuration + schema learning + lossless inspection + generated contract types — explicit native guard paths; `NullEngine` remains the default**
+**Rust** · Apache-2.0 (the tech stack) · **Byte-passthrough forwarding + bounded inspection tee + mode configuration + schema learning + lossless inspection + generated contract types — explicit native guard paths; the statistical engine is default; configure windows to detect**
 
 > Sits in the request path of every tool call: intercepts, inspects on a side
 > channel, classifies drift, repairs selectively, records the artifact. Deploys
@@ -74,8 +74,7 @@ Caller-owned `History` accumulates scoped occurrences and first-seen timestamps
 with one active entry. See contract §10.17 for scope and draft semantics.
 
 This is a library seam. Callers must publish returned artifacts/warnings and
-honor `Halt` before dispatch. Forwarding remains streaming, `NullEngine` remains
-the default, and persistence/general policy wiring remain future work.
+honor `Halt` before dispatch. Forwarding remains streaming, the statistical engine is default; configure windows to detect, and persistence/general policy wiring remain future work.
 
 ## Runtime configuration
 
@@ -524,7 +523,7 @@ queues optional unknown-case investigation in a bounded local FIFO, and provides
 per-call cost reservations, background grants/actual-cost receipts and audit-review
 confusion counters. See [routing and caller obligations](./ROUTING.md).
 No guard wiring, worker execution, durable delivery or provider billing enforcement
-is included; `NullEngine` remains the default.
+is included; the statistical engine is default; configure windows to detect.
 
 ## Local statistical windows
 
@@ -568,7 +567,7 @@ and. See contract §10.26 and the three `windows_*` integration suites.
 
 [`agw_guard::statistical`](./STATISTICAL.md) now connects local windows, raw-window
 significance, materiality, routing and the shared policy matrix on actual native
-request/response calls. Activation is explicit; `NullEngine` stays the default.
+request/response calls. Activation is explicit; the statistical engine is default; configure windows to detect.
 The library preserves completed upstream outcomes on response halts and admits
 no more than one optional local investigation job per call. Composes the
 statistical evidence into one audit artifact; HTTP/SDK/streaming drivers,
@@ -618,7 +617,7 @@ activation is supplied.
 ## Node SDK
 
 The [local Node package](./node/README.md) builds ESM/CJS and the release WASM
-guest. Default detection remains NullEngine; explicit scoped statistical windows
+guest. The statistical guest is default; configure windows to detect; explicit scoped statistical windows
 run. Package tests cover offline install, size, tool/outcome identity,
 policy halts and faults. A CI-gated local agent-loop benchmark covers the default
 engine only; retains integrated statistical latency qualification.
@@ -628,7 +627,7 @@ optional OTel spans, explicit tool/client/fetch/Express adapters, offline
 simulation/report and a limited Nango code generator. The
 [Nango guide](./node/NANGO.md) states the exact surfaces and limitations.
 Python parity, partner publication/adoption and hosted sandbox delivery remain
-separate; the default engine still detects nothing.
+separate; the statistical guest is default; configure windows to detect.
 
 ## Local Python SDK
 
@@ -644,8 +643,7 @@ or Python framework/HTTP adapters are claimed.
 The shared `agw-http-host` crate supplies a [local sidecar](./sidecar/README.md)
 and [workers-rs host](./hosted/README.md). Connection bindings hold credentials;
 execution envelopes carry handles. Exact six-field policy feedback and retained
-response outcomes use the same shared Rust statistical path. NullEngine remains
-the default. Local TCP/Unix and real workerd tests are explicit scripts; the relay
+response outcomes use the same shared Rust statistical path. The statistical engine is default; configure windows to detect. Local TCP/Unix and real workerd tests are explicit scripts; the relay
 workflow additionally runs them. Deployment and public listings remain pending.
 Node `guardRemote` and Python `guard_remote` implement explicit transport fallback
 with one bypass event and the same upstream-enforced idempotency key.

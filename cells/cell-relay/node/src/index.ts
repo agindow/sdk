@@ -1,3 +1,4 @@
+import { repairOptions } from './selective.js';
 import { unavailableAudit } from './audit.js';
 import type { AuditSink } from './audit.js';
 export type { AuditSink, AuditRecord, AuditDrain } from './audit.js';
@@ -30,6 +31,8 @@ export function createAgindow(options: Options = {}, load: EngineLoader = loadWa
   if (options.audit !== undefined && options.selection !== undefined && options.audit.tenant !== options.selection.tenant) {
     throw new AgindowSetupError('audit tenant must match selected scope');
   }
+  const selectiveRepair = repairOptions(options.selectiveRepair, options.audit !== undefined);
+  if (selectiveRepair !== undefined && load !== loadWasm) throw new AgindowSetupError('selectiveRepair requires the bundled engine');
   let initial = resolveConfig(options);
   if (options.work !== undefined && (!Number.isSafeInteger(options.work) || options.work < 0 || options.work > 0xffff_ffff)) {
     throw new AgindowSetupError('work must be a u32 allowance');
@@ -38,7 +41,7 @@ export function createAgindow(options: Options = {}, load: EngineLoader = loadWa
   let revision = 0;
   const events = new Events(); events.resize(initial.buffer ?? 100);
   const latest = new Map<keyof Config, { config: Config; revision: number }>();
-  const ready = Promise.resolve().then(() => load({ ...options, ...initial })).then(engine => { current = engine; }, () => {});
+  const ready = Promise.resolve().then(() => load({ ...options, ...initial, ...(selectiveRepair === undefined ? {} : { selectiveRepair }) })).then(engine => { current = engine; }, () => {});
   const make = <F extends Callable>(fn: F, local: GuardOptions = {}, hooks?: InspectionHooks): F => {
     validate(local);
     if (typeof fn !== 'function') throw new AgindowSetupError('guard requires a callable');

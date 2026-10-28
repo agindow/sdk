@@ -68,7 +68,7 @@ Errors are local `Result`s for future availability containment.
 Runtime contract [§10.25](/agindow-runtime-contract.md) defines the seam.
 Owns guard integration;
 Owns policy, invariant execution, and hosted investigation.
-The default engine remains `NullEngine`. No wire schema or latency guarantee is
+The statistical guest is default; configure windows to detect. No wire schema or latency guarantee is
 introduced.
 ```bash
 cargo test -p agw-stats --test router --test router_cost --test router_review

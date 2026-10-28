@@ -53,7 +53,7 @@ def measure() -> dict[str, object]:
                      "mean": mean(values), "stddev": pstdev(values)} for key, values in raw.items()}
     bypasses = sum(event.type == "bypass" for event in sdk.recent())
     report: dict[str, object] = {"schema": "agindow.python-loop/1", "samples": 5000, "warmups": 1000,
-        "fixture": "local agent tool-selection/observation loop; NullEngine through the shared release WASM",
+        "fixture": "local agent tool-selection/observation loop; empty statistical plan through the shared release WASM",
         "estimator": "p50 of alternating paired guarded-minus-unguarded steps; nearest-rank quantiles",
         "steps": steps, "payloadBytes": 862, "bypasses": bypasses, "loadUs": load_us, "summary": summary, "raw": raw,
         "environment": {"python": sys.version, "wasmtime": version("wasmtime"), "platform": platform.platform(),

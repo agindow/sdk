@@ -48,7 +48,7 @@ const summary = Object.fromEntries(Object.entries(raw).map(([key, values]) => {
   return [key, { p50: quantile(values, .5), p99: quantile(values, .99), mean,
     stddev: Math.sqrt(values.reduce((sum, value) => sum + (value - mean) ** 2, 0) / values.length) }];
 }));
-const report = { schema: 'agindow.sdk-loop/1', fixture: 'local agent tool-selection/observation loop; default NullEngine through release WASM',
+const report = { schema: 'agindow.sdk-loop/1', fixture: 'local agent tool-selection/observation loop; default empty statistical plan through release WASM',
   estimator: 'p50 of alternating paired guarded-minus-unguarded individual loop steps; nearest-rank quantiles',
   samples: 5000, warmups: 1000, steps, payloadBytes: Buffer.byteLength(JSON.stringify(payload)),
   bypasses: events.filter(e => e.type === 'bypass').length, loadUs, summary, raw,

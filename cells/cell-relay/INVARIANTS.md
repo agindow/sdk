@@ -131,7 +131,8 @@ times. A response halt retains the original completed outcome; it cannot prevent
 or roll back a write already executed. Caller code and response projection remain
 outside engine recovery. Internal faults preserve upstream outcome identity,
 skip later work, and count one bypass per call through the shared readiness and
-three-failure cooldown. `NullEngine` remains unchanged.
+three-failure cooldown. The statistical guest remains the default;
+`NullEngine` is only an explicit native opt-out.
 
 Each configured phase returns `Phase.invariants`, `unavailable_invariants`,
 `invariant_audit`, `headers` and `warning`. Audit drafts use the generated frozen

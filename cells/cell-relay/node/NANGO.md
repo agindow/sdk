@@ -10,7 +10,7 @@ no npm package and does not load WASM. No hosted AGINDOW route is required.
 | B: proxy script in your Node runtime | `sdk.httpAdapter(fetch, config)` | Completed bounded JSON response bytes, or explicit client methods | No inspection of chunked/non-JSON/unknown-length streams; no incoming Node stream repair. This is the customer's Node runtime, not a sandboxed action. |
 | C: action/sync | `agindow scan project --snapshot contracts.json` | Scalar shape checks, string enums, explicitly confirmed request sibling renames | No statistics, learned invariants, automatic conversions, hosted audit, global consistency or write-integrity proof. |
 
-A and B use the Rust/WASM distribution. Its default remains NullEngine and
+A and B use the Rust/WASM distribution. Its default is the statistical guest with no selected windows and
 detects nothing. Statistical protection requires explicit scoped baseline/live
 windows. The default guest has no selective-repair binding; the wrapper's
 verified-repair seam is available to trusted engine integrations. Installing a

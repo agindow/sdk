@@ -1,8 +1,9 @@
 # Cross-endpoint consistency
 
 Runtime contract §10.32 adds explicitly selected cross-endpoint checks to the
-Native guard. Defaults stay `NullEngine`. No network request, store lock,
-remote registry or LLM runs during a guarded call.
+Native guard. The statistical guest is default; configure windows to
+detect. No network request, store lock, remote registry or LLM runs
+during a guarded call.
 
 ## Correlation and scope
 

@@ -1,8 +1,8 @@
 # Local Worker execution host
 
 The real `workers-rs` handler implements explicit `POST /v1/guard` using the
-same Rust two-phase statistical engine as the sidecar and Node guest. NullEngine
-is the default and detects nothing. This source is deployment-ready configuration;
+same Rust two-phase statistical engine as the sidecar and Node guest. The statistical guest
+is the default; configure windows to detect. This source is deployment-ready configuration;
 no live deployment or hosted latency qualification has been performed.
 
 Install the pinned build tools and build from the repository root:

@@ -131,7 +131,7 @@ stolen DPoP tokens, bounded replay saturation, keyless-only mode and audit outpu
 The compiled Worker suite also exercises guard authorization and byte identity.
 Node and Python lifecycle fixtures cover refresh failure and single bypass.
 
-Replay/rate state is process-local. Live replay fences are never evicted to admit
+In the standalone raw Worker and sidecar, replay/rate state is process-local. Live replay fences are never evicted to admit
 a new proof; full state rejects with counters. Restart/isolate eviction loses
 those fences. Production routing must keep a token's proof traffic at one replay
 authority or provide distributed enforcement before claiming global replay
@@ -147,3 +147,87 @@ mean 82.42 µs, p99 100.96 µs over 1000 calls, release profile. This is additio
 auth cost, reported separately from the frozen engine budgets, not a claim that
 crypto verification fits the <10 µs engine bypass budget. Reproduce with
 `cargo run -p agw-http-host --release --example machine_auth_latency`.
+
+## Self-hosted execution-owner profile
+
+The opt-in [execution-owner host](hosted/owner/README.md) binds one immutable
+registration to one SQLite Durable Object and executes the Rust guard inside
+that owner. Independent ingress instances route to the same owner. No guarded
+call queries a replay database or IdP. Native proof fences stay local, but the
+signing epoch has exactly their lifetime: owner activation or WASM reincarnation
+rotates the key. Old tokens return unavailable instead of entering empty fences.
+SDK background refresh obtains a new credential. Conditional recovery allows 335s
+for a warm authority, or 370s after lost-state quarantine, with prompt signing,
+responsive exchange and a running SDK scheduler; sustained faults have no finite
+bound. This is bounded interruption under those assumptions,
+not transparent failover. Keep original-binding fallback and write idempotency
+obligations explicit.
+
+Private assertion IDs are durably fenced at exchange before exposing a token.
+The owner serializes exchanges only; a slow exchange does not hold warm guard
+execution. New/lost storage waits 360 seconds before exchange. Retention is
+assertion expiry plus 30 seconds; 1024 live fences reject further admission
+without eviction. Access TTL is at most 300 seconds. Registration snapshots
+expire explicitly within one hour; no implicit extension or bearer overlap.
+
+Local compiled-Worker evidence covers two independent ingress workers, SQLite
+persistence across runtime restart, independent WASM reset, duplicate guard and
+delegation proofs, retained audit/outcome GET races, assertion races/restart,
+capacity, clock rollback and storage loss. Additional fixtures cover tenant
+saturation isolation, invalid signature/scope before proof consumption, policy
+refresh, assertion expiry plus skew, simulated authority partition/stale routing,
+lost acknowledgements and controlled SDK recovery. Closed activation-local counters
+report replay/capacity/unavailability without credentials; GET rejection stays
+opaque. Local routing latency is measured separately from native crypto and
+engine budgets (see the owner guide). These fixtures do not qualify a public
+deployment, actual Cloudflare partition/rebalance, cross-region latency or OIDC
+providers; owns live qualification. Standalone paths keep their stated
+process-local limits.
+
+## Reviewed registration renewal
+
+The opt-in [control-plane runbook](hosted/owner/control/README.md) uses a private
+SQLite reviewed authority and a renewal-only scheduled Worker. The scheduled
+capability cannot submit reviewer commands or address execution owners. Each
+unchanged-row admission lease stays within one hour and the explicit review
+mandate (maximum 30 days). Offline Ed25519 reviewer commands bind the complete
+canonical grant digest, origin/profile, generation and expected revision. Scope
+edits/key rotation require a new admission; expiry requires reviewed resume.
+
+Only control/update/initialization events touch renewal storage. Auto-mode guard
+and retained GET validation use admitted local context after admission-lease
+expiry, subject to token TTL, signature, scope and owner epoch; exchange fails
+unavailable once the lease expires. Neither a successful guard nor SDK refresh
+extends the host registration policy. Manual secret mode remains explicit and
+cannot overwrite a durable auto-mode revision. Missing auto state has no fallback.
+
+Revocation/stop is not instantaneous token revocation: a disconnected owner can
+retain its last <=1h issuance lease, then the last token's <=330s lifetime/skew.
+The conservative bound is 66 minutes with <=30s pairwise skew and stable relative
+clock offsets over a lease/token lifetime; emergency execution
+disablement and its real propagation require operator verification. Policy-store
+loss requires a fresh generation and signed admission explicitly naming the old
+generation for existing owners. Restore/PITR is a stopped, newly reviewed migration.
+'s 360s assertion-store quarantine and proof/issuer epoch rules remain intact.
+Local fixtures and mutation evidence do not qualify hosted control-plane operation.
+
+## Customer self-service ( /, extended by / )
+
+An opt-in private [admission service](hosted/owner/admission/README.md) now
+accepts owner-session-authorized public-key intents through the identity Worker.
+The separate Workloads UI exposes Test read registration, public-key rotation,
+revocation and public SDK handoff metadata. Private client keys remain local.
+Authority-side reviewer policy still constrains every signed command; renewal
+only extends unchanged reviewed rows. Empty/missing host flags or backend policy
+leave this path unavailable. Submitted/admitted/delivered and fresh exchange-ready
+are separate states. The shared public keyless guide contains the customer steps;
+operator enablement, reviewer custody and recovery remain private host work.
+Uses a closed tenant-free format-2 host policy and deterministic isolated
+org admission/authority profiles. The first eligible verified-owner registration
+pins a fresh authority generation automatically; there is no per-org tenant put
+or CLI bootstrap. The platform signer remains admission-only. A bounded directory
+renews existing profiles, while approved read routes are materialized locally on
+owners; the guard never reads this directory. Updates the shared guide.
+Separate disabled configs and the private smoke-retirement note do not import
+legacy primary/a registrations. There are no existing customers to migrate.
+These local tests do not complete or qualify a hosted product.

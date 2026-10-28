@@ -51,7 +51,12 @@ impl Session<'_> {
         &self.request
     }
     pub(super) fn needs_response(&self) -> bool {
-        self.request.fault.is_none() && self.call.plan.is_some()
+        self.request.fault.is_none()
+            && self
+                .call
+                .plan
+                .as_ref()
+                .is_some_and(|plan| !plan.has_no_selection())
     }
     pub fn finish(self, response: Body<'_>) -> Outcome<()> {
         let original = (self.request.decision != Decision::Halt).then_some(());
@@ -61,7 +66,11 @@ impl Session<'_> {
     /// Mark one availability failure through the existing permit so audit and
     /// breaker accounting agree with the host's bypass; never alter a halt.
     pub fn finish_unavailable(mut self, response: Body<'_>) -> Outcome<()> {
-        if self.call.plan.is_some()
+        if self
+            .call
+            .plan
+            .as_ref()
+            .is_some_and(|plan| !plan.has_no_selection())
             && self.request.decision != Decision::Halt
             && self.request.fault.is_none()
             && let Some(permit) = self.permit.as_mut()
@@ -86,6 +95,9 @@ impl Session<'_> {
         let (Some(plan), Some(permit)) = (&self.call.plan, &mut self.permit) else {
             return Phase::clean();
         };
+        if plan.has_no_selection() && body.findings.is_none() {
+            return Phase::clean();
+        }
         permit
             .evaluate(AssertUnwindSafe(|| {
                 if self.inference.is_none() {

@@ -18,8 +18,9 @@ def stage() -> str:
         raise RuntimeError("Build the Node shared guest first: node cells/cell-relay/node/scripts/build.mjs")
     destination = PROJECT / "src/agindow/_guest.wasm"
     shutil.copyfile(source, destination)
-    for name in ("LICENSE", "NOTICE"):
-        shutil.copyfile(ROOT / name, PROJECT / name)
+    # SDK distributions omit the private components described by the root NOTICE.
+    shutil.copyfile(PROJECT.parent / "NOTICE", PROJECT / "NOTICE")
+    shutil.copyfile(ROOT / "LICENSE", PROJECT / "LICENSE")
     return hashlib.sha256(source.read_bytes()).hexdigest()
 
 

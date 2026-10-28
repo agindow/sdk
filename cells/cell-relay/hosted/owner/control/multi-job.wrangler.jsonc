@@ -1,0 +1,9 @@
+{
+ "$schema":"../../../node_modules/wrangler/config-schema.json",
+ "name":"agindow-keyless-multi-renewal","main":"job.ts","compatibility_date":"2026-10-28",
+ "workers_dev":false,"preview_urls":false,
+ "vars":{"KEYLESS_RENEWAL_ENABLED":"true"},
+ "services":[{"binding":"RENEWAL","service":"agindow-keyless-multi-policy","entrypoint":"MultiRenewal"}],
+ "triggers":{"crons":["*/10 * * * *"]},
+ "observability":{"enabled":true,"traces":{"enabled":true},"logs":{"enabled":true,"invocation_logs":false}}
+}

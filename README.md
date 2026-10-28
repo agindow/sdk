@@ -1,7 +1,7 @@
 # AGINDOW SDKs and in-path runtime
 
-**API drift firewall for AI agents** — repair drift in-flight, prove the write
-was correct.
+**API drift inspection for AI agent calls.** Configure evidence windows to
+detect changes, then inspect findings without changing calls in observe mode.
 
 This repository is the home of the installable SDKs **and** of the complete
 Apache-2.0 runtime that inspects, blocks or modifies your API calls: the eleven
@@ -10,21 +10,24 @@ Python SDK sources, the public wire contracts and the synthetic evaluation
 fixtures.
 
 It is a **source mirror** of that runtime (see [CONTRIBUTING.md](./CONTRIBUTING.md)).
-The shared corpus, profile generation, hosted registry/control plane, Cortex,
-dashboard backends and operations are not part of this tree.
+Hosted service backends and dashboard administration are not included in this
+source mirror.
 
 | Package | Registry | Install |
 |---|---|---|
-| [`agindow`](https://www.npmjs.com/package/agindow) | npm | `npm install agindow` |
-| [`agindow`](https://pypi.org/project/agindow/) | PyPI | `pip install agindow` |
+| [`agindow`](https://www.npmjs.com/package/agindow) | npm | `npm install agindow@0.1.0-alpha.2` |
+| [`agindow`](https://pypi.org/project/agindow/) | PyPI | `pip install agindow==0.1.0a1` |
 
-Both are **pre-alpha** (`0.1.0-alpha.1` / `0.1.0a0`). Apache-2.0. The default
-engine detects nothing until you configure protection.
+Both are **pre-alpha** (`0.1.0-alpha.2` / `0.1.0a1`). Apache-2.0. The default
+statistical guest needs explicit scoped baseline/live windows. It does not
+supply selective repair. Follow the [Node or Python detection quickstart](https://agindow.com/docs/quickstart)
+for a verified local finding and controls; the setup examples below only prove
+wrapping. Neither a fixture nor installation proves production protection.
 
 ## Quick start (Node)
 
 ```bash
-npm install agindow
+npm install agindow@0.1.0-alpha.2
 ```
 
 ```js
@@ -45,17 +48,18 @@ npx agindow report ./src
 ## Quick start (Python)
 
 ```bash
-pip install agindow
+pip install agindow==0.1.0a1
 ```
 
 ```python
-from agindow import Agindow, guard
+from agindow import Agindow
 
-@guard(mode="observe", tool="vendor.read", operation="read")
+sdk = Agindow(mode="observe")
+
+@sdk.guard(mode="observe", tool="vendor.read", operation="read")
 def read_vendor():
     return {"ok": True}
 
-sdk = Agindow(mode="observe")
 print(sdk.ready, read_vendor())
 sdk.close()
 ```
@@ -103,11 +107,27 @@ Issues and pull requests for the published packages and runtime live here — se
 
 ## What this repo is not
 
-- Not the registry, shared corpus, Cortex, identity, dashboard backend or
-  hosted operations
+- Does not include hosted service backends or dashboard administration
 - Not a claim of production detection SLA or calibrated defaults
-- Not qualified against live vendor traffic
+- Not tested against live vendor traffic
 
 ## License
 
 Apache-2.0 — see [LICENSE](./LICENSE) and [NOTICE](./NOTICE).
+
+## Public documentation and coding-agent resources
+
+Start with [Quickstart](https://agindow.com/docs/quickstart) and the
+[capability matrix](https://agindow.com/docs/capabilities). For Markdown, use
+[/docs.md](https://agindow.com/docs.md), the public developer manual.
+[/llms.txt](https://agindow.com/llms.txt) is the compact page index;
+[/llms-full.txt](https://agindow.com/llms-full.txt) adds full documentation and
+coding-agent guidance. These mirrors may return 503 on the public origin until
+an evidence service is enabled; the browser docs remain the starting point.
+
+The public [SKILL.md](https://agindow.com/SKILL.md) and
+[spore.md](https://agindow.com/spore.md) describe integration without enabling it
+automatically. [MCP tools](https://agindow.com/docs/api/tools) read evidence and
+simulate proposals; they never execute vendor writes. Signed
+[/openapi.json](https://agindow.com/openapi.json) belongs to a configured MCP
+origin, not an embedded SDK requirement or a managed execution endpoint.

@@ -9,7 +9,9 @@
     "./compat": "./src/compat.ts",
     "./packaging": "./src/packaging.ts",
     "./docs": "./src/docs.ts",
-    "./docs/detection": "./src/docs/detection.ts"
+    "./docs/detection": "./src/docs/detection.ts",
+    "./docs/playground": "./src/docs/playground.ts",
+    "./docs-releases": "./src/docs/releases.ts"
   },
   "scripts": {
     "build": "tsc --noEmit",

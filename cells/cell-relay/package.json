@@ -6,17 +6,31 @@
   "description": "The in-path engine: interception, inspection, drift classification, repair. Rust; ships as a native binary and a WASM embed.",
   "scripts": {
     "build": "cargo build --workspace --manifest-path ../../Cargo.toml && node node/scripts/build.mjs && python3 python/scripts/build.py --stage-only",
-    "lint": "cargo fmt --all --check --manifest-path ../../Cargo.toml && cargo clippy --workspace --all-targets --manifest-path ../../Cargo.toml -- -D warnings && RUSTDOCFLAGS=\"-D warnings\" cargo doc --workspace --no-deps --manifest-path ../../Cargo.toml && tsc --project wasm/tsconfig.json && tsc --project perf/tsconfig.json && tsc --project node/tsconfig.tests.json && tsc --project node/tsconfig.tooling.json && uv run --directory python --frozen mypy && tsc --project public-benchmark/tsconfig.json --noEmit",
+    "lint": "cargo fmt --all --check --manifest-path ../../Cargo.toml && cargo clippy --workspace --all-targets --manifest-path ../../Cargo.toml -- -D warnings && RUSTDOCFLAGS=\"-D warnings\" cargo doc --workspace --no-deps --manifest-path ../../Cargo.toml && tsc --project wasm/tsconfig.json && tsc --project perf/tsconfig.json && tsc --project node/tsconfig.tests.json && tsc --project node/tsconfig.tooling.json && uv run --directory python --frozen mypy && tsc --project public-benchmark/tsconfig.json --noEmit && tsc --project hosted/owner/tsconfig.json",
     "test": "cargo test --workspace --manifest-path ../../Cargo.toml && vitest run --config wasm/vitest.config.ts && node --test perf/tests/*.test.mjs && vitest run --config node/vitest.config.ts && node --test node/tests/*.test.mjs && uv run --directory python --frozen python -m unittest discover -s tests && node node/parity/run.mjs",
     "build:hosted": "node hosted/build.mjs",
     "test:hosted": "node --test hosted/tests/*.test.mjs",
-    "test:sidecar": "node --test sidecar/tests/*.test.mjs"
+    "test:sidecar": "node --test sidecar/tests/*.test.mjs",
+    "check:owner": "tsc --project hosted/owner/tsconfig.json",
+    "build:owner": "node hosted/build.mjs && wrangler deploy --config hosted/owner/wrangler.jsonc --dry-run",
+    "test:owner": "node --test hosted/tests/owner*.test.mjs",
+    "test:owner:mutations": "node hosted/mutate-owner.mjs",
+    "test:renewal": "node --test hosted/tests/renewal*.test.mjs",
+    "test:renewal:mutations": "node hosted/mutate-renewal.mjs",
+    "build:auto-owner": "node hosted/build.mjs && wrangler deploy --config hosted/owner/auto.wrangler.jsonc --dry-run",
+    "build:renewal": "wrangler deploy --config hosted/owner/control/wrangler.jsonc --dry-run && wrangler deploy --config hosted/owner/control/job.wrangler.jsonc --dry-run",
+    "test:admission": "node --test hosted/tests/admission*.test.mjs",
+    "build:admission": "wrangler deploy --config hosted/owner/admission/wrangler.jsonc --dry-run",
+    "test:operator": "node --test hosted/tests/operator-transport.test.mjs",
+    "build:operator": "wrangler deploy --config hosted/owner/control/operator/wrangler.jsonc --dry-run"
   },
   "dependencies": {
     "contracts": "workspace:*"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "5.20261016.1",
     "miniflare": "4.20260730.0",
+    "miniflare-owner": "npm:miniflare@5.20261019.1-beta",
     "wrangler": "4.151.1"
   }
 }

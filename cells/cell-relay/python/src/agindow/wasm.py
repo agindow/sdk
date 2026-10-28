@@ -13,6 +13,7 @@ from time import monotonic
 from typing import cast
 import wasmtime
 from .capture import capture
+from .selective import RenameRule
 from .types import DriftClass, EngineCall, Mode, Operation, Verdict
 
 
@@ -145,6 +146,20 @@ class WasmEngine:
         finally:
             self._invoke("__wbindgen_free", pointer, length, 1)
 
+    def prepare_rename(self, before: str, rule: RenameRule, mode: Mode) -> str:
+        with self.lock:
+            body, body_len = self._input(before)
+            source, source_len = self._input(rule.source)
+            target, target_len = self._input(rule.target)
+            mode_ptr, mode_len = self._input(mode)
+            result = self._result(self._invoke("guest_prepare_rename", self.pointer, body, body_len, source, source_len,
+                                               target, target_len, rule.confidence, mode_ptr, mode_len, self.work), 4)
+            self._error(result[3], result[2])
+            try:
+                return self._read(result[0], result[1])
+            finally:
+                self._invoke("__wbindgen_free", result[0], result[1], 1)
+
     def begin(self, value: object, mode: Mode, operation: Operation, fail_closed: bool, tool: str) -> EngineCall:
         with self.lock:
             if self.retired:
@@ -157,8 +172,8 @@ class WasmEngine:
                     int(fail_closed), self.work, monotonic() * 1000), 3)
                 self._error(result[2], result[1])
                 if result[0] != 1:
-                    raise RuntimeError("NullEngine did not complete cleanly")
-                return NullCall()
+                    raise RuntimeError("Empty statistical plan did not complete cleanly")
+                return EmptyPlanCall()
             data = capture(value) if self.active else "{}"
             try:
                 req, req_len = self._input(data)
@@ -214,8 +229,8 @@ class WasmCall:
             self._finish("{}", True)
 
 
-class NullCall:
-    """The guest already executed both evidence-free NullEngine phases."""
+class EmptyPlanCall:
+    """The guest already executed both evidence-free empty-plan phases."""
     request = Verdict()
 
     def finish(self, value: object) -> Verdict:

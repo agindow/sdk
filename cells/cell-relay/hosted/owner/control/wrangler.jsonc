@@ -1,0 +1,10 @@
+{
+ "$schema":"../../../node_modules/wrangler/config-schema.json",
+ "name":"agindow-keyless-policy","main":"worker.ts","compatibility_date":"2026-10-27",
+ "workers_dev":false,"preview_urls":false,
+ "vars":{"EXECUTION_ORIGIN":"https://guard.agindow.com","KEYLESS_PROFILE":"primary","KEYLESS_CONTROL_ENABLED":"false","KEYLESS_RENEWAL_SECONDS":"600"},
+ "secrets":{"required":["KEYLESS_REVIEW_KEYS","KEYLESS_DELIVERY_TOKEN"]},
+ "durable_objects":{"bindings":[{"name":"POLICIES","class_name":"KeylessPolicyAuthority"},{"name":"EXECUTORS","class_name":"KeylessExecutionOwner","script_name":"agindow-keyless-guard"}]},
+ "migrations":[{"tag":"ti75-v1","new_sqlite_classes":["KeylessPolicyAuthority"]}],
+ "observability":{"enabled":true,"traces":{"enabled":true},"logs":{"enabled":true,"invocation_logs":false}}
+}

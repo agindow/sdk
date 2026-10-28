@@ -88,6 +88,8 @@ dependencies = [
  "agw-diff",
  "agw-guard",
  "agw-inspector",
+ "agw-policy",
+ "agw-repair",
  "agw-stats",
  "chrono",
  "serde",

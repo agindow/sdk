@@ -1,7 +1,7 @@
 # Local sidecar
 
 The sidecar exposes the runtime contract's `POST /v1/guard` over loopback HTTP
-and an optional Unix HTTP socket. The default NullEngine detects nothing.
+and an optional Unix HTTP socket. The statistical guest is default; configure windows to detect.
 Explicit local selections use the same statistical Rust core as the SDK.
 This is an explicit tool-execution endpoint. Existing applications need to
 support that envelope or adapt their callables; it does not intercept TLS.

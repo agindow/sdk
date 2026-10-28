@@ -19,7 +19,7 @@ Do not open a public issue with:
 
 Include, in the private report: affected package/version or commit, the path or
 crate, impact, reproduction steps, and whether the issue is reachable in the
-default configuration (`NullEngine`, observe mode) or only with explicit
+default configuration (statistical guest with no selected windows, observe mode) or only with explicit
 opt-in features.
 
 ## Scope

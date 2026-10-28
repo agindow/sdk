@@ -1,9 +1,10 @@
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { mkdirSync, writeFileSync, readFileSync, copyFileSync, rmSync, chmodSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync, rmSync, chmodSync } from 'node:fs';
 import { build } from 'esbuild';
 import { fileURLToPath } from 'node:url';
 import { resolve, dirname } from 'node:path';
+import { stageLegalFiles } from './legal.mjs';
 import { notices } from './notices.mjs';
 const directory = fileURLToPath(new URL('..', import.meta.url));
 const root = resolve(directory, '../../..');
@@ -70,7 +71,7 @@ for (const [directoryName, format] of /** @type {const} */ ([['esm', 'esm'], ['c
     bundle: true, platform: 'node', target: 'node22', format, legalComments: 'inline' });
   for (const input of Object.keys(auditBundle.metafile.inputs)) auditInputs.add(input);
 }
-for (const name of ['LICENSE', 'NOTICE']) copyFileSync(resolve(root, name), resolve(directory, name));
+stageLegalFiles(root, directory);
 // The brand is optional packaging content: removing brand/ never breaks SDKs.
 let banner = '';
 try { if (process.env.AGINDOW_BRANDING !== 'off') banner = readFileSync(resolve(root, 'brand/terminal/agindow.txt'), 'utf8'); } catch { /* OEM build */ }

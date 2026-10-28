@@ -25,6 +25,7 @@ pub struct Field {
 }
 #[derive(Debug, Clone)]
 pub struct Plan {
+    unselected: bool,
     pub(crate) identity: Identity,
     pub(super) fields: Vec<Field>,
     pub(crate) request_invariants: Option<crate::invariant::Selection>,
@@ -88,6 +89,7 @@ impl Plan {
             }
         }
         Ok(Self {
+            unselected: false,
             identity,
             fields,
             request_invariants: None,
@@ -158,19 +160,51 @@ impl Plan {
             self.response_invariants.as_ref()
         }
     }
+    /// No selected evidence means no capture, parsing or detector work.
+    pub(crate) fn has_no_selection(&self) -> bool {
+        self.unselected
+            && self.fields.is_empty()
+            && self.request_shape.is_none()
+            && self.response_shape.is_none()
+            && self.request_invariants.is_none()
+            && self.response_invariants.is_none()
+            && self.cross_endpoint.is_none()
+    }
     pub fn family(&self) -> usize {
         self.fields.len() * 535
     }
 }
 /// Default construction never requires a baseline or enables uncalibrated work.
-#[derive(Default)]
 pub enum Engine {
-    #[default]
     NullEngine,
     Statistical {
         plan: Arc<Plan>,
         gate: AvailabilityGate,
     },
+}
+impl Default for Engine {
+    fn default() -> Self {
+        Self::statistical(Plan {
+            unselected: true,
+            identity: Identity {
+                tenant: "unselected".into(),
+                connection: "unselected".into(),
+                vendor: "unselected".into(),
+                operation: "unselected".into(),
+                segment: "unselected".into(),
+            },
+            fields: Vec::new(),
+            request_invariants: None,
+            response_invariants: None,
+            cross_endpoint: None,
+            request_shape: None,
+            response_shape: None,
+            alpha: 0.05,
+            materiality: 0.2,
+            overrides: Vec::new(),
+            investigation_ceiling: 1,
+        })
+    }
 }
 impl Engine {
     pub fn statistical(plan: Plan) -> Self {

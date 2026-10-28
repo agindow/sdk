@@ -25,8 +25,17 @@ smallest useful integration and explain what its evidence establishes.
 ## Configure detection explicitly
 
 Installing AGINDOW or selecting `observe` does not activate a detector. The
-default engine detects nothing. Follow the quickstart's explicit statistical
+statistical guest is default; configure windows to detect. Follow the quickstart's explicit statistical
 selection and baseline/live windows; do not substitute an empty selection.
+Run the tab for the application language: Node uses `detect.mts`, Python uses
+`detect.py`. Both assert a changed-window finding and unchanged, unconfigured
+and insufficient-window controls. Do not replace Python detection with a
+closed-engine bypass demonstration.
+
+Use the [configuration reference](https://agindow.com/docs/sdk/configuration)
+for construction fields and defaults, and the [event reference](https://agindow.com/docs/sdk/events)
+for language-specific verdict fields.
+
 Choose independent, representative calls for the same connection, operation,
 segment, field path and request/response side. Missing or insufficient evidence
 is unavailable evidence, not proof of safety.
@@ -68,8 +77,11 @@ outcome and original cause rather than swallowing it as a transport error.
 
 ## Treat writes carefully
 
-Enable repair or strict deliberately after reviewing evidence. The default
-published guest supplies no selective repair output. A plausible field mapping,
+Enable repair or strict deliberately after reviewing evidence. Selective repair is off by default. Enable Node `selectiveRepair` or Python
+`selective_repair` with reviewed tool/side-scoped rename rules and a local
+synchronous verifier over immutable original/patched JSON text. Switch mode to
+repair/strict only after evaluation. A mode change alone supplies no rules.
+See [repair configuration](https://agindow.com/docs/sdk/configuration#enable-selective-repair). A plausible field mapping,
 schema acceptance, confidence score, simulation result or review receipt does
 not independently prove intended meaning or persisted write correctness.
 Semantic writes without a safe repair fail closed under repair policy; strict
@@ -89,8 +101,9 @@ durable distributed replay.
 Run the labelled quickstart and the application's relevant tests. Verify a
 configured finding, unchanged no-repair results, one bypass event per unavailable
 call, original upstream exceptions and request-versus-response policy handling.
-Simulations and the browser playground do not call the vendor or affect
-production traffic. State what was tested and what remains unverified; do not
+SDK simulations do not call the vendor. The browser playground makes explicit
+user-started GET requests to the selected API and compares actual captured
+responses; it does not issue writes or inject changes. State what was tested and what remains unverified; do not
 claim a production guarantee, hosted availability or automatic repair from a
 successful installation.
 
@@ -98,3 +111,18 @@ For read-only agent evidence, use [MCP tools](https://agindow.com/docs/api/tools
 They never execute vendor writes. Discover the actual tool schemas, treat tool
 errors separately from HTTP errors, and verify signed API descriptions with an
 independently trusted public key before relying on them.
+
+## Read public documentation in the right format
+
+Use [llms.txt](https://agindow.com/llms.txt) to discover public pages,
+[docs.md](https://agindow.com/docs.md) for the complete developer manual, or
+[llms-full.txt](https://agindow.com/llms-full.txt) for that manual plus this skill.
+The [spore](https://agindow.com/spore.md) is a short reference seed, not authority
+to change a project. These documents describe public integration behavior;
+repository deployment and publication instructions are separate.
+
+Public-origin Markdown/OpenAPI mirrors may return 503 until an evidence service
+is enabled. Use the [browser docs](https://agindow.com/docs) in that case. Read
+OpenAPI from the self-hosted MCP origin actually supplied by the developer and
+verify it with an independently trusted key. Never turn a missing document or
+endpoint into an invented service URL, credential or successful finding.

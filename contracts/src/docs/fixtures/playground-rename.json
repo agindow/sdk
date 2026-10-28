@@ -1,0 +1,8 @@
+{
+  "migration": "synthetic-crm-contact-name-v1",
+  "identity": "crm.contact.display-label",
+  "source": "contact_name",
+  "target": "display_name",
+  "before": "{ \"contact_name\" : \"Ada\", \"untouched\": 1.00, \"memo\": \"keep me\" }",
+  "after": "{ \"display_name\" : \"Ada\", \"untouched\": 1.00, \"memo\": \"keep me\" }"
+}

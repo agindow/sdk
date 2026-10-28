@@ -17,6 +17,8 @@ workspace = true
 wasm-bindgen = "=0.2.129"
 agw-audit = { path = "../audit" }
 agw-guard = { path = "../guard" }
+agw-repair = { path = "../repair" }
+agw-policy = { path = "../policy" }
 agw-diff = { path = "../diff" }
 agw-inspector = { path = "../inspector" }
 agw-stats = { path = "../stats" }

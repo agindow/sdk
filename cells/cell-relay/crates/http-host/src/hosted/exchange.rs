@@ -8,7 +8,7 @@ use base64::{Engine as _, engine::general_purpose::URL_SAFE_NO_PAD};
 use ed25519_dalek::{SigningKey, VerifyingKey};
 use futures_util::StreamExt;
 use serde::Deserialize;
-use std::cell::RefCell;
+use std::{cell::RefCell, collections::BTreeMap};
 use worker::{Env, Request, Response, Result, wasm_bindgen::JsCast};
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -52,7 +52,7 @@ struct Cached {
     keys: KeyCache,
     replay: Replay,
 }
-thread_local! {static CACHE:RefCell<Option<Cached>>=const{RefCell::new(None)};}
+thread_local! {static CACHE:RefCell<BTreeMap<String,Option<Cached>>>=const{RefCell::new(BTreeMap::new())};}
 fn nonce() -> std::result::Result<String, Denial> {
     let crypto = js_sys::Reflect::get(&js_sys::global(), &"crypto".into())
         .map_err(|_| Denial::Unavailable)?;
@@ -159,6 +159,10 @@ pub async fn handle(request: &mut Request, env: &Env) -> Result<Response> {
         return super::error(400, "unsupported_grant_type");
     }
     let now = (js_sys::Date::now() / 1000.0) as u64;
+    let config = match super::owner::exchange(env, &config, now) {
+        Ok(value) => value.unwrap_or(config),
+        Err(_) => return super::error(503, "identity_unavailable"),
+    };
     let proof = request.headers().get("dpop")?;
     let target = request.url()?;
     let routes = env.secret("GUARD_CONNECTIONS").ok().map(|v| v.to_string());
@@ -168,8 +172,13 @@ pub async fn handle(request: &mut Request, env: &Env) -> Result<Response> {
         "Bearer"
     };
     let result = CACHE.with(|cell| {
-        let mut slot = cell.try_borrow_mut().map_err(|_| Denial::Unavailable)?;
-        let c = prepare(&mut slot, config, now).map_err(|_| Denial::Unavailable)?;
+        let mut slots = cell.try_borrow_mut().map_err(|_| Denial::Unavailable)?;
+        let namespace = super::owner::namespace(env);
+        if !slots.contains_key(&namespace) && slots.len() >= 256 {
+            return Err(Denial::Capacity);
+        }
+        let slot = slots.entry(namespace).or_default();
+        let c = prepare(slot, config, now).map_err(|_| Denial::Unavailable)?;
         if input.subject_token_type == "urn:ietf:params:oauth:token-type:access_token" {
             if input.ttl == 0 || input.ttl > 900 {
                 return Err(Denial::Expiry);

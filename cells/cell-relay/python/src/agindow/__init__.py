@@ -50,3 +50,5 @@ def recent() -> tuple[Event, ...]:
 
 from .machine_auth import (RemoteAuth as RemoteAuth, AccessCredential as AccessCredential, ProofSigner as ProofSigner)
 from .identity_source import workload_identity as workload_identity
+
+from .selective import (RenameRule as RenameRule, RepairCheck as RepairCheck, SelectiveRepair as SelectiveRepair)
