@@ -1,5 +1,10 @@
 # cell-relay — the in-path engine
 
+**Dependabot for agents. At runtime.**
+
+Detect breaking API changes as agents run, apply verified runtime repairs, and
+automatically open draft pull requests with validated source fixes.
+
 **Rust** · Apache-2.0 (the tech stack) · **Byte-passthrough forwarding + bounded inspection tee + mode configuration + schema learning + lossless inspection + generated contract types — explicit native guard paths; the statistical engine is default; configure windows to detect**
 
 > Sits in the request path of every tool call: intercepts, inspects on a side

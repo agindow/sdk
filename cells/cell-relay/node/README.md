@@ -1,6 +1,11 @@
 # agindow
 
-Inspect API calls made by AI agents for changes in data shape and meaning.
+**Dependabot for agents. At runtime.**
+
+Detect breaking API changes as agents run, apply verified runtime repairs, and
+automatically open draft pull requests with validated source fixes.
+
+The Node SDK embeds runtime API inspection and verified repair in your application.
 **Pre-alpha**, package on npm as `agindow@0.1.0-alpha.2` for Node 22+,
 with ESM/CJS and TypeScript declarations. The package embeds a Rust/WASM
 statistical guest. OpenTelemetry is an optional peer dependency.

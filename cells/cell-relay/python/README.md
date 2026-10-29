@@ -1,7 +1,11 @@
 # agindow (Python)
 
-Inspect API calls made by AI agents for changes in data shape and meaning on
-Python 3.11+. **Pre-alpha** package for PyPI as `agindow`. Loads the **identical
+**Dependabot for agents. At runtime.**
+
+Detect breaking API changes as agents run, apply verified runtime repairs, and
+automatically open draft pull requests with validated source fixes.
+
+The Python SDK embeds runtime API inspection and verified repair in Python 3.11+. **Pre-alpha** package for PyPI as `agindow`. Loads the **identical
 WASM bytes** built for `agindow` through Wasmtime. Python provides
 callable/configuration/availability glue — not a second drift engine.
 

@@ -1,7 +1,12 @@
 # AGINDOW SDKs and in-path runtime
 
-**API drift inspection for AI agent calls.** Configure evidence windows to
-detect changes, then inspect findings without changing calls in observe mode.
+**Dependabot for agents. At runtime.**
+
+Detect breaking API changes as agents run, apply verified runtime repairs, and
+automatically open draft pull requests with validated source fixes.
+
+Configure evidence windows to detect changes, then inspect findings without
+changing calls in observe mode.
 
 This repository is the home of the installable SDKs **and** of the complete
 Apache-2.0 runtime that inspects, blocks or modifies your API calls: the eleven
