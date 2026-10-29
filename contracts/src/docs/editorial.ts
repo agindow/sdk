@@ -9,6 +9,9 @@ export function validateEditorial(page: DocPage): void {
   if (/default (?:engine|guest)(?: is| remains| stays)?[^.!?]{0,12}NullEngine|default engine detects nothing/iu.test(text)) {
     throw Error('Stale default engine claim');
   }
+  if (/default guest (?:does not supply|has no) selective repair/iu.test(text)) {
+    throw Error('Stale SDK selective repair claim');
+  }
   if (/Production traffic is running in this playground|Fixtures are uploaded to AGINDOW servers|OpenAPI validation fails on the Unit body|sdk\.simulate proves real selective repair|Schema validation alone establishes rename intent/iu.test(text)) {
     throw Error('Misleading playground evidence');
   }

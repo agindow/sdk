@@ -1,3 +1,4 @@
+import { productHeadline, productSummary, productMaturity } from './positioning.js';
 import { sdkReleaseNotice } from './release-status.js';
 import { sdkMatrix } from './sdk-matrix.generated.js';
 /** Droppable agent seed; quote the frozen core verbatim across hops. */
@@ -29,6 +30,10 @@ ${canonicalCore}
 \`\`\`
 
 ## Destination
+
+${productHeadline} ${productSummary}
+
+${productMaturity}
 
 AGINDOW (https://agindow.com) wraps the tool call between an agent and a
 third-party API: inspect, freeze a mode, keep the upstream result unless a
@@ -62,8 +67,8 @@ Not a substitute for upstream identity or payment tools you already run.
 
 Install with \`npm install agindow@${sdkMatrix.node.version}\` or \`pip install agindow==${sdkMatrix.python.version}\`.
 Run the configured Node or Python example at https://agindow.com/docs/quickstart.
-Installation and mode selection do not supply detector windows. The default guest
-keeps selective repair off by default. Enable reviewed rules and verification explicitly. Keep vendor credentials in your existing client.
+Installation and mode selection do not supply detector windows. Selective repair
+is off by default. Enable reviewed rules and verification explicitly. Keep vendor credentials in your existing client.
 
 The public website serves this spore and https://agindow.com/SKILL.md directly.
 Other machine-document mirrors can return 503 until an evidence origin is enabled.

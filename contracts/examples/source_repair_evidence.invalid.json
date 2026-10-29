@@ -1,0 +1,50 @@
+{
+  "contract": "source_repair_evidence",
+  "version": 2,
+  "scope": {
+    "tenant": "acme",
+    "connection": "stripe-main",
+    "operation": "write",
+    "side": "request",
+    "contract_revision": "cv_stripe_2026_10_17a",
+    "evidence_revision": "evidence-1"
+  },
+  "finding": {
+    "id": "find_01HQ8Z4A5B6C7D8E9F0G1H2J3K",
+    "revision": 1,
+    "investigation_id": "inv_fixture",
+    "fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "observed_at": "2026-10-17T14:05:00Z",
+    "expires_at": "2026-10-24T14:05:00Z",
+    "field": "/source"
+  },
+  "created_at": "2026-10-20T12:00:00Z",
+  "expires_at": "2026-10-21T12:00:00Z",
+  "facts": [
+    {
+      "id": "migration-1",
+      "scope": {
+        "tenant": "acme",
+        "connection": "stripe-main",
+        "operation": "write",
+        "side": "request",
+        "contract_revision": "cv_stripe_2026_10_17a",
+        "evidence_revision": "evidence-1"
+      },
+      "kind": "reviewed_top_level_rename",
+      "from": "/source",
+      "to": "/payment_method",
+      "provenance": {
+        "kind": "vendor_declaration",
+        "reference": "declaration-1",
+        "revision": "rev-1",
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "reviewed_by": "reviewer-1",
+      "reviewed_at": "2026-10-20T11:00:00Z",
+      "expires_at": "2026-10-21T12:00:00Z"
+    }
+  ],
+  "attachments": [],
+  "digest": "086bcb2610f2aeec859ece8c7d09f4a2a2e0cde11128286a801ad40db50c1dc6"
+}

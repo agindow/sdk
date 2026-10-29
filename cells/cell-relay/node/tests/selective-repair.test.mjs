@@ -77,3 +77,18 @@ test('unverified shape writes retain shared Rust passthrough policy and original
  const approvedSdk=await instance();const error=Error('vendor error');
  assert.throws(()=>approvedSdk.guard((/** @type {unknown} */ _input)=>{throw error;},{tool:rule.tool})(input),value=>value===error);
 });
+
+for (const representation of ['string', 'Buffer', 'Uint8Array']) {
+ test(`raw ${representation} requests retain their representation after verified repair`,async()=>{
+  const sdk=await instance();
+  const before=' {"old_name":"Ada", "id":9007199254740993} ';
+  const input=representation==='string'?before:representation==='Buffer'?Buffer.from(before):new TextEncoder().encode(before);
+  const result=sdk.guard(identity,{tool:rule.tool,inputShape:'raw'})(input);
+  assert.equal(typeof result,typeof input);
+  assert.equal(result.constructor,input.constructor);
+  const actual=typeof result==='string'?result:Buffer.from(result).toString('utf8');
+  assert.equal(actual,before.replace('old_name','display_name'));
+  assert.equal(typeof input==='string'?input:Buffer.from(input).toString('utf8'),before);
+  assert.equal(sdk.recent().filter(e=>e.type==='repair').length,1);
+ });
+}

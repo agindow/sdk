@@ -1,53 +1,68 @@
 # agindow (Python)
 
-Inspect API calls made by AI agents for changes in data shape and meaning on
-Python 3.11+. **Pre-alpha** package for PyPI as `agindow`. Loads the **identical
-WASM bytes** built for `agindow` through Wasmtime. Python provides
-callable/configuration/availability glue — not a second drift engine.
+> **Published release:** Node `0.1.0-alpha.3` on npm and Python `0.1.0a2`
+> on PyPI. Both are pre-alpha; the pinned install commands below are available.
 
-The statistical guest is default. Configure explicit scoped baseline/live windows
-to detect drift. Selective repair is off by default. Enable reviewed rename rules and an independent verifier explicitly.
+**Dependabot for agents. At runtime.**
 
-Start with the Python tab of the [configured detection quickstart](https://agindow.com/docs/quickstart):
-save it as `detect.py` and run `python detect.py`. It asserts one local finding
-and unchanged/unconfigured/insufficient-window controls. The Python `ready`
-property is boolean, not awaitable.
+Detect API drift as agents run, apply reviewed and verified runtime repairs, and turn drift evidence into validated source fixes and draft pull requests.
 
-The embedded SDK needs no separate AGINDOW credential. Keep vendor credentials
-in your existing client. These fixtures do not establish production accuracy or
-persisted write correctness. See [capabilities](https://agindow.com/docs/capabilities).
+Pre-alpha. Detection requires configured windows. Runtime repair is opt-in for supported changes. Source-fix tooling is available locally; hosted PR automation is not yet qualified.
+
+Use Python 3.11+ to observe existing API calls and explicitly configure supported
+detection or verified repair. The embedded SDK needs no separate AGINDOW key;
+vendor authentication stays in your application. The statistical guest needs
+explicit scoped baseline/current windows, and selective repair is off by default.
 
 ## Install
 ```bash
-pip install agindow==0.1.0a1
-# or: uv add agindow==0.1.0a1
+pip install agindow==0.1.0a2
+# or: uv add agindow==0.1.0a2
 ```
 The wheel includes the prebuilt WASM guest. You do **not** need Rust, Node, or a
 monorepo checkout to use the SDK.
 
-## Decorators, async and contexts
+## First API call
 
-This is a setup fixture, not detection. Configure selection as in Quickstart
-to produce a finding; selecting repair or strict does not configure a detector.
+Save the complete program below as `orders.py`. Set `API_URL` to your existing
+read-only HTTPS JSON endpoint and run `python orders.py`. Keep authentication,
+headers and vendor credentials in your current client when adapting the function.
 ```python
-from agindow import Agindow, guard
-
-@guard(mode="repair", tool="customers.create", operation="write")
-def create_customer(email: str) -> dict[str, str]:
-    return {"email": email}
+import json
+import os
+from urllib.request import urlopen
+from agindow import Agindow
 
 sdk = Agindow(mode="observe")
+sdk.on("drift", lambda event: print("Drift:", event.verdict))
 
-@sdk.guard(tool="customers.read", operation="read")
-async def read_customer() -> dict[str, str]:
-    return {"id": "fixture"}
+@sdk.guard(tool="orders.get", operation="read")
+def get_order() -> object:
+    with urlopen(os.environ["API_URL"], timeout=10) as response:
+        order: object = json.load(response)
+        return order
 
-with sdk.context(mode="strict"):
-    # Only calls through this SDK's guards use the scoped configuration.
-    pass
-# `async with sdk.context(...)` is supported as well.
-sdk.close()
+try:
+    print("API result:", get_order())
+    print("AGINDOW events:", [event.type for event in sdk.recent()])
+finally:
+    sdk.close()
 ```
+Expect the API response and `AGINDOW events: []` with no detector selected. An
+empty list does not prove drift-free traffic. `sdk.ready` is a boolean, not
+awaitable; `sdk.load_error` retains a load failure. A failed engine load preserves
+the original call through bypass. Upstream HTTP/network/JSON errors propagate.
+The finally block closes this same SDK instance.
+
+## Async and scoped configuration
+
+Decorate an `async def` with `@sdk.guard(...)` and await it normally. The complete
+[async Python example](https://agindow.com/docs/sdk/python#guard-an-async-operation)
+uses an application-owned HTTP call. Sync/async scopes use
+`with sdk.context(mode="observe"):` / `async with sdk.context(mode="observe"):`.
+See the [Python API reference](https://agindow.com/docs/sdk/python-reference) for
+complete examples, arguments and failure contracts.
+
 Context managers scope guarded calls; they cannot intercept arbitrary Python
 statements. Overrides use ContextVar, nest and remain isolated across async
 tasks. Each call freezes configuration until completion. `configure(mode="repair")`
@@ -69,15 +84,11 @@ Resolution: explicit keywords > environment > nearest JSON `.agindowrc` >
 defaults. Shared env vars match Node (`AGINDOW_MODE`, `AGINDOW_KEY`,
 `AGINDOW_ENDPOINT`, `AGINDOW_BUFFER`, `AGINDOW_FAIL_CLOSED`). Invalid explicit
 or environment values raise `AgindowSetupError` before a call.
-```python
-from agindow import AgindowDriftError
 
-try:
-    create_customer("fixture@example.test")
-except AgindowDriftError as error:
-    print(error.code, error.tool, error.drift_class, error.drift_id)
-    print(error.hint, error.audit_url)
-```
+Catch `AgindowDriftError` only for policy handling; inspect `code`, `tool`,
+`drift_class`, `drift_id`, `hint`, `audit_url` and the original cause as applicable.
+See [errors and retained outcomes](https://agindow.com/docs/guides/errors).
+
 Request halts dispatch zero times. Response halts retain `error.outcome` and
 warn against blind replay. Upstream exceptions survive as `error.__cause__`.
 Missing audit IDs/URLs remain empty rather than fabricated.
@@ -93,24 +104,21 @@ paired local agent-loop benchmark gates added p50 &lt;100 µs on the default
 Unselected statistical plan only (excludes model/network/import/selected-detector work).
 
 Python `wrap` currently accepts callables. Node-specific tool/client/HTTP
-adapters, Nango codegen, OTel spans, report CLI and remote configuration/audit
-transports are outside this package. No Python framework adapter or streaming
+adapters, Nango codegen, OTel spans, report CLI and guest audit
+draining are outside this package. No Python framework adapter or streaming
 qualification is claimed. Inspection is bounded to detached JSON projections.
 
 ## Remote fail-open API
 
 Local decorators stay offline. Remote execution is a separate HTTP API using
 stdlib HTTP transport; it never redirects or retries through AGINDOW:
-```python
-from agindow import RemoteEnvelope, RemoteOptions, guard_remote
 
-request = RemoteEnvelope("vendor.read", "example", "read", {}, "observe")
-result = guard_remote(
-    lambda envelope: {"fallback": True},
-    request,
-    RemoteOptions("http://127.0.0.1:8789/v1/guard"),
-)
-```
+Use `guard_remote` / `guard_remote_async` only with a configured execution host
+and your real original-call fallback. Follow the complete
+[remote guide](https://agindow.com/docs/sdk/remote) for a labelled local protocol
+exercise, options, authentication, response cleanup and fallback semantics.
+A fabricated fallback value is not a successful vendor result.
+
 `RemoteResponse` retains the original status/headers and streaming `body`.
 Any 5xx/refusal/timeout/reset invokes the original callable once and emits one
 bypass. Writes/unknown operations require the same upstream idempotency key in
@@ -123,7 +131,7 @@ not enable a hosted identity service by themselves. Sibling Node package:
 
 ## Maintained detection example
 
-The complete [`detect.py`](./examples/detect.py) matches the published quickstart byte for byte.
+The complete [`detect.py`](./examples/detect.py) matches the published detection example byte for byte.
 Run it after installing the pinned package in your environment. The documentation
 publication gate executes this same source against matching built SDK artifacts.
 
@@ -152,7 +160,7 @@ Repair is off by default. Construct `Agindow` with
 `target` keys, reviewed `migration` ID and `confidence`. The local synchronous
 verifier receives immutable `RepairCheck.before`, `.after` JSON strings and
 `.rule`; it must check intended meaning using independent authoritative data.
-Load that data outside calls. Start in `Config(mode="observe")`, then use
+Load that data outside calls. Start with `Agindow(mode="observe",...)`, then use
 `sdk.configure(mode="repair")` after evaluation; observe disables application.
 
 The shared Rust engine prepares selective key edits. Existing statistical

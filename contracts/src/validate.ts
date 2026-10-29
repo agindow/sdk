@@ -181,3 +181,5 @@ export function parseDashboardRead(value: unknown): DashboardRead {
 export function parseDashboardQuery(value: unknown): DashboardQuery {return parse<DashboardQuery>('dashboard_query',value);}
 
 export function parseDashboardError(value: unknown): DashboardError {return parse<DashboardError>('dashboard_error',value);}
+
+export { parseSourceRepairEvidence, validateSourceRepairEvidence } from './source-repair.js';

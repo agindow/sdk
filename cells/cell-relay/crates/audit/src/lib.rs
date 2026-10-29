@@ -20,6 +20,7 @@ pub mod profile_wire;
 pub mod publish;
 pub mod recurrence;
 pub mod sink;
+pub mod source_repair_wire;
 pub mod store;
 
 /// Invalid artifacts and exhausted bounds. Publication is best-effort: callers

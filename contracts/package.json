@@ -8,10 +8,14 @@
     ".": "./src/index.ts",
     "./compat": "./src/compat.ts",
     "./packaging": "./src/packaging.ts",
+    "./coverage": "./src/coverage.ts",
     "./docs": "./src/docs.ts",
     "./docs/detection": "./src/docs/detection.ts",
     "./docs/playground": "./src/docs/playground.ts",
-    "./docs-releases": "./src/docs/releases.ts"
+    "./docs-releases": "./src/docs/releases.ts",
+    "./docs/examples": "./src/docs/examples.ts",
+    "./docs/release-status": "./src/docs/release-status.ts",
+    "./docs/remote-examples": "./src/docs/remote-example.ts"
   },
   "scripts": {
     "build": "tsc --noEmit",

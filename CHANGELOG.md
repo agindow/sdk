@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.1.0-alpha.3 / 0.1.0a2 — Published October 29, 2026
+
+Published on npm and PyPI. Node adds explicit local source binding, deterministic
+reviewed rename patch export and source-fix export commands. Source and fixture
+digests, scoped evidence and consent checks constrain exports; no patch is
+automatically applied. Verified raw request repair retains the original string,
+Buffer or Uint8Array representation. Independent validation and draft publication require
+separately configured authorized hosts. Python retains its runtime API and
+ships the same rebuilt WASM guest. Detection still needs configured windows;
+selective repair stays opt-in.
+
+Documentation now leads with one existing API call, language-specific SDK
+workflows and verified repair, with full method references and statistical
+controls in dedicated guides.
+
+See [release notes](./releases/v0.1.0-alpha.3.md).
+
 ## 0.1.0-alpha.2 / 0.1.0a1 — Published October 28, 2026
 
 [GitHub release notes](https://github.com/agindow/sdk/releases/tag/v0.1.0-alpha.2).

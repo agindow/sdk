@@ -1,4 +1,5 @@
 import { sdkReleaseNotice } from './release-status.js';
+import { docsIntroduction, productMaturity } from './positioning.js';
 /** Public document formats; repository publishing instructions never enter these bodies. */
 import type { DocsTree } from './model.js';
 import { markdownPage } from './markdown.js';
@@ -6,7 +7,9 @@ import { sdkMatrix } from './sdk-matrix.generated.js';
 
 const path = (page: DocsTree['pages'][number]): string => page.path ?? `/docs/${page.family}/${page.version}/${page.slug}`;
 const availablePages = (tree: DocsTree) => tree.pages.filter(page => page.published);
-const introduction = `${sdkReleaseNotice}\n\nAGINDOW inspects API calls made by AI agents for changes in data shape and meaning.
+const introduction = `${sdkReleaseNotice}\n\n${docsIntroduction}
+
+${productMaturity}
 The published pre-alpha Node and Python SDKs run an embedded statistical guest.
 Configure explicit scoped baseline/live windows, start in observe mode, and verify
 findings separately from bypass events. Selective repair is off by default; enable reviewed rename rules with independent verification. AGINDOW does not currently operate a hosted guard or MCP service.

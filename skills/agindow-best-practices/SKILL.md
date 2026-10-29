@@ -25,7 +25,7 @@ smallest useful integration and explain what its evidence establishes.
 ## Configure detection explicitly
 
 Installing AGINDOW or selecting `observe` does not activate a detector. The
-statistical guest is default; configure windows to detect. Follow the quickstart's explicit statistical
+statistical guest is default; configure windows to detect. Follow the [detection guide](https://agindow.com/docs/detection)'s explicit statistical
 selection and baseline/live windows; do not substitute an empty selection.
 Run the tab for the application language: Node uses `detect.mts`, Python uses
 `detect.py`. Both assert a changed-window finding and unchanged, unconfigured
@@ -98,7 +98,7 @@ durable distributed replay.
 
 ## Verify the integration
 
-Run the labelled quickstart and the application's relevant tests. Verify a
+Run the labelled detection example and the application's relevant tests. Verify a
 configured finding, unchanged no-repair results, one bypass event per unavailable
 call, original upstream exceptions and request-versus-response policy handling.
 SDK simulations do not call the vendor. The browser playground makes explicit

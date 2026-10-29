@@ -28,3 +28,18 @@ it('rejects deterministic invalid guard options at setup', () => {
     expect(() => sdk.guard(() => 1, options as never)).toThrow();
   }
 });
+
+it('raw calls preserve original bytes and dispatch once during unavailable inspection', async () => {
+  for (const fault of ['throws', 'warming']) {
+    const sdk = createAgindow({ mode: 'repair' }, async () => ({ begin() {
+      if (fault === 'throws') throw Error('engine fault');
+      return { request: { ...pass, bypassed: true }, finish: () => pass, close() {} };
+    } }));
+    await sdk.ready;
+    const input = Buffer.from('{"old_name":"Ada"}');
+    const upstream = vi.fn((value: Buffer) => value);
+    expect(sdk.guard(upstream, { inputShape: 'raw' })(input)).toBe(input);
+    expect(upstream).toHaveBeenCalledExactlyOnceWith(input);
+    expect(sdk.recent().filter(event => event.type === 'bypass')).toHaveLength(1);
+  }
+});

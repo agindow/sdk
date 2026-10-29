@@ -1,3 +1,6 @@
+import { seoGuides } from './docs/seo-guides.js';
+import { maintenanceGuides } from './docs/maintenance-guides.js';
+export { docsIntroduction, productHeadline, productSummary, productMaturity } from './docs/positioning.js';
 import { releaseAliases } from './docs/releases-map.generated.js';
 import { sdkChangelog } from './docs/changelog.js';
 export { sdkReleasePrepared, sdkReleaseNotice, sdkDistributionStatus, publishedSdkMatrix } from './docs/release-status.js';
@@ -55,7 +58,7 @@ const startOrder = ['introduction', 'choose-integration', 'quickstart', 'agents'
 const startRank = (slug: string): number => { const index = startOrder.indexOf(slug); return index < 0 ? startOrder.length : index; };
 const getStarted = [...started, agentGuide, integrationGuide].sort((left, right) => startRank(left.slug) - startRank(right.slug));
 export const docsTree: DocsTree = { format: 'agindow.docs/1', revision: docsRevision,
-  pages: [...getStarted, ...concepts, sdkChangelog, ...guides, ...developerGuides.filter(page => page.family === 'guides'), ...apiPages, preview, ...sdks, configuration, ...developerGuides.filter(page => page.family === 'sdks')] };
+  pages: [...getStarted, ...concepts, sdkChangelog, ...guides, ...maintenanceGuides, ...seoGuides, ...developerGuides.filter(page => page.family === 'guides'), ...apiPages, preview, ...sdks, configuration, ...developerGuides.filter(page => page.family === 'sdks')] };
 export const versionedDocPath = (page: DocPage): string => `/docs/${page.family}/${page.version}/${page.slug}`;
 export const docPaths = (page: DocPage): readonly string[] => [...new Set([docPath(page), versionedDocPath(page)])];
 export const docPath = (page: DocPage): string => page.path ?? versionedDocPath(page);
@@ -76,6 +79,10 @@ export function validateTree(tree: DocsTree): void {
     if (!page.published) continue;
     if (!page.title || page.sections.length === 0) throw Error('Empty published page');
     validateEditorial(page);
+    for (const section of page.sections) if (section.snippet !== undefined
+      && (!Number.isSafeInteger(section.snippet) || section.snippet < 0 || page.snippets?.[section.snippet] === undefined)) {
+      throw Error('Invalid docs snippet reference');
+    }
     const projection = apiPages.find(item => item.slug === page.slug);
     if (page.family === 'api-reference' && page.slug !== 'agent-surface' && JSON.stringify(page) !== JSON.stringify(projection)) throw Error('API projection diverged from signing source');
     // Examples may show redacted prefixes, never plausible credentials or tenant identifiers.

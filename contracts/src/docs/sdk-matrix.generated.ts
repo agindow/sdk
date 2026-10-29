@@ -3,8 +3,16 @@ export const docsChannels = [
   {
     id: 'latest',
     label: 'Latest',
-    display: '0.1.0-alpha.2',
+    display: '0.1.0-alpha.3',
     href: '/docs',
+    npm: '0.1.0-alpha.3',
+    pypi: '0.1.0a2',
+  },
+  {
+    id: '0.1.0-alpha.2',
+    label: 'Older version',
+    display: '0.1.0-alpha.2',
+    href: '/docs/versions/0.1.0-alpha.2',
     npm: '0.1.0-alpha.2',
     pypi: '0.1.0a1',
   },
@@ -19,7 +27,7 @@ export const docsChannels = [
 ] as const;
 
 export const sdkMatrix = {
-  node: { version: '0.1.0-alpha.2', published: true, name: 'agindow' },
-  python: { version: '0.1.0a1', published: true, name: 'agindow' },
-  cli: { version: '0.1.0-alpha.2', published: true, name: 'agindow report' },
+  node: { version: '0.1.0-alpha.3', published: true, name: 'agindow' },
+  python: { version: '0.1.0a2', published: true, name: 'agindow' },
+  cli: { version: '0.1.0-alpha.3', published: true, name: 'agindow report' },
 } as const;

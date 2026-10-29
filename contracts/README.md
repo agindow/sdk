@@ -15,6 +15,7 @@ when generated code is stale.
 | Contract | Producer → consumer | Envelope | Grounding |
 |---|---|---|---|
 | `dashboard_query` / `dashboard_read` v2, `dashboard_error` v1 | console ↔ private registry identity boundary | no |; |
+| `source_repair_evidence` | explicit Cortex packager → authorized off-path consumers | yes | contract §10.58; |
 | `credential_event` | relay → registry/console | yes | contract §10.53 |
 | `drift_eventcontract_snapshot` | the registry → cell-relay | yes | contract §3.3, §4 |
 | `findinginvestigation_jobinvestigation_completionpeer_observation` | background cortex → explicit native publisher | yes | contract §10.52 |
@@ -244,3 +245,42 @@ human content, generated Markdown and its OpenAPI pointer; both consumer builds
 refuse divergence and run the existing local HTTP example against the real MCP
 transport before emitting. No frozen schema or runtime validator changes.
 See the console.
+
+## Source-repair evidence
+
+`source_repair_evidence` v1 is a separate off-path family; finding v2 and audit
+v1 consumers are unchanged. Cortex's `packageSourceRepairEvidence` takes a
+host-authorized finding identity/revision and exact tenant, connection,
+operation, side, contract revision and evidence revision. The host must obtain
+the finding, reviewed facts and consent receipts from its trusted stores under
+that authority; caller-supplied reviewer names are not authentication.
+
+The closed export contains finding/investigation references, reviewed top-level
+rename facts, provenance reference/revision/digest, reviewer/time/expiry and an
+immutable SHA-256 digest. Confidence, private narratives, citations, payloads,
+tokens and raw source/fixtures are not projected. Optional source and sanitized
+fixture **references** each need a distinct kind-, scope- and content-digest-bound
+consent receipt. This family never transports their bodies or resolves them.
+
+Consumers must use `validateSourceRepairEvidence(value, authority, now)` before
+source/provider I/O. `parseSourceRepairEvidence` only detaches, bounds and checks
+structure; generated Rust types likewise do not replace semantic admission.
+Validation returns typed refusals for scope, expiry, contradictions, unsupported
+or incomplete evidence, unsafe content, consent and digest failures. The envelope
+is limited to 32 KiB, 2,048 JSON nodes, depth 10, 16 facts, eight attachment
+references and seven days; expiry is shortened to the earliest finding, fact or
+consent expiry. Rename chains, duplicate declarations and destination collisions
+are refused. A fact must cover the incident field.
+
+The digest is lowercase SHA-256 of `canonicalJson` over all members except the
+root `digest`; it includes nested provenance and consent digests. It detects
+mutation, not authenticity: authorization and reviewed-store admission remain
+host obligations. No source edit, provider call, runtime repair grant, collection,
+publishing, or hosted qualification is enabled. See contract §10.58.
+
+Also shares a private browser projection in `src/playground.ts`. Its
+allowlist/bounds/linkage decoder is not a frozen public runtime wire family and
+does not grant execution or publication authority. The configured Test host must
+independently admit original runtime, validation and provider receipts; local
+projection tests do not qualify a hosted run. See the
+.

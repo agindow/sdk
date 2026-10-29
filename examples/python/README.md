@@ -1,6 +1,6 @@
 # Python examples
 
-These examples install the published package from PyPI — no local Rust build is
+These examples install the pinned package from PyPI — no local Rust build is
 needed.
 
 ```bash
@@ -9,11 +9,18 @@ pip install -r requirements.txt
 python observe.py
 ```
 
-`pyrightconfig.json` points the type checker at that virtual environment. This is a wrapper setup fixture: it uses observe mode without a detector
-selection and preserves the original object. It does not demonstrate drift
-detection. Run the Python tab of the [configured quickstart](https://agindow.com/docs/quickstart)
-for a real local finding and unchanged/unconfigured/insufficient-window controls.
-Python readiness is a boolean; it is not awaitable.
+Set `API_URL` to an existing read-only HTTPS JSON endpoint before running
+`observe.py`. The program uses the same SDK instance for the decorator, events
+and cleanup. It prints the API response and recent event kinds. Keep vendor
+authentication in your own client when adapting the function. An empty event
+list is expected without a selection; it does not establish drift-free traffic.
+Python readiness is a boolean, not awaitable; failed loading retains load_error
+and guarded calls bypass. Original HTTP/network/JSON errors propagate.
+
+`pyrightconfig.json` points the type checker at the virtual environment. For a
+labelled local finding and stable/unconfigured/insufficient-window controls, use
+the [detection guide](https://agindow.com/docs/detection). It makes no live vendor
+call. The pinned release is available from PyPI.
 
 Public Markdown guidance is available through the [document index](https://agindow.com/llms.txt)
 and [developer manual](https://agindow.com/docs.md) when those mirrors are enabled;

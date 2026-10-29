@@ -1,0 +1,33 @@
+import type { DocSection } from './model.js';
+/** Exhaustive retained reference, kept after the workflow on the configuration page. */
+export const configurationReferenceSections: readonly DocSection[] = [
+    { heading: 'Shared call settings', text: 'Node uses camelCase; Python keyword settings use snake_case. Defaults below apply before configuration sources and per-call overrides. configure changes future calls; an executing call keeps its snapshot.', table: { columns: ['Node / Python', 'Type and default', 'Behavior'], rows: [
+      ['mode / mode', 'observe | repair | strict; observe', 'Controls handling of findings, not detector selection.'],
+      ['failClosed / fail_closed', 'boolean; true', 'Opt-out affects unknown writes in repair mode. Semantic writes stay protected; strict ignores the opt-out.'],
+      ['allowedTools / allowed_tools', 'string array / tuple or "*"; "*"', 'Select tools eligible for inspection.'],
+      ['denyTools / deny_tools', 'string array / tuple; empty', 'Excludes tools from inspection.'],
+      ['buffer / buffer', 'integer 0–100000; 100', 'Maximum recent event metadata retained locally; 0 disables retention.'],
+      ['onEvent / on_event', 'callback; absent', 'Receives events. Listener errors are contained.'],
+      ['apiKey / api_key; endpoint / endpoint', 'optional strings; absent', 'Do not switch an embedded guard to HTTP. Use explicit remote helpers for HTTP transport.'],
+    ] } },
+    { heading: 'StatisticalSelection', text: 'Node exports the StatisticalSelection type. Python accepts the equivalent JSON-compatible dict[str, object] as selection. Required scope strings identify the dataset; they do not provide authentication or vendor credentials.', table: { columns: ['Field', 'Type / presence', 'Meaning'], rows: [
+      ['tenant, connection, vendor, operation, segment', 'strings; required', 'Scope the comparison. operation matches the guarded tool name.'],
+      ['fields', 'array; required', 'Explicit field comparisons. No inferred selection.'],
+      ['fields[].side', 'request | response; required', 'Which inspection phase owns the field.'],
+      ['fields[].path', 'string; required', 'Selected JSON Pointer, for example /value.'],
+      ['fields[].baseline; fields[].live', 'arrays of strings; required', 'Complete raw JSON documents from comparable independent calls.'],
+      ['fields[].enumeration', 'boolean; required', 'Whether enumeration comparison is enabled for that field.'],
+      ['materiality', 'optional number in (0, 1]', 'Explicit materiality floor; not repair authority.'],
+      ['work', 'construction integer u32; 200000000', 'Guest work allowance, not milliseconds. Exhaustion does not authorize a finding or repair.'],
+    ] }, links: [{ label: 'Baselines and eligibility', href: '/docs/detection' }] },
+    { heading: 'Repair rule reference', text: 'Node RenameRule uses tool, side, from, to, migration and confidence. Python RenameRule uses tool, side, source, target, migration and confidence. Keys are simple top-level object names of up to 64 ASCII letters, digits or underscores, starting with a letter or underscore. One rule per tool/side, at most 16 rules. Tool and migration IDs contain 1–256 non-control characters. confidence is a required finite number from 0 to 1; side is request or response. All rule fields are required. The verifier receives RepairCheck with before, after and rule, returning exactly true/True to approve. It must check independent authoritative meaning or business evidence; copying values or validating a schema alone cannot establish intent. Prepare evidence outside calls; do not perform network or database I/O in the verifier.' },
+    { heading: 'Repair decisions and limits', text: 'Observe reports matched rules without changing payloads. Repair requires confidence at least 0.97; strict requires 0.99. Source absence preserves identity. Destination collisions, low confidence and verifier refusal leave payloads unchanged; strict halts matched unresolved drift, and repair passes unresolved shape drift through under the shared Rust policy; semantic-write blocks remain in force. Statistical findings or halts, malformed results and bypass are never cleared to permit a repair. Verifier faults, async results and unavailable capture preserve upstream behavior through bypass. Supported payloads are plain JSON objects and Node RawJson boundaries, with complete captures up to 1 MiB. Opt-in repair divides the work allowance across statistical inspection and the two preparation phases. Numeric/unit/enum rewrites, nested/array migrations and automatic discovery are outside this option. Node guest audit FIFO cannot be combined with selectiveRepair; use repair events for local observation. This does not provide a durable repair archive or persisted write proof.' },
+    { heading: 'Node-specific options', text: 'These fields are not Python Config keywords. Types are exported as Config, Options and GuardOptions; use type-only imports in TypeScript. Node defaults spans to true. The headers, transformers, sync, endpoint, sidecar and debug fields are accepted configuration metadata; they do not activate header injection, a transformation pipeline, polling or transport.', table: { columns: ['Option', 'Type / default', 'Purpose'], rows: [
+      ['spans; debug', 'optional booleans; true / absent', 'OTel span emission and debug configuration.'],
+      ['headers', 'string record; absent', 'Accepted metadata; no automatic header injection.'],
+      ['transformers', 'record of (value: unknown) => unknown; absent', 'Accepted callback metadata; no automatic transformer pipeline.'],
+      ['sidecar; sync', 'URL string; {contracts?: number, drift?: number}', 'Configuration metadata; does not select remote execution or provision refresh.'],
+      ['audit', '{tenant: string, capacity?: number, maxBytes?: number}; absent', 'Opt-in guest FIFO. Default capacity 64 (1–256); maxBytes 524288 (1024–1048576). Audit tenant must match selection tenant.'],
+    ] } },
+    { heading: 'Guard options and operation identity', text: 'guard(fn, options) and Python guard(fn, **options) accept tool and operation plus call-policy settings. operation is read, write or unknown; generic callables default to read. Label writes and uncertain operations explicitly. Node also supports toolName for dynamic names and inputShape raw or parsed. A function returning a Promise stays asynchronous; Python coroutine functions stay asynchronous. Unsupported adapter shapes need an explicit supported callable boundary.', links: [{ label: 'Method signatures', href: '/docs/sdk/node' }, { label: 'Python decorators', href: '/docs/sdk/python' }] },
+];

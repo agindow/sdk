@@ -81,5 +81,6 @@ with `include_str!` at a fixed relative depth. Moving `contracts/` or
 
 The standalone export omits admission tests that require private dashboard or
 registry cells, and the combined admission mutation runner. Those cross-cell
-checks remain in the monorepo. The public admission runtime, policy and SDK tests
+checks and the source-evaluation test requiring the private Cortex corpus remain
+in the monorepo. The public admission runtime, policy and SDK tests
 remain available through `pnpm --filter cell-relay test:admission`.

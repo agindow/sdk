@@ -6,13 +6,16 @@ export interface DocTable {
 }
 export interface DocSection {
   readonly heading: string; readonly aliases?: readonly string[]; readonly text: string; readonly schema?: string;
+  /** Index into page.snippets, rendered at this step in HTML and Markdown. */
+  readonly snippet?: number;
+  readonly diagram?: { readonly label: string; readonly steps: readonly string[] };
   readonly example?: { readonly language: DocCodeLanguage; readonly code: string };
   readonly links?: readonly { readonly label: string; readonly href: string }[];
   readonly unavailable?: readonly string[];
   readonly table?: DocTable;
 }
 /** Language key for tab chrome and highlighter (Better Auth–style short labels). */
-export type DocCodeLanguage = 'ts' | 'python' | 'bash' | 'json' | 'sh';
+export type DocCodeLanguage = 'ts' | 'python' | 'bash' | 'json' | 'sh' | 'text';
 export interface DocCodeSample {
   readonly label: string;
   readonly language: DocCodeLanguage;

@@ -1,20 +1,19 @@
-"""Minimal observe-mode example — installs from PyPI."""
+import json
+import os
+from urllib.request import urlopen
+from agindow import Agindow
 
-from agindow import Agindow, guard
+sdk = Agindow(mode="observe")
+sdk.on("drift", lambda event: print("Drift:", event.verdict))
 
+@sdk.guard(tool="orders.get", operation="read")
+def get_order() -> object:
+    with urlopen(os.environ["API_URL"], timeout=10) as response:
+        order: object = json.load(response)
+        return order
 
-@guard(mode="observe", tool="example.read", operation="read")
-def read_example() -> dict[str, bool]:
-    return {"ok": True}
-
-
-def main() -> None:
-    sdk = Agindow(mode="observe")
-    try:
-        print({"ready": sdk.ready, "result": read_example()})
-    finally:
-        sdk.close()
-
-
-if __name__ == "__main__":
-    main()
+try:
+    print("API result:", get_order())
+    print("AGINDOW events:", [event.type for event in sdk.recent()])
+finally:
+    sdk.close()

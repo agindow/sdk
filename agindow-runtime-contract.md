@@ -3232,3 +3232,222 @@ LLM dependencies. Guest audit FIFO plus host-applied repair is a setup error
 until its artifact can accurately cover the combined path; repair events are
 local metadata, not durable evidence or persisted write correctness proof.
 See and wrapper API §12.23.
+
+### 10.58 Planned source-fix generation and automatic draft PRs
+
+Design decision for. The local
+evidence, binding, generation, validation and durable-job boundaries below are
+implemented; hosted automation remains planned. Source repair is entirely off path:
+an explicitly admitted tenant/operation/evidence package and exact repository
+binding may produce a minimal candidate patch. Start with reviewed mechanical
+JS/TS field migrations. Source-inventory hints, statistical hypotheses and model
+confidence cannot establish migration authority or the target code location.
+Generation and publication are distinct grants. Generation does not write a
+customer checkout by default; it exports a patch and attributable receipt.
+
+Independent validation binds original/base/patch/fact/tool/command identities,
+checks untouched context and reproduces a targeted before-fail/after-pass
+regression in an isolated bounded host environment. The generator cannot change
+its verifier facts or weaken existing tests. Failed, missing or inconclusive
+validation cannot qualify automatic publication. Local tests are not proof of
+vendor write acceptance, business effects, provider CI or deployed resolution.
+
+A standing owner/repository-authorized, versioned policy may enable automatic
+**draft PRs** for qualified deterministic recipes within explicit repository,
+branch, path, type and resource limits. Default is disabled. Model-assisted
+candidates require distinct disclosure consent and per-candidate digest-bound
+publication review. Recheck authority, policy and base revision before publishing;
+revocation/cancellation fences later steps. Durable identities/leases and external
+outcome reconciliation prevent duplicate creation after uncertain requests.
+Never overwrite human commits, force-push, approve, merge or deploy.
+
+The customer/host-controlled publisher alone owns GitHub App credentials and
+repository-scoped tokens; generation, validation and guard paths never receive
+them. Existing customer vendor-credential boundaries are unchanged. Unconfigured
+host ports stay unavailable. Distinguish generated, locally validated, PR-open,
+CI, merged, deployed and observed-resolution states. No runtime mode, wire
+response, retry policy or guard dependency changes. Private source and evidence
+remain tenant-scoped with explicit disclosure/retention policy.
+
+Now implements only the explicit local evidence-package boundary:
+`source_repair_evidence` v1 and an off-path Cortex projection. It binds an
+authorized finding and reviewed top-level rename facts to tenant/connection,
+operation/side, contract/evidence revisions, provenance, expiry and SHA-256.
+Statistical hypotheses, missing/contradictory/expired facts, mismatched scope,
+unsafe references and altered digests produce typed refusals. Default exports
+omit traffic and narratives; source/fixture references require distinct scoped,
+content-digest-bound consent and never carry inline bodies. The host owns
+trusted review/authorization admission; an unkeyed digest grants no authority.
+This evidence-package boundary enables no source reader, candidate generator,
+publisher or hosted route. See local boundary; the remaining planning
+and qualification limits above still apply.
+
+Adds an explicit off-path local checkout binding manifest in the Node
+CLI (`bind-source` / `resolve-source`). A host-admitted tenant/repository/root,
+actor/authority revision and exact base SHA bind an explicitly selected
+operation/side/file/symbol/field and binding version to committed source bytes,
+SHA-256 and independently re-resolved AST spans. Only direct single-return
+JS/TS serializers/accessors are admitted; aliases, computed/dynamic targets,
+ambiguous matches, stale bytes, unsafe paths and known generated/vendor sources
+abstain with locations and a manual selection/review path. Inventory remains
+advisory. Local CLI grants are maintainer assertions, not hosted authentication;
+the host owns current authority, checkout isolation and durable version admission.
+No registry persistence, source execution, generation, patching or publication is
+enabled. See [local binding boundary](/cells/cell-relay/node/cli/binding/README.md).
+
+Adds local deterministic patch export on top of these boundaries:
+a fresh host-admitted generation grant names the exact evidence digest, binding
+ID, reviewed fact and repository/actor authority. The Node CLI revalidates scope,
+expiry, committed bytes and the binding before a single-token top-level JS/TS
+rename. Request model member names and unrelated bytes remain unchanged;
+collisions, unsupported syntax, stale/dirty targets and unsafe fields refuse.
+An explicitly rebound committed destination may yield a no-op. A bounded unified
+patch and recipe-versioned digest receipt label the result generated/unvalidated;
+no source execution, in-place application, upstream I/O, isolated qualification or
+publication follows. The host owns current grant admission and checkout isolation.
+See [local generation boundary](/cells/cell-relay/node/cli/migration/README.md).
+
+Adds a separate Cortex isolated-validation host port. Trusted host
+admission pins the immutable candidate, reviewed fact/recipe and command/tool
+identities. The verifier independently parses the one-file patch, derives the
+permitted AST rename and checks exact preservation. Baseline checks and a specific
+before-fail/after-pass regression, immutable checkout inventories and confirmed
+cleanup are required. Hosts must enforce isolation, deny network/credentials,
+pin dependencies/tools and bound resources with abort fencing; the orchestrator
+bounds RPC waits and never substitutes local shell execution. Absent host ports
+stay skipped; unsupported, failed, timed-out or inconclusive runs cannot pass.
+Receipts distinguish local transformation evidence from provider CI, real vendor
+acceptance, business effects and publication authority. Host provisioning and
+hosted isolation qualification remain explicit. See
+validation boundary.
+
+Adds an explicit private Postgres source-job ledger. Active owner membership
+and independently verified repository authority admit immutable scoped policies
+with separate source, inference and publication grants. Tenant-serialized durable
+deduplication, revisioned leases, pre-effect spend/exposure reservations, rate and
+concurrency limits survive restart. Cancellation, consent revision, removed
+installation/owner and stale base/evidence fence advancement. Stable stage intents
+quarantine uncertain external effects for bounded read-only reconciliation;
+unknown outcomes never automatically retry creation. Detailed metadata retention
+preserves bounded dedup/accounting tombstones. Publication intents require a fresh
+independently admitted validation receipt and deterministic standing publication
+grant; model publication requires the separate current candidate review added by. The host must enforce resource and
+effect fencing and recheck current authority at provider writes. No default
+source/runner/publisher, hosted route, GitHub action or guard dependency is enabled.
+See durable jobs. Supplies the explicit
+publication boundary below; still owns hosted qualification.
+
+Adds an opt-in Cortex draft-publication host port over durable transactional
+SQLite state. Fresh running lease/policy authority and independently admitted
+Validation pins precede each write. Model/manual publication requires exact
+owner/repository-authorized patch/validation approval, separately from inference.
+Only create-if-absent bot branches and draft PRs exist in the port; changed bases,
+protected branches, human commits, missing permissions/draft support and scope
+mismatches stop writes. Stable dispatch identities and lookup-only reconciliation
+preserve one attributed receipt across unknown creation outcomes and restart.
+Immutable initial draft/local-validation evidence is separate from current PR/CI
+projection. Scoped HMAC-verified deduplicated webhooks invalidate a fresh read;
+raw private payloads and provider errors never become PR text or lifecycle authority.
+Credentials remain in the selected-repository host with Contents/Pull requests write
+permissions; CI observations require a separate host read source. No default host,
+credential provisioning, route, merge/deploy operation or live provider qualification
+is enabled. See publication boundary.
+
+Adds private session/owner source-fix review controls with server-derived
+review identities, versioned policy admission and durable attributed command
+intents. Generation, deterministic automatic drafts, pause/revoke and exact
+candidate approval remain separate. CLI local evidence injection exports patches,
+citations and unvalidated test state without a hosted publisher. Dashboard
+projections distinguish candidate/local-test/job/PR/CI state; merged does not
+imply deployed or observed resolution. Default review/artifact ports remain
+unconfigured, and no new hosted qualification is claimed. See
+review controls and
+dashboard review.
+
+Adds a private Test playground entry, bounded linked-evidence timeline and
+an optional host-reviewed profile API. Browser commands carry reviewed identities,
+revision/idempotency and separate runtime consent; never URLs, source, verifier
+commands, facts or credentials. Session membership, owner mutations, recent start
+authentication and server-side review checks precede host execution. No default
+execution host exists. Owns durable
+capture/packaged-runtime/source-job composition and original receipt admission;
+Still gates actual API/runner/provider qualification. Local projections
+cannot establish those outcomes. Source consent/publication retain and
+Authority. SDK interfaces, guard availability and call-time policy do not
+change. See private API and
+Test workflow.
+
+Decision: optional model candidates use a separate qualified capability
+and price policy, a candidate-scoped instance of the durable spend engine and
+one dispatch per source job. Fixed instructions frame bounded reviewed source
+and citations as untrusted JSON data; models receive no tools, secrets, verifier
+commands or authority. Closed single-file patches require independent
+validation. Its existing reviewed transformation support is not expanded by a
+model; unsupported complex edits remain failed/inconclusive. Validator receipts
+retain model provenance, which prevents deterministic automatic publication.
+Explicit exact-candidate human approval remains required. Missing provider usage
+and unsuccessful/unknown outcomes remain conservatively unsettled until bounded
+read-only reconciliation; no implicit paid retry or provider provisioning exists.
+
+Adds a versioned local synthetic source-fix holdout with thresholds
+recorded before execution, exact generator/verifier before-and-after evidence,
+explicit correctness/coverage/abstention denominators and measured local resource
+observations. Separate durable publication/review fault cohorts and disposable
+verifier/path/consent mutation controls gate local evidence. Model-assisted
+provider evaluation is excluded, and no detector score, hosted qualification or
+production resolution claim follows. See
+local evaluation; remains the
+hosted qualification boundary.
+
+### 10.59 Planned verified-repair and API-change coverage expansion
+
+Planning decision for.
+Current SDK limits in §10.57 remain authoritative until new opt-in recipe
+implementations and parity evidence land. Planned recipes expose existing native
+raw-span capabilities through the shared guest: nested/bounded-array renames,
+explicit finite string mappings, 's exact empty-string-to-null exception,
+and exact number-to-number unit/epoch scaling. No numeric type coercion,
+rounding, guessed defaults/units, missing-value invention or write retries.
+
+Each recipe requires independently reviewed operation/side/version/expiry-scoped
+facts, exact source predicates, bounded edits, unchanged-context verification
+and existing confidence/policy gates. Detector hypotheses cannot grant authority.
+Missing/contradictory facts are normal refusal; verifier faults preserve the
+existing availability boundary. Observe/default construction stays non-mutating;
+semantic vetoes remain intact. Facts refresh outside calls, without cell, database
+or LLM dependencies in the guard. Local transformation evidence is not a claim
+of completed provider-write correctness or durable audit delivery.
+
+Detection expansion covers explicit operation/side-scoped nested JSON constraints,
+bounded HTTP status/media-type/safe-header observations and off-path configured
+OpenAPI pair comparison. Declared compatibility, observed drift, credential or
+availability signals and source-code impact remain distinct evidence. Directional
+request/response compatibility matters. Unseen values cannot establish declared
+requiredness, and insufficient windows/truncated captures cannot establish drift.
+HTTP forwarding bytes, header order, streaming and latency-header rules remain.
+No new metadata finding changes write policy without a separate decision.
+
+Implements an explicitly invoked local/background OpenAPI JSON pair
+comparison and required immutable acquisition host port, with bounded local
+references, directional compatibility and operation-authorized declaration
+publication. The default acquisition bounds remain unchanged; larger profiles
+are explicit and capped. Unsupported acquisition/comparison returns partial
+evidence. No scheduler, hosted storage or guard fetch is enabled. See
+the hosted qualification evidence.
+
+Supplies a committed per-family catalog, SDK/adapter-scoped expiring
+watermark projections, pinned historical evidence and a versioned synthetic
+scorecard contract holdout. Public/docs/dashboard projections share the catalog;
+missing sources expose no traffic counts or qualification. Scorecard fixtures
+validate scoring, not measured provider correctness or detector calibration.
+Five disposable source mutations gate verifier, direction, preservation and
+capture rules. Planned Tier 1 recipes remain unsupported. See
+the hosted qualification evidence.
+
+Publish a per-family/protocol/adapter/side/evidence-source catalog with actual
+configuration, sample/capture limits and qualification provenance. Unsupported
+GraphQL/webhook/stream/gRPC and workflow-pagination semantics remain explicit
+until separately specified and tested. Preserve historical eval baselines; add
+versioned holdouts and separate healthy safety, fault-bypass exposure, detector
+accuracy and production calibration.
+qualifies only explicitly exercised hosted capability rows.

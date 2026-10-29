@@ -1,5 +1,11 @@
 # cell-relay — the in-path engine
 
+**Dependabot for agents. At runtime.**
+
+Detect API drift as agents run, apply reviewed and verified runtime repairs, and turn drift evidence into validated source fixes and draft pull requests.
+
+Pre-alpha. Detection requires configured windows. Runtime repair is opt-in for supported changes. Source-fix tooling is available locally; hosted PR automation is not yet qualified.
+
 **Rust** · Apache-2.0 (the tech stack) · **Byte-passthrough forwarding + bounded inspection tee + mode configuration + schema learning + lossless inspection + generated contract types — explicit native guard paths; the statistical engine is default; configure windows to detect**
 
 > Sits in the request path of every tool call: intercepts, inspects on a side
@@ -634,9 +640,10 @@ separate; the statistical guest is default; configure windows to detect.
 [python/README.md](./python/README.md) documents the typed uv-managed Python
 decorators/context managers and identical shared-WASM binding. Build stages the
 Node guest into the Python package; lint runs strict mypy; test runs Python
-behavior/package fixtures and actual cross-language parity. CI gates default
-NullEngine added p50 <100 µs separately from statistical paths. No PyPI release
-or Python framework/HTTP adapters are claimed.
+behavior/package fixtures and actual cross-language parity. Local SDK timing
+checks remain separate from configured statistical-path measurements. The
+pre-alpha Python package is published on PyPI and includes explicit remote HTTP
+APIs. Python framework adapters and hosted delivery remain unavailable.
 
 ## Explicit HTTP and agent surfaces
 

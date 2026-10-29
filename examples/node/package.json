@@ -6,6 +6,6 @@
     "node": ">=22"
   },
   "dependencies": {
-    "agindow": "0.1.0-alpha.2"
+    "agindow": "0.1.0-alpha.3"
   }
 }

@@ -1,14 +1,18 @@
 import { createAgindow } from 'agindow';
 
-const sdk = createAgindow({ mode: 'observe', buffer: 16 });
+const sdk = createAgindow({ mode: 'observe' });
 await sdk.ready;
+sdk.on('drift', event => console.log('Drift:', event.verdict));
 
-const original = { ok: true };
-const run = sdk.guard(() => original, { tool: 'example.read', operation: 'read' });
-const result = run();
+const getOrder = sdk.guard(async () => {
+  const url = process.env.API_URL;
+  if (!url) throw new Error('Set API_URL to your order JSON endpoint.');
+  const response = await fetch(url, { signal: AbortSignal.timeout(10_000) });
+  if (!response.ok) throw new Error(`API returned ${response.status}`);
+  const order = await response.json();
+  return order;
+}, { tool: 'orders.get', operation: 'read' });
 
-if (result !== original) {
-  throw new Error('expected return-by-reference on the no-repair path');
-}
-
-console.log(JSON.stringify({ ready: true, result }, null, 2));
+const order = await getOrder();
+console.log('API result:', order);
+console.log('AGINDOW events:', sdk.recent().map(event => event.type));

@@ -61,3 +61,12 @@ export type { DashboardError } from './generated/dashboard_error.js';
 export { inspectAuditText, patchSides, AUDIT_INSPECTION_BYTES, type AuditInspection } from './audit-inspection.js';
 
 export { jsonText, type JsonText } from './json-text.js';
+
+export type { SourceRepairEvidence } from './generated/source_repair_evidence.js';
+export {
+  SOURCE_REPAIR_BYTES, SOURCE_REPAIR_TTL_MS, parseSourceRepairEvidence, validateSourceRepairEvidence,
+  checkSourceRepairEvidence, sourceRepairDigest, sameSourceRepairScope, boundedSourceRepair,
+  sourceRepairFailure, refuse, type SourceRepairAuthority, type SourceRepairRefusal, type SourceRepairResult,
+} from './source-repair.js';
+export { readPlaygroundReview, readPlaygroundCatalog, playgroundId, playgroundOutcome,
+  type PlaygroundReview, type PlaygroundScope } from './playground.js';

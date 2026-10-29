@@ -1,7 +1,7 @@
 {
   "name": "agindow",
-  "version": "0.1.0-alpha.2",
-  "description": "API drift firewall for AI agents on Node (Rust/WASM)",
+  "version": "0.1.0-alpha.3",
+  "description": "Runtime API change detection and reviewed repair for AI agents on Node (Rust/WASM)",
   "type": "module",
   "license": "Apache-2.0",
   "homepage": "https://github.com/agindow/sdk",

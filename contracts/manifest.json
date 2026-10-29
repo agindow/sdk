@@ -107,6 +107,12 @@
       "version": 1,
       "type": "DashboardError",
       "envelope": false
+    },
+    {
+      "name": "source_repair_evidence",
+      "version": 1,
+      "type": "SourceRepairEvidence",
+      "envelope": true
     }
   ]
 }

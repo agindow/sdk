@@ -4,7 +4,7 @@ import { performance } from 'node:perf_hooks';
 import { openSpan } from './otel.js';
 import { types } from 'node:util';
 import { warn } from './config.js';
-import { RawJson, RAW_CAP } from './raw.js';
+import { RawJson, RAW_CAP, restoreRaw } from './raw.js';
 import type { Operation } from './types.js';
 export interface Snapshot extends GuardOptions { readonly mode: Mode; readonly failClosed: boolean }
 export interface InspectionHooks {
@@ -70,6 +70,7 @@ export function guard<F extends Callable>(fn: F, options: GuardOptions,
           if (patch.verified !== true || verdict.class === 'unknown' || verdict.class === null || verdict.confidence === undefined
             || !Number.isFinite(verdict.confidence) || verdict.confidence < threshold || verdict.confidence > 1) throw Error('invalid repair evidence');
           effective = phase === 'request' ? patch.value : hooks?.replaceResponse === undefined ? patch.value : hooks.replaceResponse(value, patch.value);
+          if (phase === 'request' && hooks === undefined && options.inputShape === 'raw') effective = restoreRaw(value, effective);
           if (phase === 'request' && effective !== value) {
             if (hooks?.replaceRequest !== undefined) args = [...hooks.replaceRequest(args, effective)];
             else if (args.length <= 1) args = [effective];

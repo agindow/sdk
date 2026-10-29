@@ -1,3 +1,4 @@
+import sourceRepairEvidence from '../source_repair_evidence.v1.json';
 /**
  * The schemas themselves — the source of truth every cell validates against.
  *
@@ -25,7 +26,7 @@ import fieldProfile from '../field_profile.v1.json';
 import profileSnapshot from '../profile_snapshot.v1.json';
 import finding from '../finding.v2.json';
 
-export type ContractName = 'dashboard_error' | 'dashboard_query' | 'dashboard_read' | 'credential_event' | 'peer_observation' | 'investigation_completion' | 'investigation_job' | 'shadow_review' | 'notification' | 'review_case' | 'review_resolution' | 'recovery_event' | 'drift_event' | 'contract_snapshot' | 'finding' | 'audit_artifact' | 'field_profile' | 'profile_snapshot';
+export type ContractName = 'source_repair_evidence' | 'dashboard_error' | 'dashboard_query' | 'dashboard_read' | 'credential_event' | 'peer_observation' | 'investigation_completion' | 'investigation_job' | 'shadow_review' | 'notification' | 'review_case' | 'review_resolution' | 'recovery_event' | 'drift_event' | 'contract_snapshot' | 'finding' | 'audit_artifact' | 'field_profile' | 'profile_snapshot';
 
 /**
  * Which version file each schema above was imported from.
@@ -37,6 +38,7 @@ export type ContractName = 'dashboard_error' | 'dashboard_query' | 'dashboard_re
  * asserts this record matches the manifest.
  */
 export const SCHEMA_FILES: Record<ContractName, string> = {
+  source_repair_evidence: 'source_repair_evidence.v1.json',
   dashboard_error: 'dashboard_error.v1.json',
   dashboard_query: 'dashboard_query.v2.json',
   dashboard_read: 'dashboard_read.v2.json',
@@ -59,6 +61,7 @@ export const SCHEMA_FILES: Record<ContractName, string> = {
 
 /** Keyed by contract name; `contracts/manifest.json` is the version registry the code generators read. */
 export const CONTRACTS: Record<ContractName, Schema> = {
+  source_repair_evidence: sourceRepairEvidence,
   dashboard_error: DashboardErrorSchema,
   dashboard_query: DashboardQuerySchema,
   dashboard_read: dashboardRead,

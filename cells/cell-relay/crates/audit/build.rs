@@ -92,6 +92,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 }
             }
         }
+        if entry.name == "source_repair_evidence" {
+            source_repair_text(&mut settings, &schema)?;
+            settings.with_conversion(
+                serde_json::from_value(schema["properties"]["version"].clone())?,
+                "crate::profile_wire::ProfileVersion",
+                std::iter::empty(),
+            );
+        }
         if matches!(entry.name.as_str(), "dashboard_query" | "dashboard_read") {
             dashboard_text(&mut settings, &schema)?;
         }
@@ -199,6 +207,40 @@ fn dashboard_text(
         serde_json::Value::Array(items) => {
             for child in items {
                 dashboard_text(settings, child)?;
+            }
+        }
+        _ => {}
+    }
+    Ok(())
+}
+
+// Map every constrained source-repair string without generated regex initialization.
+fn source_repair_text(
+    settings: &mut typify::TypeSpaceSettings,
+    value: &serde_json::Value,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let target = match value["pattern"].as_str() {
+        Some("^[A-Za-z0-9_.:-]+$") => Some("crate::dashboard_wire::Search"),
+        Some("^/[A-Za-z_][A-Za-z0-9_]*$") => Some("crate::source_repair_wire::Field"),
+        Some("^[a-f0-9]{64}$") => Some("crate::source_repair_wire::Digest"),
+        _ => None,
+    };
+    if let Some(target) = target {
+        settings.with_conversion(
+            serde_json::from_value(value.clone())?,
+            target,
+            std::iter::empty(),
+        );
+    }
+    match value {
+        serde_json::Value::Object(properties) => {
+            for child in properties.values() {
+                source_repair_text(settings, child)?;
+            }
+        }
+        serde_json::Value::Array(items) => {
+            for child in items {
+                source_repair_text(settings, child)?;
             }
         }
         _ => {}
