@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.1.0-alpha.4 / 0.1.0a3 — Prepared November 2, 2026
+## 0.1.0-alpha.4 / 0.1.0a3 — Published November 2, 2026
 
-Prepared locally for publication; the latest published pair remains alpha.3/a2.
+Published on npm and PyPI. Registry integrity matches the reviewed release archives.
 
 - Node and Python: reviewed concrete nested/array field renames with atomic
   refusal and independent raw-token preservation verification.
@@ -17,7 +17,7 @@ Prepared locally for publication; the latest published pair remains alpha.3/a2.
 
 Configured windows are still required for detection. Selective repair stays
 opt-in; source validation and draft publication need separate authorized hosts.
-See [release preparation notes](./releases/v0.1.0-alpha.4.md).
+See [release notes](./releases/v0.1.0-alpha.4.md).
 
 ## 0.1.0-alpha.3 / 0.1.0a2 — Published October 29, 2026
 

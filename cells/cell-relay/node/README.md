@@ -1,8 +1,7 @@
 # agindow
 
-> **Prepared release:** Node `0.1.0-alpha.4` on npm and Python `0.1.0a3`
-> are prepared locally. Registry install commands below apply after publication.
-> The latest published pair is Node `0.1.0-alpha.3` / Python `0.1.0a2`.
+> **Published release:** Node `0.1.0-alpha.4` on npm and Python `0.1.0a3`
+> on PyPI, confirmed November 2, 2026. Both are pre-alpha; the pinned install commands below are available.
 
 **Dependabot for agents. At runtime.**
 
@@ -11,7 +10,7 @@ Detect API drift as agents run, apply reviewed and verified runtime repairs, and
 Pre-alpha. Detection requires configured windows. Runtime repair is opt-in for supported changes. Source-fix tooling is available locally; hosted PR automation is not yet qualified.
 
 The Node SDK embeds runtime API inspection and verified repair in your application.
-**Pre-alpha**, prepared as `agindow@0.1.0-alpha.4` for Node 22+,
+**Pre-alpha**, published as `agindow@0.1.0-alpha.4` for Node 22+,
 with ESM/CJS and TypeScript declarations. The package embeds a Rust/WASM
 statistical guest. OpenTelemetry is an optional peer dependency.
 ```sh

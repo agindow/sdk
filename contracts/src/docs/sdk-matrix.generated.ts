@@ -2,7 +2,7 @@
 export const docsChannels = [
   {
     id: 'latest',
-    label: 'Prepared release',
+    label: 'Latest',
     display: '0.1.0-alpha.4',
     href: '/docs',
     npm: '0.1.0-alpha.4',
@@ -35,7 +35,7 @@ export const docsChannels = [
 ] as const;
 
 export const sdkMatrix = {
-  node: { version: '0.1.0-alpha.4', published: false, name: 'agindow' },
-  python: { version: '0.1.0a3', published: false, name: 'agindow' },
-  cli: { version: '0.1.0-alpha.4', published: false, name: 'agindow report' },
+  node: { version: '0.1.0-alpha.4', published: true, name: 'agindow' },
+  python: { version: '0.1.0a3', published: true, name: 'agindow' },
+  cli: { version: '0.1.0-alpha.4', published: true, name: 'agindow report' },
 } as const;

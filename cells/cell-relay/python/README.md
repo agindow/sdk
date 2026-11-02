@@ -1,8 +1,7 @@
 # agindow (Python)
 
-> **Prepared release:** Node `0.1.0-alpha.4` on npm and Python `0.1.0a3`
-> are prepared locally. Registry install commands below apply after publication.
-> The latest published pair is Node `0.1.0-alpha.3` / Python `0.1.0a2`.
+> **Published release:** Node `0.1.0-alpha.4` on npm and Python `0.1.0a3`
+> on PyPI, confirmed November 2, 2026. Both are pre-alpha; the pinned install commands below are available.
 
 **Dependabot for agents. At runtime.**
 

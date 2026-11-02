@@ -7,7 +7,7 @@ export const sdkReleaseNotice = sdkReleasePrepared
 export const sdkDistributionStatus = sdkReleasePrepared ? 'prepared for publication' : 'published';
 /** Last registry-confirmed pair while the next pair is prepared locally. */
 export const publishedSdkMatrix = {
-  node: sdkMatrix.node.published ? sdkMatrix.node : { version: '0.1.0-alpha.3', published: true, name: 'agindow' },
-  python: sdkMatrix.python.published ? sdkMatrix.python : { version: '0.1.0a2', published: true, name: 'agindow' },
-  cli: sdkMatrix.cli.published ? sdkMatrix.cli : { version: '0.1.0-alpha.3', published: true, name: 'agindow report' },
+  node: sdkMatrix.node.published ? sdkMatrix.node : { version: '0.1.0-alpha.4', published: true, name: 'agindow' },
+  python: sdkMatrix.python.published ? sdkMatrix.python : { version: '0.1.0a3', published: true, name: 'agindow' },
+  cli: sdkMatrix.cli.published ? sdkMatrix.cli : { version: '0.1.0-alpha.4', published: true, name: 'agindow report' },
 } as const;

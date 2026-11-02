@@ -4,7 +4,7 @@ import { sdkReleasePrepared } from './release-status.js';
 export const sdkChangelog: DocPage = {
   family: 'get-started', version: 'v1', slug: 'changelog', path: '/docs/changelog',
   title: 'SDK changelog', published: true, sections: [
-    { heading: `${sdkMatrix.node.version} / ${sdkMatrix.python.version}`, text: `${sdkReleasePrepared ? 'Prepared release, November 2, 2026. These versions have not yet been published to npm or PyPI. Install commands in these docs apply after publication.' : 'Published on npm and PyPI.'} Node requires 22+; Python requires 3.11+. Both packages use the same release WASM guest.`, table: { columns: ['Package', 'Version', 'Status'], rows: [
+    { heading: `${sdkMatrix.node.version} / ${sdkMatrix.python.version}`, text: `${sdkReleasePrepared ? 'Prepared release, November 2, 2026. These versions have not yet been published to npm or PyPI. Install commands in these docs apply after publication.' : 'Published November 2, 2026 on npm and PyPI.'} Node requires 22+; Python requires 3.11+. Both packages use the same release WASM guest.`, table: { columns: ['Package', 'Version', 'Status'], rows: [
       ['npm agindow', sdkMatrix.node.version, sdkMatrix.node.published ? 'Published' : 'Prepared'],
       ['PyPI agindow', sdkMatrix.python.version, sdkMatrix.python.published ? 'Published' : 'Prepared'],
     ] } },
