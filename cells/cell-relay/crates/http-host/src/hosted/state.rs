@@ -176,12 +176,21 @@ pub fn prepare(
                 .ok_or(503u16)?
         );
         let engine = cache.engines.get(&key).ok_or(503u16)?;
-        let call = Execution::start_at(input, engine, id, 200_000_000, at)
-            .ok()
-            .and_then(|call| match authority {
-                Some(c) => call.with_machine_authority(&c).ok(),
-                None => Some(call),
-            });
+        // Only the local customer-key wrapper sets this host field after snapshot
+        // infrastructure failure. Skip both phases while preserving fixed routing.
+        let bypass = env
+            .var("AGINDOW_CUSTOMER_BYPASS")
+            .is_ok_and(|value| value.to_string() == "true");
+        let call = if bypass {
+            None
+        } else {
+            Execution::start_at(input, engine, id, 200_000_000, at)
+                .ok()
+                .and_then(|call| match authority {
+                    Some(c) => call.with_machine_authority(&c).ok(),
+                    None => Some(call),
+                })
+        };
         Ok(Prepared {
             route,
             permit,

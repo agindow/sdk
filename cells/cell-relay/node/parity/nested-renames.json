@@ -1,0 +1,12 @@
+[
+  {"id":"nested-numeric","source":"old","target":"new","parents":["/data"],"before":" {\"data\":{\"old\":9007199254740993},\"keep\":1e400} ","after":" {\"data\":{\"new\":9007199254740993},\"keep\":1e400} "},
+  {"id":"selected-array","source":"old","target":"new","parents":["/items/0","/items/2"],"before":"{\"items\":[{\"old\":1},{\"old\":2},{\"old\":-0}]}","after":"{\"items\":[{\"new\":1},{\"old\":2},{\"new\":-0}]}"},
+  {"id":"escaped-key","source":"old.key","target":"n[e]w","parents":["/a~1b~0c"],"before":"{\"a/b~c\":{\"old\\u002ekey\":\"unchanged\"}}","after":"{\"a/b~c\":{\"n[e]w\":\"unchanged\"}}"},
+  {"id":"empty-key","source":"","target":"new","parents":["/"],"before":"{\"\":{\"\":1}}","after":"{\"\":{\"new\":1}}"},
+  {"id":"root-array","source":"old","target":"new","parents":["/1"],"before":"[{\"old\":1},{\"old\":2}]","after":"[{\"old\":1},{\"new\":2}]"},
+  {"id":"atomic-collision","source":"old","target":"new","parents":["/items/0","/items/1"],"before":"{\"items\":[{\"old\":1},{\"old\":2,\"new\":3}]}","after":null},
+  {"id":"missing-selected","source":"old","target":"new","parents":["/items/0","/items/1"],"before":"{\"items\":[{\"old\":1},{}]}","after":null},
+  {"id":"noncanonical-array-index","source":"old","target":"new","parents":["/items/01"],"before":"{\"items\":[{\"old\":1},{\"old\":2}]}","after":null},
+  {"id":"duplicate-member","source":"old","target":"new","parents":["/data"],"before":"{\"data\":{\"old\":1},\"keep\":1,\"keep\":2}","after":null},
+  {"id":"malformed","source":"old","target":"new","parents":["/data"],"before":"{\"data\":{\"old\":1}","after":null}
+]

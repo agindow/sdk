@@ -1,7 +1,8 @@
 # agindow
 
-> **Published release:** Node `0.1.0-alpha.3` on npm and Python `0.1.0a2`
-> on PyPI. Both are pre-alpha; the pinned install commands below are available.
+> **Prepared release:** Node `0.1.0-alpha.4` on npm and Python `0.1.0a3`
+> are prepared locally. Registry install commands below apply after publication.
+> The latest published pair is Node `0.1.0-alpha.3` / Python `0.1.0a2`.
 
 **Dependabot for agents. At runtime.**
 
@@ -10,11 +11,11 @@ Detect API drift as agents run, apply reviewed and verified runtime repairs, and
 Pre-alpha. Detection requires configured windows. Runtime repair is opt-in for supported changes. Source-fix tooling is available locally; hosted PR automation is not yet qualified.
 
 The Node SDK embeds runtime API inspection and verified repair in your application.
-**Pre-alpha**, published as `agindow@0.1.0-alpha.3` for Node 22+,
+**Pre-alpha**, prepared as `agindow@0.1.0-alpha.4` for Node 22+,
 with ESM/CJS and TypeScript declarations. The package embeds a Rust/WASM
 statistical guest. OpenTelemetry is an optional peer dependency.
 ```sh
-npm install agindow@0.1.0-alpha.3
+npm install agindow@0.1.0-alpha.4
 ```
 ## First API call
 
@@ -226,9 +227,18 @@ boolean. Prepare that evidence outside guarded calls.
 
 After evaluation, `sdk.configure({ mode: 'repair' })` permits verified patches;
 `observe` disables application again. Mode alone supplies no migration rule.
-Unrelated statistical findings and blocks remain in force. Numeric, nested and
-array migrations are outside this option. Guest audit FIFO cannot be combined
+Unrelated statistical findings and blocks remain in force. Numeric migrations
+and automatic discovery are outside this option. Guest audit FIFO cannot be combined
 with this option; repair events provide local observation.
+
+For nested or selected-array renames in the **local unreleased source**, add
+`parents: ['/contacts/0', '/contacts/2']` to the rule, keeping `from` and `to` as
+literal keys within each selected object. Supply `contract` (reviewed contract
+revision), `migration` (reviewed migration revision), `provenance` and
+`expiresAt` (Unix milliseconds). The synchronous verifier still checks intended
+meaning against independent facts; a successful rename alone does not prove it.
+See the.
+Published package documentation retains its existing release scope.
 
 See the [runnable Node/Python example and limits](https://agindow.com/docs/sdk/configuration#enable-selective-repair).
 
@@ -244,3 +254,6 @@ applies or publishes a patch.
 Adds [local source-fix export](cli/source-fixes/README.md) with an injected
 local evidence source, reviewed citations and explicit unvalidated test state;
 no hosted publisher or automatic application is required or enabled.
+
+For versioned contract/expiry and value-type admission in the **local unreleased
+Source**, see.

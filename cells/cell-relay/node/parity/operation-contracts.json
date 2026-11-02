@@ -1,0 +1,554 @@
+[
+  {
+    "id": "nullable-request",
+    "input": {
+      "baseline": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "request",
+          "version": "v1"
+        },
+        "kind": "declared",
+        "provenance": "review-a",
+        "body": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"string\"}}}",
+        "complete": true
+      },
+      "current": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "request",
+          "version": "v1"
+        },
+        "kind": "declared",
+        "provenance": "review-b",
+        "body": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":[\"string\",\"null\"]}}}",
+        "complete": true
+      }
+    },
+    "expected": {
+      "coverage": "complete",
+      "requiredness": "declared",
+      "findings": [
+        {
+          "path": "x",
+          "compatibility": "compatible"
+        }
+      ]
+    }
+  },
+  {
+    "id": "nullable-response",
+    "input": {
+      "baseline": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "response",
+          "version": "v1"
+        },
+        "kind": "declared",
+        "provenance": "review-a",
+        "body": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"string\"}}}",
+        "complete": true
+      },
+      "current": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "response",
+          "version": "v1"
+        },
+        "kind": "declared",
+        "provenance": "review-b",
+        "body": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":[\"string\",\"null\"]}}}",
+        "complete": true
+      }
+    },
+    "expected": {
+      "coverage": "complete",
+      "requiredness": "declared",
+      "findings": [
+        {
+          "path": "x",
+          "compatibility": "breaking"
+        }
+      ]
+    }
+  },
+  {
+    "id": "required-added-request",
+    "input": {
+      "baseline": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "request",
+          "version": "v1"
+        },
+        "kind": "declared",
+        "provenance": "review-a",
+        "body": "{\"type\":\"object\",\"properties\":{}}",
+        "complete": true
+      },
+      "current": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "request",
+          "version": "v1"
+        },
+        "kind": "declared",
+        "provenance": "review-b",
+        "body": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"string\"}},\"required\":[\"x\"]}",
+        "complete": true
+      }
+    },
+    "expected": {
+      "coverage": "complete",
+      "requiredness": "declared",
+      "findings": [
+        {
+          "path": "x",
+          "compatibility": "breaking"
+        }
+      ]
+    }
+  },
+  {
+    "id": "required-added-response",
+    "input": {
+      "baseline": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "response",
+          "version": "v1"
+        },
+        "kind": "declared",
+        "provenance": "review-a",
+        "body": "{\"type\":\"object\",\"properties\":{}}",
+        "complete": true
+      },
+      "current": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "response",
+          "version": "v1"
+        },
+        "kind": "declared",
+        "provenance": "review-b",
+        "body": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"string\"}},\"required\":[\"x\"]}",
+        "complete": true
+      }
+    },
+    "expected": {
+      "coverage": "complete",
+      "requiredness": "declared",
+      "findings": [
+        {
+          "path": "x",
+          "compatibility": "compatible"
+        }
+      ]
+    }
+  },
+  {
+    "id": "observed-missing",
+    "input": {
+      "baseline": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "response",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-a",
+        "body": "{\"nested\":{\"x\":1}}",
+        "complete": true
+      },
+      "current": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "response",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-b",
+        "body": "{\"nested\":{}}",
+        "complete": true
+      }
+    },
+    "expected": {
+      "coverage": "partial",
+      "requiredness": "unknown",
+      "findings": [
+        {
+          "path": "nested.x",
+          "compatibility": "unknown"
+        }
+      ]
+    }
+  },
+  {
+    "id": "concrete-array",
+    "input": {
+      "baseline": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "response",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-a",
+        "body": "{\"items\":[{\"x\":1},{\"x\":2}]}",
+        "complete": true
+      },
+      "current": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "response",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-b",
+        "body": "{\"items\":[{\"y\":1},{\"y\":2}]}",
+        "complete": true
+      }
+    },
+    "expected": {
+      "coverage": "partial",
+      "requiredness": "unknown",
+      "findings": [
+        {
+          "path": "items[0].x",
+          "compatibility": "unknown"
+        },
+        {
+          "path": "items[0].y",
+          "compatibility": "unknown"
+        },
+        {
+          "path": "items[1].x",
+          "compatibility": "unknown"
+        },
+        {
+          "path": "items[1].y",
+          "compatibility": "unknown"
+        }
+      ]
+    }
+  },
+  {
+    "id": "empty",
+    "input": {
+      "baseline": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "response",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-a",
+        "body": "{\"items\":[]}",
+        "complete": true
+      },
+      "current": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "response",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-b",
+        "body": "{\"items\":[1]}",
+        "complete": true
+      }
+    },
+    "expected": {
+      "coverage": "partial",
+      "requiredness": "unknown",
+      "findings": []
+    }
+  },
+  {
+    "id": "heterogeneous",
+    "input": {
+      "baseline": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "response",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-a",
+        "body": "{\"items\":[1,\"x\"]}",
+        "complete": true
+      },
+      "current": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "response",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-b",
+        "body": "{\"items\":[1]}",
+        "complete": true
+      }
+    },
+    "expected": {
+      "coverage": "partial",
+      "requiredness": "unknown",
+      "findings": []
+    }
+  },
+  {
+    "id": "duplicate",
+    "input": {
+      "baseline": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "response",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-a",
+        "body": "{\"x\":1,\"x\":2}",
+        "complete": true
+      },
+      "current": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "response",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-b",
+        "body": "{\"x\":1}",
+        "complete": true
+      }
+    },
+    "expected": {
+      "coverage": "unsupported",
+      "requiredness": "unknown",
+      "findings": []
+    }
+  },
+  {
+    "id": "unsupported-keyword",
+    "input": {
+      "baseline": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "request",
+          "version": "v1"
+        },
+        "kind": "declared",
+        "provenance": "review-a",
+        "body": "{\"type\":\"string\",\"format\":\"date\"}",
+        "complete": true
+      },
+      "current": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "request",
+          "version": "v1"
+        },
+        "kind": "declared",
+        "provenance": "review-b",
+        "body": "{\"type\":\"string\"}",
+        "complete": true
+      }
+    },
+    "expected": {
+      "coverage": "unsupported",
+      "requiredness": "unknown",
+      "findings": []
+    }
+  },
+  {
+    "id": "scope-route",
+    "input": {
+      "baseline": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "request",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-a",
+        "body": "{}",
+        "complete": true
+      },
+      "current": {
+        "scope": {
+          "route": "/other",
+          "method": "POST",
+          "side": "request",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-b",
+        "body": "{}",
+        "complete": true
+      }
+    },
+    "expected": {
+      "coverage": "unsupported",
+      "requiredness": "unknown",
+      "findings": []
+    }
+  },
+  {
+    "id": "scope-method",
+    "input": {
+      "baseline": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "request",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-a",
+        "body": "{}",
+        "complete": true
+      },
+      "current": {
+        "scope": {
+          "route": "/charges",
+          "method": "GET",
+          "side": "request",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-b",
+        "body": "{}",
+        "complete": true
+      }
+    },
+    "expected": {
+      "coverage": "unsupported",
+      "requiredness": "unknown",
+      "findings": []
+    }
+  },
+  {
+    "id": "scope-side",
+    "input": {
+      "baseline": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "request",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-a",
+        "body": "{}",
+        "complete": true
+      },
+      "current": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "response",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-b",
+        "body": "{}",
+        "complete": true
+      }
+    },
+    "expected": {
+      "coverage": "unsupported",
+      "requiredness": "unknown",
+      "findings": []
+    }
+  },
+  {
+    "id": "scope-version",
+    "input": {
+      "baseline": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "request",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-a",
+        "body": "{}",
+        "complete": true
+      },
+      "current": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "request",
+          "version": "v2"
+        },
+        "kind": "observed",
+        "provenance": "review-b",
+        "body": "{}",
+        "complete": true
+      }
+    },
+    "expected": {
+      "coverage": "unsupported",
+      "requiredness": "unknown",
+      "findings": []
+    }
+  },
+  {
+    "id": "incomplete",
+    "input": {
+      "baseline": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "request",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-a",
+        "body": "{}",
+        "complete": true
+      },
+      "current": {
+        "scope": {
+          "route": "/charges",
+          "method": "POST",
+          "side": "request",
+          "version": "v1"
+        },
+        "kind": "observed",
+        "provenance": "review-b",
+        "body": "{}",
+        "complete": false
+      }
+    },
+    "expected": {
+      "coverage": "partial",
+      "requiredness": "unknown",
+      "findings": []
+    }
+  }
+]

@@ -12,6 +12,10 @@ interface GuestCall {
   free(): void;
 }
 interface Guest {
+  free?(): void;
+  compare_operation?(input: string, work: number): string;
+  prepare_scalar?(bytes: Uint8Array, facts: string, confidence: number, mode: string, work: number): string;
+  prepare_nested_rename?(bytes: Uint8Array, selection: string, target: string, confidence: number, mode: string, work: number): string;
   prepare_rename?(bytes: Uint8Array, source: string, target: string, confidence: number, mode: string, work: number): string;
   set_ready?(ready: boolean): void;
   enable_audit?(tenant: string, namespace: string, capacity: number, maxBytes: number): void;
@@ -46,7 +50,7 @@ function verdict(json: string): Verdict {
   return Object.freeze(value as Verdict);
 }
 /** Each loader creates an isolated guest instance, including after retirement. */
-export async function loadWasm(options: Options): Promise<Engine> {
+async function isolatedGuest(options: Options): Promise<Guest> {
   // A fresh CommonJS module is required for independent linear memories. The
   // generated module's constructor closes over its instance, so clone via a
   // fresh module compilation rather than sharing a trapped singleton.
@@ -64,7 +68,17 @@ export async function loadWasm(options: Options): Promise<Engine> {
   compiled(local.exports, createRequire(path), local, path, dirname(path), undefined);
   const binding = local.exports as Binding;
   const guest = new binding.Guest(JSON.stringify(options.selection ?? null), performance.now());
-  return bindGuest(guest, options);
+  return guest;
+}
+export async function loadWasm(options: Options): Promise<Engine> {
+  return bindGuest(await isolatedGuest(options), options);
+}
+export async function operationComparison(input: string, work: number): Promise<string> {
+  const guest = await isolatedGuest({});
+  try {
+    if (!guest.compare_operation) throw Error('operation guest unavailable');
+    return guest.compare_operation(input, work);
+  } finally { guest.free?.(); }
 }
 /** Internal host boundary, exported here for real-trap fault injection. */
 export function bindGuest(guest: Guest, options: Options): Engine {
@@ -136,6 +150,14 @@ export function bindGuest(guest: Guest, options: Options): Engine {
   if (!guest.prepare_rename) throw Error('selective repair guest unavailable');
   return selectiveEngine(engine, repair, (before, rule, mode) => enter(() => {
     if (!guest.prepare_rename) throw Error('selective repair guest unavailable');
+    if ('recipe' in rule) {
+      if (!guest.prepare_scalar) throw Error('scalar guest unavailable');
+      return guest.prepare_scalar(new TextEncoder().encode(before), JSON.stringify(rule.facts), rule.confidence, mode, allowance);
+    }
+    if (rule.parents !== undefined) {
+      if (!guest.prepare_nested_rename) throw Error('nested repair guest unavailable');
+      return guest.prepare_nested_rename(new TextEncoder().encode(before), JSON.stringify({source: rule.from, parents: rule.parents}), rule.to, rule.confidence, mode, allowance);
+    }
     return guest.prepare_rename(new TextEncoder().encode(before), rule.from, rule.to, rule.confidence, mode, allowance);
   }));
 }

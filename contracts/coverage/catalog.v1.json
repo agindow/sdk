@@ -1,0 +1,513 @@
+{
+  "format": "agindow.coverage/1",
+  "revision": "coverage-local-v1",
+  "capabilities": [
+    {
+      "id": "openapi-declarations",
+      "changeFamily": "operation/parameter/body/status/header/media/security",
+      "route": "explicit operation selection",
+      "side": [
+        "operation",
+        "request",
+        "response"
+      ],
+      "protocol": "openapi",
+      "sdks": [
+        "background"
+      ],
+      "adapters": [
+        "configured-pair"
+      ],
+      "evidenceSource": [
+        "cells/cell-cortex/tests/openapi.test.ts"
+      ],
+      "configuration": "Pinned public HTTPS pair; local refs; explicit host persistence/profile",
+      "minimumSamples": 0,
+      "captureBytes": 65536,
+      "verifierFacts": [
+        "declarations never grant repair facts"
+      ],
+      "supported": true,
+      "decisions": [],
+      "sdkAdapters": [
+        {
+          "sdk": "background",
+          "adapters": [
+            "configured-pair"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "statistical-json",
+      "changeFamily": "numeric magnitude / enumeration / completeness / type / charset",
+      "route": "explicit operation selection",
+      "side": [
+        "request",
+        "response"
+      ],
+      "protocol": "json",
+      "sdks": [
+        "node",
+        "python"
+      ],
+      "adapters": [
+        "tool",
+        "client",
+        "http",
+        "decorator"
+      ],
+      "evidenceSource": [
+        "cells/cell-relay/STATISTICAL.md"
+      ],
+      "configuration": "Explicit field/side windows and host-selected minimum samples",
+      "minimumSamples": null,
+      "captureBytes": 1048576,
+      "verifierFacts": [
+        "observed findings are not declarations"
+      ],
+      "supported": true,
+      "decisions": [],
+      "sdkAdapters": [
+        {
+          "sdk": "node",
+          "adapters": [
+            "tool",
+            "client",
+            "http"
+          ]
+        },
+        {
+          "sdk": "python",
+          "adapters": [
+            "decorator"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reviewed-rename",
+      "changeFamily": "top-level rename",
+      "route": "explicit operation selection",
+      "side": [
+        "request",
+        "response"
+      ],
+      "protocol": "json",
+      "sdks": [
+        "node",
+        "python"
+      ],
+      "adapters": [
+        "tool",
+        "client",
+        "http",
+        "decorator"
+      ],
+      "evidenceSource": [
+        "cells/cell-relay/node/tests/selective-repair.test.mjs"
+      ],
+      "configuration": "Opt-in selective repair; explicitly reviewed tool/side rename rules and synchronous verifier",
+      "minimumSamples": 0,
+      "captureBytes": 1048576,
+      "verifierFacts": [
+        "exact source predicate",
+        "target absent",
+        "unchanged context",
+        "independent verifier"
+      ],
+      "supported": true,
+      "decisions": [],
+      "sdkAdapters": [
+        {
+          "sdk": "node",
+          "adapters": [
+            "tool",
+            "client",
+            "http"
+          ]
+        },
+        {
+          "sdk": "python",
+          "adapters": [
+            "decorator"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nested-rename",
+      "changeFamily": "nested/array rename",
+      "route": "explicit operation selection",
+      "side": [
+        "request",
+        "response"
+      ],
+      "protocol": "json",
+      "sdks": [
+        "node",
+        "python"
+      ],
+      "adapters": [
+        "tool",
+        "decorator"
+      ],
+      "evidenceSource": [
+        "cells/cell-relay/crates/node-guest/tests/nested_repair.rs",
+        "cells/cell-relay/node/tests/nested-repair.test.mjs",
+        "cells/cell-relay/python/tests/test_nested_repair.py",
+        "cells/cell-relay/node/parity/nested-renames.json"
+      ],
+      "configuration": "Local unreleased opt-in RenameRule.parents: 1\u201316 concrete RFC 6901 object-parent pointers (512 UTF-8 bytes / 32 segments each); canonical array indices, no wildcards. Reviewed tool/side, contract/migration revisions, provenance, Unix-ms expiry and synchronous semantic verifier. Keys <=64 UTF-8 bytes; 1 MiB complete capture, 4096 nodes / depth 64, 16x-byte guest work admission. Atomic all-or-none; raw key-token preservation independently verified.",
+      "minimumSamples": 0,
+      "captureBytes": 1048576,
+      "verifierFacts": [
+        "reviewed contract and migration revisions",
+        "provenance and fresh expiry",
+        "explicit source keys at every selected parent",
+        "target absent at every selected parent",
+        "nonoverlapping selections",
+        "exact unchanged raw context",
+        "independent synchronous semantic verifier"
+      ],
+      "supported": true,
+      "decisions": [
+        "Local source capability; registry releases and hosted/streaming qualification unchanged"
+      ],
+      "sdkAdapters": [
+        {
+          "sdk": "node",
+          "adapters": [
+            "tool"
+          ]
+        },
+        {
+          "sdk": "python",
+          "adapters": [
+            "decorator"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "string-map",
+      "changeFamily": "finite string mapping",
+      "route": "explicit operation selection",
+      "side": [
+        "request",
+        "response"
+      ],
+      "protocol": "json",
+      "sdks": [
+        "node",
+        "python"
+      ],
+      "adapters": [],
+      "evidenceSource": [],
+      "configuration": "Unavailable; additional detector and SDK evidence required",
+      "minimumSamples": null,
+      "captureBytes": null,
+      "verifierFacts": [],
+      "supported": false,
+      "decisions": [
+        "Separate contract, shared guest and SDK parity fixtures required"
+      ],
+      "sdkAdapters": [
+        {
+          "sdk": "node",
+          "adapters": []
+        },
+        {
+          "sdk": "python",
+          "adapters": []
+        }
+      ]
+    },
+    {
+      "id": "exact-null",
+      "changeFamily": "empty string to null",
+      "route": "explicit operation selection",
+      "side": [
+        "request",
+        "response"
+      ],
+      "protocol": "json",
+      "sdks": [
+        "node",
+        "python"
+      ],
+      "adapters": [],
+      "evidenceSource": [],
+      "configuration": "Unavailable; additional detector and SDK evidence required",
+      "minimumSamples": null,
+      "captureBytes": null,
+      "verifierFacts": [],
+      "supported": false,
+      "decisions": [
+        "Separate contract, shared guest and SDK parity fixtures required"
+      ],
+      "sdkAdapters": [
+        {
+          "sdk": "node",
+          "adapters": []
+        },
+        {
+          "sdk": "python",
+          "adapters": []
+        }
+      ]
+    },
+    {
+      "id": "unit-scaling",
+      "changeFamily": "exact unit/epoch scaling",
+      "route": "explicit operation selection",
+      "side": [
+        "request",
+        "response"
+      ],
+      "protocol": "json",
+      "sdks": [
+        "node",
+        "python"
+      ],
+      "adapters": [],
+      "evidenceSource": [],
+      "configuration": "Unavailable; additional detector and SDK evidence required",
+      "minimumSamples": null,
+      "captureBytes": null,
+      "verifierFacts": [],
+      "supported": false,
+      "decisions": [
+        "Separate contract, shared guest and SDK parity fixtures required"
+      ],
+      "sdkAdapters": [
+        {
+          "sdk": "node",
+          "adapters": []
+        },
+        {
+          "sdk": "python",
+          "adapters": []
+        }
+      ]
+    },
+    {
+      "id": "http-envelope",
+      "changeFamily": "status/media/safe headers",
+      "route": "explicit operation selection",
+      "side": [
+        "request",
+        "response"
+      ],
+      "protocol": "http",
+      "sdks": [
+        "node",
+        "python"
+      ],
+      "adapters": [],
+      "evidenceSource": [],
+      "configuration": "Unavailable; additional detector and SDK evidence required",
+      "minimumSamples": null,
+      "captureBytes": null,
+      "verifierFacts": [],
+      "supported": false,
+      "decisions": [
+        "Separate contract, shared guest and SDK parity fixtures required"
+      ],
+      "sdkAdapters": [
+        {
+          "sdk": "node",
+          "adapters": []
+        },
+        {
+          "sdk": "python",
+          "adapters": []
+        }
+      ]
+    },
+    {
+      "id": "nested-json",
+      "changeFamily": "nested JSON constraints",
+      "route": "explicit operation selection",
+      "side": [
+        "request",
+        "response"
+      ],
+      "protocol": "json",
+      "sdks": [
+        "node",
+        "python"
+      ],
+      "adapters": [],
+      "evidenceSource": [],
+      "configuration": "Unavailable; additional detector and SDK evidence required",
+      "minimumSamples": null,
+      "captureBytes": null,
+      "verifierFacts": [],
+      "supported": false,
+      "decisions": [
+        "Separate contract, shared guest and SDK parity fixtures required"
+      ],
+      "sdkAdapters": [
+        {
+          "sdk": "node",
+          "adapters": []
+        },
+        {
+          "sdk": "python",
+          "adapters": []
+        }
+      ]
+    },
+    {
+      "id": "graphql",
+      "changeFamily": "graphql semantics",
+      "route": "explicit operation selection",
+      "side": [
+        "request",
+        "response"
+      ],
+      "protocol": "graphql",
+      "sdks": [],
+      "adapters": [],
+      "evidenceSource": [],
+      "configuration": "Unavailable",
+      "minimumSamples": null,
+      "captureBytes": null,
+      "verifierFacts": [],
+      "supported": false,
+      "decisions": [
+        "Specify parser and transport framing",
+        "Freeze operation/side contract",
+        "Add positive, negative, partial-capture and fault fixtures",
+        "Qualify adapter independently"
+      ],
+      "sdkAdapters": []
+    },
+    {
+      "id": "webhook",
+      "changeFamily": "webhook semantics",
+      "route": "explicit operation selection",
+      "side": [
+        "request",
+        "response"
+      ],
+      "protocol": "webhook",
+      "sdks": [],
+      "adapters": [],
+      "evidenceSource": [],
+      "configuration": "Unavailable",
+      "minimumSamples": null,
+      "captureBytes": null,
+      "verifierFacts": [],
+      "supported": false,
+      "decisions": [
+        "Specify parser and transport framing",
+        "Freeze operation/side contract",
+        "Add positive, negative, partial-capture and fault fixtures",
+        "Qualify adapter independently"
+      ],
+      "sdkAdapters": []
+    },
+    {
+      "id": "sse",
+      "changeFamily": "sse semantics",
+      "route": "explicit operation selection",
+      "side": [
+        "request",
+        "response"
+      ],
+      "protocol": "sse",
+      "sdks": [],
+      "adapters": [],
+      "evidenceSource": [],
+      "configuration": "Unavailable",
+      "minimumSamples": null,
+      "captureBytes": null,
+      "verifierFacts": [],
+      "supported": false,
+      "decisions": [
+        "Specify parser and transport framing",
+        "Freeze operation/side contract",
+        "Add positive, negative, partial-capture and fault fixtures",
+        "Qualify adapter independently"
+      ],
+      "sdkAdapters": []
+    },
+    {
+      "id": "websocket",
+      "changeFamily": "websocket semantics",
+      "route": "explicit operation selection",
+      "side": [
+        "request",
+        "response"
+      ],
+      "protocol": "websocket",
+      "sdks": [],
+      "adapters": [],
+      "evidenceSource": [],
+      "configuration": "Unavailable",
+      "minimumSamples": null,
+      "captureBytes": null,
+      "verifierFacts": [],
+      "supported": false,
+      "decisions": [
+        "Specify parser and transport framing",
+        "Freeze operation/side contract",
+        "Add positive, negative, partial-capture and fault fixtures",
+        "Qualify adapter independently"
+      ],
+      "sdkAdapters": []
+    },
+    {
+      "id": "pagination",
+      "changeFamily": "pagination semantics",
+      "route": "explicit operation selection",
+      "side": [
+        "request",
+        "response"
+      ],
+      "protocol": "pagination",
+      "sdks": [],
+      "adapters": [],
+      "evidenceSource": [],
+      "configuration": "Unavailable",
+      "minimumSamples": null,
+      "captureBytes": null,
+      "verifierFacts": [],
+      "supported": false,
+      "decisions": [
+        "Specify parser and transport framing",
+        "Freeze operation/side contract",
+        "Add positive, negative, partial-capture and fault fixtures",
+        "Qualify adapter independently"
+      ],
+      "sdkAdapters": []
+    },
+    {
+      "id": "grpc",
+      "changeFamily": "grpc semantics",
+      "route": "explicit operation selection",
+      "side": [
+        "request",
+        "response"
+      ],
+      "protocol": "grpc",
+      "sdks": [],
+      "adapters": [],
+      "evidenceSource": [],
+      "configuration": "Unavailable",
+      "minimumSamples": null,
+      "captureBytes": null,
+      "verifierFacts": [],
+      "supported": false,
+      "decisions": [
+        "Specify parser and transport framing",
+        "Freeze operation/side contract",
+        "Add positive, negative, partial-capture and fault fixtures",
+        "Qualify adapter independently"
+      ],
+      "sdkAdapters": []
+    }
+  ]
+}

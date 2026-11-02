@@ -33,3 +33,26 @@ fn scopes_keys_to_routes_and_counts_remaining_with_bounded_clock_recovery()
     );
     Ok(())
 }
+
+#[test]
+fn customer_keys_never_authenticate_against_operator_digests() -> Result<(), &'static str> {
+    let token = format!("agw_test_{}_{}", "a".repeat(32), "b".repeat(64));
+    let digest = format!("{:x}", Sha256::digest(token.as_bytes()));
+    let manifest = json!([{ "digest":digest, "tenant":"t", "routes":["c/op"], "plan":"test", "limit":2,"window_seconds":60 }]).to_string();
+    let mut auth = Auth::new(&manifest)?;
+    assert!(matches!(
+        auth.admit(&format!("Bearer {token}"), "c/op", 120),
+        Err(Refusal::Unauthorized)
+    ));
+    Ok(())
+}
+
+#[test]
+fn pre_v1_sdk_legacy_keys_remain_a_separate_operator_class() -> Result<(), &'static str> {
+    let token = format!("agw_test_{}", "c".repeat(64));
+    let digest = format!("{:x}", Sha256::digest(token.as_bytes()));
+    let manifest = json!([{ "digest":digest, "tenant":"t", "routes":["c/op"], "plan":"test", "limit":2,"window_seconds":60 }]).to_string();
+    let mut auth = Auth::new(&manifest)?;
+    assert!(auth.admit(&format!("Bearer {token}"), "c/op", 120).is_ok());
+    Ok(())
+}

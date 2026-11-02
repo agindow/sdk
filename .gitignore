@@ -17,6 +17,10 @@ target/
 .pytest_cache/
 .mypy_cache/
 coverage/
+# Reviewed runtime source, not a generated coverage report.
+!contracts/coverage/
+contracts/coverage/*
+!contracts/coverage/catalog.v1.json
 .wrangler/
 
 # Local credentials and deployment state

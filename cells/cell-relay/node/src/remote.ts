@@ -82,7 +82,7 @@ export async function guardRemote<T>(original: (input: RemoteEnvelope) => T | Pr
     const authHeaders = options.auth?.headers('POST', url.href);
     if (options.auth !== undefined && authHeaders === undefined) throw Error('auth unavailable');
     response = await fetch(url, { method: 'POST', redirect: 'error', signal: controller.signal,
-      headers: { 'content-type': 'application/json', ...(options.apiKey === undefined ? {} : { authorization: `Bearer ${options.apiKey}` }), ...authHeaders },
+      headers: { 'content-type': 'application/json', 'x-agindow-key-use':'sdk.remote', ...(options.apiKey === undefined ? {} : { authorization: `Bearer ${options.apiKey}` }), ...authHeaders },
       body: JSON.stringify(input) });
     if (response.status >= 500) {
       completedFailure = ['ok', 'degraded', 'repaired', 'bypassed'].includes(response.headers.get('x-agindow-status') ?? '');
@@ -113,7 +113,7 @@ export async function guardRemote<T>(original: (input: RemoteEnvelope) => T | Pr
           const recoveryAuth = options.auth?.headers('GET', location.href);
           if (options.auth !== undefined && recoveryAuth === undefined) throw Error('auth unavailable');
           const recovered = await fetch(location, { redirect: 'error', signal: AbortSignal.timeout(remaining),
-            headers: recoveryAuth ?? (options.apiKey === undefined ? {} : { authorization: `Bearer ${options.apiKey}` }) });
+            headers: { 'x-agindow-key-use':'sdk.remote', ...(recoveryAuth ?? (options.apiKey === undefined ? {} : { authorization: `Bearer ${options.apiKey}` })) } });
           if (recovered.headers.get('x-agindow-retained-outcome') === 'true' || recovered.ok) outcome = recovered;
           else void recovered.body?.cancel().catch(() => {});
         }

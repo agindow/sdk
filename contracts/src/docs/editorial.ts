@@ -26,7 +26,7 @@ export function validateEditorial(page: DocPage): void {
     }
     for (const link of section.links ?? []) {
       if (link.href === '/SKILL.md') continue;
-      if (!/^\/docs(?:\/|$)|^\/integrations\/[a-z-]+$|^\/try$|^\/#(?:maturity|detect)$|^https:\/\/github\.com\/agindow\/sdk(?:\/|$)/u.test(link.href)) {
+      if (!/^\/docs(?:\/|$)|^\/integrations(?:\/[a-z-]+)?$|^\/try$|^\/#(?:maturity|detect)$|^https:\/\/github\.com\/agindow\/sdk(?:\/|$)/u.test(link.href)) {
         throw Error('Unreviewed docs link');
       }
     }

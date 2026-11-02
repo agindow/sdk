@@ -1,0 +1,14 @@
+[
+  {"type":"string","value":"Ada","accepted":true},
+  {"type":"string","value":7,"accepted":false},
+  {"type":"number","value":7,"accepted":true},
+  {"type":"number","value":true,"accepted":false},
+  {"type":"boolean","value":true,"accepted":true},
+  {"type":"boolean","value":1,"accepted":false},
+  {"type":"null","value":null,"accepted":true},
+  {"type":"null","value":"","accepted":false},
+  {"type":"array","value":[1,"a"],"accepted":true},
+  {"type":"array","value":{},"accepted":false},
+  {"type":"object","value":{"id":1},"accepted":true},
+  {"type":"object","value":[],"accepted":false}
+]

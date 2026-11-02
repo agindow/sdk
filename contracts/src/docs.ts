@@ -1,3 +1,4 @@
+import { githubAppGuide } from './docs/github-app.js';
 import { seoGuides } from './docs/seo-guides.js';
 import { maintenanceGuides } from './docs/maintenance-guides.js';
 export { docsIntroduction, productHeadline, productSummary, productMaturity } from './docs/positioning.js';
@@ -58,7 +59,7 @@ const startOrder = ['introduction', 'choose-integration', 'quickstart', 'agents'
 const startRank = (slug: string): number => { const index = startOrder.indexOf(slug); return index < 0 ? startOrder.length : index; };
 const getStarted = [...started, agentGuide, integrationGuide].sort((left, right) => startRank(left.slug) - startRank(right.slug));
 export const docsTree: DocsTree = { format: 'agindow.docs/1', revision: docsRevision,
-  pages: [...getStarted, ...concepts, sdkChangelog, ...guides, ...maintenanceGuides, ...seoGuides, ...developerGuides.filter(page => page.family === 'guides'), ...apiPages, preview, ...sdks, configuration, ...developerGuides.filter(page => page.family === 'sdks')] };
+  pages: [...getStarted, ...concepts, sdkChangelog, ...guides, ...maintenanceGuides, githubAppGuide, ...seoGuides, ...developerGuides.filter(page => page.family === 'guides'), ...apiPages, preview, ...sdks, configuration, ...developerGuides.filter(page => page.family === 'sdks')] };
 export const versionedDocPath = (page: DocPage): string => `/docs/${page.family}/${page.version}/${page.slug}`;
 export const docPaths = (page: DocPage): readonly string[] => [...new Set([docPath(page), versionedDocPath(page)])];
 export const docPath = (page: DocPage): string => page.path ?? versionedDocPath(page);

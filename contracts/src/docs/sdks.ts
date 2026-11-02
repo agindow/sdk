@@ -1,4 +1,6 @@
 import { cliPage } from './cli-guide.js';
+import { platformGuides } from './platform-guides.js';
+import { platformIntegrations } from './platform-integrations.js';
 import { nodeSdk } from './sdk-node.js';
 import { pythonSdk } from './sdk-python.js';
 import { nodeReference, pythonReference } from './sdk-reference.js';
@@ -11,12 +13,14 @@ const page = (slug: string, title: string, sections: readonly DocSection[]): Doc
 export const sdks: readonly DocPage[] = [
   page('index', 'API drift documentation — SDK index', [
     { heading: 'Version-pinned packages', text: 'These pages describe the paired Node, Python and CLI versions below. Use the pinned package matching your application runtime. Examples are compiled/imported and executed against the built packages before documentation publication.', table: { columns: ['Package', 'Pinned version', 'Publication'], rows: Object.values(sdkMatrix).map(item => [item.name, item.version, item.published ? 'Published' : 'Prepared release']) } },
-    { heading: 'Install', text: `Install with \`npm install agindow@${sdkMatrix.node.version}\` or \`pip install agindow==${sdkMatrix.python.version}\`. CLI ships in the Node package as \`agindow\`. The embedded SDK needs no separate AGINDOW credential; your application still supplies any vendor credentials its API client requires. Select and configure a detector after installation. Otherwise the statistical guest is default; configure windows to detect.`, links: [{ label: 'TypeScript / Node', href: '/docs/sdk/node' }, { label: 'Python', href: '/docs/sdk/python' }, { label: 'CLI / report', href: '/docs/sdk/cli' }, { label: 'Remote SDK calls', href: '/docs/sdk/remote' }] },
+    { heading: 'Install', text: `Install with \`npm install agindow@${sdkMatrix.node.version}\` or \`pip install agindow==${sdkMatrix.python.version}\`. CLI ships in the Node package as \`agindow\`. The embedded SDK needs no separate AGINDOW credential; your application still supplies any vendor credentials its API client requires. Select and configure a detector after installation. Otherwise the statistical guest is default; configure windows to detect.`, links: [{ label: 'TypeScript / Node', href: '/docs/sdk/node' }, { label: 'Python', href: '/docs/sdk/python' }, { label: 'CLI / report', href: '/docs/sdk/cli' }, { label: 'Remote SDK calls', href: '/docs/sdk/remote' }, { label: 'Platform integrations', href: '/docs/integrations' }] },
   ]),
   nodeSdk,
   pythonSdk,
   remoteSdk,
   cliPage,
+  platformIntegrations,
+  ...platformGuides,
   nodeReference,
   pythonReference,
 ];

@@ -60,3 +60,7 @@ production qualification remain pending; no source manifest supplies those claim
 
 Opt-in machine identity adds local token/proof validation and a bounded
 `/v1/token` exchange. Configuration and limitations:.
+
+## Customer-key host availability
+
+The customer-key host depends on private registry modules and is omitted from this public export. SDK remote helpers and the ordinary Rust host remain available.

@@ -44,6 +44,7 @@ class Verdict:
     audit_id: str | None = None
     feedback: PolicyFeedback | None = None
     repair: VerifiedRepair | None = None
+    repair_refusal: str | None = None
 
 
 @dataclass(frozen=True)

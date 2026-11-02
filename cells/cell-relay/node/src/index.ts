@@ -124,3 +124,6 @@ export { createRemoteAuth, createProofSigner } from './machine-auth.js';
 export type { RemoteAuth, RemoteAuthOptions, AccessCredential, ProofSigner } from './machine-auth.js';
 export { workloadIdentity } from './identity-source.js';
 export type { WorkloadIdentityOptions } from './identity-source.js';
+
+export { compareOperation } from './operation-contract.js';
+export type { OperationScope, OperationSource, OperationFinding, OperationComparisonInput, OperationComparisonResult } from './operation-contract.js';

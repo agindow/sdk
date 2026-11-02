@@ -1,8 +1,12 @@
 name: CodeQL
 
-# Static analysis for the public SDK and runtime sources. Starts with
-# JavaScript/TypeScript and Python (build-mode none). Rust/WASM can be added
-# later once noise from the guest build is understood.
+# Static analysis for the exported SDK and runtime sources only.
+# Rust supports only build-mode none (rust-analyzer extraction), not manual:
+# https://docs.github.com/en/code-security/reference/code-scanning/codeql/build-options-for-compiled-languages#building-rust
+# The separate Cargo build verifies the native workspace; it is not traced by
+# CodeQL. WASM packaging remains in check.yml, outside this analysis job.
+# No query exclusions: after the first green Rust run, review alerts and record
+# any noisy rule IDs, evidence and rationale here before suppressing them.
 
 on:
   push:
@@ -30,17 +34,27 @@ jobs:
             build-mode: none
           - language: python
             build-mode: none
+          - language: rust
+            build-mode: none
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install native Rust toolchain
+        if: matrix.language == 'rust'
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Verify native workspace build
+        if: matrix.language == 'rust'
+        run: cargo build --workspace --locked
+
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
           queries: security-extended
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4
         with:
           category: '/language:${{ matrix.language }}'

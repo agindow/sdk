@@ -52,3 +52,9 @@ from .machine_auth import (RemoteAuth as RemoteAuth, AccessCredential as AccessC
 from .identity_source import workload_identity as workload_identity
 
 from .selective import (RenameRule as RenameRule, RepairCheck as RepairCheck, SelectiveRepair as SelectiveRepair)
+
+from .repair_facts import (RepairFacts as RepairFacts, RepairConstraint as RepairConstraint, RepairValueType as RepairValueType)
+
+from .scalar import ScalarFacts as ScalarFacts, ScalarRule as ScalarRule
+
+from .operation_contract import (OperationScope as OperationScope, OperationSource as OperationSource, compare_operation as compare_operation)

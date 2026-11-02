@@ -84,3 +84,8 @@ registry cells, and the combined admission mutation runner. Those cross-cell
 checks and the source-evaluation test requiring the private Cortex corpus remain
 in the monorepo. The public admission runtime, policy and SDK tests
 remain available through `pnpm --filter cell-relay test:admission`.
+
+Customer-key hosted composition and its tests/build configuration depend on
+private registry modules and are omitted. Public Node/Python remote helpers and
+the ordinary Rust host remain included; the export does not provide a customer-key
+host backend.

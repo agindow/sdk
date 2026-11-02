@@ -1,5 +1,6 @@
+export type { RepairFacts, RepairConstraint, RepairValueType } from './repair-facts.js';
 import type { SelectiveRepairOptions } from './selective.js';
-export type { SelectiveRepairOptions, RenameRule, RepairCheck } from './selective.js';
+export type { SelectiveRepairOptions, RenameRule, RepairRule, RepairCheck } from './selective.js';
 import type { AuditDrain, AuditSink } from './audit.js';
 export type Mode = 'observe' | 'repair' | 'strict';
 export type Operation = 'read' | 'write' | 'unknown';
@@ -75,6 +76,7 @@ export interface PolicyFeedback {
   readonly audit: string;
 }
 export interface Verdict {
+  readonly repairRefusal?: string;
   readonly halt: boolean;
   readonly bypassed: boolean;
   readonly class: 'shape' | 'semantic' | 'unknown' | null;
@@ -133,3 +135,5 @@ export class AgindowDriftError extends Error {
     }
   }
 }
+
+export type { ScalarRule, ScalarFacts, ScalarScope } from './scalar.js';

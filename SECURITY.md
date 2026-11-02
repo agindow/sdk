@@ -34,9 +34,12 @@ that detection is calibrated or production-qualified — it is not.
 
 ## Automated scanning
 
-This repository runs GitHub code scanning (CodeQL for JavaScript/TypeScript and
-Python), OpenSSF Scorecard, and dependency review on pull requests. Findings
-appear under **Security → Code scanning**. They complement — they do not
+The exported workflow configures GitHub code scanning (CodeQL for
+JavaScript/TypeScript, Python and Rust), OpenSSF Scorecard, and dependency review
+on pull requests. Rust uses native host extraction plus a separate locked
+workspace build; WASM packaging is checked separately and is not a CodeQL
+coverage claim. The first live Rust analysis and alert review remain pending.
+Findings appear under **Security → Code scanning**. They complement — they do not
 replace — private vulnerability reports above. Dependency version bumps are
 reviewed upstream and land here on the next export.
 

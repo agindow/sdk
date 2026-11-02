@@ -80,7 +80,7 @@ impl Auth {
         let token = authorization
             .strip_prefix("Bearer ")
             .ok_or(Refusal::Unauthorized)?;
-        if token.is_empty() || token.len() > 1024 {
+        if token.is_empty() || token.len() > 1024 || customer_key(token) {
             return Err(Refusal::Unauthorized);
         }
         let digest: [u8; 32] = Sha256::digest(token.as_bytes()).into();
@@ -113,4 +113,17 @@ impl Auth {
             resets: (count.0 + 1) * u64::from(credential.window_seconds),
         })
     }
+}
+
+// TI-70 legacy SDK keys have no v1 public-ID/secret separator. Reserving the
+// whole agw_ prefix would silently revoke that separate operator credential class.
+fn customer_key(token: &str) -> bool {
+    let normalized = token.to_ascii_lowercase();
+    let mut parts = normalized.splitn(4, '_');
+    matches!(parts.next(), Some("agw"))
+        && matches!(parts.next(), Some("test" | "live"))
+        && parts
+            .next()
+            .is_some_and(|id| id.len() == 32 && id.bytes().all(|byte| byte.is_ascii_hexdigit()))
+        && parts.next().is_some()
 }

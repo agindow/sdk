@@ -50,7 +50,7 @@ class RemoteResponse:
 def _send(endpoint: str, options: RemoteOptions, payload: bytes | None) -> tuple[int, dict[str, str], HTTPResponse | bytes]:
     url = urlsplit(endpoint)
     connection = (HTTPSConnection if url.scheme == "https" else HTTPConnection)(url.hostname or "", url.port, timeout=options.timeout_seconds)
-    headers = {"content-type": "application/json"}
+    headers = {"content-type": "application/json", "x-agindow-key-use": "sdk.remote"}
     if options.auth is not None:
         auth_headers = options.auth.headers("POST" if payload is not None else "GET", endpoint)
         if auth_headers is None:

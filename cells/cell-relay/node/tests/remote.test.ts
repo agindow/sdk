@@ -106,3 +106,17 @@ it('preserves a completed upstream 5xx instead of dispatching the operation agai
   if (result instanceof Response) { expect(result.status).toBe(503); expect(await result.text()).toBe('original upstream failure'); }
   expect(calls).toBe(0); expect(events).toEqual(['bypass']);
 });
+
+it('presents the shared customer key with the registered SDK remote scope',async()=>{
+ const {readFileSync}=await import('node:fs');
+ const fixture=JSON.parse(readFileSync(new URL('../parity/api-keys.json',import.meta.url),'utf8')) as {keys:{key:string}[]};
+ for(const row of fixture.keys){
+  const url=await endpoint((request,response)=>{
+   expect(request.headers['authorization']).toBe(`Bearer ${row.key}`);
+   expect(request.headers['x-agindow-key-use']).toBe('sdk.remote');
+   response.writeHead(200).end('raw');
+  });
+  const result=await guardRemote(()=>{throw Error('Unexpected fallback');},envelope,{endpoint:url,apiKey:row.key});
+  expect(result).toBeInstanceOf(Response);if(result instanceof Response)expect(await result.text()).toBe('raw');
+ }
+});

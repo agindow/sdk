@@ -1,0 +1,455 @@
+[
+  {
+    "id": "finite-map",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "string-map",
+      "mapping": [
+        [
+          "old",
+          "new"
+        ]
+      ]
+    },
+    "before": " {\"value\":\"old\",\"id\":9007199254740993,\"huge\":1e400} ",
+    "after": " {\"value\":\"new\",\"id\":9007199254740993,\"huge\":1e400} ",
+    "confidence": 1
+  },
+  {
+    "id": "escaped-source",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "string-map",
+      "mapping": [
+        [
+          "old",
+          "new"
+        ]
+      ]
+    },
+    "before": "{\"value\":\"o\\u006cd\"}",
+    "after": "{\"value\":\"new\"}",
+    "confidence": 1
+  },
+  {
+    "id": "nested-array",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/items/1/value",
+      "recipe": "string-map",
+      "mapping": [
+        [
+          "old",
+          "new"
+        ]
+      ]
+    },
+    "before": "{\"items\":[{\"value\":\"old\"},{\"value\":\"old\"}]}",
+    "after": "{\"items\":[{\"value\":\"old\"},{\"value\":\"new\"}]}",
+    "confidence": 1
+  },
+  {
+    "id": "unknown-value",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "string-map",
+      "mapping": [
+        [
+          "old",
+          "new"
+        ]
+      ]
+    },
+    "before": "{\"value\":\"future\"}",
+    "after": null,
+    "confidence": 1
+  },
+  {
+    "id": "semantic-confidence",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "string-map",
+      "mapping": [
+        [
+          "old",
+          "new"
+        ]
+      ]
+    },
+    "before": "{\"value\":\"old\"}",
+    "after": null,
+    "confidence": 0.989
+  },
+  {
+    "id": "empty-null",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "empty-null",
+      "nullMeaning": "empty is absent"
+    },
+    "before": " {\"value\":\"\", \"other\":1e400} ",
+    "after": " {\"value\":null, \"other\":1e400} ",
+    "confidence": 1
+  },
+  {
+    "id": "nonempty",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "empty-null",
+      "nullMeaning": "empty is absent"
+    },
+    "before": "{\"value\":\" \"}",
+    "after": null,
+    "confidence": 1
+  },
+  {
+    "id": "missing",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "empty-null",
+      "nullMeaning": "empty is absent"
+    },
+    "before": "{}",
+    "after": null,
+    "confidence": 1
+  },
+  {
+    "id": "already-null",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "empty-null",
+      "nullMeaning": "empty is absent"
+    },
+    "before": "{\"value\":null}",
+    "after": null,
+    "confidence": 1
+  },
+  {
+    "id": "numeric-null",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "empty-null",
+      "nullMeaning": "empty is absent"
+    },
+    "before": "{\"value\":0}",
+    "after": null,
+    "confidence": 1
+  },
+  {
+    "id": "scale-9007199254740993",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "scale",
+      "sourceUnit": "cents",
+      "targetUnit": "dollars",
+      "numerator": "1",
+      "denominator": "100",
+      "inputMin": "-999999999999999999",
+      "inputMax": "999999999999999999",
+      "outputMin": "-999999999999999999",
+      "outputMax": "999999999999999999"
+    },
+    "before": "{\"value\":9007199254740993,\"untouched\":-0}",
+    "after": "{\"value\":90071992547409.93,\"untouched\":-0}",
+    "confidence": 1
+  },
+  {
+    "id": "scale--125",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "scale",
+      "sourceUnit": "cents",
+      "targetUnit": "dollars",
+      "numerator": "1",
+      "denominator": "100",
+      "inputMin": "-999999999999999999",
+      "inputMax": "999999999999999999",
+      "outputMin": "-999999999999999999",
+      "outputMax": "999999999999999999"
+    },
+    "before": "{\"value\":-125,\"untouched\":-0}",
+    "after": "{\"value\":-1.25,\"untouched\":-0}",
+    "confidence": 1
+  },
+  {
+    "id": "scale-0",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "scale",
+      "sourceUnit": "cents",
+      "targetUnit": "dollars",
+      "numerator": "1",
+      "denominator": "100",
+      "inputMin": "-999999999999999999",
+      "inputMax": "999999999999999999",
+      "outputMin": "-999999999999999999",
+      "outputMax": "999999999999999999"
+    },
+    "before": "{\"value\":0,\"untouched\":-0}",
+    "after": "{\"value\":0,\"untouched\":-0}",
+    "confidence": 1
+  },
+  {
+    "id": "scale-1.25e2",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "scale",
+      "sourceUnit": "cents",
+      "targetUnit": "dollars",
+      "numerator": "1",
+      "denominator": "100",
+      "inputMin": "-999999999999999999",
+      "inputMax": "999999999999999999",
+      "outputMin": "-999999999999999999",
+      "outputMax": "999999999999999999"
+    },
+    "before": "{\"value\":1.25e2,\"untouched\":-0}",
+    "after": "{\"value\":1.25,\"untouched\":-0}",
+    "confidence": 1
+  },
+  {
+    "id": "refuse-1e400",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "scale",
+      "sourceUnit": "cents",
+      "targetUnit": "dollars",
+      "numerator": "1",
+      "denominator": "100",
+      "inputMin": "-999999999999999999",
+      "inputMax": "999999999999999999",
+      "outputMin": "-999999999999999999",
+      "outputMax": "999999999999999999"
+    },
+    "before": "{\"value\":1e400}",
+    "after": null,
+    "confidence": 1
+  },
+  {
+    "id": "refuse-0.000000000000000001",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "scale",
+      "sourceUnit": "cents",
+      "targetUnit": "dollars",
+      "numerator": "1",
+      "denominator": "100",
+      "inputMin": "-999999999999999999",
+      "inputMax": "999999999999999999",
+      "outputMin": "-999999999999999999",
+      "outputMax": "999999999999999999"
+    },
+    "before": "{\"value\":0.000000000000000001}",
+    "after": null,
+    "confidence": 1
+  },
+  {
+    "id": "refuse-\"125\"",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "scale",
+      "sourceUnit": "cents",
+      "targetUnit": "dollars",
+      "numerator": "1",
+      "denominator": "100",
+      "inputMin": "-999999999999999999",
+      "inputMax": "999999999999999999",
+      "outputMin": "-999999999999999999",
+      "outputMax": "999999999999999999"
+    },
+    "before": "{\"value\":\"125\"}",
+    "after": null,
+    "confidence": 1
+  },
+  {
+    "id": "refuse-1000000000000000000",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "scale",
+      "sourceUnit": "cents",
+      "targetUnit": "dollars",
+      "numerator": "1",
+      "denominator": "100",
+      "inputMin": "-999999999999999999",
+      "inputMax": "999999999999999999",
+      "outputMin": "-999999999999999999",
+      "outputMax": "999999999999999999"
+    },
+    "before": "{\"value\":1000000000000000000}",
+    "after": null,
+    "confidence": 1
+  },
+  {
+    "id": "reverse-epoch",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "scale",
+      "sourceUnit": "milliseconds",
+      "targetUnit": "seconds",
+      "numerator": "1",
+      "denominator": "1000",
+      "inputMin": "-999999999999999999",
+      "inputMax": "999999999999999999",
+      "outputMin": "-999999999999999999",
+      "outputMax": "999999999999999999"
+    },
+    "before": "{\"value\":1234}",
+    "after": "{\"value\":1.234}",
+    "confidence": 1
+  },
+  {
+    "id": "duplicate",
+    "facts": {
+      "version": 1,
+      "tool": "pay",
+      "side": "request",
+      "contract": "v2",
+      "migration": "review-1",
+      "provenance": "owner-review",
+      "expiresAt": 4102444800000,
+      "pointer": "/value",
+      "recipe": "string-map",
+      "mapping": [
+        [
+          "old",
+          "new"
+        ]
+      ]
+    },
+    "before": "{\"value\":\"old\",\"value\":\"old\"}",
+    "after": null,
+    "confidence": 1
+  }
+]

@@ -458,6 +458,32 @@ fall back to — an ambiguous target, invalid config — it throws at setup inst
 
 ### 12.6 Frontend and hosted control plane — PLANNED
 
+/–190 decision (November 2, 2026): the closed customer scope
+registry registers profile produce/read, finding write/read, audit produce/read,
+recovery produce/read, corpus produce and investigation produce/read, plus local
+snapshot-only `guard.call` and `sdk.remote`. There is no corpus read HTTP route,
+so no `corpus.read` grant. Off-path customer requests provide the tenant resource
+context in `X-Agindow-Tenant`; the verified key must match it and the host-selected
+environment before existing body/scope validation or storage. The private verifier
+binding has a two-second deadline. Configured infrastructure failure is `503
+verifier_unavailable`; a non-opted-in host rejects customer credentials, and no
+v1 customer Bearer can fall through to operator digest authentication. Older
+Keys without the v1 public-ID/secret separator remain operator credentials.
+
+SDK remote terminates at the optional customer hosted-guard wrapper, uses the
+existing key format and selects required scope with `X-Agindow-Key-Use: sdk.remote`.
+Direct guard requests default to `guard.call`. The wrapper consumes only locally
+installed signed snapshots/non-extractable scoped HMAC material. A reviewed host
+policy independently binds key ID, tenant/environment, routes and quota/plan;
+`GUARD_CONNECTIONS` owns upstream routing. Stale verification bypasses both
+inspection phases once per call, preserving raw tokens and quota. Retained
+private audit/outcome reads refuse stale verification as `503`. No in-call
+registry, SQL, discovery or material fetch exists. Host installation/withdrawal
+and local receipt semantics are recorded in the
+customer host procedure.
+Default provisioning and hosted qualification stay unavailable. Operator digests
+remain optional bootstrap/smoke; Cortex finding/peer credentials remain host-owned.
+
 Decision (October 27, 2026): signup verification offers the existing
 link and a six-digit email code in the same message. Better Auth owns persistent,
 keyed-hashed, ten-minute, five-attempt, single-consumption code records. Only
@@ -467,22 +493,21 @@ never automatically signs in. All AGINDOW-controlled email paths share branded
 sender/layout and escaped HTML with plain-text alternatives; notification
 projection/receipt boundaries are unchanged.
 
-Decision (October 27, 2026; implementation pending): customer Usage and
-Billing follow the runtime environment selector. Test uses Stripe test-mode
-credentials/catalog/customers and sandbox entitlements; Production continues
-using live credentials/catalog/customers. Reads, Checkout/Portal, return/audit
-paths and lifecycle reconciliation remain mode-scoped. Missing test configuration
-never falls back to live. This supersedes only 's forced-live billing
-presentation decision; its other fixes remain applicable. See
+Decision (November 2, 2026): customer Test Usage and Billing show a
+notice that pricing, billing and usage are available only in Production, with a
+same-organization link to the corresponding Production page. Test mounts no
+commercial session and issues no summary or Checkout/Portal requests. Switching
+scope discards pending reads, confirmations and provider links. Production keeps
+live-scoped commercial reads and explicitly confirmed sessions. This replaces
+the original sandbox-purchase proposal and supersedes only 's forced-live
+billing presentation; operator sandbox APIs remain unchanged. See
 .
 
 Decision (October 27, 2026): window blur retains the current dashboard
 view. Focus rechecks authority with interaction disabled; any refusal or failed
 check discards tenant context. Navigation, sign-out and pagehide still clear it.
 This replaces ’s clear-on-blur presentation and grants no API authority.
-Customer Usage/Billing uses the organization’s live commercial scope regardless
-of the selected runtime environment, labels real billing and preserves explicit
-checkout confirmation. Operator sandbox billing APIs remain environment-scoped.
+Its original forced-live customer billing presentation is superseded by.
 
 Decision (October 26, 2026): public navigation may read a fresh boolean
 session projection from the dashboard host at GET `/api/session/navigation`.
@@ -1106,6 +1131,22 @@ No async verifier or guard-time network lookup is supported. Invalid rules are
 setup errors. Guest audit FIFO cannot be combined until it can accurately record
 host-applied repair; normal repair events remain available. Only plain JSON
 object/RawJson captures are supported; unmatched calls preserve references.
+
+Extends the local unreleased source API with optional `parents` (Node
+readonly string array / Python tuple of strings), requiring reviewed `contract`,
+`provenance` and `expiresAt` / `expires_at` alongside the migration revision.
+Pointers identify 1–16 explicit object parents; keys remain literal siblings.
+See [contract §10.59](/agindow-runtime-contract.md#1059-planned-verified-repair-and-api-change-coverage-expansion)
+and [bounds and examples](/cells/cell-relay/NESTED_REPAIR.md).
+
+/ add local unreleased `ScalarRule` entries to that same list. Each
+has `recipe: 'scalar'`, tool, side, migration, confidence and mandatory
+`ScalarFacts`; Python exports frozen dataclasses with the same names.
+See [scalar recipes and refusal behavior](/cells/cell-relay/SCALAR_REPAIR.md).
+Adds explicit advisory `compareOperation` / `compare_operation` utilities
+with exact route/method/side/version sources and coverage/provenance results;
+see [operation comparison](/cells/cell-relay/OPERATION_CONTRACTS.md).
+Neither utility changes guard defaults, publication authority or released claims.
 
 ## 13. Tickets
 

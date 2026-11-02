@@ -56,7 +56,7 @@ pub(crate) fn stage(
     };
     let targets = spans
         .iter()
-        .filter(|span| span.schema_path == change.path)
+        .filter(|span| span.schema_path == change.path || span.path == change.path)
         .collect::<Vec<_>>();
     if targets.is_empty() {
         return reject(Reject::MissingTarget);

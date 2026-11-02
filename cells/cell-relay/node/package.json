@@ -1,6 +1,6 @@
 {
   "name": "agindow",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.4",
   "description": "Runtime API change detection and reviewed repair for AI agents on Node (Rust/WASM)",
   "type": "module",
   "license": "Apache-2.0",

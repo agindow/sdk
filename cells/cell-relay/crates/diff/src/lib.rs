@@ -15,4 +15,4 @@ pub use class::DriftClass;
 pub use compare::{compare, compare_with_limits};
 pub use model::{Change, Evidence, Kind, Limits, Node, Reason, Report, Side, Skip, Snapshot};
 
-pub use inspection::{compare_inspection, compare_inspection_with_limits};
+pub use inspection::{compare_inspection, compare_inspection_with_limits, observed_shape};

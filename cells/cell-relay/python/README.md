@@ -1,7 +1,8 @@
 # agindow (Python)
 
-> **Published release:** Node `0.1.0-alpha.3` on npm and Python `0.1.0a2`
-> on PyPI. Both are pre-alpha; the pinned install commands below are available.
+> **Prepared release:** Node `0.1.0-alpha.4` on npm and Python `0.1.0a3`
+> are prepared locally. Registry install commands below apply after publication.
+> The latest published pair is Node `0.1.0-alpha.3` / Python `0.1.0a2`.
 
 **Dependabot for agents. At runtime.**
 
@@ -16,8 +17,8 @@ explicit scoped baseline/current windows, and selective repair is off by default
 
 ## Install
 ```bash
-pip install agindow==0.1.0a2
-# or: uv add agindow==0.1.0a2
+pip install agindow==0.1.0a3
+# or: uv add agindow==0.1.0a3
 ```
 The wheel includes the prebuilt WASM guest. You do **not** need Rust, Node, or a
 monorepo checkout to use the SDK.
@@ -164,5 +165,17 @@ Load that data outside calls. Start with `Agindow(mode="observe",...)`, then use
 `sdk.configure(mode="repair")` after evaluation; observe disables application.
 
 The shared Rust engine prepares selective key edits. Existing statistical
-findings/blocks remain in force. Numeric, nested and array migrations are outside
-this option. See the [runnable example and limits](https://agindow.com/docs/sdk/configuration#enable-selective-repair).
+findings/blocks remain in force. Numeric migrations and automatic discovery
+are outside this option. See the [runnable example and limits](https://agindow.com/docs/sdk/configuration#enable-selective-repair).
+
+For nested or selected-array renames in the **local unreleased source**,
+add `parents=('/contacts/0', '/contacts/2')` to `RenameRule`, keeping `source`
+and `target` as literal keys. Supply reviewed `contract`, `migration`,
+`provenance` and `expires_at` (Unix milliseconds). Use a synchronous semantic
+verifier over independent application facts loaded outside calls. Python applies
+to plain dictionaries/lists; it does not provide Node's raw-body boundary.
+See.
+Published package documentation retains its existing release scope.
+
+For versioned contract/expiry and value-type admission in the **local unreleased
+Source**, see.

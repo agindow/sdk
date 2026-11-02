@@ -723,6 +723,15 @@ non-finite or incomplete reports fail closed. Hardware/OS/runtime metadata and
 Criterion reports are retained for each run. This enforces an absolute budget on
 the executing runner, not a portable SLA or the working path's separate p50.
 
+Separately compares all manifest native Criterion suites against a
+committed source revision remeasured on the same runner and toolchain. Any
+mean point estimate regression strictly above 10% fails; missing, malformed,
+empty or mismatched case sets fail closed. This relative mean gate does not
+qualify p50/p99, SDK/WASM, network or production latency. Baseline revision and
+suite changes require review; failures never ratchet the baseline. Raw reports
+and environment metadata are retained, and a separate trusted workflow reports
+the result to the PR. See `cells/cell-relay/perf/README.md`.
+
 ### ✅ 10.11 Schema learning and local baselines — SETTLED
 
 The standalone inspector learner accepts complete captured JSON bytes. Invalid,
@@ -3225,8 +3234,8 @@ without retries, and retain original upstream exceptions.
 
 Boundaries: 16 rules, one per tool/side, simple 64-character ASCII object keys,
 complete captures <=1 MiB, existing.97/.99 thresholds. Opt-in divides the work
-allowance across statistical inspection and request/response preparation. No
-nested/array/unit/enum transformations or automatic discovery. Facts and business
+allowance across statistical inspection and request/response preparation. Nested/concrete-array rename support is extended by below; no unit/enum
+transformations or automatic discovery. Facts and business
 snapshots refresh outside calls; callbacks must not add synchronous cell, DB or
 LLM dependencies. Guest audit FIFO plus host-applied repair is a setup error
 until its artifact can accurately cover the combined path; repair events are
@@ -3369,8 +3378,10 @@ an optional host-reviewed profile API. Browser commands carry reviewed identitie
 revision/idempotency and separate runtime consent; never URLs, source, verifier
 commands, facts or credentials. Session membership, owner mutations, recent start
 authentication and server-side review checks precede host execution. No default
-execution host exists. Owns durable
-capture/packaged-runtime/source-job composition and original receipt admission;
+execution host exists. Implements explicit durable Postgres
+capture/packaged-runtime/source-job composition and original receipt admission,
+with reviewed profile/artifact pins, scoped pre-effect reservations, fenced
+source-job advancement and lookup-only recovery;
 Still gates actual API/runner/provider qualification. Local projections
 cannot establish those outcomes. Source consent/publication retain and
 Authority. SDK interfaces, guard availability and call-time policy do not
@@ -3402,12 +3413,47 @@ hosted qualification boundary.
 ### 10.59 Planned verified-repair and API-change coverage expansion
 
 Planning decision for.
-Current SDK limits in §10.57 remain authoritative until new opt-in recipe
-implementations and parity evidence land. Planned recipes expose existing native
+Current SDK limits in §10.57 remain authoritative except for the explicitly
+implemented local // extensions below. These recipes expose existing native
 raw-span capabilities through the shared guest: nested/bounded-array renames,
 explicit finite string mappings, 's exact empty-string-to-null exception,
 and exact number-to-number unit/epoch scaling. No numeric type coercion,
 rounding, guessed defaults/units, missing-value invention or write retries.
+
+Implements the local opt-in `RenameRule.facts` admission boundary in Node
+and Python. Version 1 binds `recipe: rename`, tool/side, contract/migration
+revisions, provenance, expiry, concrete parents and explicit old/new key/type
+constraints. Setup snapshots facts and rejects invalid or contradictory bindings;
+legacy construction remains supported. Independent original/patched byte
+preservation and fact predicates must pass before the required synchronous
+application verifier can approve. Expired facts or predicate mismatch refuse
+normally; faults preserve availability bypass. Expiry is rechecked after the
+verifier. This adds no transformation recipe or guest budget and retains the
+guest-audit setup restriction. See [repair facts](/cells/cell-relay/REPAIR_FACTS.md).
+
+/ implementation decision: additive `ScalarRule` entries in the
+existing selective-repair rule list carry mandatory version-1 facts: tool/side,
+contract/migration/provenance, expiry and one concrete nonroot RFC 6901 pointer.
+Recipes are `string-map` (1–64 exact string pairs; collisions require a source-bound equivalence review
+receipt for every participating source), `empty-null` (literal empty token and declared
+null meaning), and `scale` (reviewed units, positive integer rational and explicit
+input/output bounds). Unknown values, missing members and stale facts refuse as
+semantic findings; writes fail closed under existing policy. Both shared native
+repair and an independent host token/arithmetic check must approve before the
+application verifier. No recipe clears an existing finding or veto. Decimal work
+is bounded to 36 coefficient digits, 18 fractional places and exponent magnitude
+18; checked arithmetic refuses overflow and nonterminating or excessive precision.
+Supported exact unit pairs are cents/dollars, seconds/milliseconds and
+meters/millimeters, in either direction; identifiers, rates and offsets have no
+recipe. This is local unreleased source, with no new publication authority.
+
+Implementation decision: explicit operation comparisons take matching
+route/method/side/version scopes and either supplied schema declarations or
+observed JSON captures. The bounded declared subset is type, properties,
+required, enum and items. Unsupported keywords, empty/unseen item shapes,
+heterogeneous observations, duplicate members and capture/work limits retain
+partial/unsupported coverage. Observations never grant requiredness authority.
+Comparison results are advisory and cannot grant repair authority or alter modes.
 
 Each recipe requires independently reviewed operation/side/version/expiry-scoped
 facts, exact source predicates, bounded edits, unchanged-context verification
@@ -3417,6 +3463,30 @@ existing availability boundary. Observe/default construction stays non-mutating;
 semantic vetoes remain intact. Facts refresh outside calls, without cell, database
 or LLM dependencies in the guard. Local transformation evidence is not a claim
 of completed provider-write correctness or durable audit delivery.
+
+Implements local opt-in `RenameRule.parents`: 1–16 explicit concrete
+RFC 6901 object-parent pointers, each <=512 UTF-8 bytes and <=32 segments.
+`from`/`source` and `to`/`target` remain literal sibling keys (<=64 UTF-8 bytes,
+no ASCII controls); no wildcard expansion, moves or container synthesis.
+Canonical decimal array indices select only those elements. Each nested rule
+requires reviewed contract/migration revisions, provenance and a positive safe
+integer Unix-millisecond expiry, copied/frozen at construction. Existing
+one-rule-per-tool/side and 16-rule limits remain. Duplicate or ancestor/descendant
+source selections are setup errors; stale facts refuse application under existing
+shape policy. Both SDKs independently reproduce the exact allowed key-token
+edits from original bytes before synchronous semantic verification, and recheck
+expiry after verification. Candidate-derived facts cannot grant authority.
+Any selected missing member, destination collision or rejected candidate refuses
+the entire set. Duplicate members, incomplete/malformed capture, exhausted work
+or unavailable verification retain original identity through existing bypass.
+Caps: complete capture <=1 MiB, <=4096 nodes, depth <=64 and preparation work
+admission >=16 times captured bytes; request/response share the existing divided
+work allowance. Report concrete escaped native changed paths. Node supports its
+existing raw string/Buffer/Uint8Array boundaries; Python applies plain dict/list
+projections. Observe/default never apply. Statistical vetoes, exception identity,
+no retries and guest-audit combination refusal remain unchanged. This is local
+unreleased source capability, not a registry-release or hosted/streaming claim.
+See [nested repair](/cells/cell-relay/NESTED_REPAIR.md).
 
 Detection expansion covers explicit operation/side-scoped nested JSON constraints,
 bounded HTTP status/media-type/safe-header observations and off-path configured
@@ -3441,7 +3511,7 @@ scorecard contract holdout. Public/docs/dashboard projections share the catalog;
 missing sources expose no traffic counts or qualification. Scorecard fixtures
 validate scoring, not measured provider correctness or detector calibration.
 Five disposable source mutations gate verifier, direction, preservation and
-capture rules. Planned Tier 1 recipes remain unsupported. See
+capture rules. Other planned Tier 1 recipes remain unsupported. See
 the hosted qualification evidence.
 
 Publish a per-family/protocol/adapter/side/evidence-source catalog with actual
@@ -3451,3 +3521,106 @@ until separately specified and tested. Preserve historical eval baselines; add
 versioned holdouts and separate healthy safety, fault-bypass exposure, detector
 accuracy and production calibration.
 qualifies only explicitly exercised hosted capability rows.
+
+### 10.60 Planned proof-of-value lifecycle benchmark
+
+Planning decision for.
+The product claim is unproven until detection, verified repair and source-fix
+outcomes are measured on one lifecycle corpus with explicit denominators.
+Existing instruments remain authoritative for their scopes and are not
+substitutes: scores conditional
+repair/policy safety from supplied findings;
+publishes coverage and synthetic scorecards;
+evaluates local source-fix adversarial correctness;
+owns production silent-mode false-positive replay when a growing workload
+exists; /
+own public methodology and official scores.
+
+Requires versioned calibration metrics (precision, recall, false
+positives, detection latency, missed breaking changes, response-pattern
+slices), a recorded-traffic plus deliberate-drift corpus protocol that keeps
+sanitized internal cohorts separate from public synthetic tracks, verifier-
+central repair evaluation across rename/type/enum/unit/nested/nullability/
+semantic classes (unsupported classes credit refusal, never guessed edits),
+and one concentrated source-fix feedback cohort measuring validation,
+behavior preservation, human modification and acceptance rates. The end-to-end
+scorecard runs the six lifecycle scenarios (field rename, type change, enum
+change, missing required field, unit change, nested structure change) and
+reports detection precision/recall, repair success, false repair, source patch
+validation and human acceptance without a single opaque blended score.
+Recorded or sanitized traffic is preferred over exclusive synthetic fixtures;
+tenant private corpus evidence never becomes public claim material under
+§10.49. No detector floor, default-on repair, public Agindow leaderboard entry
+or hosted qualification follows from local PoV results alone.
+Remains the hosted pilot gate.
+
+Local implementation now provides a frozen synthetic lifecycle corpus,
+packaged-guest execution, independent runtime verification, runtime-linked
+source generation/validation, explicit opportunity gaps and separate stage/slice
+rates. Its local runner also gates scoring
+mutations and conservatively admits reviewed internal shape projections. Actual
+recorded-derived corpus admission and human acceptance receipts remain pending;
+local synthetic passes do not complete this qualification requirement.
+
+### 10.61 Planned hosted change-request publication and GitHub App distribution
+
+Planning decision for.
+§10.58 remains the source-fix and draft-publication authority: generation,
+independent validation, durable jobs and the Cortex publication library stay
+off path; credentials never enter guard, generator or validator contexts.
+Adds the **hosted distribution** surface that §10.58 left unconfigured.
+
+Product surfaces stay complementary, not interchangeable:
+
+1. **Runtime SDK** — core product. Observe agent calls, detect drift and apply
+Eligible reviewed repairs when opted in.
+2. **GitHub App** — distribution and remediation. Authorize selected repositories
+And open **draft** change requests from validated source-fix evidence.
+   Humans merge. Install alone does not detect drift or protect runtime traffic.
+
+The publisher workflow is provider-aware. Normalize change-request lifecycle
+(`open` / `closed` / `merged`), draft-required admission and bot-branch
+create-only semantics above adapters. GitHub is the first adapter
+With selected-repository
+Contents and Pull requests write scopes only. Do not assume identical draft or
+permission semantics for GitLab merge requests, Bitbucket pull requests or
+Azure DevOps pull requests; missing draft capability refuses publication rather
+than opening a ready proposal. Second-provider adapters require separate
+tickets after a live GitHub path exists.
+
+Host App private keys, installation tokens and webhook secrets remain
+host-only. Unconfigured hosts stay unavailable. Dashboard and public copy must
+distinguish SDK vs App and must not claim one-click install, continuous
+maintenance or production protection while
+staging smoke and pilot evidence
+are incomplete. No auto-merge, workflow/admin permissions, Marketplace listing
+requirement or guard dependency is introduced by this section.
+
+– implement this workflow locally: explicit change-request kinds,
+a GitHub-only registration/HTTP adapter, digest-only actor-bound installation
+intents and selected-repository bindings, complementary install entries and
+receipt-backed lifecycle. Host file provenance, job/installation admission and
+durable dispatch fencing remain required private ports. Setup installation IDs
+are hints until linked-user OAuth and canonical administrator checks pass.
+Unconfigured hosts remain unavailable; / hosted evidence is pending.
+
+### 10.62 — local OEM distribution
+
+The Apache-2.0 runtime export may be embedded without a product attribution
+badge; LICENSE/NOTICE, modification notices and trademark limits remain. Private
+registry/console/corpus rights are separate and never included in that export.
+
+An explicitly configured self-host registry may preload a host-owned reviewed
+Version snapshot and expose authenticated read-only scope histories under
+an exact HTTPS origin and escaped partner/neutral title. Invalid startup refuses
+to listen; foreign origins and remote writes are rejected. One deployment and
+credential cover one partner. The serving store is process-local; restart from
+the durable host snapshot reproduces digests. No guard uses this HTTP service
+synchronously, no new SDK protocol or repair authority is implied, and no
+automatic contribution or external service I/O is enabled. Existing corpus
+consent/review boundaries govern separately integrated background contributions.
+
+Commercial fees, optional contribution credits, private deployment rights and
+support require separate approval/agreement; local tests qualify no hosted offer.
+See the self-host guide and
+proposed partner brief.

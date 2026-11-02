@@ -1,7 +1,8 @@
 # AGINDOW SDKs and in-path runtime
 
-> **Published release:** Node `0.1.0-alpha.3` on npm and Python `0.1.0a2`
-> on PyPI. Both are pre-alpha; the pinned install commands below are available.
+> **Prepared release:** Node `0.1.0-alpha.4` on npm and Python `0.1.0a3`
+> are prepared locally. Registry install commands below apply after publication.
+> The latest published pair is Node `0.1.0-alpha.3` / Python `0.1.0a2`.
 
 **Dependabot for agents. At runtime.**
 
@@ -24,10 +25,10 @@ source mirror.
 
 | Package | Registry | Install |
 |---|---|---|
-| [`agindow`](https://www.npmjs.com/package/agindow) | npm | `npm install agindow@0.1.0-alpha.3` |
-| [`agindow`](https://pypi.org/project/agindow/) | PyPI | `pip install agindow==0.1.0a2` |
+| [`agindow`](https://www.npmjs.com/package/agindow) | npm | `npm install agindow@0.1.0-alpha.4` |
+| [`agindow`](https://pypi.org/project/agindow/) | PyPI | `pip install agindow==0.1.0a3` |
 
-Both are **pre-alpha** (`0.1.0-alpha.3` / `0.1.0a2`). Apache-2.0. The default
+Both are **pre-alpha** (`0.1.0-alpha.4` / `0.1.0a3`). Apache-2.0. The default
 statistical guest needs explicit scoped baseline/live windows. Selective repair
 is off by default; enable reviewed top-level rename rules and an independent
 verifier explicitly. Follow the [Node or Python detection guide](https://agindow.com/docs/detection)
@@ -37,7 +38,7 @@ wrapping. Neither a fixture nor installation proves production protection.
 ## Quick start (Node)
 
 ```bash
-npm install agindow@0.1.0-alpha.3
+npm install agindow@0.1.0-alpha.4
 ```
 
 Use Node 22.6+ for the native TypeScript command. Save as `orders.mts`, set `API_URL` to your existing read-only HTTPS JSON
@@ -74,7 +75,7 @@ npx --no-install agindow report ./src
 ## Quick start (Python)
 
 ```bash
-pip install agindow==0.1.0a2
+pip install agindow==0.1.0a3
 ```
 
 Save as `orders.py` with the same API_URL and run `python orders.py`.
@@ -186,3 +187,10 @@ automatically. [MCP tools](https://agindow.com/docs/api/tools) read evidence and
 simulate proposals; they never execute vendor writes. Signed
 [/openapi.json](https://agindow.com/openapi.json) belongs to a configured MCP
 origin, not an embedded SDK requirement or a managed execution endpoint.
+
+
+## OEM embedding
+
+Ship the runtime under your own product name with the
+[OEM embedding](OEM.md) guide. No product badge is required; preserve the
+Apache LICENSE/NOTICE. Private registry rights and services are separate.

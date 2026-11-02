@@ -1,6 +1,12 @@
 //! TI-30 production binding. Host values and upstream execution stay in Node.
 mod audit;
+mod compatibility;
+mod declarations;
+mod exact;
+mod nested;
+mod operation;
 mod playground;
+mod scalar;
 mod selection;
 mod selective;
 use agw_guard::{
@@ -124,6 +130,33 @@ impl Guest {
         work: u32,
     ) -> Result<String, String> {
         selective::prepare(bytes, source, target, confidence, mode, work)
+    }
+    /// Prepare an atomic set of reviewed nested/concrete-array key renames.
+    pub fn prepare_nested_rename(
+        &self,
+        bytes: &[u8],
+        selection: &str,
+        target: &str,
+        confidence: f64,
+        mode: &str,
+        work: u32,
+    ) -> Result<String, String> {
+        nested::prepare(bytes, selection, target, confidence, mode, work)
+    }
+    /// Prepare one reviewed semantic scalar edit; independent host verification is mandatory.
+    pub fn prepare_scalar(
+        &self,
+        bytes: &[u8],
+        facts: &str,
+        confidence: f64,
+        mode: &str,
+        work: u32,
+    ) -> Result<String, String> {
+        scalar::prepare(bytes, facts, confidence, mode, work)
+    }
+    /// Explicit local operation-scoped comparison; results never grant repair authority.
+    pub fn compare_operation(&self, input: &str, work: u32) -> Result<String, String> {
+        operation::compare(input, work)
     }
     pub fn set_ready(&self, ready: bool) {
         self.engine.set_ready(ready);

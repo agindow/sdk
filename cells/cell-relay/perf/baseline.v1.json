@@ -1,0 +1,13 @@
+{
+  "revision": "e0b5869e655323d3a1bfe733509723c9081ad70e",
+  "statistic": "Criterion mean point estimate in nanoseconds",
+  "maximumRegressionPercent": 10,
+  "suites": [
+    ["agw-audit", "audit"],
+    ["agw-inspector", "tee"],
+    ["agw-guard", "forward"],
+    ["agw-guard", "statistical"],
+    ["agw-guard", "credentials"],
+    ["agw-guard", "availability"]
+  ]
+}

@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.1.0-alpha.4 / 0.1.0a3 — Prepared November 2, 2026
+
+Prepared locally for publication; the latest published pair remains alpha.3/a2.
+
+- Node and Python: reviewed concrete nested/array field renames with atomic
+  refusal and independent raw-token preservation verification.
+- Node and Python: reviewed finite string maps, exact empty-string/null semantics
+  and bounded exact unit/epoch scaling, requiring independent facts and host
+  preservation/arithmetic verification.
+- Node `compareOperation` and Python `compare_operation`: explicit advisory
+  operation-contract comparison, directional declared compatibility, concrete
+  observed paths and conservative coverage gaps. No automatic policy changes.
+- Updated paired documentation, release selector and web changelog. All three
+  published documentation editions remain available unchanged.
+
+Configured windows are still required for detection. Selective repair stays
+opt-in; source validation and draft publication need separate authorized hosts.
+See [release preparation notes](./releases/v0.1.0-alpha.4.md).
+
 ## 0.1.0-alpha.3 / 0.1.0a2 — Published October 29, 2026
 
 Published on npm and PyPI. Node adds explicit local source binding, deterministic

@@ -126,3 +126,14 @@ fn merge(node: &mut Node, other: Node) {
         }
     }
 }
+
+/// Bounded lossless observed shape, without declared presence or semantic facts.
+pub fn observed_shape(inspection: &Inspection, limits: Limits) -> Result<Node, Skip> {
+    if inspection.truncated {
+        return Err(Skip::Incomplete);
+    }
+    match &inspection.parse {
+        Parse::Parsed(value) => shape(value, 0, &mut Budget::new(limits)),
+        _ => Err(Skip::ParserFailure),
+    }
+}
